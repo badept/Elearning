@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<title>Phạm vi bản tối giản</title>
+<script src="js/scope-overview-41bf7932.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/></head>
+<body>
+<x-dc>
+<helmet>
+<link href="../../shared/css/base.css" rel="stylesheet"/>
+<link href="css/scope.css" rel="stylesheet"/>
+</helmet>
+<div class="scope-overview-panel-5c33568">
+<div class="scope-overview-panel-93699f9">
+<div class="scope-overview-panel-620e22a">
+<p class="scope-overview-text-19f4437">AcaSys · PHÂN HỆ ĐÀO TẠO</p>
+<h1 class="scope-overview-title-b478187">Phạm vi bản tối giản</h1>
+<p class="scope-overview-text-2322eb9">Chỉ giữ những gì ứng dụng học viên cần để hiển thị. Mỗi mục giữ lại đều ghi rõ nó phục vụ màn hình nào trên ứng dụng.</p>
+</div>
+<div class="ui-panel-863d400">
+<section class="scope-overview-section-62033ab">
+<div class="scope-overview-panel-62db06f"><h2 class="scope-overview-heading-c8c4842">Giữ lại</h2><span class="scope-overview-label-a24e145">5 mục menu</span></div>
+<div class="ui-panel-d4c57f3">
+<div class="scope-overview-panel-82b8371"><span>TRÊN WEB</span><span>PHỤC VỤ TRÊN ỨNG DỤNG</span></div>
+<sc-for as="k" hint-placeholder-count="8" list="{{ keep }}">
+<div class="scope-overview-panel-5aed4a0">
+<span class="strong-text">{{ k.web }}</span>
+<span class="scope-overview-label-fc07e37">{{ k.app }}</span>
+</div>
+</sc-for>
+</div>
+<div class="scope-overview-panel-b38edc0">
+<div class="scope-overview-panel-4ece3ec">
+<h3 class="scope-overview-subheading-c2fd593">Trường của học viên</h3>
+<p class="scope-overview-text-5643cd5">Mã, Tên, Điện thoại, Email, Bộ phận, Người quản lý, Ảnh đại diện, Tài khoản, Mật khẩu, Trạng thái. Level được hiển thị theo từng lộ trình.</p>
+</div>
+<div class="scope-overview-panel-4ece3ec">
+<h3 class="scope-overview-subheading-c2fd593">Trường của dự án</h3>
+<p class="scope-overview-text-5643cd5">Tên, Mã, Khách hàng, Cách đăng nhập, Bộ phận, Tiêu chí đào tạo, Trạng thái</p>
+</div>
+<div class="scope-overview-panel-865b7b1">
+<h3 class="scope-overview-subheading-c2fd593">Trường của khóa học</h3>
+<p class="scope-overview-text-5643cd5">Khóa học: Tên, Chương trình, Ngành hàng. Bài học: Tên, Tệp nội dung, Ảnh đại diện, Học tối thiểu (%), Hiện trong Thư viện, Thứ tự. Câu hỏi: Bài học, loại trắc nghiệm/tự luận/ghi âm, nội dung, đáp án, điểm, thứ tự và ghi chú. Tài liệu: Tên, Loại, Tệp hoặc đường dẫn.</p>
+</div>
+</div>
+</section>
+<section class="scope-overview-section-ba31dd2">
+<h2 class="scope-overview-heading-c8c4842">Lược bỏ ở giai đoạn này</h2>
+<sc-for as="d" hint-placeholder-count="5" list="{{ drop }}">
+<div class="scope-overview-panel-4cbce57">
+<span class="strong-text">{{ d.what }}</span>
+<span class="scope-overview-label-28f8a4e">{{ d.why }}</span>
+</div>
+</sc-for>
+</section>
+</div>
+<section class="scope-overview-section-de1c8d9">
+<h2 class="scope-overview-heading-e178b8c">Trường AcaSys đang bắt buộc nhưng đã ẩn khỏi form</h2>
+<sc-for as="a" hint-placeholder-count="2" list="{{ auto }}">
+<p class="scope-overview-text-87297b3"><b class="scope-overview-b-7bbab39">{{ a.field }}:</b> {{ a.rule }}</p>
+</sc-for>
+</section>
+</div>
+</div>
+</x-dc>
+<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1000}}' type="text/x-dc">
+class Component extends DCLogic {
+  renderVals() {
+    const keep = [
+      { web: 'Học viên', app: 'Đăng nhập, Trang chủ, Hồ sơ' },
+      { web: 'Chương trình', app: 'Nhóm khóa học theo chủ đề hoặc nghiệp vụ' },
+      { web: 'Khóa học (tab Bài học, Ngân hàng câu hỏi, Tài liệu)', app: 'Thẻ khóa học, Học bài, Làm kiểm tra, Thư viện' },
+      { web: 'Lịch học/thi', app: 'Học tiếp, Chưa học, Làm kiểm tra, Kết quả, Chứng chỉ' },
+      { web: 'Lộ trình đào tạo', app: 'Thứ tự học, Level và các lịch thi bắt buộc' },
+      { web: 'Dự án đào tạo', app: 'Cách đăng nhập; bộ phận; tiêu chí cho biểu đồ Kết quả học tập' }
+    ];
+    const drop = [
+      { what: 'Menu Tổng quan, Câu hỏi coaching', why: 'Ứng dụng học viên không hiển thị.' },
+      { what: 'Menu Thi lại và gia hạn', why: 'Không tạo thao tác dư thừa; học viên thi trong số lượt tối đa của từng lịch.' },
+      { what: 'Menu Bài học, Ngân hàng câu hỏi, Tài liệu bài học', why: 'Gộp thành 3 tab trong trang chi tiết khóa học.' },
+      { what: 'Menu Dự án thị trường', why: 'Không thuộc phạm vi vận hành eLearning hiện tại.' },
+      { what: 'Các trường hồ sơ chưa có nguồn dữ liệu', why: 'Chỉ lược bỏ khi doanh nghiệp xác nhận; trường Người quản lý vẫn được giữ.' },
+      { what: 'Thuộc tính nội dung không phục vụ luồng hiện tại', why: 'Không lược bỏ loại câu hỏi, điểm hoặc liên kết bài học vì đây là dữ liệu bắt buộc của lịch thi.' },
+      { what: 'Thiết lập dự án không dùng đến', why: 'Dự án gốc, Mã PO, Hệ thống liên quan, Tiếp đầu ngữ tài khoản, Lấy nhân viên từ dự án thị trường, Ghi chú, 13 danh mục khác, Cấu hình form, Xuất log.' }
+    ];
+    const auto = [
+      { field: 'Ngày vào dự án', rule: 'tự lấy ngày tạo học viên.' },
+      { field: 'Cách hiển thị và phiên bản trang học viên', rule: 'giữ mặc định Webview, phiên bản Mới.' }
+    ];
+    return { keep, drop, auto };
+  }
+}
+</script>
+</body></html>

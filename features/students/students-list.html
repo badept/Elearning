@@ -1,0 +1,874 @@
+<!doctype html>
+
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Học viên – danh sách</title>
+    <script src="js/students-list-d107c165.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+<link href="../../shared/css/base.css" rel="stylesheet"/>
+<link href="css/students.css" rel="stylesheet"/>
+      </helmet>
+      <div
+       
+       class="students-list-panel-4e551fd">
+        <nav
+          aria-label="Menu chính"
+         
+         class="ui-sidebar-a50515f">
+          <div
+           
+           class="brand-row">
+            <div
+             
+             class="ui-panel-798c0b6">
+              A
+            </div>
+            <div class="stack-xs">
+              <span
+                 class="ui-label-53c3575">AcaSys</span
+              ><span class="ui-label-3cb8792">Đào tạo</span>
+            </div>
+          </div>
+          <sc-for as="item" hint-placeholder-count="14" list="{{ nav }}">
+            <sc-if
+              hint-placeholder-val="{{ false }}"
+              value="{{ item.isHeader }}"
+            >
+              <p
+               
+               class="ui-text-e1c7d10">
+                {{ item.label }}
+              </p>
+            </sc-if>
+            <sc-if
+              hint-placeholder-val="{{ false }}"
+              value="{{ item.isActive }}"
+            >
+              <a
+                aria-current="page"
+                href="{{ item.href }}"
+               
+               class="ui-link-c4dc568">
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="20"
+                  sc-camel-view-box="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  width="20"
+                >
+                  <path d="{{ item.d }}"></path>
+                </svg>
+                <span>{{ item.label }}</span>
+              </a>
+            </sc-if>
+            <sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}">
+              <a
+                href="{{ item.href }}"
+               
+               class="ui-link-c4b025d">
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="20"
+                  sc-camel-view-box="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  width="20"
+                >
+                  <path d="{{ item.d }}"></path>
+                </svg>
+                <span>{{ item.label }}</span>
+              </a>
+            </sc-if>
+          </sc-for>
+        </nav>
+        <div
+         
+         class="app-content">
+          <header
+           
+           class="ui-header-34f1474">
+            <button
+              aria-label="Đổi dự án"
+             
+              type="button"
+             class="ui-button-0662e01">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="18"
+                sc-camel-view-box="0 0 24 24"
+                stroke="#2456B8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                width="18"
+              >
+                <path
+                  d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                ></path>
+              </svg>
+              <span
+               
+                 class="ui-label-69babcb"><span class="ui-label-6e5e314">Dự án</span
+                ><span
+                   class="ui-label-7e6ddec">ACACY PRESENTATION</span
+                ></span
+              >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                sc-camel-view-box="0 0 24 24"
+                stroke="#5E6B85"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                width="16"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </button>
+            <label
+             
+             class="ui-field-375c72e">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="18"
+                sc-camel-view-box="0 0 24 24"
+                stroke="#5E6B85"
+                stroke-linecap="round"
+                stroke-width="2"
+                width="18"
+              >
+                <path
+                  d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"
+                ></path>
+              </svg>
+              <span
+               
+                 class="visually-hidden">Tìm trong hệ thống</span
+              >
+              <input
+                placeholder="Tìm học viên, khóa học, lịch học/thi…"
+               
+                type="search" class="ui-input-956a9ed"
+              />
+            </label>
+            <button
+             
+              type="button"
+             class="ui-button-8e4b730">
+              Tiếng Việt
+            </button>
+            <button
+              aria-label="Tài khoản"
+             
+              type="button"
+             class="ui-button-0798c7a">
+              <span
+               
+                 class="ui-label-4066746">T</span
+              >
+              <span
+               
+                 class="ui-label-69babcb"><span class="ui-label-7e6ddec">Trainer</span
+                ><span
+                   class="ui-label-6e5e314">Quản trị đào tạo</span
+                ></span
+              >
+            </button>
+          </header>
+          <main
+           
+           class="ui-content-d1b7109">
+            <div
+             
+             class="ui-panel-b02d809">
+              <div class="ui-panel-d08feb7">
+                <h1
+                 
+                 class="students-list-title-a29a994">
+                  Học viên
+                </h1>
+                <p class="ui-text-4e5f0ed">
+                  {{ total }} học viên trong dự án ACACY PRESENTATION
+                </p>
+              </div>
+              <div
+               
+               class="ui-panel-dab9924">
+                <button aria-label="Xuất Excel {{ selectedCount }} học viên đã chọn" sc-camel-on-click="{{ exportSelectedStudents }}" type="button" class="students-list-button-1a9ca70 student-export-fixed">
+                  <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>
+                  <span>Xuất Excel</span>
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ selectionActive }}"><span class="student-export-fixed-count">{{ selectedCount }}</span></sc-if>
+                </button>
+                <div class="students-list-panel-c40d127">
+                  <button
+                    sc-camel-on-click="{{ openDrawer }}"
+                   
+                    type="button"
+                   class="students-list-button-0a3f460">
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      height="18"
+                      sc-camel-view-box="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-width="2.2"
+                      width="18"
+                    >
+                      <path d="M12 5v14M5 12h14"></path></svg
+                    >Thêm học viên
+                  </button>
+                  <button
+                    aria-label="Cách thêm khác"
+                    sc-camel-on-click="{{ toggleAddMenu }}"
+                   
+                    type="button"
+                   class="students-list-button-15a3335">
+                    <svg
+                      aria-hidden="true"
+                      fill="none"
+                      height="18"
+                      sc-camel-view-box="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      width="18"
+                    >
+                      <path d="m6 9 6 6 6-6"></path>
+                    </svg>
+                  </button>
+                </div>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ addMenu }}">
+                  <div
+                    role="menu"
+                   
+                   class="students-list-panel-0a6105d">
+                    <button
+                      role="menuitem"
+                     
+                      type="button"
+                     class="students-list-button-26fca2e">
+                      <span
+                         class="ui-label-7e6ddec">Nhập từ Excel</span
+                      ><span
+                         class="ui-label-046e088">Thêm nhiều học viên một lần</span
+                      >
+                    </button>
+                    <button
+                      role="menuitem"
+                     
+                      type="button"
+                     class="students-list-button-26fca2e">
+                      <span
+                         class="ui-label-7e6ddec">Tải file mẫu</span
+                      ><span
+                         class="ui-label-046e088">Điền mẫu trước khi nhập</span
+                      >
+                    </button>
+                  </div>
+                </sc-if>
+              </div>
+            </div>
+            <section class="student-filter-panel" aria-label="Tìm kiếm và bộ lọc học viên">
+              <div class="student-filter-heading">
+                <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18">
+                  <path d="M4 5h16l-6 7v6l-4 2v-8z"></path>
+                </svg>
+                <h2>Tìm kiếm &amp; Bộ lọc</h2>
+              </div>
+              <div class="student-filter-grid">
+                <label class="student-filter-field">
+                  <span class="student-filter-label">Tìm kiếm</span>
+                  <span class="student-search-control">
+                    <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2" width="18">
+                      <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path>
+                    </svg>
+                    <input placeholder="Tên, mã học viên, điện thoại..." sc-camel-on-input="{{ onSearch }}" type="search" value="{{ q }}" />
+                  </span>
+                </label>
+                <label class="student-filter-field">
+                  <span class="student-filter-label">Bộ phận</span>
+                  <sc-raw-select class="student-filter-select" sc-camel-on-change="{{ onDepartmentChange }}" value="{{ department }}">
+                    <option value="all">Tất cả bộ phận</option>
+                    <option value="Bộ phận 01">Bộ phận 01</option>
+                    <option value="Bộ phận 02">Bộ phận 02</option>
+                  </sc-raw-select>
+                </label>
+                <label class="student-filter-field">
+                  <span class="student-filter-label">Cấp độ</span>
+                  <sc-raw-select class="student-filter-select" sc-camel-on-change="{{ onLevelChange }}" value="{{ level }}">
+                    <option value="all">Tất cả cấp độ</option>
+                    <option value="Cấp độ 0">Cấp độ 0</option>
+                    <option value="Cấp độ 1">Cấp độ 1</option>
+                  </sc-raw-select>
+                </label>
+                <label class="student-filter-field">
+                  <span class="student-filter-label">Trạng thái</span>
+                  <sc-raw-select class="student-filter-select" sc-camel-on-change="{{ onStatusChange }}" value="{{ status }}">
+                    <option value="all">Tất cả trạng thái</option>
+                    <option value="active">Đang hoạt động</option>
+                    <option value="inactive">Ngưng</option>
+                  </sc-raw-select>
+                </label>
+              </div>
+              <div class="student-filter-actions">
+                <div class="student-filter-buttons">
+                  <button sc-camel-on-click="{{ applySearch }}" type="button" class="student-filter-search">
+                    <svg aria-hidden="true" fill="none" height="17" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2" width="17">
+                      <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path>
+                    </svg>
+                    Tìm kiếm
+                  </button>
+                  <button sc-camel-on-click="{{ resetFilters }}" type="button" class="student-filter-reset">
+                    <svg aria-hidden="true" fill="none" height="17" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="17">
+                      <path d="M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5"></path>
+                    </svg>
+                    Làm mới bộ lọc
+                  </button>
+                </div>
+                <span class="student-filter-result">Tìm thấy {{ shown }} học viên</span>
+              </div>
+            </section>
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ selectionActive }}">
+              <section class="student-bulk-toolbar" aria-label="Thao tác hàng loạt">
+                <div><span class="student-bulk-count">{{ selectedCount }}</span><span>học viên đã chọn</span><button sc-camel-on-click="{{ clearSelection }}" type="button">Bỏ chọn tất cả</button></div>
+              </section>
+            </sc-if>
+            <div class="students-list-panel-b54cafe">
+              <sc-raw-table
+               
+               class="ui-sc-raw-table-0249e07">
+                <sc-raw-thead>
+                  <sc-raw-tr
+                   
+                   class="students-list-sc-raw-tr-998d337">
+                    <sc-raw-th class="student-select-heading">
+                      <button aria-label="{{ selectAllLabel }}" aria-pressed="{{ selectAllAria }}" sc-camel-on-click="{{ toggleSelectAll }}" title="{{ selectAllLabel }}" type="button" class="student-selection-box {{ selectAllClass }}">{{ selectAllMark }}</button>
+                    </sc-raw-th>
+                    <sc-raw-th
+                     
+                       class="students-list-sc-raw-th-a42aecf">Học viên</sc-raw-th
+                    >
+                    <sc-raw-th
+                     
+                       class="students-list-sc-raw-th-a42aecf">Bộ phận</sc-raw-th
+                    >
+                    <sc-raw-th
+                     
+                       class="students-list-sc-raw-th-a42aecf">Cấp độ</sc-raw-th
+                    >
+                    <sc-raw-th
+                     
+                       class="students-list-sc-raw-th-a42aecf">Trạng thái</sc-raw-th
+                    >
+                    <sc-raw-th class="students-list-actions-heading">Thao tác</sc-raw-th>
+                  </sc-raw-tr>
+                </sc-raw-thead>
+                <sc-raw-tbody>
+                  <sc-for as="r" hint-placeholder-count="6" list="{{ rows }}">
+                    <sc-raw-tr class="students-list-sc-raw-tr-7c2efdb {{ r.selectedRowClass }}">
+                      <sc-raw-td class="student-select-cell">
+                        <button aria-label="{{ r.selectLabel }}" aria-pressed="{{ r.selectedAria }}" sc-camel-on-click="{{ r.toggleSelected }}" title="{{ r.selectLabel }}" type="button" class="student-selection-box {{ r.selectedClass }}">{{ r.selectedMark }}</button>
+                      </sc-raw-td>
+                      <sc-raw-td
+                       
+                       class="students-list-sc-raw-td-0d88c20">
+                        <div class="students-list-student-summary">
+                          <span
+                           
+                             class="students-list-label-3faadec student-avatar-{{ r.avatarTone }}">{{ r.initials }}</span
+                          >
+                          <span
+                           
+                             class="stack-xs"><span class="ui-element-21a1be8">{{ r.name }}</span
+                            ><span
+                               class="ui-label-046e088">Mã: {{ r.id }}</span
+                            ></span
+                          >
+                        </div>
+                      </sc-raw-td>
+                      <sc-raw-td
+                       
+                         class="students-list-sc-raw-td-59d2c3e">{{ r.bp }}</sc-raw-td
+                      >
+                      <sc-raw-td
+                       
+                         class="students-list-sc-raw-td-0d88c20"><span
+                         
+                           class="students-list-label-350beb1">{{ r.cd }}</span
+                        ></sc-raw-td
+                      >
+                      <sc-raw-td
+                       
+                       class="students-list-sc-raw-td-0d88c20">
+                        <sc-if
+                          hint-placeholder-val="{{ true }}"
+                          value="{{ r.active }}"
+                          ><span
+                           
+                             class="students-list-label-9cb01f7"><span
+                             
+                             class="students-list-label-2a8bc2a"></span
+                            >Đang hoạt động</span
+                          ></sc-if
+                        >
+                        <sc-if
+                          hint-placeholder-val="{{ false }}"
+                          value="{{ r.inactive }}"
+                          ><span
+                           
+                             class="students-list-label-230d7a9"><span
+                             
+                             class="students-list-label-8d6e6f4"></span
+                            >Ngưng</span
+                          ></sc-if
+                        >
+                      </sc-raw-td>
+                      <sc-raw-td class="students-list-actions-cell">
+                        <div class="students-list-actions">
+                          <a href="student-detail.html" class="student-row-action student-row-action-edit" aria-label="Sửa {{ r.name }}" title="Sửa">
+                            <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18">
+                              <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path>
+                            </svg>
+                          </a>
+                          <button sc-camel-on-click="{{ r.requestPassword }}" type="button" class="student-row-action student-row-action-password" aria-label="Đổi mật khẩu cho {{ r.name }}" title="Đổi mật khẩu">
+                            <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18">
+                              <circle cx="8" cy="15" r="4"></circle>
+                              <path d="m11 12 9-9M15 4l2 2M18 1l2 2"></path>
+                            </svg>
+                          </button>
+                          <button sc-camel-on-click="{{ r.requestDelete }}" type="button" class="student-row-action student-row-action-delete" aria-label="Xóa {{ r.name }}" title="Xóa">
+                            <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18">
+                              <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v5M14 11v5"></path>
+                            </svg>
+                          </button>
+                        </div>
+                      </sc-raw-td>
+                    </sc-raw-tr>
+                  </sc-for>
+                </sc-raw-tbody>
+              </sc-raw-table>
+              <sc-if hint-placeholder-val="{{ false }}" value="{{ empty }}">
+                <p
+                 
+                 class="students-list-text-e7c2e51">
+                  Không có học viên phù hợp với bộ lọc hiện tại.
+                </p>
+              </sc-if>
+              <div
+               
+               class="students-list-panel-ad44e70">
+                <span>Hiển thị {{ shown }} / {{ total }} học viên</span>
+                <span>50 dòng mỗi trang</span>
+              </div>
+            </div>
+          </main>
+        </div>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ drawer }}">
+          <div
+           
+           class="ui-panel-b7c6c15">
+            <section
+              aria-label="Thêm học viên"
+             
+             class="ui-section-f37a56d">
+              <div
+               
+               class="ui-panel-4ee43c1">
+                <div class="stack-xs">
+                  <h2 class="ui-heading-1a33e4e">
+                    Thêm học viên
+                  </h2>
+                  <p class="ui-text-2a5324c">
+                    Dự án: ACACY PRESENTATION
+                  </p>
+                </div>
+                <button
+                  aria-label="Đóng"
+                  sc-camel-on-click="{{ closeDrawer }}"
+                 
+                  type="button"
+                 class="ui-button-0567c08">
+                  <svg
+                    aria-hidden="true"
+                    fill="none"
+                    height="20"
+                    sc-camel-view-box="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="2"
+                    width="20"
+                  >
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div
+               
+               class="ui-panel-c9e72b6">
+                <div class="ui-panel-a4aea48">
+                  <h3
+                   
+                   class="students-list-subheading-521bd4d">
+                    THÔNG TIN HỌC VIÊN
+                  </h3>
+                  <div
+                   
+                   class="ui-panel-ba0ec76">
+                    <label
+                     
+                       class="ui-field-4ee83e9">Mã <span class="ui-label-aaa496a">*</span
+                      ><input
+                        placeholder="VD: ADTest4"
+                       
+                        type="text" class="ui-input-a6dbc1a"
+                    /></label>
+                    <label
+                     
+                       class="ui-field-4ee83e9">Tên <span class="ui-label-aaa496a">*</span
+                      ><input
+                        placeholder="Họ và tên"
+                       
+                        type="text" class="ui-input-a6dbc1a"
+                    /></label>
+                    <label
+                     
+                       class="ui-field-4ee83e9">Điện thoại<input
+                       
+                        type="tel" class="ui-input-a6dbc1a"
+                    /></label>
+                    <label
+                     
+                       class="ui-field-4ee83e9">Email<input
+                       
+                        type="email" class="ui-input-a6dbc1a"
+                    /></label>
+                    <label
+                     
+                       class="ui-field-4ee83e9">Bộ phận<sc-raw-select
+                       
+                         class="ui-sc-raw-select-46418d1"><option>Chọn…</option>
+                        <option>Bộ phận 01</option>
+                        <option>Demo</option></sc-raw-select
+                      ></label
+                    >
+                    <label
+                     
+                       class="ui-field-4ee83e9">Cấp độ<sc-raw-select
+                       
+                         class="ui-sc-raw-select-46418d1"><option>Cấp độ 0</option>
+                        <option>Cấp độ 1</option></sc-raw-select
+                      ></label
+                    >
+                  </div>
+                </div>
+                <div class="ui-panel-a4aea48">
+                  <h3
+                   
+                   class="students-list-subheading-521bd4d">
+                    ĐĂNG NHẬP ỨNG DỤNG
+                  </h3>
+                  <div
+                   
+                   class="ui-panel-ba0ec76">
+                    <label
+                     
+                       class="ui-field-4ee83e9">Tài khoản <span class="ui-label-aaa496a">*</span
+                      ><input
+                        placeholder="Mặc định bằng Mã"
+                       
+                        type="text" class="ui-input-a6dbc1a"
+                    /></label>
+                    <label
+                     
+                       class="ui-field-4ee83e9">Mật khẩu ban đầu<input
+                       
+                        type="password" class="ui-input-a6dbc1a"
+                    /></label>
+                  </div>
+                  <p
+                   
+                   class="students-list-text-f703edb">
+                    Học viên dùng tài khoản này, hoặc đường dẫn và mã QR của dự
+                    án, để vào ứng dụng.
+                  </p>
+                </div>
+              </div>
+              <div
+               
+               class="ui-panel-180200f">
+                <button
+                  sc-camel-on-click="{{ closeDrawer }}"
+                 
+                  type="button"
+                 class="ui-button-15e35d6">
+                  Hủy
+                </button>
+                <button
+                  sc-camel-on-click="{{ closeDrawer }}"
+                 
+                  type="button"
+                 class="ui-button-454d92a">
+                  Lưu học viên
+                </button>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ passwordConfirmOpen }}">
+          <div class="student-delete-backdrop">
+            <section aria-describedby="reset-password-description" aria-labelledby="reset-password-title" aria-modal="true" class="student-password-dialog" role="alertdialog">
+              <div class="student-password-dialog-header">
+                <h2 id="reset-password-title">Xác nhận đặt lại mật khẩu</h2>
+                <button aria-label="Đóng" sc-camel-on-click="{{ cancelPassword }}" type="button" class="student-password-close">
+                  <svg aria-hidden="true" fill="none" height="22" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2" width="22"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+                </button>
+              </div>
+              <div class="student-password-confirm-body">
+                <span class="student-password-warning">
+                  <svg aria-hidden="true" fill="none" height="30" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="30"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg>
+                </span>
+                <p id="reset-password-description">Bạn có chắc chắn muốn đặt lại mật khẩu cho <strong>{{ passwordName }}</strong> ({{ passwordId }})?</p>
+              </div>
+              <div class="student-password-actions">
+                <button sc-camel-on-click="{{ cancelPassword }}" type="button" class="student-password-cancel">Hủy</button>
+                <button sc-camel-on-click="{{ openPasswordForm }}" type="button" class="student-password-primary">Đặt lại</button>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ passwordFormOpen }}">
+          <div class="student-delete-backdrop">
+            <section aria-labelledby="change-password-title" aria-modal="true" class="student-password-dialog student-password-form-dialog" role="dialog">
+              <div class="student-password-dialog-header">
+                <div><h2 id="change-password-title">Đổi mật khẩu</h2><p>{{ passwordName }} · {{ passwordId }}</p></div>
+                <button aria-label="Đóng" sc-camel-on-click="{{ cancelPassword }}" type="button" class="student-password-close">
+                  <svg aria-hidden="true" fill="none" height="22" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2" width="22"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+                </button>
+              </div>
+              <div class="student-password-form">
+                <label><span>Mật khẩu mới</span><input autocomplete="new-password" placeholder="Nhập mật khẩu mới" sc-camel-on-input="{{ onNewPassword }}" type="password" value="{{ newPassword }}"/></label>
+                <label><span>Nhập lại mật khẩu</span><input autocomplete="new-password" placeholder="Nhập lại mật khẩu mới" sc-camel-on-input="{{ onConfirmPassword }}" type="password" value="{{ confirmPassword }}"/></label>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ passwordHasError }}"><p class="student-password-error">{{ passwordError }}</p></sc-if>
+              </div>
+              <div class="student-password-actions">
+                <button sc-camel-on-click="{{ cancelPassword }}" type="button" class="student-password-cancel">Hủy</button>
+                <button sc-camel-on-click="{{ savePassword }}" type="button" class="student-password-primary">Lưu mật khẩu</button>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ deleteOpen }}">
+          <div class="student-delete-backdrop">
+            <section aria-describedby="delete-student-description" aria-labelledby="delete-student-title" aria-modal="true" class="student-delete-dialog" role="alertdialog">
+              <div class="student-delete-icon">
+                <svg aria-hidden="true" fill="none" height="26" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="26">
+                  <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v5M14 11v5"></path>
+                </svg>
+              </div>
+              <div class="student-delete-copy">
+                <h2 id="delete-student-title">Xóa học viên?</h2>
+                <p id="delete-student-description">Bạn có chắc muốn xóa <strong>{{ deleteName }}</strong> ({{ deleteId }})? Thao tác này không thể hoàn tác.</p>
+              </div>
+              <div class="student-delete-actions">
+                <button sc-camel-on-click="{{ cancelDelete }}" type="button" class="student-delete-cancel">Hủy</button>
+                <button sc-camel-on-click="{{ confirmDelete }}" type="button" class="student-delete-confirm">Xóa học viên</button>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ exportToastOpen }}">
+          <div class="student-list-toast" role="status"><b>✓</b><span>{{ exportToast }}</span><button aria-label="Đóng thông báo" sc-camel-on-click="{{ closeExportToast }}" type="button">×</button></div>
+        </sc-if>
+      </div>
+    </x-dc>
+    <script
+      data-dc-script=""
+      data-props='{"$preview":{"width":1440,"height":1000}}'
+      type="text/x-dc"
+    >
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          this.state = {
+            qInput: '',
+            q: '',
+            department: 'all',
+            level: 'all',
+            status: 'all',
+            selected: {},
+            exportToast: '',
+            deleted: {},
+            pendingDelete: null,
+            pendingPassword: null,
+            passwordStep: 'confirm',
+            newPassword: '',
+            confirmPassword: '',
+            passwordError: '',
+            addMenu: false,
+            drawer: false
+          };
+        }
+        renderVals() {
+          const P = {
+            home: 'M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z',
+            users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+            layers: 'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+            book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5',
+            play: 'M3 3h18v18H3zM10 8l6 4-6 4z',
+            help: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01',
+            file: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5',
+            chat: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
+            cal: 'M3 5h18v16H3zM16 3v4M8 3v4M3 10h18',
+            redo: 'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5',
+            folder: 'M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+            link: 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7',
+            target: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'
+          };
+          const link = (label, d, href, active) => ({ label, d, href: href || '#', isHeader: false, isActive: !!active, isLink: !active });
+          const head = (label) => ({ label, isHeader: true, isActive: false, isLink: false, d: '', href: '#' });
+          const nav = [
+            head('NGƯỜI HỌC'), link('Học viên', P.users, 'students-list.html', true),
+            head('NỘI DUNG'), link('Chương trình', P.layers, '../programs/programs.html'), link('Khóa học', P.book, '../courses/courses.html'),
+            head('VẬN HÀNH'), link('Lịch học/thi', P.cal, '../schedules/schedules.html'), link('Lộ trình đào tạo', P.layers, '../learning-paths/learning-paths.html'),
+            head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, '../training-projects/training-projects.html')
+          ];
+          const avatarTones = ['blue', 'red', 'green', 'amber'];
+          const data = [
+            { id: 'ADTest1', name: 'Avery Dennison Test 1', initials: 'AT', phone: '0901000001', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true },
+            { id: 'ADTest2', name: 'Avery Dennison Test 2', initials: 'AT', phone: '0901000002', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true },
+            { id: 'ADTest3', name: 'Avery Dennison Test 3', initials: 'AT', phone: '0901000003', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: true },
+            { id: 'HVDEMO001', name: 'Học viên demo 01', initials: 'HV', phone: '0901000004', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true },
+            { id: 'ACACYDEMO01', name: 'ACACYDEMO01', initials: 'AC', phone: '0901000005', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: true },
+            { id: 'ACACYDEMO02', name: 'ACACYDEMO_02', initials: 'AC', phone: '0901000006', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: false }
+          ];
+          const q = (this.state.q || '').trim().toLowerCase();
+          const available = data.filter((r) => !this.state.deleted[r.id]);
+          const filtered = available.filter((r) => {
+            const matchesQuery = !q || r.name.toLowerCase().includes(q) || r.id.toLowerCase().includes(q) || r.phone.includes(q);
+            const matchesDepartment = this.state.department === 'all' || r.bp === this.state.department;
+            const matchesLevel = this.state.level === 'all' || r.cd === this.state.level;
+            const matchesStatus = this.state.status === 'all' || (this.state.status === 'active' ? r.active : !r.active);
+            return matchesQuery && matchesDepartment && matchesLevel && matchesStatus;
+          });
+          const selectedStudents = available.filter((student) => !!this.state.selected[student.id]);
+          const selectedCount = selectedStudents.length;
+          const allFilteredSelected = filtered.length > 0 && filtered.every((student) => !!this.state.selected[student.id]);
+          const someFilteredSelected = filtered.some((student) => !!this.state.selected[student.id]);
+          const rows = filtered.map((r, i) => {
+            const avatarTone = avatarTones[i % avatarTones.length];
+            const selected = !!this.state.selected[r.id];
+            return Object.assign({}, r, {
+              inactive: !r.active,
+              avatarTone,
+              selectedClass: selected ? 'is-selected' : '',
+              selectedRowClass: selected ? 'is-row-selected' : '',
+              selectedAria: selected ? 'true' : 'false',
+              selectedMark: selected ? '✓' : '',
+              selectLabel: selected ? 'Bỏ chọn ' + r.name : 'Chọn ' + r.name,
+              toggleSelected: () => {
+                const next = Object.assign({}, this.state.selected);
+                if (next[r.id]) delete next[r.id]; else next[r.id] = true;
+                this.setState({ selected: next });
+              },
+              requestPassword: () => this.setState({ pendingPassword: r, passwordStep: 'confirm', newPassword: '', confirmPassword: '', passwordError: '' }),
+              requestDelete: () => this.setState({ pendingDelete: r })
+            });
+          });
+          const exportSelectedStudents = () => {
+            if (!selectedStudents.length) {
+              this.setState({ exportToast: 'Hãy chọn ít nhất một học viên trước khi xuất Excel.' });
+              return;
+            }
+            this.setState({ exportToast: 'Đã tạo yêu cầu xuất Excel cho ' + selectedStudents.length + ' học viên.' });
+          };
+          const pendingDelete = this.state.pendingDelete;
+          const pendingPassword = this.state.pendingPassword;
+          return {
+            nav, rows, q: this.state.qInput, department: this.state.department, level: this.state.level, status: this.state.status,
+            total: available.length, shown: filtered.length, empty: filtered.length === 0,
+            selectedCount, selectionActive: selectedCount > 0,
+            selectAllClass: allFilteredSelected ? 'is-selected' : someFilteredSelected ? 'is-partial' : '',
+            selectAllMark: allFilteredSelected ? '✓' : someFilteredSelected ? '−' : '',
+            selectAllAria: allFilteredSelected ? 'true' : someFilteredSelected ? 'mixed' : 'false',
+            selectAllLabel: allFilteredSelected ? 'Bỏ chọn tất cả học viên đang hiển thị' : 'Chọn tất cả học viên đang hiển thị',
+            exportToast: this.state.exportToast, exportToastOpen: !!this.state.exportToast,
+            deleteOpen: !!pendingDelete, deleteName: pendingDelete ? pendingDelete.name : '', deleteId: pendingDelete ? pendingDelete.id : '',
+            passwordConfirmOpen: !!pendingPassword && this.state.passwordStep === 'confirm',
+            passwordFormOpen: !!pendingPassword && this.state.passwordStep === 'form',
+            passwordName: pendingPassword ? pendingPassword.name : '', passwordId: pendingPassword ? pendingPassword.id : '',
+            newPassword: this.state.newPassword, confirmPassword: this.state.confirmPassword,
+            passwordError: this.state.passwordError, passwordHasError: !!this.state.passwordError,
+            addMenu: this.state.addMenu, drawer: this.state.drawer,
+            onSearch: (e) => this.setState({ qInput: e.target.value }),
+            applySearch: () => this.setState({ q: this.state.qInput }),
+            onDepartmentChange: (e) => this.setState({ department: e.target.value }),
+            onLevelChange: (e) => this.setState({ level: e.target.value }),
+            onStatusChange: (e) => this.setState({ status: e.target.value }),
+            resetFilters: () => this.setState({ qInput: '', q: '', department: 'all', level: 'all', status: 'all' }),
+            toggleSelectAll: () => {
+              const next = Object.assign({}, this.state.selected);
+              filtered.forEach((student) => { if (allFilteredSelected) delete next[student.id]; else next[student.id] = true; });
+              this.setState({ selected: next });
+            },
+            clearSelection: () => this.setState({ selected: {} }),
+            exportSelectedStudents,
+            closeExportToast: () => this.setState({ exportToast: '' }),
+            cancelPassword: () => this.setState({ pendingPassword: null, passwordStep: 'confirm', newPassword: '', confirmPassword: '', passwordError: '' }),
+            openPasswordForm: () => this.setState({ passwordStep: 'form', passwordError: '' }),
+            onNewPassword: (e) => this.setState({ newPassword: e.target.value, passwordError: '' }),
+            onConfirmPassword: (e) => this.setState({ confirmPassword: e.target.value, passwordError: '' }),
+            savePassword: () => {
+              const password = this.state.newPassword || '';
+              const confirmation = this.state.confirmPassword || '';
+              if (password.length < 6) {
+                this.setState({ passwordError: 'Mật khẩu phải có ít nhất 6 ký tự.' });
+                return;
+              }
+              if (password !== confirmation) {
+                this.setState({ passwordError: 'Mật khẩu nhập lại không khớp.' });
+                return;
+              }
+              this.setState({ pendingPassword: null, passwordStep: 'confirm', newPassword: '', confirmPassword: '', passwordError: '' });
+            },
+            cancelDelete: () => this.setState({ pendingDelete: null }),
+            confirmDelete: () => {
+              const student = this.state.pendingDelete;
+              if (!student) return;
+              const selected = Object.assign({}, this.state.selected);
+              delete selected[student.id];
+              this.setState({
+                deleted: Object.assign({}, this.state.deleted, { [student.id]: true }),
+                selected,
+                pendingDelete: null
+              });
+            },
+            toggleAddMenu: () => this.setState({ addMenu: !this.state.addMenu }),
+            openDrawer: () => this.setState({ drawer: true, addMenu: false }),
+            closeDrawer: () => this.setState({ drawer: false })
+          };
+        }
+      }
+    </script>
+  </body>
+</html>

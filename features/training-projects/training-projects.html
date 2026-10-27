@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<title>Dự án đào tạo – danh sách</title>
+<script src="js/training-projects-5270744d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/></head>
+<body>
+<x-dc>
+<helmet>
+<link href="../../shared/css/base.css" rel="stylesheet"/>
+<link href="css/training-projects.css" rel="stylesheet"/>
+</helmet>
+<div class="app-shell">
+<nav aria-label="Menu chính" class="app-sidebar">
+<div class="brand-row">
+<div class="brand-logo">A</div>
+<div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div>
+</div>
+<sc-for as="item" hint-placeholder-count="14" list="{{ nav }}">
+<sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}">
+<p class="sidebar-section-title">{{ item.label }}</p>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}">
+<a aria-current="page" href="{{ item.href }}" class="ui-link-b975ab7">
+<svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg>
+<span>{{ item.label }}</span>
+</a>
+</sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}">
+<a href="{{ item.href }}" class="ui-link-dbb06b9">
+<svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg>
+<span>{{ item.label }}</span>
+</a>
+</sc-if>
+</sc-for>
+</nav>
+<div class="app-content">
+<header class="ui-header-fc3ec06">
+<button aria-label="Đổi dự án" type="button" class="ui-button-1cba726">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#2456B8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18"><path d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+<span class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">ACACY PRESENTATION</span></span>
+<svg aria-hidden="true" fill="none" height="16" sc-camel-view-box="0 0 24 24" stroke="#5E6B85" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="16"><path d="m6 9 6 6 6-6"></path></svg>
+</button>
+<label class="ui-field-0b7aaec">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#5E6B85" stroke-linecap="round" stroke-width="2" width="18"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path></svg>
+<span class="visually-hidden">Tìm trong hệ thống</span>
+<input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search" class="ui-input-956a9ed"/>
+</label>
+<button type="button" class="ui-button-e0d1029">Tiếng Việt</button>
+<button aria-label="Tài khoản" type="button" class="ui-button-0798c7a">
+<span class="ui-label-fcfeba1">T</span>
+<span class="ui-label-69babcb"><span class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span>
+</button>
+</header>
+<main class="ui-content-d1b7109">
+<div class="ui-panel-b02d809">
+<div class="ui-panel-d08feb7">
+<h1 class="ui-title-fbb879b">Dự án đào tạo</h1>
+<p class="muted-text">Mỗi dự án có chương trình, khóa học, học viên và lịch học/thi riêng.</p>
+</div>
+<div class="training-projects-panel-fa70adc">
+<button type="button" class="ui-button-2491151">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>Xuất link đăng nhập</button>
+<button sc-camel-on-click="{{ openDrawer }}" type="button" class="ui-button-53d3bfd">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" width="18"><path d="M12 5v14M5 12h14"></path></svg>Thêm dự án</button>
+</div>
+</div>
+<div class="toolbar-row">
+<label class="training-projects-field-5fdf71d">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#5E6B85" stroke-linecap="round" stroke-width="2" width="18"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path></svg>
+<span class="visually-hidden">Tìm dự án</span>
+<input placeholder="Tìm theo tên, mã dự án, khách hàng" type="search" class="ui-input-956a9ed"/>
+</label>
+<button type="button" class="training-projects-button-679febc">Trạng thái: Tất cả<svg aria-hidden="true" fill="none" height="16" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="16"><path d="m6 9 6 6 6-6"></path></svg></button>
+</div>
+<div class="training-projects-panel-2fadee7">
+<sc-for as="p" hint-placeholder-count="2" list="{{ projects }}">
+<article class="training-projects-article-d22f0e8">
+<div class="ui-panel-f265ed3">
+<span class="training-projects-label-e2f6b70"><svg aria-hidden="true" fill="none" height="24" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="24"><path d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg></span>
+<div class="ui-panel-634a28b"></div>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ p.current }}"><span class="training-projects-label-2858417">Đang làm việc</span></sc-if>
+<button aria-label="Thao tác với {{ p.name }}" sc-camel-on-click="{{ p.menu }}" type="button" class="ui-button-10e2633"><svg aria-hidden="true" fill="currentColor" height="20" sc-camel-view-box="0 0 24 24" width="20"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+</div>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ p.menuOpen }}">
+<div role="menu" class="training-projects-panel-d2045e4">
+<a href="training-project-detail.html" role="menuitem" class="ui-link-07ef58a">Sửa thông tin</a>
+<button role="menuitem" type="button" class="ui-button-aa9210c">Ngưng sử dụng</button>
+<div class="ui-panel-5032cf7"></div>
+<button role="menuitem" type="button" class="ui-button-b9d201c">Xóa dự án</button>
+</div>
+</sc-if>
+<div class="ui-element-bc0172c">
+<h2 class="training-projects-heading-8bf9465">{{ p.name }}</h2>
+<p class="ui-text-4333d42">Mã dự án: {{ p.code }}</p>
+</div>
+<div class="training-projects-panel-a38d7e0">
+<div class="training-projects-panel-529e6af"><span class="ui-label-e15e86b">Khách hàng</span><span class="training-projects-label-5839be9">{{ p.customer }}</span></div>
+</div>
+<div class="training-projects-panel-4739bd4">
+<div class="training-projects-panel-65d9d01">
+<sc-if hint-placeholder-val="{{ true }}" value="{{ p.on }}"><button aria-checked="true" aria-label="Đang sử dụng" role="switch" sc-camel-on-click="{{ p.toggle }}" type="button" class="training-projects-button-aa08b2f"><span class="training-projects-label-7eb8aaa"></span></button>Đang sử dụng</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ p.off }}"><button aria-checked="false" aria-label="Đang sử dụng" role="switch" sc-camel-on-click="{{ p.toggle }}" type="button" class="training-projects-button-c22a1b1"><span class="training-projects-label-7eb8aaa"></span></button>Đã ngưng</sc-if>
+</div>
+<a href="training-project-detail.html" class="training-projects-link-d0951d3">Mở dự án<svg aria-hidden="true" fill="none" height="16" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="16"><path d="m9 18 6-6-6-6"></path></svg></a>
+</div>
+</article>
+</sc-for>
+</div>
+</main>
+</div>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ drawer }}">
+<div class="ui-panel-c56d050">
+<section aria-label="Thêm dự án đào tạo" class="ui-section-3d964db">
+<div class="ui-panel-f2f19c9">
+<h2 class="ui-heading-ae46a5c">Thêm dự án đào tạo</h2>
+<button aria-label="Đóng" sc-camel-on-click="{{ closeDrawer }}" type="button" class="ui-button-354b601"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2" width="20"><path d="M18 6 6 18M6 6l12 12"></path></svg></button>
+</div>
+<div class="ui-panel-c9e72b6">
+<div class="ui-panel-a4aea48">
+<h3 class="ui-subheading-19a2c6e">THÔNG TIN DỰ ÁN</h3>
+<label class="form-field">Tên dự án <span class="danger-text">*</span><input placeholder="VD: AVERY DENNISON" type="text" class="form-control"/></label>
+<div class="ui-panel-ba0ec76">
+<label class="form-field">Mã dự án <span class="danger-text">*</span><input type="text" class="form-control"/><span class="ui-label-b98d342">Không sửa được sau khi tạo</span></label>
+<label class="form-field">Khách hàng<sc-raw-select class="ui-sc-raw-select-89f8d6a"><option>Chọn…</option></sc-raw-select></label>
+</div>
+</div>
+<div class="training-projects-panel-90543b1">
+<h3 class="ui-subheading-19a2c6e">HỌC VIÊN ĐĂNG NHẬP BẰNG <span class="danger-text">*</span></h3>
+<label class="training-projects-field-3795ab6"><input checked="" type="checkbox" class="ui-input-ffa791a"/>Mã hoặc số điện thoại học viên</label>
+<label class="training-projects-field-3795ab6"><input type="checkbox" class="ui-input-ffa791a"/>Tên đăng nhập và mật khẩu của dự án</label>
+<label class="training-projects-field-3795ab6"><input type="checkbox" class="ui-input-ffa791a"/>Tên đăng nhập và mật khẩu hệ thống</label>
+<label class="training-projects-field-3795ab6"><input type="checkbox" class="ui-input-ffa791a"/>Mã nhân viên</label>
+</div>
+<div class="project-create-criteria">
+<h3 class="ui-subheading-19a2c6e">TIÊU CHÍ ĐÀO TẠO</h3>
+<div class="project-create-criteria-grid">
+<sc-for as="criterion" hint-placeholder-count="3" list="{{ createCriteria }}"><button aria-pressed="{{ criterion.ariaPressed }}" class="{{ criterion.className }}" sc-camel-on-click="{{ criterion.toggle }}" type="button"><b>{{ criterion.mark }}</b><span><strong>{{ criterion.code }}</strong>{{ criterion.name }}</span></button></sc-for>
+</div>
+</div>
+</div>
+<div class="ui-panel-ec3e4d0">
+<button sc-camel-on-click="{{ closeDrawer }}" type="button" class="ui-button-7ee8f8c">Hủy</button>
+<button sc-camel-on-click="{{ closeDrawer }}" type="button" class="ui-button-6998386">Tạo dự án</button>
+</div>
+</section>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1000}}' type="text/x-dc">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { off: {}, menu: null, drawer: false, newProjectCriteria: {} };
+  }
+  renderVals() {
+    const P = {
+      home: 'M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z',
+      users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+      layers: 'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+      book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5',
+      play: 'M3 3h18v18H3zM10 8l6 4-6 4z',
+      help: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01',
+      file: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5',
+      chat: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
+      cal: 'M3 5h18v16H3zM16 3v4M8 3v4M3 10h18',
+      redo: 'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5',
+      folder: 'M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+      link: 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7',
+      target: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'
+    };
+    const link = (label, d, href, active) => ({ label, d, href: href || '#', isHeader: false, isActive: !!active, isLink: !active });
+    const head = (label) => ({ label, isHeader: true, isActive: false, isLink: false, d: '', href: '#' });
+    const nav = [
+      head('NGƯỜI HỌC'), link('Học viên', P.users, '../students/students-list.html'),
+      head('NỘI DUNG'), link('Chương trình', P.layers, '../programs/programs.html'), link('Khóa học', P.book, '../courses/courses.html'),
+      head('VẬN HÀNH'), link('Lịch học/thi', P.cal, '../schedules/schedules.html'), link('Lộ trình đào tạo', P.layers, '../learning-paths/learning-paths.html'),
+      head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, 'training-projects.html', true), link('Tiêu chí đào tạo', P.target, 'training-criteria.html')
+    ];
+    const criteriaCatalog = [
+      { id: 'tc01', code: 'TC01', name: 'Kỹ năng giao tiếp với khách hàng' },
+      { id: 'tc02', code: 'TC02', name: 'Kỹ năng bán hàng' },
+      { id: 'tc03', code: 'TC03', name: 'Kiến thức sản phẩm' }
+    ];
+    const data = [
+      { id: 'p1', name: 'ACACY PRESENTATION', code: 'ACACY_PRESENTATION', customer: 'ACA Office Văn Phòng', current: true },
+      { id: 'p2', name: 'ACACY DEMO', code: 'DEMO', customer: '—', current: false }
+    ];
+    const s = this.state;
+    const projects = data.map((p) => Object.assign({}, p, {
+      on: !s.off[p.id], off: !!s.off[p.id], menuOpen: s.menu === p.id,
+      toggle: () => this.setState({ off: Object.assign({}, this.state.off, { [p.id]: !this.state.off[p.id] }) }),
+      menu: () => this.setState({ menu: this.state.menu === p.id ? null : p.id })
+    }));
+    const createCriteria = criteriaCatalog.map((criterion) => {
+      const selected = !!s.newProjectCriteria[criterion.id];
+      return Object.assign({}, criterion, {
+        ariaPressed: String(selected), className: selected ? 'is-selected' : '', mark: selected ? '✓' : '',
+        toggle: () => {
+          const next = Object.assign({}, this.state.newProjectCriteria);
+          if (next[criterion.id]) delete next[criterion.id]; else next[criterion.id] = true;
+          this.setState({ newProjectCriteria: next });
+        }
+      });
+    });
+    return {
+      nav, projects, createCriteria, drawer: s.drawer,
+      openDrawer: () => this.setState({ drawer: true, newProjectCriteria: {} }),
+      closeDrawer: () => this.setState({ drawer: false })
+    };
+  }
+}
+</script>
+</body></html>

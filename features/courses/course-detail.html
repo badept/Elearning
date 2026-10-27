@@ -1,0 +1,1803 @@
+<!doctype html>
+
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <title>Khóa học – chi tiết</title>
+    <script src="js/course-detail-69263d86.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <x-dc>
+      <helmet>
+<link href="../../shared/css/base.css" rel="stylesheet"/>
+<link href="css/courses.css" rel="stylesheet"/>
+      </helmet>
+      <div
+       
+       class="course-detail-panel-d8e198a">
+        <nav
+          aria-label="Menu chính"
+         
+         class="ui-sidebar-a50515f">
+          <div class="brand-row">
+            <div
+             
+             class="ui-panel-798c0b6">
+              A
+            </div>
+            <div class="stack-xs">
+              <span class="ui-label-53c3575">AcaSys</span
+              ><span class="ui-label-3cb8792">Đào tạo</span>
+            </div>
+          </div>
+          <sc-for as="item" hint-placeholder-count="9" list="{{ nav }}">
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}">
+              <p
+               
+               class="ui-text-e1c7d10">
+                {{ item.label }}
+              </p>
+            </sc-if>
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}">
+              <a
+                aria-current="page"
+                href="{{ item.href }}"
+               
+               class="ui-link-c4dc568">
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="20"
+                  sc-camel-view-box="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  width="20"
+                >
+                  <path d="{{ item.d }}"></path>
+                </svg>
+                <span>{{ item.label }}</span>
+              </a>
+            </sc-if>
+            <sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}">
+              <a
+                href="{{ item.href }}"
+               
+               class="ui-link-c4b025d">
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="20"
+                  sc-camel-view-box="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.8"
+                  width="20"
+                >
+                  <path d="{{ item.d }}"></path>
+                </svg>
+                <span>{{ item.label }}</span>
+              </a>
+            </sc-if>
+          </sc-for>
+        </nav>
+        <div class="app-content">
+          <header
+           
+           class="ui-header-34f1474">
+            <button
+              aria-label="Đổi dự án"
+             
+              type="button"
+             class="ui-button-0662e01">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="18"
+                sc-camel-view-box="0 0 24 24"
+                stroke="#2456B8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.8"
+                width="18"
+              >
+                <path
+                  d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                ></path>
+              </svg>
+              <span
+               
+                 class="ui-label-69babcb"><span class="ui-label-6e5e314">Dự án</span
+                ><span class="ui-label-7e6ddec">ACACY PRESENTATION</span></span
+              >
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="16"
+                sc-camel-view-box="0 0 24 24"
+                stroke="#5E6B85"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                width="16"
+              >
+                <path d="m6 9 6 6 6-6"></path>
+              </svg>
+            </button>
+            <label
+             
+             class="ui-field-375c72e">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="18"
+                sc-camel-view-box="0 0 24 24"
+                stroke="#5E6B85"
+                stroke-linecap="round"
+                stroke-width="2"
+                width="18"
+              >
+                <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path>
+              </svg>
+              <span
+               
+                 class="visually-hidden">Tìm trong hệ thống</span
+              >
+              <input
+                placeholder="Tìm học viên, khóa học, lịch học/thi…"
+               
+                type="search" class="ui-input-956a9ed"
+              />
+            </label>
+            <button
+             
+              type="button"
+             class="ui-button-8e4b730">
+              Tiếng Việt
+            </button>
+            <button
+              aria-label="Tài khoản"
+             
+              type="button"
+             class="ui-button-0798c7a">
+              <span
+               
+                 class="ui-label-4066746">T</span
+              >
+              <span
+               
+                 class="ui-label-69babcb"><span class="ui-label-7e6ddec">Trainer</span
+                ><span class="ui-label-6e5e314">Quản trị đào tạo</span></span
+              >
+            </button>
+          </header>
+          <main
+           
+           class="ui-content-196256b">
+            <nav
+              aria-label="Đường dẫn"
+             
+             class="course-detail-sidebar-be6a519">
+              <a href="courses.html" class="ui-element-21a1be8">Khóa học</a>
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="14"
+                sc-camel-view-box="0 0 24 24"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                width="14"
+              >
+                <path d="m9 18 6-6-6-6"></path>
+              </svg>
+              <span>Chốt sale hiệu quả trong 5 bước</span>
+            </nav>
+            <section
+             
+             class="course-detail-section-5e3477b">
+              <div
+               
+               class="course-detail-panel-12539ad">
+                <svg
+                  aria-hidden="true"
+                  fill="none"
+                  height="34"
+                  sc-camel-view-box="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.6"
+                  width="34"
+                >
+                  <path
+                    d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"
+                  ></path>
+                </svg>
+              </div>
+              <div class="ui-panel-ed81d1d">
+                <div class="toolbar-row">
+                  <h1 class="course-detail-title-c4ce3e9">
+                    Chốt sale hiệu quả trong 5 bước
+                  </h1>
+                  <span
+                   
+                     class="course-detail-label-88d55fa">4 bài học</span
+                  >
+                </div>
+                <p class="ui-text-4e5f0ed">
+                  Chương trình
+                  <a href="../programs/program-detail.html" class="ui-element-21a1be8">Kỹ năng bán hàng</a> · {{
+                  lessonCount }} bài học · {{ pageCount }} trang · {{ qCount }} câu hỏi · {{
+                  docCount }} tài liệu
+                </p>
+              </div>
+              <div class="ui-panel-dab9924">
+                <button
+                  sc-camel-on-click="{{ openInfo }}"
+                 
+                  type="button"
+                 class="course-detail-button-1ff8921">
+                  <svg
+                    aria-hidden="true"
+                    fill="none"
+                    height="18"
+                    sc-camel-view-box="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    width="18"
+                  >
+                    <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg
+                  >Sửa thông tin
+                </button>
+                <button
+                  aria-label="Thao tác khác"
+                  sc-camel-on-click="{{ toggleMore }}"
+                 
+                  type="button"
+                 class="ui-button-2366714">
+                  <svg
+                    aria-hidden="true"
+                    fill="currentColor"
+                    height="20"
+                    sc-camel-view-box="0 0 24 24"
+                    width="20"
+                  >
+                    <circle cx="5" cy="12" r="1.8"></circle>
+                    <circle cx="12" cy="12" r="1.8"></circle>
+                    <circle cx="19" cy="12" r="1.8"></circle>
+                  </svg>
+                </button>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ moreOpen }}">
+                  <div
+                    role="menu"
+                   
+                   class="course-detail-panel-1fc8556">
+                    <button
+                      role="menuitem"
+                     
+                      type="button"
+                     class="ui-button-ce275f2">
+                      Xóa khóa học
+                    </button>
+                  </div>
+                </sc-if>
+              </div>
+            </section>
+            <div
+             
+             class="course-detail-panel-043a03d">
+              <div
+                aria-label="Nội dung khóa học"
+                role="tablist"
+               
+               class="course-detail-panel-fac1ead">
+                <sc-for as="t" hint-placeholder-count="4" list="{{ tabs }}">
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ t.active }}">
+                    <button
+                      aria-selected="true"
+                      role="tab"
+                      sc-camel-on-click="{{ t.go }}"
+                     
+                      type="button"
+                     class="course-detail-button-7b310c0">
+                      {{ t.label }}<span
+                       
+                         class="course-detail-label-0ceac81">{{ t.count }}</span
+                      >
+                    </button>
+                  </sc-if>
+                  <sc-if hint-placeholder-val="{{ true }}" value="{{ t.inactive }}">
+                    <button
+                      aria-selected="false"
+                      role="tab"
+                      sc-camel-on-click="{{ t.go }}"
+                     
+                      type="button"
+                     class="course-detail-button-fbfd1ab">
+                      {{ t.label }}<span
+                       
+                         class="course-detail-label-5912f6e">{{ t.count }}</span
+                      >
+                    </button>
+                  </sc-if>
+                </sc-for>
+              </div>
+              <sc-if hint-placeholder-val="{{ true }}" value="{{ tabBai }}">
+                <div
+                  role="tabpanel"
+                 
+                 class="ui-panel-92ce386">
+                  <div
+                   
+                   class="course-detail-panel-8dbb6c0">
+                    <div
+                     
+                     class="ui-panel-d78b093">
+                      <p class="course-detail-text-b973025">
+                        Tạo nội dung và câu hỏi của từng bài học trong cùng một lần thao tác.
+                      </p>
+                      <button
+                        sc-camel-on-click="{{ openAddLesson }}"
+                       
+                        type="button"
+                       class="course-detail-button-abd633d">
+                        <svg
+                          aria-hidden="true"
+                          fill="none"
+                          height="18"
+                          sc-camel-view-box="0 0 24 24"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-width="2.2"
+                          width="18"
+                        >
+                          <path d="M12 5v14M5 12h14"></path></svg
+                        >Thêm bài học &amp; câu hỏi
+                      </button>
+                    </div>
+                    <div
+                     
+                     class="course-detail-panel-25ec75f">
+                      <sc-for as="l" hint-placeholder-count="4" list="{{ lessons }}">
+                        <div
+                         
+                         class="course-detail-panel-8bf0af5">
+                          <div class="stack-xs">
+                            <button
+                              aria-label="Đưa bài {{ l.n }} lên"
+                              disabled="{{ l.first }}"
+                              sc-camel-on-click="{{ l.up }}"
+                             
+                              type="button"
+                             class="course-detail-button-af4ce37">
+                              <svg
+                                aria-hidden="true"
+                                fill="none"
+                                height="16"
+                                sc-camel-view-box="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2.2"
+                                width="16"
+                              >
+                                <path d="m18 15-6-6-6 6"></path>
+                              </svg>
+                            </button>
+                            <button
+                              aria-label="Đưa bài {{ l.n }} xuống"
+                              disabled="{{ l.last }}"
+                              sc-camel-on-click="{{ l.down }}"
+                             
+                              type="button"
+                             class="course-detail-button-af4ce37">
+                              <svg
+                                aria-hidden="true"
+                                fill="none"
+                                height="16"
+                                sc-camel-view-box="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2.2"
+                                width="16"
+                              >
+                                <path d="m6 9 6 6 6-6"></path>
+                              </svg>
+                            </button>
+                          </div>
+                          <span
+                           
+                             class="course-detail-label-db4ff1e">{{ l.n }}</span
+                          >
+                          <span
+                           
+                             class="course-detail-label-52c237c"><svg
+                              aria-hidden="true"
+                              fill="none"
+                              height="20"
+                              sc-camel-view-box="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="1.8"
+                              width="20"
+                            >
+                              <path d="{{ l.icon }}"></path></svg
+                          ></span>
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ l.viewing }}">
+                            <div
+                             
+                             class="course-detail-panel-4c5fa82">
+                              <span class="ui-label-7e6ddec">{{ l.name }}</span>
+                              <span
+                                 class="course-detail-label-d347222">{{ l.type }} · {{ l.pages }} trang · Học tối thiểu {{ l.min
+                                }}</span
+                              >
+                              <div
+                               
+                               class="course-detail-panel-ba93521">
+                                <span class="course-detail-button-35db0fb">
+                                  {{ l.qn }} câu hỏi
+                                </span>
+                                <sc-if hint-placeholder-val="{{ false }}" value="{{ l.lib }}"
+                                  ><span
+                                   
+                                     class="course-detail-label-2a0c5a2">Trong Thư viện</span
+                                  ></sc-if
+                                >
+                              </div>
+                            </div>
+                            <button
+                              aria-label="Sửa {{ l.name }}"
+                              sc-camel-on-click="{{ l.edit }}"
+                             
+                              type="button"
+                             class="ui-button-11c4f69">
+                              <svg
+                                aria-hidden="true"
+                                fill="none"
+                                height="18"
+                                sc-camel-view-box="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                width="18"
+                              >
+                                <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path>
+                              </svg>
+                            </button>
+                            <button
+                              aria-label="Xóa {{ l.name }}"
+                              sc-camel-on-click="{{ l.ask }}"
+                             
+                              type="button"
+                             class="course-detail-button-f98ad3e">
+                              <svg
+                                aria-hidden="true"
+                                fill="none"
+                                height="18"
+                                sc-camel-view-box="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                width="18"
+                              >
+                                <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"></path>
+                              </svg>
+                            </button>
+                          </sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ l.asking }}">
+                            <span
+                               class="course-detail-label-d8d13f5">Xóa bài “{{ l.name }}” và {{ l.qn }} câu hỏi của bài?</span
+                            >
+                            <button
+                              sc-camel-on-click="{{ cancelAsk }}"
+                             
+                              type="button"
+                             class="course-detail-button-f37ef2f">
+                              Hủy
+                            </button>
+                            <button
+                              sc-camel-on-click="{{ l.remove }}"
+                             
+                              type="button"
+                             class="course-detail-button-e4f1cc5">
+                              Xóa
+                            </button>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <aside
+                   
+                   class="course-detail-aside-335be1b">
+                    <h3 class="course-detail-subheading-48a0648">
+                      Học viên thấy trên ứng dụng
+                    </h3>
+                    <div
+                     
+                     class="course-detail-panel-99b1eed">
+                      <div class="course-detail-panel-8f624a5">
+                        <div
+                         
+                         class="course-detail-panel-0b42c40">
+                          <svg
+                            aria-hidden="true"
+                            fill="none"
+                            height="28"
+                            sc-camel-view-box="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.6"
+                            width="28"
+                          >
+                            <path
+                              d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div class="course-detail-panel-26b9bab">
+                          <span
+                             class="course-detail-label-48394e3">Kỹ năng bán hàng</span
+                          ><span
+                             class="course-detail-label-b8ada54">Chốt sale hiệu quả trong 5 bước</span
+                          >
+                        </div>
+                      </div>
+                      <div class="course-detail-panel-6cc806e">
+                        <div
+                         
+                         class="course-detail-panel-7a28787"></div>
+                      </div>
+                      <div
+                       
+                       class="course-detail-panel-c0f18cd">
+                        <span>{{ pageCount }} trang</span><span>{{ qCount }} câu hỏi</span
+                        ><span class="course-detail-label-5bb9203">Cấp 1</span>
+                      </div>
+                    </div>
+                    <p class="course-detail-text-eb0cbdb">
+                      Số trang được tự đếm từ tệp nội dung. Bài “Trong Thư viện” còn hiện ở mục Thư
+                      viện để học viên xem lại.
+                    </p>
+                  </aside>
+                </div>
+              </sc-if>
+              <sc-if hint-placeholder-val="{{ false }}" value="{{ tabCauHoi }}">
+                <div
+                  role="tabpanel"
+                 
+                 class="ui-panel-09f4a2f">
+                  <div class="toolbar-row">
+                    <div
+                      aria-label="Lọc theo bài học"
+                      role="group"
+                     
+                     class="course-detail-panel-020207c">
+                      <sc-for as="f" hint-placeholder-count="4" list="{{ qFilters }}">
+                        <sc-if hint-placeholder-val="{{ false }}" value="{{ f.on }}"
+                          ><button
+                            aria-pressed="true"
+                            sc-camel-on-click="{{ f.pick }}"
+                           
+                            type="button"
+                           class="course-detail-button-5089590">
+                            {{ f.label }}
+                          </button></sc-if
+                        >
+                        <sc-if hint-placeholder-val="{{ true }}" value="{{ f.off }}"
+                          ><button
+                            aria-pressed="false"
+                            sc-camel-on-click="{{ f.pick }}"
+                           
+                            type="button"
+                           class="course-detail-button-ebb1cd7">
+                            {{ f.label }}
+                          </button></sc-if
+                        >
+                      </sc-for>
+                    </div>
+                    <div class="ui-panel-634a28b"></div>
+                    <button
+                     
+                      type="button"
+                     class="course-detail-button-737c8ec">
+                      Tải file mẫu
+                    </button>
+                    <button
+                     
+                      type="button"
+                     class="course-detail-button-e4d92c4">
+                      Nhập từ Excel
+                    </button>
+                    <button
+                      sc-camel-on-click="{{ openAddQ }}"
+                     
+                      type="button"
+                     class="course-detail-button-abd633d">
+                      <svg
+                        aria-hidden="true"
+                        fill="none"
+                        height="18"
+                        sc-camel-view-box="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width="2.2"
+                        width="18"
+                      >
+                        <path d="M12 5v14M5 12h14"></path></svg
+                      >Thêm câu hỏi
+                    </button>
+                  </div>
+                  <sc-for as="q" hint-placeholder-count="4" list="{{ questions }}">
+                    <article
+                     
+                     class="course-detail-article-cbfbc5e">
+                      <div class="course-detail-panel-4b41f8c">
+                        <span class="course-detail-label-d99295b">Câu {{ q.n }}</span>
+                        <span
+                         
+                           class="course-detail-label-0929b1f">Bài {{ q.b }}: {{ q.lesson }}</span
+                        >
+                        <span
+                         
+                           class="course-detail-label-1a794b1">{{ q.pts }} điểm</span
+                        >
+                        <span class="course-detail-label-1a794b1">{{ q.typeLabel }}</span>
+                        <sc-if hint-placeholder-val="{{ false }}" value="{{ q.fixed }}"
+                          ><span
+                           
+                             class="course-detail-label-274ee09">Cố định thứ tự đáp án</span
+                          ></sc-if
+                        >
+                        <div class="ui-panel-634a28b"></div>
+                        <button
+                          aria-label="Sửa câu {{ q.n }}"
+                          sc-camel-on-click="{{ q.edit }}"
+                         
+                          type="button"
+                         class="course-detail-button-2dac92d">
+                          <svg
+                            aria-hidden="true"
+                            fill="none"
+                            height="18"
+                            sc-camel-view-box="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            width="18"
+                          >
+                            <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path>
+                          </svg>
+                        </button>
+                        <button
+                          aria-label="Xóa câu {{ q.n }}"
+                          sc-camel-on-click="{{ q.remove }}"
+                          type="button"
+                         class="course-detail-button-abda828">
+                          <svg
+                            aria-hidden="true"
+                            fill="none"
+                            height="18"
+                            sc-camel-view-box="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            width="18"
+                          >
+                            <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"></path>
+                          </svg>
+                        </button>
+                      </div>
+                      <p class="course-detail-text-ee3fcab">
+                        {{ q.text }}
+                      </p>
+                      <div
+                       
+                       class="course-detail-panel-1e14ef3">
+                        <sc-for as="o" hint-placeholder-count="4" list="{{ q.opts }}">
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ o.ok }}"
+                            ><div
+                             
+                             class="course-detail-panel-5b3ef36">
+                              <span
+                               
+                                 class="course-detail-label-ac997dc">{{ o.k }}</span
+                              ><span class="course-detail-label-d952f32">{{ o.t }}</span
+                              ><svg
+                                aria-label="Đáp án đúng"
+                                fill="none"
+                                height="18"
+                                role="img"
+                                sc-camel-view-box="0 0 24 24"
+                                stroke="#1B6B45"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2.4"
+                                width="18"
+                              >
+                                <path d="M20 6 9 17l-5-5"></path>
+                              </svg></div
+                          ></sc-if>
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ o.no }}"
+                            ><div
+                             
+                             class="course-detail-panel-89581a8">
+                              <span
+                               
+                                 class="course-detail-label-eaa57eb">{{ o.k }}</span
+                              ><span class="course-detail-label-48d60ba">{{ o.t }}</span>
+                            </div></sc-if
+                          >
+                        </sc-for>
+                      </div>
+                    </article>
+                  </sc-for>
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ hasMore }}">
+                    <button
+                      sc-camel-on-click="{{ showAll }}"
+                     
+                      type="button"
+                     class="course-detail-button-f4987c5">
+                      Xem thêm {{ moreCount }} câu hỏi
+                    </button>
+                  </sc-if>
+                </div>
+              </sc-if>
+              <sc-if hint-placeholder-val="{{ false }}" value="{{ tabTaiLieu }}">
+                <div
+                  role="tabpanel"
+                 
+                 class="ui-panel-09f4a2f">
+                  <div
+                   
+                   class="ui-panel-d78b093">
+                    <p class="course-detail-text-b973025">
+                      Mỗi tài liệu phải thuộc một bài học để dễ quản lý và hiển thị đúng ngữ cảnh trong Thư viện.
+                    </p>
+                    <button
+                      sc-camel-on-click="{{ startDoc }}"
+                     
+                      type="button"
+                     class="course-detail-button-abd633d">
+                      <svg
+                        aria-hidden="true"
+                        fill="none"
+                        height="18"
+                        sc-camel-view-box="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width="2.2"
+                        width="18"
+                      >
+                        <path d="M12 5v14M5 12h14"></path></svg
+                      >Thêm tài liệu
+                    </button>
+                  </div>
+                  <div
+                   
+                   class="course-detail-panel-25ec75f">
+                    <sc-for as="d" hint-placeholder-count="3" list="{{ docs }}">
+                      <div
+                       
+                       class="course-detail-panel-a37db18">
+                        <span
+                         
+                           class="course-detail-label-28db863"><svg
+                            aria-hidden="true"
+                            fill="none"
+                            height="20"
+                            sc-camel-view-box="0 0 24 24"
+                            stroke="currentColor"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="1.8"
+                            width="20"
+                          >
+                            <path d="{{ d.icon }}"></path></svg
+                        ></span>
+                        <sc-if hint-placeholder-val="{{ true }}" value="{{ d.viewing }}">
+                          <div
+                           
+                           class="course-detail-panel-11b7f30">
+                            <span class="ui-label-7e6ddec">{{ d.name }}</span>
+                            <span class="course-detail-doc-lesson">{{ d.lessonLabel }}</span>
+                            <span class="course-detail-label-d347222">{{ d.meta }}</span>
+                          </div>
+                          <button
+                           
+                            type="button"
+                           class="course-detail-button-517ae35">
+                            Xem
+                          </button>
+                          <button
+                            aria-label="Xóa {{ d.name }}"
+                            sc-camel-on-click="{{ d.ask }}"
+                           
+                            type="button"
+                           class="course-detail-button-f98ad3e">
+                            <svg
+                              aria-hidden="true"
+                              fill="none"
+                              height="18"
+                              sc-camel-view-box="0 0 24 24"
+                              stroke="currentColor"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              width="18"
+                            >
+                              <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"></path>
+                            </svg>
+                          </button>
+                        </sc-if>
+                        <sc-if hint-placeholder-val="{{ false }}" value="{{ d.asking }}">
+                          <span
+                             class="course-detail-label-d8d13f5">Xóa tài liệu “{{ d.name }}”?</span
+                          >
+                          <button
+                            sc-camel-on-click="{{ cancelAsk }}"
+                           
+                            type="button"
+                           class="course-detail-button-f37ef2f">
+                            Hủy
+                          </button>
+                          <button
+                            sc-camel-on-click="{{ d.remove }}"
+                           
+                            type="button"
+                           class="course-detail-button-e4f1cc5">
+                            Xóa
+                          </button>
+                        </sc-if>
+                      </div>
+                    </sc-for>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ docAdding }}">
+                      <div
+                       
+                       class="course-detail-panel-0b41353">
+                        <label class="course-detail-doc-field"><span>Tên tài liệu <b>*</b></span><input placeholder="Nhập tên tài liệu" type="text" class="course-detail-input-bcc8c72"/></label>
+                        <label class="course-detail-doc-field"><span>Thuộc bài học <b>*</b></span><sc-raw-select sc-camel-on-change="{{ onDocLessonChange }}" value="{{ docLessonId }}" class="course-detail-sc-raw-select-adaf37f"><sc-for as="dl" hint-placeholder-count="4" list="{{ docLessonOptions }}"><option value="{{ dl.id }}">{{ dl.label }}</option></sc-for></sc-raw-select></label>
+                        <label class="course-detail-doc-field"><span>Loại tài liệu <b>*</b></span><sc-raw-select class="course-detail-sc-raw-select-adaf37f"><option>Tệp PDF</option><option>Tài liệu điện tử (đường dẫn)</option></sc-raw-select></label>
+                        <button
+                         
+                          type="button"
+                         class="course-detail-button-124378f">
+                          Chọn tệp
+                        </button>
+                        <button
+                          sc-camel-on-click="{{ cancelAsk }}"
+                         
+                          type="button"
+                         class="course-detail-button-f37ef2f">
+                          Hủy
+                        </button>
+                        <button
+                          sc-camel-on-click="{{ cancelAsk }}"
+                         
+                          type="button"
+                         class="course-detail-button-e01ae2f">
+                          Thêm
+                        </button>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if hint-placeholder-val="{{ false }}" value="{{ tabLichThi }}">
+                <div role="tabpanel" class="course-detail-schedule-panel">
+                  <div class="ui-panel-d78b093">
+                    <div class="stack-xs">
+                      <h3 class="course-detail-subheading-48a0648">Lịch đang sử dụng khóa học này</h3>
+                      <p class="course-detail-text-b973025">
+                        Mỗi lịch thi gắn đúng một bài học. Câu hỏi của đề chỉ được lấy từ bài học đó.
+                      </p>
+                    </div>
+                    <a href="../schedules/schedule-detail.html?mode=create&amp;type=exam&amp;course=chot-sale-5-buoc" class="course-detail-schedule-create">
+                      <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" width="18">
+                        <path d="M12 5v14M5 12h14"></path>
+                      </svg>
+                      Tạo lịch thi
+                    </a>
+                  </div>
+                  <div class="course-detail-schedule-note">
+                    <svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20">
+                      <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01"></path>
+                    </svg>
+                    <span><strong>Phạm vi câu hỏi được khóa theo một bài học.</strong> Không lấy câu hỏi từ bài học hoặc khóa học khác.</span>
+                  </div>
+                  <div class="course-detail-schedule-list">
+                    <sc-for as="sch" hint-placeholder-count="2" list="{{ schedules }}">
+                      <article class="course-detail-schedule-card">
+                        <div class="course-detail-schedule-main">
+                          <div class="course-detail-schedule-tags">
+                            <span class="course-detail-schedule-code">{{ sch.code }}</span>
+                            <span class="course-detail-schedule-kind">{{ sch.kind }}</span>
+                          </div>
+                          <h4 class="course-detail-schedule-name">{{ sch.name }}</h4>
+                          <p class="course-detail-schedule-scope">Phạm vi: {{ sch.scope }}</p>
+                          <p class="course-detail-schedule-time">Thời gian: {{ sch.from }} → {{ sch.to }}</p>
+                        </div>
+                        <div class="course-detail-schedule-meta">
+                          <span>{{ sch.students }} học viên</span>
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ sch.active }}"><span class="course-detail-schedule-status-active">Đã phát hành</span></sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ sch.draft }}"><span class="course-detail-schedule-status-draft">Bản nháp</span></sc-if>
+                          <a href="{{ sch.href }}" class="course-detail-schedule-open">Xem chi tiết</a>
+                        </div>
+                      </article>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </main>
+        </div>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ scheduleCreateOpen }}">
+          <div class="ui-panel-b7c6c15">
+            <section aria-label="Tạo lịch thi" class="ui-section-f37a56d course-detail-lesson-drawer">
+              <div class="ui-panel-4ee43c1">
+                <div class="stack-xs">
+                  <h2 class="ui-heading-1a33e4e">Tạo lịch thi từ khóa học</h2>
+                  <p class="ui-text-2a5324c">Khóa học: Chốt sale hiệu quả trong 5 bước</p>
+                </div>
+                <button aria-label="Đóng" sc-camel-on-click="{{ closeAssignSchedule }}" type="button" class="ui-button-0567c08">
+                  <svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2" width="20"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+                </button>
+              </div>
+              <div class="course-detail-panel-99d0339 course-detail-assign-body">
+                <div class="course-detail-lesson-overview">
+                  <svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20"><path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 8v4M12 16h.01"></path></svg>
+                  <span>Chọn đúng một bài học để tạo lịch thi. Sau khi tạo, module Lịch học/thi dùng để quản lý học viên, cách đăng nhập và cấu hình vận hành.</span>
+                </div>
+                <div class="course-detail-assign-grid">
+                  <label class="ui-field-4ee83e9">Tên lịch thi <span class="ui-label-aaa496a">*</span><input sc-camel-on-input="{{ onScheduleName }}" type="text" value="{{ scheduleDraftName }}" class="ui-input-a6dbc1a"/></label>
+                  <label class="ui-field-4ee83e9">Khóa học<input readonly="readonly" type="text" value="Chốt sale hiệu quả trong 5 bước" class="ui-input-a6dbc1a"/></label>
+                  <label class="ui-field-4ee83e9">Loại lịch <span class="ui-label-aaa496a">*</span><sc-raw-select class="course-detail-sc-raw-select-adaf37f"><option>Chỉ thi</option><option>Học và thi</option></sc-raw-select></label>
+                </div>
+                <section class="course-detail-assign-section">
+                  <div class="course-detail-lesson-linked-header">
+                    <div class="stack-xs">
+                      <h3 class="course-detail-lesson-linked-title">Chọn một bài học cho lịch thi</h3>
+                      <p class="course-detail-lesson-linked-help">Đây là phạm vi nội dung bắt buộc của lịch thi.</p>
+                    </div>
+                    <span class="course-detail-lesson-linked-count">Bắt buộc chọn đúng 1 bài</span>
+                  </div>
+                  <div class="course-detail-assign-lessons">
+                    <sc-for as="al" hint-placeholder-count="4" list="{{ assignLessons }}">
+                      <button aria-pressed="{{ al.ariaPressed }}" sc-camel-on-click="{{ al.toggle }}" type="button" class="course-detail-assign-lesson {{ al.className }}">
+                        <span class="course-detail-assign-check">{{ al.mark }}</span>
+                        <span class="course-detail-assign-index">Bài {{ al.n }}</span>
+                        <span class="course-detail-assign-content"><strong>{{ al.name }}</strong><small>{{ al.type }} · {{ al.pages }} trang</small></span>
+                        <span class="course-detail-lesson-linked-count">{{ al.qn }} câu hỏi</span>
+                      </button>
+                    </sc-for>
+                  </div>
+                  <div class="course-detail-assign-summary">
+                    <span>Bài học đã chọn: <strong>{{ assignLessonName }}</strong></span>
+                    <span>Ngân hàng trong phạm vi: <strong>{{ assignQuestionCount }} câu hỏi</strong></span>
+                  </div>
+                </section>
+                <section class="course-detail-assign-section">
+                  <div class="stack-xs">
+                    <h3 class="course-detail-lesson-linked-title">Tiêu chí đào tạo</h3>
+                    <p class="course-detail-lesson-linked-help">Có thể gắn nhiều tiêu chí cùng dự án. Tiêu chí chỉ dùng nhóm và tổng hợp báo cáo, không quyết định Đạt/Chưa đạt.</p>
+                  </div>
+                  <div class="course-detail-assign-grid course-detail-assign-grid-2">
+                    <label class="course-detail-question-checkbox"><input checked="checked" type="checkbox"/><span><strong>Kỹ năng giao tiếp với khách hàng</strong><small>TC01 · Thuộc ACACY PRESENTATION</small></span></label>
+                    <label class="course-detail-question-checkbox"><input checked="checked" type="checkbox"/><span><strong>Kỹ năng bán hàng</strong><small>TC02 · Thuộc ACACY PRESENTATION</small></span></label>
+                  </div>
+                </section>
+                <section class="course-detail-assign-section">
+                  <div class="stack-xs">
+                    <h3 class="course-detail-lesson-linked-title">Thời gian và quy định thi</h3>
+                    <p class="course-detail-lesson-linked-help">Các thiết lập tối thiểu để lịch có thể được ghi nhận.</p>
+                  </div>
+                  <div class="course-detail-assign-grid course-detail-assign-grid-2">
+                    <label class="ui-field-4ee83e9">Bắt đầu<input type="datetime-local" value="2026-10-25T08:00" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Kết thúc<input type="datetime-local" value="2026-10-25T23:59" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Số câu trắc nghiệm<input min="0" type="number" value="{{ assignQuestionCount }}" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Số câu tự luận<input min="0" type="number" value="0" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Số câu ghi âm<input min="0" type="number" value="0" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Thời gian thi (phút)<input min="1" type="number" value="40" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Điểm đạt (%)<input max="100" min="0" type="number" value="80" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Số lần thi tối đa<input min="1" type="number" value="3" class="ui-input-a6dbc1a"/></label>
+                    <label class="ui-field-4ee83e9">Đề thi khi thi lại<sc-raw-select class="course-detail-sc-raw-select-adaf37f"><option>Trộn lại trong đúng bài học</option><option>Dùng lại đề trước</option></sc-raw-select></label>
+                  </div>
+                </section>
+              </div>
+              <div class="ui-panel-180200f">
+                <button sc-camel-on-click="{{ closeAssignSchedule }}" type="button" class="ui-button-15e35d6">Hủy</button>
+                <button disabled="{{ noAssignLessons }}" sc-camel-on-click="{{ saveAssignedSchedule }}" type="button" class="ui-button-454d92a">Tạo lịch thi</button>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ lessonDrawer }}">
+          <div
+           
+           class="ui-panel-b7c6c15">
+            <section
+              aria-label="{{ drawerTitle }}"
+             
+             class="ui-section-f37a56d course-detail-lesson-drawer">
+              <div
+               
+               class="ui-panel-4ee43c1">
+                <div class="stack-xs">
+                  <h2 class="ui-heading-1a33e4e">{{ drawerTitle }}</h2>
+                  <p class="ui-text-2a5324c">
+                    Khóa học: Chốt sale hiệu quả trong 5 bước
+                  </p>
+                </div>
+                <button
+                  aria-label="Đóng"
+                  sc-camel-on-click="{{ closeDrawer }}"
+                 
+                  type="button"
+                 class="ui-button-0567c08">
+                  <svg
+                    aria-hidden="true"
+                    fill="none"
+                    height="20"
+                    sc-camel-view-box="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="2"
+                    width="20"
+                  >
+                    <path d="M18 6 6 18M6 6l12 12"></path>
+                  </svg>
+                </button>
+              </div>
+              <div
+               
+               class="course-detail-panel-99d0339">
+                <div class="course-detail-lesson-overview">
+                    <svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20">
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5"></path>
+                    </svg>
+                    <span>Hoàn thiện nội dung, điều kiện học và câu hỏi kiểm tra ngay trong khung này rồi lưu bài học một lần.</span>
+                  </div>
+                <label
+                 
+                   class="ui-field-4ee83e9">Tên bài học <span class="ui-label-aaa496a">*</span
+                  ><input
+                    placeholder="VD: Bước 6: Giữ chân khách hàng"
+                    sc-camel-on-input="{{ onLessonName }}"
+                    type="text"
+                    value="{{ dName }}" class="ui-input-a6dbc1a"
+                /></label>
+                <div class="ui-panel-d08feb7">
+                  <span
+                     class="course-detail-label-95117e4">Tệp nội dung <span class="ui-label-aaa496a">*</span></span
+                  >
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ dHasFile }}">
+                    <div
+                     
+                     class="course-detail-panel-c616c6c">
+                      <svg
+                        aria-hidden="true"
+                        fill="none"
+                        height="22"
+                        sc-camel-view-box="0 0 24 24"
+                        stroke="#2456B8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.8"
+                        width="22"
+                      >
+                        <path
+                          d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6"
+                        ></path>
+                      </svg>
+                      <span
+                         class="course-detail-label-ef04d54"><span class="ui-label-7e6ddec">{{ dFile }}</span
+                        ><span
+                           class="ui-label-046e088">{{ dType }} · {{ dPages }} trang (tự đếm)</span
+                        ></span
+                      >
+                      <button
+                       
+                        type="button"
+                       class="course-detail-button-517ae35">
+                        Thay tệp
+                      </button>
+                    </div>
+                  </sc-if>
+                  <sc-if hint-placeholder-val="{{ true }}" value="{{ dNoFile }}">
+                    <div
+                     
+                     class="course-detail-panel-c260203">
+                      <svg
+                        aria-hidden="true"
+                        fill="none"
+                        height="28"
+                        sc-camel-view-box="0 0 24 24"
+                        stroke="#2456B8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.8"
+                        width="28"
+                      >
+                        <path
+                          d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"
+                        ></path>
+                      </svg>
+                      <span
+                         class="ui-label-7e6ddec">Kéo thả gói SCORM (.zip) hoặc tệp PDF vào đây</span
+                      >
+                      <button
+                       
+                        type="button"
+                       class="course-detail-button-2abc63c">
+                        Chọn tệp
+                      </button>
+                      <span
+                         class="ui-label-046e088">Số trang được tự đếm sau khi tải lên</span
+                      >
+                    </div>
+                  </sc-if>
+                </div>
+                <div
+                 
+                 class="ui-panel-ba0ec76">
+                  <div class="ui-panel-d08feb7">
+                    <span
+                       class="course-detail-label-95117e4">Ảnh đại diện</span
+                    >
+                    <button
+                     
+                      type="button"
+                     class="course-detail-button-1bc23e5">
+                      Chọn ảnh<span
+                         class="course-detail-label-adcad21">Tỉ lệ 4:3</span
+                      >
+                    </button>
+                  </div>
+                  <label
+                   
+                     class="ui-field-4ee83e9">Học tối thiểu
+                    <span
+                     
+                       class="course-detail-label-0ed4f24"><input
+                        max="100"
+                        min="0"
+                       
+                        type="number"
+                        value="{{ dMin }}" class="course-detail-input-541de7c"
+                      /><span
+                         class="course-detail-label-6e0e284">%</span
+                      ></span
+                    >
+                    <span
+                     
+                       class="course-detail-label-45bad3b">Xem đủ tỉ lệ này thì bài mới tính hoàn thành. Mặc định 80%.</span
+                    ></label
+                  >
+                </div>
+                <label
+                 
+                   class="course-detail-field-85ce5ed"><span
+                     class="ui-element-e2cc18d"><span class="ui-label-7e6ddec">Hiện trong Thư viện</span
+                    ><span
+                       class="ui-label-046e088">Học viên xem lại bài ở mục Thư viện của ứng dụng</span
+                    ></span
+                  ><input checked="{{ dLib }}" type="checkbox" class="course-detail-input-ea19a84"
+                /></label>
+                <section class="course-detail-lesson-linked-section course-detail-inline-questions">
+                  <div class="course-detail-lesson-linked-header">
+                    <div class="stack-xs">
+                      <h3 class="course-detail-lesson-linked-title">Câu hỏi kiểm tra của bài học</h3>
+                    </div>
+                    <div class="course-detail-lesson-question-header-actions">
+                      <span class="course-detail-lesson-linked-count">{{ dQuestionCount }} câu hỏi</span>
+                      <button sc-camel-on-click="{{ startLessonQuestion }}" type="button" class="course-detail-lesson-add-question">+ Thêm câu hỏi</button>
+                    </div>
+                  </div>
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ dNoQuestions }}">
+                    <p class="course-detail-lesson-empty">Chưa có câu hỏi. Bạn có thể thêm câu hỏi trước khi lưu bài học.</p>
+                  </sc-if>
+                  <sc-if hint-placeholder-val="{{ true }}" value="{{ dHasQuestions }}">
+                    <div class="course-detail-lesson-question-list">
+                      <sc-for as="dq" hint-placeholder-count="3" list="{{ dQuestions }}">
+                        <div class="course-detail-lesson-question-item">
+                          <span class="course-detail-lesson-question-number">{{ dq.n }}</span>
+                          <span class="course-detail-lesson-question-content">
+                            <strong>{{ dq.text }}</strong>
+                            <small>{{ dq.typeLabel }} · {{ dq.points }} điểm · Đáp án/hướng dẫn: {{ dq.answer }}</small>
+                          </span>
+                          <span class="course-detail-lesson-question-actions">
+                            <button sc-camel-on-click="{{ dq.edit }}" type="button">Sửa</button>
+                            <button sc-camel-on-click="{{ dq.remove }}" type="button" class="is-danger">Xóa</button>
+                          </span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </section>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ dEditing }}">
+                  <section class="course-detail-lesson-linked-section">
+                    <div class="course-detail-lesson-linked-header">
+                      <div class="stack-xs">
+                        <h3 class="course-detail-lesson-linked-title">Lịch học/thi đang sử dụng bài này</h3>
+                        <p class="course-detail-lesson-linked-help">Giúp kiểm tra phạm vi trước khi thay tệp hoặc sửa câu hỏi.</p>
+                      </div>
+                      <span class="course-detail-lesson-linked-count">{{ dScheduleCount }} lịch</span>
+                    </div>
+                    <sc-if hint-placeholder-val="{{ true }}" value="{{ dHasSchedules }}">
+                      <div class="course-detail-lesson-schedule-list">
+                        <sc-for as="ds" hint-placeholder-count="2" list="{{ dSchedules }}">
+                          <div class="course-detail-lesson-schedule-item">
+                            <span class="course-detail-lesson-schedule-content"><strong>{{ ds.name }}</strong><small>{{ ds.kind }} · {{ ds.scope }}</small></span>
+                            <span class="course-detail-lesson-schedule-state">{{ ds.status }}</span>
+                          </div>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ dNoSchedules }}">
+                      <p class="course-detail-lesson-empty">Bài học này chưa được sử dụng trong lịch học/thi nào.</p>
+                    </sc-if>
+                  </section>
+                </sc-if>
+              </div>
+              <div
+               
+               class="ui-panel-180200f">
+                <button
+                  sc-camel-on-click="{{ closeDrawer }}"
+                 
+                  type="button"
+                 class="ui-button-15e35d6">
+                  Hủy
+                </button>
+                <button
+                  sc-camel-on-click="{{ saveLesson }}"
+                 
+                  type="button"
+                 class="ui-button-454d92a">
+                  Lưu bài học
+                </button>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ questionWorkspaceOpen }}">
+          <div class="course-detail-question-backdrop">
+            <section aria-label="{{ questionWorkspaceTitle }}" aria-modal="true" role="dialog" class="course-detail-question-workspace">
+              <header class="course-detail-question-workspace-header">
+                <div>
+                  <h2>Câu hỏi của {{ questionLessonName }}</h2>
+                </div>
+                <button aria-label="Đóng" sc-camel-on-click="{{ closeQuestionWorkspace }}" type="button" class="ui-button-0567c08">
+                  <svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2" width="20"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+                </button>
+              </header>
+              <div class="course-detail-question-workspace-body">
+                <aside class="course-detail-question-list-panel">
+                  <div class="course-detail-question-list-header">
+                    <strong>Danh sách câu hỏi</strong>
+                    <span>{{ workspaceQuestionCount }}</span>
+                  </div>
+                  <button sc-camel-on-click="{{ newWorkspaceQuestion }}" type="button" class="course-detail-question-new">+ Câu hỏi mới</button>
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ workspaceQuestionEmpty }}">
+                    <div class="course-detail-question-list-empty">Chưa có câu hỏi</div>
+                  </sc-if>
+                  <sc-if hint-placeholder-val="{{ true }}" value="{{ workspaceQuestionHasItems }}">
+                    <div class="course-detail-question-list-items">
+                      <sc-for as="wq" hint-placeholder-count="4" list="{{ workspaceQuestions }}">
+                        <button sc-camel-on-click="{{ wq.edit }}" type="button" class="course-detail-question-list-item {{ wq.className }}">
+                          <span>{{ wq.n }}</span>
+                          <span><strong>{{ wq.text }}</strong><small>{{ wq.typeLabel }} · {{ wq.points }} điểm</small></span>
+                        </button>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </aside>
+                <div class="course-detail-question-form-panel">
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ questionFromGlobal }}">
+                    <label class="ui-field-4ee83e9">Bài học <span class="ui-label-aaa496a">*</span><sc-raw-select sc-camel-on-change="{{ onQuestionLesson }}" value="{{ questionLessonId }}" class="ui-sc-raw-select-46418d1"><sc-for as="ql" hint-placeholder-count="4" list="{{ questionLessonOptions }}"><option value="{{ ql.id }}">{{ ql.label }}</option></sc-for></sc-raw-select></label>
+                  </sc-if>
+                  <section class="course-detail-question-section">
+                    <h3>{{ questionFormTitle }}</h3>
+                    <div class="course-detail-question-grid course-detail-question-grid-4">
+                      <label class="ui-field-4ee83e9">Loại câu hỏi <span class="ui-label-aaa496a">*</span><sc-raw-select sc-camel-on-change="{{ onQuestionType }}" value="{{ lessonQuestionType }}" class="ui-sc-raw-select-46418d1"><option value="multiple">Trắc nghiệm</option><option value="essay">Tự luận</option><option value="audio">Ghi âm</option></sc-raw-select></label>
+                      <label class="ui-field-4ee83e9">Nhóm câu hỏi <span class="ui-label-aaa496a">*</span><sc-raw-select sc-camel-on-change="{{ onQuestionCategory }}" value="{{ lessonQuestionCategory }}" class="ui-sc-raw-select-46418d1"><option value="knowledge">Kiến thức</option><option value="skill">Kỹ năng</option><option value="situation">Tình huống</option></sc-raw-select></label>
+                      <label class="ui-field-4ee83e9">Điểm <span class="ui-label-aaa496a">*</span><input min="0.5" step="0.5" sc-camel-on-input="{{ onQuestionPoints }}" type="number" value="{{ lessonQuestionPoints }}" class="ui-input-a6dbc1a"/></label>
+                      <label class="ui-field-4ee83e9">Thứ tự hiển thị<input min="1" sc-camel-on-input="{{ onQuestionOrder }}" type="number" value="{{ lessonQuestionOrder }}" class="ui-input-a6dbc1a"/></label>
+                    </div>
+                    <label class="ui-field-4ee83e9">Nội dung câu hỏi <span class="ui-label-aaa496a">*</span><textarea sc-camel-on-input="{{ onLessonQuestionText }}" placeholder="Nhập nội dung câu hỏi" rows="4" value="{{ lessonQuestionText }}" class="course-detail-textarea-dc238ce"></textarea></label>
+                  </section>
+                  <sc-if hint-placeholder-val="{{ true }}" value="{{ questionTypeMultiple }}">
+                    <section class="course-detail-question-section">
+                      <h3>Phương án trả lời</h3>
+                      <div class="course-detail-question-answer-grid">
+                        <sc-for as="lo" hint-placeholder-count="4" list="{{ lessonQuestionOptions }}">
+                          <label class="course-detail-question-answer">
+                            <input checked="{{ lo.correct }}" name="workspace-correct-answer" sc-camel-on-click="{{ lo.choose }}" type="radio"/>
+                            <span>{{ lo.key }}</span>
+                            <input aria-label="Phương án {{ lo.key }}" placeholder="Nội dung phương án {{ lo.key }}" sc-camel-on-input="{{ lo.change }}" type="text" value="{{ lo.value }}"/>
+                            <sc-if hint-placeholder-val="{{ true }}" value="{{ lo.canRemove }}"><button aria-label="Xóa phương án {{ lo.key }}" sc-camel-on-click="{{ lo.remove }}" type="button">×</button></sc-if>
+                          </label>
+                        </sc-for>
+                      </div>
+                      <div class="course-detail-question-inline-actions">
+                        <button sc-camel-on-click="{{ addQuestionOption }}" type="button" class="course-detail-question-add-answer">+ Thêm phương án</button>
+                        <label class="course-detail-question-simple-check"><input checked="{{ lessonQuestionFixed }}" sc-camel-on-click="{{ toggleQuestionFixed }}" type="checkbox"/> Cố định thứ tự đáp án</label>
+                      </div>
+                    </section>
+                  </sc-if>
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ questionTypeEssay }}">
+                    <section class="course-detail-question-section">
+                      <h3>Chấm tự luận</h3>
+                      <label class="ui-field-4ee83e9">Đáp án tham khảo / tiêu chí chấm<textarea sc-camel-on-input="{{ onQuestionAnswerGuide }}" placeholder="Nhập đáp án hoặc tiêu chí chấm" rows="4" value="{{ lessonQuestionAnswerGuide }}" class="course-detail-textarea-dc238ce"></textarea></label>
+                    </section>
+                  </sc-if>
+                  <sc-if hint-placeholder-val="{{ false }}" value="{{ questionTypeAudio }}">
+                    <section class="course-detail-question-section">
+                      <h3>Câu trả lời ghi âm</h3>
+                      <div class="course-detail-question-grid course-detail-question-grid-2">
+                        <label class="ui-field-4ee83e9">Thời lượng tối đa (giây)<input min="10" sc-camel-on-input="{{ onQuestionAudioSeconds }}" type="number" value="{{ lessonQuestionAudioSeconds }}" class="ui-input-a6dbc1a"/></label>
+                        <label class="ui-field-4ee83e9">Tiêu chí đánh giá<input sc-camel-on-input="{{ onQuestionAnswerGuide }}" placeholder="Nhập tiêu chí đánh giá" type="text" value="{{ lessonQuestionAnswerGuide }}" class="ui-input-a6dbc1a"/></label>
+                      </div>
+                    </section>
+                  </sc-if>
+                  <section class="course-detail-question-section">
+                    <h3>Ghi chú nội bộ</h3>
+                    <textarea sc-camel-on-input="{{ onQuestionNote }}" placeholder="Nhập ghi chú" rows="3" value="{{ lessonQuestionNote }}" class="course-detail-textarea-dc238ce"></textarea>
+                  </section>
+                </div>
+              </div>
+              <footer class="course-detail-question-workspace-footer">
+                <div></div>
+                <div><button sc-camel-on-click="{{ closeQuestionWorkspace }}" type="button" class="ui-button-15e35d6">Hoàn tất</button><button disabled="{{ noLessonQuestionText }}" sc-camel-on-click="{{ saveQuestionWorkspace }}" type="button" class="ui-button-454d92a">{{ questionSaveLabel }}</button></div>
+              </footer>
+            </section>
+          </div>
+        </sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ infoOpen }}">
+          <div
+           
+           class="course-detail-panel-8c495f0">
+            <section
+              aria-label="Sửa thông tin khóa học"
+              role="dialog"
+             
+             class="course-detail-section-1290deb">
+              <h2 class="ui-heading-1a33e4e">Sửa thông tin khóa học</h2>
+              <label
+               
+                 class="ui-field-4ee83e9">Tên khóa học <span class="ui-label-aaa496a">*</span
+                ><input
+                 
+                  type="text"
+                  value="Chốt sale hiệu quả trong 5 bước" class="ui-input-a6dbc1a"
+              /></label>
+              <div
+               
+               class="ui-panel-ba0ec76">
+                <label
+                 
+                   class="ui-field-4ee83e9">Chương trình <span class="ui-label-aaa496a">*</span
+                  ><sc-raw-select
+                   
+                     class="ui-sc-raw-select-46418d1"><option>Kỹ năng bán hàng</option>
+                    <option>Hội nhập nhân viên mới</option>
+                    <option>Trưng bày sản phẩm</option>
+                    <option>Kiến thức sản phẩm</option>
+                    <option>Quản lý cửa hàng</option></sc-raw-select
+                  ></label
+                >
+                <label
+                 
+                   class="ui-field-4ee83e9">Ngành hàng<sc-raw-select
+                   
+                     class="ui-sc-raw-select-46418d1"><option>Bán hàng</option>
+                    <option>Hội nhập</option>
+                    <option>Trưng bày</option>
+                    <option>Khác</option></sc-raw-select
+                  ></label
+                >
+              </div>
+              <div class="actions-row">
+                <button
+                  sc-camel-on-click="{{ closeInfo }}"
+                 
+                  type="button"
+                 class="ui-button-15e35d6">
+                  Hủy
+                </button>
+                <button
+                  sc-camel-on-click="{{ closeInfo }}"
+                 
+                  type="button"
+                 class="ui-button-454d92a">
+                  Lưu thay đổi
+                </button>
+              </div>
+            </section>
+          </div>
+        </sc-if>
+      </div>
+    </x-dc>
+    <script
+      data-dc-script=""
+      data-props='{"$preview":{"width":1440,"height":1200}}'
+      type="text/x-dc"
+    >
+      class Component extends DCLogic {
+        constructor(props) {
+          super(props);
+          const query = typeof window !== 'undefined' && window.location ? new URLSearchParams(window.location.search) : null;
+          const initialTab = query && query.get('tab') === 'lichthi' ? 'lichthi' : 'bai';
+          this.state = {
+            tab: initialTab, more: false, info: false, drawer: null, editIdx: null, ask: null, qf: 1, all: true, docAdding: false, docLessonId: 1,
+            lessons: [
+              { id: 1, name: 'Chào hỏi và tìm hiểu nhu cầu', type: 'Gói SCORM (.zip)', file: 'bai-1-chao-hoi.zip', pages: 18, min: 80, lib: true, qn: 3 },
+              { id: 2, name: 'Giới thiệu sản phẩm phù hợp', type: 'Gói SCORM (.zip)', file: 'bai-2-gioi-thieu.zip', pages: 22, min: 80, lib: true, qn: 3 },
+              { id: 3, name: 'Xử lý băn khoăn của khách', type: 'Tệp PDF', file: 'bai-3-xu-ly-ban-khoan.pdf', pages: 12, min: 80, lib: false, qn: 2 },
+              { id: 4, name: 'Chốt đơn và chăm sóc sau bán', type: 'Gói SCORM (.zip)', file: 'bai-4-chot-don.zip', pages: 15, min: 90, lib: true, qn: 2 }
+            ],
+            questions: [
+              [1, 'Khi khách vừa bước vào cửa hàng, việc đầu tiên nhân viên nên làm là gì?', ['Mời khách xem khuyến mãi ngay', 'Chào hỏi và để khách tự nhiên xem hàng', 'Hỏi ngay khách muốn mua gì', 'Đứng chờ khách gọi'], 1, false],
+              [1, 'Câu hỏi nào giúp tìm hiểu nhu cầu của khách tốt nhất?', ['Anh/chị mua gì ạ?', 'Anh/chị cần sản phẩm cho dịp nào ạ?', 'Anh/chị có vội không ạ?', 'Anh/chị đến đây lần nào chưa ạ?'], 1, false],
+              [1, 'Khi tìm hiểu nhu cầu, nhân viên nên nói nhiều hơn hay nghe nhiều hơn?', ['Nói nhiều hơn', 'Nghe nhiều hơn', 'Ngang nhau', 'Tùy từng khách'], 1, false],
+              [2, 'Kỹ năng quan trọng nhất trong bán hàng là gì?', ['Sử dụng công nghệ', 'Lắng nghe và đặt câu hỏi', 'Thuyết trình', 'Cả A và C'], 1, true],
+              [2, 'Nên giới thiệu bao nhiêu sản phẩm cùng lúc cho một khách?', ['Càng nhiều càng tốt', '2–3 sản phẩm phù hợp nhất', 'Chỉ sản phẩm đắt nhất', 'Để khách tự chọn'], 1, false],
+              [2, 'Khi giới thiệu sản phẩm, nên nhấn mạnh điều gì?', ['Thông số kỹ thuật', 'Lợi ích phù hợp với nhu cầu của khách', 'Giá khuyến mãi', 'Thương hiệu'], 1, false],
+              [3, 'Khách nói “Giá hơi cao”, nhân viên nên làm gì trước tiên?', ['Giảm giá ngay', 'Ghi nhận và hỏi khách đang so sánh với sản phẩm nào', 'Giới thiệu sản phẩm rẻ nhất', 'Im lặng chờ khách quyết định'], 1, false],
+              [3, 'Băn khoăn của khách nên được xem là gì?', ['Lời từ chối', 'Cơ hội để hiểu khách hơn', 'Sự phiền phức', 'Dấu hiệu nên dừng tư vấn'], 1, false],
+              [4, 'Dấu hiệu nào cho thấy khách sẵn sàng mua?', ['Khách nhìn đồng hồ', 'Khách hỏi cách thanh toán và giao hàng', 'Khách nghe điện thoại', 'Khách sang xem quầy khác'], 1, false],
+              [4, 'Sau khi khách thanh toán, nhân viên nên làm gì?', ['Kết thúc nhanh để phục vụ khách khác', 'Hướng dẫn sử dụng và hẹn chăm sóc sau bán', 'Mời khách mua thêm ngay', 'Không cần làm gì thêm'], 1, false]
+            ],
+            lessonDraftName: '', lessonDraftQuestions: [], questionWorkspaceOpen: false, questionOrigin: 'lesson',
+            lessonQuestionEditing: null, globalQuestionEditing: null, questionLessonId: 1,
+            lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0,
+            lessonQuestionType: 'multiple', lessonQuestionCategory: 'knowledge', lessonQuestionPoints: 1,
+            lessonQuestionOrder: 1, lessonQuestionNote: '', lessonQuestionAnswerGuide: '', lessonQuestionAudioSeconds: 60, lessonQuestionFixed: false,
+            scheduleCreateOpen: false,
+            scheduleDraftName: 'Đánh giá chốt đơn và chăm sóc sau bán',
+            selectedScheduleLessons: { 4: true },
+            courseSchedules: [
+              { code: 'SCH-2026-018', type: 'exam', name: 'Đánh giá chốt đơn và chăm sóc sau bán', kind: 'Lịch thi theo bài học', scope: 'Bài 4 · 2 câu hỏi đúng phạm vi', from: '25/10/2026 08:00', to: '25/10/2026 23:59', students: 48, status: 'Đã phát hành', active: true, draft: false, lessonIds: [4] },
+              { code: 'SCH-2026-021', type: 'learning', name: 'Ôn tập xử lý băn khoăn của khách', kind: 'Học và thi theo bài', scope: 'Bài 3 · 2 câu hỏi của bài học', from: '28/10/2026 08:00', to: '30/10/2026 23:59', students: 24, status: 'Bản nháp', active: false, draft: true, lessonIds: [3] }
+            ],
+            docs: [
+              { name: 'Kịch bản chào hỏi khách hàng', meta: 'Tệp PDF · 2 trang', link: false, lessonId: 1 },
+              { name: 'Bộ câu hỏi tìm hiểu nhu cầu', meta: 'Tài liệu điện tử · đường dẫn', link: true, lessonId: 1 },
+              { name: 'Checklist chốt đơn', meta: 'Tệp PDF · 1 trang', link: false, lessonId: 4 }
+            ]
+          };
+        }
+        renderVals() {
+          const P = {
+            users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+            layers: 'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+            book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5',
+            cal: 'M3 5h18v16H3zM16 3v4M8 3v4M3 10h18',
+            folder: 'M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+            play: 'M5 3l14 9-14 9V3z',
+            pdf: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5',
+            link: 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7'
+          };
+          const link = (label, d, href, active) => ({ label, d, href: href || '#', isHeader: false, isActive: !!active, isLink: !active });
+          const head = (label) => ({ label, isHeader: true, isActive: false, isLink: false, d: '', href: '#' });
+          const nav = [
+            head('NGƯỜI HỌC'), link('Học viên', P.users, '../students/students-list.html'),
+            head('NỘI DUNG'), link('Chương trình', P.layers, '../programs/programs.html'), link('Khóa học', P.book, 'courses.html', true),
+            head('VẬN HÀNH'), link('Lịch học/thi', P.cal, '../schedules/schedules.html'), link('Lộ trình đào tạo', P.layers, '../learning-paths/learning-paths.html'),
+            head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, '../training-projects/training-projects.html')
+          ];
+          const s = this.state;
+          const L = s.lessons;
+          const swap = (i, j) => { const a = L.slice(); const t = a[i]; a[i] = a[j]; a[j] = t; this.setState({ lessons: a, ask: null }); };
+          const lessons = L.map((l, i) => ({
+            n: i + 1, name: l.name, type: l.type, pages: l.pages, min: l.min + '%', lib: l.lib, qn: s.questions.filter((q) => q[0] === l.id).length,
+            icon: l.type === 'Tệp PDF' ? P.pdf : P.play,
+            first: i === 0, last: i === L.length - 1,
+            viewing: s.ask !== 'l' + l.id, asking: s.ask === 'l' + l.id,
+            up: () => { if (i > 0) swap(i, i - 1); },
+            down: () => { if (i < L.length - 1) swap(i, i + 1); },
+            edit: () => this.setState({
+              drawer: 'lesson', editIdx: i, ask: null, lessonDraftName: l.name,
+              lessonDraftQuestions: s.questions.filter((q) => q[0] === l.id).map((q, questionIndex) => ({
+                text: q[1], options: q[2].slice(), correct: q[3], fixed: q[4],
+                type: q[5]&&q[5].type||'multiple', category: q[5]&&q[5].category||'knowledge', points: q[5]&&q[5].points||1,
+                order: q[5]&&q[5].order||questionIndex+1, note: q[5]&&q[5].note||'', answerGuide: q[5]&&q[5].answerGuide||'', audioSeconds: q[5]&&q[5].audioSeconds||60
+              })),
+              questionWorkspaceOpen: false, lessonQuestionEditing: null, lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0
+            }),
+            ask: () => this.setState({ ask: 'l' + l.id }),
+            remove: () => this.setState({ lessons: this.state.lessons.filter((x) => x.id !== l.id), questions: this.state.questions.filter((q) => q[0] !== l.id), ask: null })
+          }));
+          const pageCount = L.reduce((a, l) => a + l.pages, 0);
+          const lessonName = {};
+          L.forEach((l) => { lessonName[l.id] = l.name; });
+          const QS = s.questions.filter((q) => lessonName[q[0]]);
+          const schedules = s.courseSchedules.map((item) => Object.assign({}, item, { href: '../schedules/schedule-detail.html?mode=view&type=' + item.type + '&course=chot-sale-5-buoc&schedule=' + item.code + '&lessons=' + item.lessonIds.join(',') }));
+          const assignLessons = L.map((lesson, index) => {
+            const selected = !!s.selectedScheduleLessons[lesson.id];
+            return {
+              n: index + 1, id: lesson.id, name: lesson.name, type: lesson.type, pages: lesson.pages, qn: QS.filter((q) => q[0] === lesson.id).length,
+              mark: selected ? '✓' : '', className: selected ? 'is-selected' : '', ariaPressed: selected ? 'true' : 'false',
+              toggle: () => this.setState({ selectedScheduleLessons: { [lesson.id]: true } })
+            };
+          });
+          const selectedAssignLessons = L.filter((lesson) => s.selectedScheduleLessons[lesson.id]);
+          const assignLessonCount = selectedAssignLessons.length;
+          const assignQuestionCount = QS.filter((q) => s.selectedScheduleLessons[q[0]]).length;
+          const assignLessonName = selectedAssignLessons.length ? 'Bài ' + (L.indexOf(selectedAssignLessons[0]) + 1) + ': ' + selectedAssignLessons[0].name : 'Chưa chọn';
+          const order = {};
+          L.forEach((l, i) => { order[l.id] = i + 1; });
+          const shownQ = QS.filter((q) => !s.qf || q[0] === s.qf);
+          const limit = (!s.qf && !s.all) ? 4 : shownQ.length;
+          const questionTypeLabels = { multiple: 'Trắc nghiệm', essay: 'Tự luận', audio: 'Ghi âm' };
+          const questions = shownQ.slice(0, limit).map((q) => {
+            const meta = q[5] || {};
+            const sourceIndex = s.questions.indexOf(q);
+            return {
+              n: QS.indexOf(q) + 1, b: order[q[0]], lesson: lessonName[q[0]], text: q[1], pts: meta.points || 1, fixed: q[4],
+              typeLabel: questionTypeLabels[meta.type || 'multiple'],
+              opts: q[2].map((t, k) => ({ k: String.fromCharCode(65 + k), t, ok: k === q[3], no: k !== q[3] })),
+              edit: () => this.setState({
+                questionWorkspaceOpen: true, questionOrigin: 'global', globalQuestionEditing: sourceIndex, questionLessonId: q[0], lessonQuestionEditing: null,
+                lessonQuestionText: q[1], lessonQuestionOptions: q[2].slice(), lessonQuestionCorrect: q[3], lessonQuestionFixed: q[4],
+                lessonQuestionType: meta.type || 'multiple', lessonQuestionCategory: meta.category || 'knowledge', lessonQuestionPoints: meta.points || 1,
+                lessonQuestionOrder: meta.order || QS.indexOf(q) + 1, lessonQuestionNote: meta.note || '', lessonQuestionAnswerGuide: meta.answerGuide || '', lessonQuestionAudioSeconds: meta.audioSeconds || 60
+              }),
+              remove: () => this.setState({ questions: this.state.questions.filter((_, index) => index !== sourceIndex) })
+            };
+          });
+          const qFilters = L.map((l, i) => ({ id: l.id, label: 'Bài ' + (i + 1) + ' (' + QS.filter((q) => q[0] === l.id).length + ')' }))
+            .map((f) => ({ label: f.label, on: s.qf === f.id, off: s.qf !== f.id, pick: () => this.setState({ qf: f.id, all: true }) }));
+          const docLessonOptions = L.map((lesson, index) => ({ id: lesson.id, label: 'Bài ' + (index + 1) + ': ' + lesson.name }));
+          const docs = s.docs.map((d, i) => ({
+            name: d.name, meta: d.meta, icon: d.link ? P.link : P.pdf,
+            lessonLabel: lessonName[d.lessonId] ? 'Bài ' + order[d.lessonId] + ': ' + lessonName[d.lessonId] : 'Bài học không còn tồn tại',
+            viewing: s.ask !== 'd' + i, asking: s.ask === 'd' + i,
+            ask: () => this.setState({ ask: 'd' + i, docAdding: false }),
+            remove: () => this.setState({ docs: this.state.docs.filter((_, j) => j !== i), ask: null })
+          }));
+          const tabDefs = [['bai', 'Bài học', L.length], ['cauhoi', 'Tất cả câu hỏi', QS.length], ['tailieu', 'Tài liệu', s.docs.length], ['lichthi', 'Lịch học/thi', schedules.length]];
+          const tabs = tabDefs.map(([id, label, count]) => ({ label, count, active: s.tab === id, inactive: s.tab !== id, go: () => this.setState({ tab: id, ask: null, more: false }) }));
+          const ed = s.editIdx !== null && s.drawer === 'lesson' ? L[s.editIdx] : null;
+          const dQuestions = s.lessonDraftQuestions.map((q, index) => ({
+            n: index + 1, text: q.text, answer: q.type === 'multiple' ? (q.options[q.correct] || 'Chưa chọn') : (q.answerGuide || 'Chấm thủ công'),
+            typeLabel: questionTypeLabels[q.type || 'multiple'], points: q.points || 1,
+            edit: () => this.setState({
+              questionWorkspaceOpen: true, questionOrigin: 'lesson', lessonQuestionEditing: index, globalQuestionEditing: null,
+              lessonQuestionText: q.text, lessonQuestionOptions: q.options.slice(), lessonQuestionCorrect: q.correct, lessonQuestionFixed: !!q.fixed,
+              lessonQuestionType: q.type || 'multiple', lessonQuestionCategory: q.category || 'knowledge', lessonQuestionPoints: q.points || 1,
+              lessonQuestionOrder: q.order || index + 1, lessonQuestionNote: q.note || '', lessonQuestionAnswerGuide: q.answerGuide || '', lessonQuestionAudioSeconds: q.audioSeconds || 60
+            }),
+            remove: () => this.setState({ lessonDraftQuestions: this.state.lessonDraftQuestions.filter((_, questionIndex) => questionIndex !== index), lessonQuestionEditing: null })
+          }));
+          const lessonQuestionOptions = s.lessonQuestionOptions.map((value, index) => ({
+            key: String.fromCharCode(65 + index), value: value || '', correct: s.lessonQuestionCorrect === index,
+            choose: () => this.setState({ lessonQuestionCorrect: index }),
+            change: (event) => { const next = this.state.lessonQuestionOptions.slice(); next[index] = event.target.value; this.setState({ lessonQuestionOptions: next }); },
+            canRemove: s.lessonQuestionOptions.length > 2,
+            remove: () => {
+              if (this.state.lessonQuestionOptions.length <= 2) return;
+              const next = this.state.lessonQuestionOptions.slice();
+              next.splice(index, 1);
+              let correct = this.state.lessonQuestionCorrect;
+              if (correct === index) correct = 0; else if (correct > index) correct -= 1;
+              this.setState({ lessonQuestionOptions: next, lessonQuestionCorrect: correct });
+            }
+          }));
+          const questionLessonOptions = L.map((lesson, index) => ({ id: lesson.id, label: 'Bài ' + (index + 1) + ': ' + lesson.name, selected: s.questionLessonId === lesson.id }));
+          const questionFromLesson = s.questionOrigin === 'lesson';
+          const questionFromGlobal = !questionFromLesson;
+          const questionLesson = L.find((lesson) => lesson.id === Number(s.questionLessonId));
+          const questionLessonName = questionFromLesson
+            ? (s.lessonDraftName || (ed ? ed.name : 'Bài học mới'))
+            : (questionLesson ? questionLesson.name : 'Chưa chọn bài học');
+          const workspaceQuestions = questionFromLesson
+            ? s.lessonDraftQuestions.map((q, index) => ({
+                n: index + 1, text: q.text, typeLabel: questionTypeLabels[q.type || 'multiple'], points: q.points || 1,
+                className: s.lessonQuestionEditing === index ? 'is-active' : '',
+                edit: () => this.setState({
+                  lessonQuestionEditing: index, globalQuestionEditing: null,
+                  lessonQuestionText: q.text, lessonQuestionOptions: q.options.slice(), lessonQuestionCorrect: q.correct, lessonQuestionFixed: !!q.fixed,
+                  lessonQuestionType: q.type || 'multiple', lessonQuestionCategory: q.category || 'knowledge', lessonQuestionPoints: q.points || 1,
+                  lessonQuestionOrder: q.order || index + 1, lessonQuestionNote: q.note || '', lessonQuestionAnswerGuide: q.answerGuide || '', lessonQuestionAudioSeconds: q.audioSeconds || 60
+                })
+              }))
+            : s.questions.map((q, sourceIndex) => ({ q, sourceIndex })).filter((entry) => entry.q[0] === Number(s.questionLessonId)).map((entry, index) => {
+                const q = entry.q;
+                const meta = q[5] || {};
+                return {
+                  n: index + 1, text: q[1], typeLabel: questionTypeLabels[meta.type || 'multiple'], points: meta.points || 1,
+                  className: s.globalQuestionEditing === entry.sourceIndex ? 'is-active' : '',
+                  edit: () => this.setState({
+                    globalQuestionEditing: entry.sourceIndex, lessonQuestionEditing: null,
+                    lessonQuestionText: q[1], lessonQuestionOptions: q[2].slice(), lessonQuestionCorrect: q[3], lessonQuestionFixed: !!q[4],
+                    lessonQuestionType: meta.type || 'multiple', lessonQuestionCategory: meta.category || 'knowledge', lessonQuestionPoints: meta.points || 1,
+                    lessonQuestionOrder: meta.order || index + 1, lessonQuestionNote: meta.note || '', lessonQuestionAnswerGuide: meta.answerGuide || '', lessonQuestionAudioSeconds: meta.audioSeconds || 60
+                  })
+                };
+              });
+          const questionEditing = s.lessonQuestionEditing !== null || s.globalQuestionEditing !== null;
+          const questionTypeMultiple = s.lessonQuestionType === 'multiple';
+          const questionTypeEssay = s.lessonQuestionType === 'essay';
+          const questionTypeAudio = s.lessonQuestionType === 'audio';
+          const filledQuestionOptions = s.lessonQuestionOptions.filter((option) => option.trim());
+          const questionInvalid = !s.lessonQuestionText.trim() || Number(s.lessonQuestionPoints) <= 0 ||
+            (questionTypeMultiple && (filledQuestionOptions.length < 2 || !(s.lessonQuestionOptions[s.lessonQuestionCorrect] || '').trim()));
+          const dSchedules = ed ? schedules.filter((item) => item.lessonIds.indexOf(ed.id) !== -1) : [];
+          return {
+            nav, tabs, lessons, questions, qFilters, docs, schedules, dQuestions, dSchedules, assignLessons, docLessonOptions,
+            lessonCount: L.length, pageCount, qCount: QS.length, docCount: s.docs.length,
+            tabBai: s.tab === 'bai', tabCauHoi: s.tab === 'cauhoi', tabTaiLieu: s.tab === 'tailieu', tabLichThi: s.tab === 'lichthi',
+            hasMore: shownQ.length > limit, moreCount: shownQ.length - limit,
+            lessonNames: L.map((l, i) => 'Bài ' + (i + 1) + ': ' + l.name),
+            moreOpen: s.more, infoOpen: s.info, docAdding: s.docAdding, docLessonId: s.docLessonId,
+            scheduleCreateOpen: s.scheduleCreateOpen, scheduleDraftName: s.scheduleDraftName,
+            assignLessonCount, assignQuestionCount, assignLessonName, noAssignLessons: assignLessonCount !== 1,
+            lessonDrawer: s.drawer === 'lesson',
+            drawerTitle: ed ? 'Sửa bài học' : 'Thêm bài học',
+            dEditing: !!ed, dName: s.lessonDraftName, dHasFile: !!ed, dNoFile: !ed, dFile: ed ? ed.file : '', dType: ed ? ed.type : '', dPages: ed ? ed.pages : '', dMin: ed ? ed.min : 80, dLib: ed ? ed.lib : true,
+            dQuestionCount: dQuestions.length, dHasQuestions: dQuestions.length > 0, dNoQuestions: dQuestions.length === 0, dScheduleCount: dSchedules.length, dHasSchedules: dSchedules.length > 0, dNoSchedules: dSchedules.length === 0,
+            questionWorkspaceOpen: s.questionWorkspaceOpen,
+            questionWorkspaceTitle: questionEditing ? 'Sửa câu hỏi' : 'Thêm câu hỏi',
+            questionFormTitle: questionEditing ? 'Sửa câu hỏi' : 'Câu hỏi mới',
+            questionSaveLabel: questionEditing ? 'Lưu thay đổi' : 'Lưu & thêm câu tiếp',
+            questionFromLesson, questionFromGlobal, questionLessonOptions, questionLessonId: s.questionLessonId, questionLessonName,
+            workspaceQuestions, workspaceQuestionCount: workspaceQuestions.length, workspaceQuestionHasItems: workspaceQuestions.length > 0, workspaceQuestionEmpty: workspaceQuestions.length === 0,
+            questionTypeMultiple, questionTypeEssay, questionTypeAudio,
+            lessonQuestionOptions, lessonQuestionText: s.lessonQuestionText,
+            lessonQuestionType: s.lessonQuestionType, lessonQuestionCategory: s.lessonQuestionCategory,
+            lessonQuestionPoints: s.lessonQuestionPoints, lessonQuestionOrder: s.lessonQuestionOrder,
+            lessonQuestionNote: s.lessonQuestionNote, lessonQuestionAnswerGuide: s.lessonQuestionAnswerGuide,
+            lessonQuestionAudioSeconds: s.lessonQuestionAudioSeconds, lessonQuestionFixed: s.lessonQuestionFixed,
+            noLessonQuestionText: questionInvalid,
+            openAddLesson: () => this.setState({
+              drawer: 'lesson', editIdx: null, lessonDraftName: '', lessonDraftQuestions: [], questionWorkspaceOpen: false,
+              lessonQuestionEditing: null, globalQuestionEditing: null, lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0
+            }),
+            openAddQ: () => this.setState({
+              questionWorkspaceOpen: true, questionOrigin: 'global', globalQuestionEditing: null, lessonQuestionEditing: null,
+              questionLessonId: this.state.qf || (this.state.lessons[0] ? this.state.lessons[0].id : 0),
+              lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0,
+              lessonQuestionType: 'multiple', lessonQuestionCategory: 'knowledge', lessonQuestionPoints: 1,
+              lessonQuestionOrder: this.state.questions.length + 1, lessonQuestionNote: '', lessonQuestionAnswerGuide: '', lessonQuestionAudioSeconds: 60, lessonQuestionFixed: false
+            }),
+            closeDrawer: () => this.setState({ drawer: null, editIdx: null, questionWorkspaceOpen: false, lessonQuestionEditing: null, globalQuestionEditing: null }),
+            onLessonName: (event) => this.setState({ lessonDraftName: event.target.value }),
+            startLessonQuestion: () => this.setState({
+              questionWorkspaceOpen: true, questionOrigin: 'lesson', lessonQuestionEditing: null, globalQuestionEditing: null,
+              lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0,
+              lessonQuestionType: 'multiple', lessonQuestionCategory: 'knowledge', lessonQuestionPoints: 1,
+              lessonQuestionOrder: this.state.lessonDraftQuestions.length + 1, lessonQuestionNote: '', lessonQuestionAnswerGuide: '', lessonQuestionAudioSeconds: 60, lessonQuestionFixed: false
+            }),
+            closeQuestionWorkspace: () => this.setState({ questionWorkspaceOpen: false, lessonQuestionEditing: null, globalQuestionEditing: null }),
+            newWorkspaceQuestion: () => this.setState({
+              lessonQuestionEditing: null, globalQuestionEditing: null,
+              lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0,
+              lessonQuestionType: 'multiple', lessonQuestionCategory: 'knowledge', lessonQuestionPoints: 1,
+              lessonQuestionOrder: workspaceQuestions.length + 1, lessonQuestionNote: '', lessonQuestionAnswerGuide: '', lessonQuestionAudioSeconds: 60, lessonQuestionFixed: false
+            }),
+            onLessonQuestionText: (event) => this.setState({ lessonQuestionText: event.target.value }),
+            onQuestionLesson: (event) => {
+              const nextLessonId = Number(event.target.value);
+              const nextCount = this.state.questions.filter((q) => q[0] === nextLessonId).length;
+              this.setState({
+                questionLessonId: nextLessonId, lessonQuestionEditing: null, globalQuestionEditing: null,
+                lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0,
+                lessonQuestionType: 'multiple', lessonQuestionCategory: 'knowledge', lessonQuestionPoints: 1,
+                lessonQuestionOrder: nextCount + 1, lessonQuestionNote: '', lessonQuestionAnswerGuide: '', lessonQuestionAudioSeconds: 60, lessonQuestionFixed: false
+              });
+            },
+            onQuestionType: (event) => this.setState({ lessonQuestionType: event.target.value }),
+            onQuestionCategory: (event) => this.setState({ lessonQuestionCategory: event.target.value }),
+            onQuestionPoints: (event) => this.setState({ lessonQuestionPoints: event.target.value }),
+            onQuestionOrder: (event) => this.setState({ lessonQuestionOrder: event.target.value }),
+            onQuestionNote: (event) => this.setState({ lessonQuestionNote: event.target.value }),
+            onQuestionAnswerGuide: (event) => this.setState({ lessonQuestionAnswerGuide: event.target.value }),
+            onQuestionAudioSeconds: (event) => this.setState({ lessonQuestionAudioSeconds: event.target.value }),
+            toggleQuestionFixed: () => this.setState({ lessonQuestionFixed: !this.state.lessonQuestionFixed }),
+            addQuestionOption: () => this.setState({ lessonQuestionOptions: this.state.lessonQuestionOptions.concat(['']) }),
+            saveQuestionWorkspace: () => {
+              const text = this.state.lessonQuestionText.trim();
+              if (!text) return;
+              const type = this.state.lessonQuestionType;
+              const rawOptions = this.state.lessonQuestionOptions.map((option) => option.trim());
+              const usedOptionIndexes = rawOptions.map((option, index) => option ? index : -1).filter((index) => index !== -1);
+              if (Number(this.state.lessonQuestionPoints) <= 0 || (type === 'multiple' && (usedOptionIndexes.length < 2 || !rawOptions[this.state.lessonQuestionCorrect]))) return;
+              const item = {
+                text,
+                options: type === 'multiple' ? usedOptionIndexes.map((index) => rawOptions[index]) : [],
+                correct: type === 'multiple' ? usedOptionIndexes.indexOf(this.state.lessonQuestionCorrect) : 0,
+                fixed: type === 'multiple' && this.state.lessonQuestionFixed,
+                type,
+                category: this.state.lessonQuestionCategory,
+                points: Number(this.state.lessonQuestionPoints) || 0,
+                order: Number(this.state.lessonQuestionOrder) || 1,
+                note: this.state.lessonQuestionNote.trim(),
+                answerGuide: this.state.lessonQuestionAnswerGuide.trim(),
+                audioSeconds: Number(this.state.lessonQuestionAudioSeconds) || 60
+              };
+              if (this.state.questionOrigin === 'lesson') {
+                const next = this.state.lessonDraftQuestions.slice();
+                if (this.state.lessonQuestionEditing === null) next.push(item); else next[this.state.lessonQuestionEditing] = item;
+                this.setState({
+                  lessonDraftQuestions: next, questionWorkspaceOpen: true, lessonQuestionEditing: null, globalQuestionEditing: null,
+                  lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0,
+                  lessonQuestionType: 'multiple', lessonQuestionCategory: 'knowledge', lessonQuestionPoints: 1,
+                  lessonQuestionOrder: next.length + 1, lessonQuestionNote: '', lessonQuestionAnswerGuide: '', lessonQuestionAudioSeconds: 60, lessonQuestionFixed: false
+                });
+              } else {
+                const tuple = [Number(this.state.questionLessonId), item.text, item.options.slice(), item.correct, item.fixed, {
+                  type: item.type, category: item.category, points: item.points, order: item.order,
+                  note: item.note, answerGuide: item.answerGuide, audioSeconds: item.audioSeconds
+                }];
+                const next = this.state.questions.slice();
+                if (this.state.globalQuestionEditing === null) next.push(tuple); else next[this.state.globalQuestionEditing] = tuple;
+                const nextCount = next.filter((q) => q[0] === Number(this.state.questionLessonId)).length;
+                this.setState({
+                  questions: next, questionWorkspaceOpen: true, lessonQuestionEditing: null, globalQuestionEditing: null,
+                  lessonQuestionText: '', lessonQuestionOptions: ['', '', '', ''], lessonQuestionCorrect: 0,
+                  lessonQuestionType: 'multiple', lessonQuestionCategory: 'knowledge', lessonQuestionPoints: 1,
+                  lessonQuestionOrder: nextCount + 1, lessonQuestionNote: '', lessonQuestionAnswerGuide: '', lessonQuestionAudioSeconds: 60, lessonQuestionFixed: false
+                });
+              }
+            },
+            saveLesson: () => {
+              const lessonId = ed ? ed.id : (this.state.lessons.reduce((max, lesson) => Math.max(max, lesson.id), 0) + 1);
+              const name = this.state.lessonDraftName.trim() || 'Bài học mới';
+              const questionCount = this.state.lessonDraftQuestions.length;
+              const nextLessons = ed
+                ? this.state.lessons.map((lesson) => lesson.id === lessonId ? Object.assign({}, lesson, { name, qn: questionCount }) : lesson)
+                : this.state.lessons.concat([{ id: lessonId, name, type: 'Gói SCORM (.zip)', file: 'bai-hoc-moi.zip', pages: 0, min: 80, lib: true, qn: questionCount }]);
+              const nextQuestions = this.state.questions.filter((q) => q[0] !== lessonId).concat(this.state.lessonDraftQuestions.map((q) => [lessonId, q.text, q.options.slice(), q.correct, q.fixed, {
+                type: q.type || 'multiple', category: q.category || 'knowledge', points: Number(q.points) || 0, order: Number(q.order) || 1,
+                note: q.note || '', answerGuide: q.answerGuide || '', audioSeconds: Number(q.audioSeconds) || 60
+              }]));
+              const nextSelected = Object.assign({}, this.state.selectedScheduleLessons, { [lessonId]: true });
+              this.setState({ lessons: nextLessons, questions: nextQuestions, selectedScheduleLessons: nextSelected, drawer: null, editIdx: null, questionWorkspaceOpen: false, lessonQuestionEditing: null, globalQuestionEditing: null });
+            },
+            openAssignSchedule: () => this.setState({ scheduleCreateOpen: true }),
+            closeAssignSchedule: () => this.setState({ scheduleCreateOpen: false }),
+            onScheduleName: (event) => this.setState({ scheduleDraftName: event.target.value }),
+            saveAssignedSchedule: () => {
+              if (assignLessonCount !== 1) return;
+              const sequence = this.state.courseSchedules.length + 22;
+              const lesson = selectedAssignLessons[0];
+              const scope = 'Bài ' + (L.indexOf(lesson) + 1) + ' · ' + assignQuestionCount + ' câu hỏi đúng phạm vi';
+              const created = {
+                code: 'SCH-2026-0' + sequence, type: 'exam', name: this.state.scheduleDraftName || 'Lịch thi mới', kind: 'Lịch thi theo bài học',
+                scope, from: '25/10/2026 08:00', to: '25/10/2026 23:59', students: 0, status: 'Bản nháp', active: false, draft: true,
+                lessonIds: selectedAssignLessons.map((lesson) => lesson.id)
+              };
+              this.setState({ courseSchedules: this.state.courseSchedules.concat([created]), scheduleCreateOpen: false, tab: 'lichthi' });
+            },
+            showAll: () => this.setState({ all: true }),
+            cancelAsk: () => this.setState({ ask: null, docAdding: false }),
+            startDoc: () => this.setState({ docAdding: true, ask: null, docLessonId: L.length ? L[0].id : '' }),
+            onDocLessonChange: (e) => this.setState({ docLessonId: Number(e.target.value) }),
+            toggleMore: () => this.setState({ more: !this.state.more }),
+            openInfo: () => this.setState({ info: true, more: false }),
+            closeInfo: () => this.setState({ info: false })
+          };
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tiêu chí đào tạo – AcaSys</title>
+<script src="js/training-projects-5270744d.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+</head><body><x-dc><helmet>
+<link href="../../shared/css/base.css" rel="stylesheet"/>
+<link href="css/training-projects.css" rel="stylesheet"/>
+</helmet>
+<div class="app-shell">
+<nav aria-label="Menu chính" class="app-sidebar">
+<div class="brand-row"><div class="brand-logo">A</div><div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div></div>
+<sc-for as="item" hint-placeholder-count="14" list="{{ nav }}">
+<sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}"><p class="sidebar-section-title">{{ item.label }}</p></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}"><a aria-current="page" href="{{ item.href }}" class="ui-link-b975ab7"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}"><a href="{{ item.href }}" class="ui-link-dbb06b9"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if>
+</sc-for>
+</nav>
+<div class="app-content">
+<header class="ui-header-fc3ec06">
+<button aria-label="Đổi dự án" type="button" class="ui-button-1cba726"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#2456B8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18"><path d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg><span class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">ACACY PRESENTATION</span></span></button>
+<label class="ui-field-0b7aaec"><span class="visually-hidden">Tìm trong hệ thống</span><input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search" class="ui-input-956a9ed"/></label>
+<button type="button" class="ui-button-e0d1029">Tiếng Việt</button>
+<button aria-label="Tài khoản" type="button" class="ui-button-0798c7a"><span class="ui-label-fcfeba1">T</span><span class="ui-label-69babcb"><span class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span></button>
+</header>
+<main class="ui-content-d1b7109 criteria-page">
+<div class="criteria-page-header"><h1>Tiêu chí đào tạo</h1><button sc-camel-on-click="{{ openAdd }}" type="button">＋ Thêm tiêu chí</button></div>
+<div class="criteria-toolbar"><label><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#5E6B85" stroke-linecap="round" stroke-width="2" width="18"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path></svg><input placeholder="Tìm theo mã hoặc tên tiêu chí" sc-camel-on-input="{{ onSearch }}" type="search" value="{{ query }}"/></label></div>
+<div class="criteria-table" role="table" aria-label="Danh mục tiêu chí đào tạo">
+<div class="criteria-table-row criteria-table-head" role="row"><span>Mã</span><span>Tên tiêu chí</span><span>Dự án đang sử dụng</span><span>Trạng thái</span></div>
+<sc-for as="criterion" hint-placeholder-count="3" list="{{ criteria }}"><div class="criteria-table-row" role="row"><strong>{{ criterion.code }}</strong><strong>{{ criterion.name }}</strong><div class="criteria-projects"><sc-for as="project" hint-placeholder-count="2" list="{{ criterion.projects }}"><span>{{ project }}</span></sc-for></div><span class="criteria-status">Đang sử dụng</span></div></sc-for>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ empty }}"><p class="criteria-empty">Không tìm thấy tiêu chí.</p></sc-if>
+</div>
+</main>
+</div>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ addOpen }}"><div class="modal-backdrop"><section aria-label="Thêm tiêu chí đào tạo" aria-modal="true" role="dialog" class="training-project-detail-section-47380eb criteria-dialog"><header><h2>Thêm tiêu chí đào tạo</h2><button aria-label="Đóng" sc-camel-on-click="{{ closeAdd }}" type="button">×</button></header><label>Mã tiêu chí *<input placeholder="VD: TC04" sc-camel-on-input="{{ onCode }}" type="text" value="{{ newCode }}"/></label><label>Tên tiêu chí *<input placeholder="Nhập tên tiêu chí" sc-camel-on-input="{{ onName }}" type="text" value="{{ newName }}"/></label><sc-if hint-placeholder-val="{{ false }}" value="{{ errorOpen }}"><p class="criteria-dialog-error">{{ error }}</p></sc-if><div class="criteria-dialog-actions"><button sc-camel-on-click="{{ closeAdd }}" type="button">Hủy</button><button sc-camel-on-click="{{ saveCriterion }}" type="button">Thêm tiêu chí</button></div></section></div></sc-if>
+</div></x-dc>
+<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1000}}' type="text/x-dc">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: '', addOpen: false, newCode: '', newName: '', error: '',
+      criteria: [
+        { code: 'TC01', name: 'Kỹ năng giao tiếp với khách hàng', projects: ['ACACY PRESENTATION', 'ACACY DEMO'] },
+        { code: 'TC02', name: 'Kỹ năng bán hàng', projects: ['ACACY PRESENTATION'] },
+        { code: 'TC03', name: 'Kiến thức sản phẩm', projects: ['ACACY DEMO'] }
+      ]
+    };
+  }
+  renderVals() {
+    const P = {
+      users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8',
+      layers: 'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+      book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15z',
+      cal: 'M3 5h18v16H3zM16 3v4M8 3v4M3 10h18',
+      folder: 'M3 6a2 2 0 0 1 2-2h4l2 3h8v13H3z',
+      target: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'
+    };
+    const link = (label, d, href, active) => ({ label, d, href, isHeader: false, isActive: !!active, isLink: !active });
+    const head = (label) => ({ label, isHeader: true, isActive: false, isLink: false, d: '', href: '#' });
+    const nav = [
+      head('NGƯỜI HỌC'), link('Học viên', P.users, '../students/students-list.html'),
+      head('NỘI DUNG'), link('Chương trình', P.layers, '../programs/programs.html'), link('Khóa học', P.book, '../courses/courses.html'),
+      head('VẬN HÀNH'), link('Lịch học/thi', P.cal, '../schedules/schedules.html'), link('Lộ trình đào tạo', P.layers, '../learning-paths/learning-paths.html'),
+      head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, 'training-projects.html'), link('Tiêu chí đào tạo', P.target, 'training-criteria.html', true)
+    ];
+    const q = this.state.query.trim().toLowerCase();
+    const criteria = this.state.criteria.filter((criterion) => !q || criterion.code.toLowerCase().includes(q) || criterion.name.toLowerCase().includes(q));
+    return {
+      nav, criteria, query: this.state.query, empty: criteria.length === 0, addOpen: this.state.addOpen,
+      newCode: this.state.newCode, newName: this.state.newName, error: this.state.error, errorOpen: !!this.state.error,
+      onSearch: (e) => this.setState({ query: e.target.value }),
+      openAdd: () => this.setState({ addOpen: true, newCode: '', newName: '', error: '' }),
+      closeAdd: () => this.setState({ addOpen: false, error: '' }),
+      onCode: (e) => this.setState({ newCode: e.target.value.toUpperCase().replace(/[^A-Z0-9_-]/g, ''), error: '' }),
+      onName: (e) => this.setState({ newName: e.target.value, error: '' }),
+      saveCriterion: () => {
+        const code = this.state.newCode.trim();
+        const name = this.state.newName.trim();
+        if (!code || !name) { this.setState({ error: 'Vui lòng nhập mã và tên tiêu chí.' }); return; }
+        if (this.state.criteria.some((criterion) => criterion.code === code)) { this.setState({ error: 'Mã tiêu chí đã tồn tại.' }); return; }
+        this.setState({ criteria: this.state.criteria.concat([{ code, name, projects: [] }]), addOpen: false, newCode: '', newName: '', error: '' });
+      }
+    };
+  }
+}
+</script></body></html>

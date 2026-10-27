@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Lộ trình đào tạo – AcaSys</title>
+  <script src="../schedules/js/schedules-runtime.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+</head>
+<body>
+<x-dc>
+  <helmet><link href="../../shared/css/base.css" rel="stylesheet"/><link href="css/learning-paths.css" rel="stylesheet"/></helmet>
+  <div class="app-shell">
+    <nav aria-label="Menu chính" class="app-sidebar">
+      <div class="brand-row"><div class="brand-logo">A</div><div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div></div>
+      <sc-for as="item" hint-placeholder-count="10" list="{{ nav }}">
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}"><p class="sidebar-section-title">{{ item.label }}</p></sc-if>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}"><a aria-current="page" href="{{ item.href }}" class="ui-link-b975ab7"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if>
+        <sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}"><a href="{{ item.href }}" class="ui-link-dbb06b9"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if>
+      </sc-for>
+    </nav>
+    <div class="app-content">
+      <header class="ui-header-fc3ec06"><button type="button" class="ui-button-1cba726"><span class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">ACACY PRESENTATION</span></span></button><label class="ui-field-0b7aaec"><span class="visually-hidden">Tìm trong hệ thống</span><input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search" class="ui-input-956a9ed"/></label><button type="button" class="ui-button-e0d1029">Tiếng Việt</button><button aria-label="Tài khoản" type="button" class="ui-button-0798c7a"><span class="ui-label-fcfeba1">T</span><span class="ui-label-69babcb"><span class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span></button></header>
+      <main class="path-main">
+        <section class="path-heading"><div><p class="path-eyebrow">VẬN HÀNH ĐÀO TẠO</p><h1>Lộ trình đào tạo</h1><p>Sắp xếp khóa học theo Level và phân bổ học viên.</p></div><button sc-camel-on-click="{{ openAdd }}" type="button" class="path-primary">+ Thêm lộ trình</button></section>
+        <section class="path-summary">
+          <article><span>Lộ trình</span><strong>{{ total }}</strong><small>Trong dự án hiện tại</small></article>
+          <article><span>Đang áp dụng</span><strong>2</strong><small>1 bản nháp</small></article>
+          <article><span>Học viên được phân bổ</span><strong>126</strong><small>Theo từng lộ trình</small></article>
+          <article><span>Lịch thi bắt buộc</span><strong>8</strong><small>Điều kiện xét Level</small></article>
+        </section>
+        <div class="path-toolbar"><input aria-label="Tìm lộ trình" class="path-search" placeholder="Tìm theo tên hoặc mã lộ trình" sc-camel-on-input="{{ onSearch }}" type="search" value="{{ query }}"/><span>{{ shown }} kết quả</span></div>
+        <section class="path-list">
+          <div class="path-list-head"><span>Lộ trình</span><span>Level</span><span>Khóa học</span><span>Lịch thi bắt buộc</span><span>Học viên</span><span>Trạng thái</span></div>
+          <sc-for as="path" hint-placeholder-count="3" list="{{ paths }}">
+            <div class="path-list-row"><span><a href="learning-path-detail.html"><strong>{{ path.name }}</strong></a><small>{{ path.code }} · {{ path.project }}</small></span><span>{{ path.levels }} Level</span><span>{{ path.courses }} khóa</span><span>{{ path.exams }} lịch thi</span><span>{{ path.learners }} học viên</span><span class="path-status {{ path.statusClass }}">{{ path.status }}</span></div>
+          </sc-for>
+          <sc-if hint-placeholder-val="{{ false }}" value="{{ empty }}"><p class="path-empty">Không tìm thấy lộ trình phù hợp.</p></sc-if>
+        </section>
+      </main>
+    </div>
+  </div>
+  <sc-if hint-placeholder-val="{{ false }}" value="{{ addOpen }}">
+    <div class="path-backdrop"><section aria-label="Thêm lộ trình" aria-modal="true" class="path-dialog" role="dialog"><h2>Thêm lộ trình đào tạo</h2><p>Tạo thông tin nền trước, sau đó thiết lập khóa học và điều kiện cho từng Level.</p><div class="path-form-grid"><label class="path-form-field is-wide">Tên lộ trình <input placeholder="VD: Lộ trình phát triển năng lực bán hàng" type="text"/></label><label class="path-form-field">Mã lộ trình <input value="LP-SALES-2026" type="text"/></label><label class="path-form-field">Số Level của lộ trình *<input max="12" min="1" sc-camel-on-input="{{ onLevelCount }}" type="number" value="{{ levelCount }}"/></label><label class="path-form-field is-wide">Dự án <select><option>ACACY PRESENTATION</option></select></label><label class="path-form-field is-wide">Mô tả <textarea rows="3" placeholder="Mục tiêu và đối tượng của lộ trình"></textarea></label></div><div class="path-dialog-actions"><button sc-camel-on-click="{{ closeAdd }}" type="button" class="path-secondary">Hủy</button><a href="{{ createHref }}" class="path-primary">Tạo và thiết lập</a></div></section></div>
+  </sc-if>
+</x-dc>
+<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1000}}' type="text/x-dc">
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { query: '', addOpen: false, levelCount: 4 }; }
+  renderVals() {
+    const P={users:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8',layers:'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',book:'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5',cal:'M3 5h18v16H3zM16 3v4M8 3v4',route:'M4 19V5m0 0 4 4m-4-4L0 9m20-4v14m0 0-4-4m4 4 4-4',folder:'M3 6a2 2 0 0 1 2-2h4l2 3h8v13H3z'};
+    const link=(label,d,href,active)=>({label,d,href,isHeader:false,isActive:!!active,isLink:!active});const head=label=>({label,isHeader:true,isActive:false,isLink:false,d:'',href:'#'});
+    const nav=[head('NGƯỜI HỌC'),link('Học viên',P.users,'../students/students-list.html'),head('NỘI DUNG'),link('Chương trình',P.layers,'../programs/programs.html'),link('Khóa học',P.book,'../courses/courses.html'),head('VẬN HÀNH'),link('Lịch học/thi',P.cal,'../schedules/schedules.html'),link('Lộ trình đào tạo',P.route,'learning-paths.html',true),head('THIẾT LẬP'),link('Dự án đào tạo',P.folder,'../training-projects/training-projects.html')];
+    const data=[
+      {code:'LP-SALES-2026',name:'Lộ trình phát triển năng lực bán hàng',project:'ACACY PRESENTATION',levels:4,courses:4,exams:4,learners:48,status:'Đang áp dụng',statusClass:''},
+      {code:'LP-ONBOARD-2026',name:'Lộ trình hội nhập nhân viên mới',project:'ACACY PRESENTATION',levels:2,courses:2,exams:3,learners:62,status:'Đang áp dụng',statusClass:''},
+      {code:'LP-MANAGER-DRAFT',name:'Lộ trình quản lý cửa hàng',project:'ACACY PRESENTATION',levels:3,courses:3,exams:1,learners:16,status:'Bản nháp',statusClass:'is-draft'}
+    ];
+    const query=this.state.query.trim().toLowerCase();const filtered=data.filter(path=>!query||path.name.toLowerCase().includes(query)||path.code.toLowerCase().includes(query));
+    const levelCount=Math.min(12,Math.max(1,Math.floor(Number(this.state.levelCount)||1)));
+    return {nav,paths:filtered,total:data.length,shown:filtered.length,empty:filtered.length===0,query:this.state.query,addOpen:this.state.addOpen,levelCount:this.state.levelCount,createHref:'learning-path-detail.html?levels='+levelCount,onSearch:e=>this.setState({query:e.target.value}),onLevelCount:e=>this.setState({levelCount:e.target.value}),openAdd:()=>this.setState({addOpen:true}),closeAdd:()=>this.setState({addOpen:false})};
+  }
+}
+</script>
+</body>
+</html>

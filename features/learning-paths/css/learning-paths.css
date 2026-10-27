@@ -1,0 +1,765 @@
+#dc-root .path-main {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 28px 32px 48px;
+}
+
+#dc-root .path-heading,
+#dc-root .path-toolbar,
+#dc-root .path-detail-heading,
+#dc-root .path-step-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#dc-root .path-heading {
+  align-items: flex-end;
+  margin-bottom: 22px;
+}
+
+#dc-root .path-eyebrow {
+  margin: 0 0 4px;
+  color: #2456B8;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+
+#dc-root .path-heading h1,
+#dc-root .path-detail-heading h1 {
+  margin: 0;
+  color: #13234B;
+  font-size: 30px;
+  line-height: 1.25;
+}
+
+#dc-root .path-heading p:last-child,
+#dc-root .path-detail-heading p {
+  margin: 6px 0 0;
+  color: #66738C;
+}
+
+#dc-root .path-primary,
+#dc-root .path-secondary {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border-radius: 9px;
+  font-weight: 700;
+}
+
+#dc-root .path-primary {
+  border: 1px solid #2456B8;
+  background: #2456B8;
+  color: #FFFFFF;
+}
+
+#dc-root .path-secondary {
+  border: 1px solid #C9D5E7;
+  background: #FFFFFF;
+  color: #1E3968;
+}
+
+#dc-root .path-primary:disabled {
+  cursor: not-allowed;
+  opacity: .45;
+}
+
+#dc-root .path-toolbar {
+  margin-bottom: 16px;
+  padding: 14px;
+  border: 1px solid #DCE4F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+}
+
+#dc-root .path-search {
+  width: min(420px, 100%);
+  min-height: 42px;
+  padding: 0 13px;
+  border: 1px solid #C9D5E7;
+  border-radius: 9px;
+  background: #F9FBFE;
+}
+
+#dc-root .path-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+#dc-root .path-summary article {
+  padding: 16px;
+  border: 1px solid #DCE4F0;
+  border-radius: 12px;
+  background: #FFFFFF;
+}
+
+#dc-root .path-summary span,
+#dc-root .path-summary small {
+  display: block;
+  color: #6B7891;
+  font-size: 12px;
+}
+
+#dc-root .path-summary strong {
+  display: block;
+  margin: 5px 0 2px;
+  color: #13234B;
+  font-size: 24px;
+}
+
+#dc-root .path-list {
+  overflow: hidden;
+  border: 1px solid #DCE4F0;
+  border-radius: 14px;
+  background: #FFFFFF;
+}
+
+#dc-root .path-list-head,
+#dc-root .path-list-row {
+  display: grid;
+  grid-template-columns: minmax(260px, 1.8fr) .7fr .8fr .9fr .8fr 120px;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+}
+
+#dc-root .path-list-head {
+  background: #F2F5FA;
+  color: #53617B;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+#dc-root .path-list-row {
+  min-height: 82px;
+  border-top: 1px solid #E7ECF4;
+  color: #43506A;
+}
+
+#dc-root .path-list-row > span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+#dc-root .path-list-row strong {
+  color: #13234B;
+}
+
+#dc-root .path-list-row small {
+  color: #748099;
+}
+
+#dc-root .path-status {
+  width: max-content;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #E7F6ED;
+  color: #177245;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#dc-root .path-status.is-draft {
+  background: #F1F3F7;
+  color: #5E6B85;
+}
+
+#dc-root .path-empty {
+  margin: 0;
+  padding: 30px;
+  color: #66738C;
+  text-align: center;
+}
+
+#dc-root .path-backdrop {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(13, 30, 66, .48);
+}
+
+#dc-root .path-dialog {
+  width: min(620px, 100%);
+  padding: 22px;
+  border-radius: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 22px 60px rgba(16, 39, 83, .24);
+}
+
+#dc-root .path-dialog h2 {
+  margin: 0 0 6px;
+  color: #13234B;
+}
+
+#dc-root .path-dialog > p {
+  margin: 0 0 18px;
+  color: #66738C;
+}
+
+#dc-root .path-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+#dc-root .path-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #4D5B75;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+#dc-root .path-form-field.is-wide {
+  grid-column: 1 / -1;
+}
+
+#dc-root .path-form-field input,
+#dc-root .path-form-field select,
+#dc-root .path-form-field textarea {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 12px;
+  border: 1px solid #C9D5E7;
+  border-radius: 9px;
+  background: #FFFFFF;
+  color: #13234B;
+  font-weight: 500;
+}
+
+#dc-root .path-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#dc-root .path-breadcrumb {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #6B7891;
+  font-size: 13px;
+}
+
+#dc-root .path-detail-heading {
+  margin-bottom: 18px;
+  padding: 20px;
+  border: 1px solid #DCE4F0;
+  border-radius: 14px;
+  background: #FFFFFF;
+}
+
+#dc-root .path-detail-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 16px;
+}
+
+#dc-root .path-step-nav {
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #DCE4F0;
+  border-radius: 14px;
+  background: #FFFFFF;
+}
+
+#dc-root .path-step-nav > header {
+  padding: 16px;
+  border-bottom: 1px solid #E4EAF3;
+}
+
+#dc-root .path-step-nav > header span,
+#dc-root .path-step-nav > header small {
+  display: block;
+  color: #6B7891;
+  font-size: 11px;
+}
+
+#dc-root .path-step-nav > header strong {
+  display: block;
+  margin: 4px 0;
+  color: #13234B;
+}
+
+#dc-root .path-step-nav button {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 10px;
+  padding: 14px 16px;
+  border: 0;
+  border-bottom: 1px solid #EEF1F6;
+  background: #FFFFFF;
+  color: #526079;
+  text-align: left;
+}
+
+#dc-root .path-step-nav button.is-active {
+  background: #EDF3FD;
+  color: #174994;
+  box-shadow: inset 3px 0 0 #2456B8;
+}
+
+#dc-root .path-step-nav button > span:first-child {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #EDF1F7;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#dc-root .path-step-nav button.is-active > span:first-child {
+  background: #2456B8;
+  color: #FFFFFF;
+}
+
+#dc-root .path-step-nav button > span:last-child {
+  min-width: 0;
+}
+
+#dc-root .path-step-nav button strong,
+#dc-root .path-step-nav button small {
+  display: block;
+}
+
+#dc-root .path-step-nav button small {
+  margin-top: 3px;
+  color: #78849A;
+  font-size: 10px;
+}
+
+#dc-root .path-workspace {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #DCE4F0;
+  border-radius: 14px;
+  background: #FFFFFF;
+}
+
+#dc-root .path-panel {
+  padding: 22px;
+}
+
+#dc-root .path-panel > header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+#dc-root .path-panel h2,
+#dc-root .path-panel h3,
+#dc-root .path-panel p {
+  margin-top: 0;
+}
+
+#dc-root .path-panel h2,
+#dc-root .path-panel h3 {
+  color: #13234B;
+}
+
+#dc-root .path-panel > header p {
+  margin-bottom: 0;
+  color: #66738C;
+}
+
+#dc-root .path-callout {
+  margin-bottom: 16px;
+  padding: 14px 16px;
+  border: 1px solid #F0C77A;
+  border-radius: 10px;
+  background: #FFF8E8;
+  color: #72500E;
+  font-size: 13px;
+}
+
+#dc-root .path-level-list,
+#dc-root .path-exam-list,
+#dc-root .path-learner-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#dc-root .path-level-card,
+#dc-root .path-exam-row,
+#dc-root .path-learner-row {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border: 1px solid #DCE4F0;
+  border-radius: 10px;
+  background: #FBFCFE;
+}
+
+#dc-root .path-level-card {
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+}
+
+#dc-root .path-level-card > span:first-child {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #2456B8;
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+#dc-root .path-level-card strong,
+#dc-root .path-level-card small,
+#dc-root .path-exam-row strong,
+#dc-root .path-exam-row small,
+#dc-root .path-learner-row strong,
+#dc-root .path-learner-row small {
+  display: block;
+}
+
+#dc-root .path-level-card small,
+#dc-root .path-exam-row small,
+#dc-root .path-learner-row small {
+  margin-top: 4px;
+  color: #6B7891;
+}
+
+#dc-root .path-level-rule {
+  color: #2456B8 !important;
+  font-weight: 700;
+}
+
+#dc-root .path-exam-row {
+  grid-template-columns: minmax(0, 1fr) auto auto;
+}
+
+#dc-root .path-required {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #FDEBED;
+  color: #B42335;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#dc-root .path-learner-toolbar {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) 190px auto;
+  align-items: end;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+#dc-root .path-learner-toolbar input,
+#dc-root .path-learner-toolbar select,
+#dc-root .path-learner-row select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 12px;
+  border: 1px solid #C9D5E7;
+  border-radius: 9px;
+  background: #FFFFFF;
+  color: #263957;
+}
+
+#dc-root .path-learner-toolbar label {
+  display: grid;
+  gap: 5px;
+  color: #596780;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+#dc-root .path-learner-table {
+  overflow: hidden;
+  border: 1px solid #DCE4F0;
+  border-radius: 10px;
+}
+
+#dc-root .path-learner-head,
+#dc-root .path-learner-row {
+  display: grid;
+  grid-template-columns: 38px 44px minmax(220px, 1fr) 170px 210px;
+  align-items: center;
+  gap: 12px;
+}
+
+#dc-root .path-learner-head {
+  grid-template-columns: 38px minmax(264px, 1fr) 170px 210px;
+  padding: 12px 14px;
+  color: #5D6A82;
+  background: #F3F6FA;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#dc-root .path-learner-row {
+  border: 0;
+  border-top: 1px solid #E7ECF4;
+  border-radius: 0;
+  background: #FFFFFF;
+}
+
+#dc-root .path-check {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #B9C8DC;
+  border-radius: 7px;
+  background: #FFFFFF;
+  color: #FFFFFF;
+  font-weight: 800;
+}
+
+#dc-root .path-check.is-selected {
+  border-color: #2456B8;
+  background: #2456B8;
+}
+
+#dc-root .path-not-assigned {
+  color: #7A869B;
+}
+
+#dc-root .path-avatar {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #DFE9FA;
+  color: #2456B8;
+  font-weight: 800;
+}
+
+#dc-root .path-panel > header > div + strong {
+  color: #2456B8;
+}
+
+#dc-root .path-level-dialog {
+  width: min(820px, 100%);
+  max-height: min(860px, calc(100vh - 40px));
+  overflow: auto;
+}
+
+#dc-root .path-dialog-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+#dc-root .path-dialog-heading span {
+  color: #2456B8;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+#dc-root .path-dialog-heading h2 {
+  margin: 4px 0 0;
+}
+
+#dc-root .path-dialog-heading > button {
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 8px;
+  background: #F0F3F8;
+  color: #44516A;
+  font-size: 22px;
+}
+
+#dc-root .path-dialog-section {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #E5EAF2;
+}
+
+#dc-root .path-dialog-section > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#dc-root .path-dialog-section h3 {
+  margin: 0 0 12px;
+  color: #13234B;
+}
+
+#dc-root .path-threshold {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #4D5B75;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#dc-root .path-threshold input {
+  width: 64px;
+  min-height: 36px;
+  padding: 0 8px;
+  border: 1px solid #C9D5E7;
+  border-radius: 8px;
+}
+
+#dc-root .path-option-list {
+  display: grid;
+  gap: 8px;
+}
+
+#dc-root .path-option {
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid #D5DEEA;
+  border-radius: 9px;
+  background: #FFFFFF;
+  color: #31415F;
+  text-align: left;
+}
+
+#dc-root .path-option > b {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1px solid #B9C8DC;
+  border-radius: 6px;
+  color: #FFFFFF;
+}
+
+#dc-root .path-option.is-selected {
+  border-color: #8FB1EB;
+  background: #F1F6FF;
+}
+
+#dc-root .path-option.is-selected > b {
+  border-color: #2456B8;
+  background: #2456B8;
+}
+
+#dc-root .path-option strong,
+#dc-root .path-option small {
+  display: block;
+}
+
+#dc-root .path-option small {
+  margin-top: 3px;
+  color: #6B7891;
+}
+
+#dc-root .path-step-footer {
+  padding: 14px 22px;
+  border-top: 1px solid #E2E8F2;
+  background: #FAFBFD;
+}
+
+#dc-root .path-step-footer div {
+  display: flex;
+  gap: 8px;
+}
+
+#dc-root .path-toast {
+  position: fixed;
+  z-index: 140;
+  right: 24px;
+  bottom: 24px;
+  padding: 12px 16px;
+  border-radius: 9px;
+  background: #173C7B;
+  color: #FFFFFF;
+  box-shadow: 0 12px 30px rgba(16, 39, 83, .24);
+}
+
+@media (max-width: 1000px) {
+  #dc-root .path-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #dc-root .path-list-head {
+    display: none;
+  }
+
+  #dc-root .path-list-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  #dc-root .path-detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  #dc-root .path-step-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #dc-root .path-step-nav > header {
+    grid-column: 1 / -1;
+  }
+
+  #dc-root .path-learner-table {
+    overflow-x: auto;
+  }
+
+  #dc-root .path-learner-head,
+  #dc-root .path-learner-row {
+    min-width: 820px;
+  }
+}
+
+@media (max-width: 700px) {
+  #dc-root .path-main {
+    padding: 20px 14px 36px;
+  }
+
+  #dc-root .path-heading,
+  #dc-root .path-detail-heading,
+  #dc-root .path-toolbar,
+  #dc-root .path-step-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  #dc-root .path-summary,
+  #dc-root .path-form-grid,
+  #dc-root .path-list-row,
+  #dc-root .path-step-nav {
+    grid-template-columns: 1fr;
+  }
+
+  #dc-root .path-step-nav > header {
+    grid-column: auto;
+  }
+
+  #dc-root .path-learner-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  #dc-root .path-exam-row {
+    grid-template-columns: 1fr;
+  }
+}

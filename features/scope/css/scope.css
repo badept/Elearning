@@ -1,0 +1,193 @@
+/* Presentation rules for the scope feature. */
+
+#dc-root .scope-overview-b-7bbab39 {
+  color: #FFFFFF;
+}
+
+#dc-root .scope-overview-heading-c8c4842 {
+  margin: 0;
+  font-size: 20px;
+  color: #13234B;
+}
+
+#dc-root .scope-overview-heading-e178b8c {
+  margin: 0;
+  font-size: 18px;
+  color: #FFFFFF;
+}
+
+#dc-root .scope-overview-label-28f8a4e {
+  font-size: 14px;
+  line-height: 1.55;
+  color: #5E6B85;
+}
+
+#dc-root .scope-overview-label-a24e145 {
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: #E5F3EB;
+  color: #1B6B45;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#dc-root .scope-overview-label-fc07e37 {
+  color: #3E4A63;
+  line-height: 1.5;
+}
+
+#dc-root .scope-overview-panel-4cbce57 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 14px;
+  background: #F7F9FC;
+  border-radius: 12px;
+}
+
+#dc-root .scope-overview-panel-4ece3ec {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: #F7F9FC;
+  border-radius: 12px;
+}
+
+#dc-root .scope-overview-panel-5aed4a0 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 12px 14px;
+  border-top: 1px solid #EEF1F6;
+}
+
+#dc-root .scope-overview-panel-5c33568 {
+  min-height: 100vh;
+  background: #F4F6FA;
+  color: #2B3550;
+  font-size: 15px;
+  padding: 40px 32px 56px;
+}
+
+#dc-root .scope-overview-panel-620e22a {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#dc-root .scope-overview-panel-62db06f {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+#dc-root .scope-overview-panel-82b8371 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  padding: 10px 14px;
+  background: #F7F9FC;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #5E6B85;
+}
+
+#dc-root .scope-overview-panel-865b7b1 {
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: #F7F9FC;
+  border-radius: 12px;
+}
+
+#dc-root .scope-overview-panel-93699f9 {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+#dc-root .scope-overview-panel-b38edc0 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+#dc-root .scope-overview-section-62033ab {
+  flex: 3 1 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  background: #FFFFFF;
+  border: 1px solid #E2E7F0;
+  border-top: 6px solid #1E8A55;
+  border-radius: 16px;
+}
+
+#dc-root .scope-overview-section-ba31dd2 {
+  flex: 2 1 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 22px;
+  background: #FFFFFF;
+  border: 1px solid #E2E7F0;
+  border-top: 6px solid #8790A3;
+  border-radius: 16px;
+}
+
+#dc-root .scope-overview-section-de1c8d9 {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 22px;
+  background: #13234B;
+  border-radius: 16px;
+  color: #E3EAF7;
+}
+
+#dc-root .scope-overview-subheading-c2fd593 {
+  margin: 0;
+  font-size: 15px;
+  color: #13234B;
+}
+
+#dc-root .scope-overview-text-19f4437 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: #2456B8;
+}
+
+#dc-root .scope-overview-text-2322eb9 {
+  margin: 0;
+  max-width: 820px;
+  line-height: 1.6;
+  color: #3E4A63;
+}
+
+#dc-root .scope-overview-text-5643cd5 {
+  margin: 0;
+  line-height: 1.6;
+  color: #3E4A63;
+}
+
+#dc-root .scope-overview-text-87297b3 {
+  margin: 0;
+  line-height: 1.55;
+}
+
+#dc-root .scope-overview-title-b478187 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 700;
+  color: #13234B;
+}

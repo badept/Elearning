@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<title>Học viên – chi tiết</title>
+<script src="js/student-detail-03bb43a8.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/></head>
+<body>
+<x-dc>
+<helmet>
+<link href="../../shared/css/base.css" rel="stylesheet"/>
+<link href="css/students.css" rel="stylesheet"/>
+</helmet>
+<div class="app-shell">
+<nav aria-label="Menu chính" class="app-sidebar">
+<div class="brand-row">
+<div class="brand-logo">A</div>
+<div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div>
+</div>
+<sc-for as="item" hint-placeholder-count="14" list="{{ nav }}">
+<sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}">
+<p class="sidebar-section-title">{{ item.label }}</p>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}">
+<a aria-current="page" href="{{ item.href }}" class="ui-link-b975ab7">
+<svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg>
+<span>{{ item.label }}</span>
+</a>
+</sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}">
+<a href="{{ item.href }}" class="ui-link-dbb06b9">
+<svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg>
+<span>{{ item.label }}</span>
+</a>
+</sc-if>
+</sc-for>
+</nav>
+<div class="app-content">
+<header class="ui-header-fc3ec06">
+<button aria-label="Đổi dự án" type="button" class="ui-button-1cba726">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#2456B8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18"><path d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+<span class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">ACACY PRESENTATION</span></span>
+<svg aria-hidden="true" fill="none" height="16" sc-camel-view-box="0 0 24 24" stroke="#5E6B85" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="16"><path d="m6 9 6 6 6-6"></path></svg>
+</button>
+<label class="ui-field-0b7aaec">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#5E6B85" stroke-linecap="round" stroke-width="2" width="18"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path></svg>
+<span class="visually-hidden">Tìm trong hệ thống</span>
+<input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search" class="ui-input-956a9ed"/>
+</label>
+<button type="button" class="ui-button-e0d1029">Tiếng Việt</button>
+<button aria-label="Tài khoản" type="button" class="ui-button-0798c7a">
+<span class="ui-label-fcfeba1">T</span>
+<span class="ui-label-69babcb"><span class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span>
+</button>
+</header>
+<main class="ui-content-196256b">
+<nav aria-label="Đường dẫn" class="ui-sidebar-4d31d5b">
+<a href="students-list.html" class="ui-element-21a1be8">Học viên</a>
+<svg aria-hidden="true" fill="none" height="14" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="14"><path d="m9 18 6-6-6-6"></path></svg>
+<span>Avery Dennison Test 1</span>
+</nav>
+<section class="ui-section-904a9e8">
+<div class="student-detail-panel-539d005">AT</div>
+<div class="ui-panel-ed81d1d">
+<div class="toolbar-row">
+<h1 class="ui-title-d025eb7">Avery Dennison Test 1</h1>
+<span class="ui-label-6cec209"><span class="ui-label-1ffc1ad"></span>Đang hoạt động</span>
+<span class="ui-label-715a8aa">Cấp độ 1</span>
+</div>
+<p class="muted-text">Mã: ADTest1 · Bộ phận 01 · Dự án ACACY PRESENTATION</p>
+</div>
+<div class="ui-panel-dab9924">
+<sc-if hint-placeholder-val="{{ false }}" value="{{ tabThongTin }}">
+<button sc-camel-on-click="{{ saveStudent }}" type="button" class="student-detail-save-button">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8M7 3v5h8"></path></svg>
+<span>Lưu thay đổi</span>
+</button>
+</sc-if>
+<button aria-label="Thao tác khác" sc-camel-on-click="{{ toggleMore }}" type="button" class="ui-button-040b25c">
+<svg aria-hidden="true" fill="currentColor" height="20" sc-camel-view-box="0 0 24 24" width="20"><circle cx="5" cy="12" r="1.8"></circle><circle cx="12" cy="12" r="1.8"></circle><circle cx="19" cy="12" r="1.8"></circle></svg></button>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ moreOpen }}">
+<div role="menu" class="ui-panel-156c915">
+<button role="menuitem" type="button" class="ui-button-aa9210c">Ngưng hoạt động</button>
+<div class="ui-panel-5032cf7"></div>
+<button role="menuitem" sc-camel-on-click="{{ askDelete }}" type="button" class="ui-button-b9d201c">Xóa học viên</button>
+</div>
+</sc-if>
+</div>
+</section>
+<div class="ui-panel-b1f86f8">
+<div aria-label="Quản lý học viên" role="tablist" class="ui-panel-5b0db9d">
+<sc-for as="t" hint-placeholder-count="2" list="{{ tabs }}">
+<sc-if hint-placeholder-val="{{ false }}" value="{{ t.active }}">
+<button aria-selected="true" role="tab" sc-camel-on-click="{{ t.go }}" type="button" class="ui-button-dd5bb86">{{ t.label }}<sc-if hint-placeholder-val="{{ false }}" value="{{ t.hasCount }}"><span class="ui-label-ba3285b">{{ t.count }}</span></sc-if></button>
+</sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ t.inactive }}">
+<button aria-selected="false" role="tab" sc-camel-on-click="{{ t.go }}" type="button" class="ui-button-3c3cead">{{ t.label }}<sc-if hint-placeholder-val="{{ false }}" value="{{ t.hasCount }}"><span class="ui-label-51d9daf">{{ t.count }}</span></sc-if></button>
+</sc-if>
+</sc-for>
+</div>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ tabHocTap }}">
+<div role="tabpanel" class="student-learning-management">
+<div aria-label="Nội dung quản lý học tập" role="tablist" class="student-learning-tabs">
+<sc-for as="t" hint-placeholder-count="4" list="{{ learningTabs }}">
+<sc-if hint-placeholder-val="{{ true }}" value="{{ t.active }}"><button aria-selected="true" role="tab" sc-camel-on-click="{{ t.go }}" type="button" class="student-learning-tab is-active">{{ t.label }}<sc-if hint-placeholder-val="{{ false }}" value="{{ t.hasCount }}"><span>{{ t.count }}</span></sc-if></button></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ t.inactive }}"><button aria-selected="false" role="tab" sc-camel-on-click="{{ t.go }}" type="button" class="student-learning-tab">{{ t.label }}<sc-if hint-placeholder-val="{{ false }}" value="{{ t.hasCount }}"><span>{{ t.count }}</span></sc-if></button></sc-if>
+</sc-for>
+</div>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ tabLich }}">
+<div role="tabpanel" class="student-detail-panel-2bf3068">
+<div class="toolbar-row">
+<label class="student-detail-field-728887e">
+<svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#5E6B85" stroke-linecap="round" stroke-width="2" width="18"><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path></svg>
+<span class="visually-hidden">Tìm lịch học/thi</span>
+<input placeholder="Tìm lịch học/thi" type="search" class="student-detail-input-6b5c3bd"/>
+</label>
+<div aria-label="Lọc lịch theo nguồn gán" role="tablist" class="student-detail-panel-58bc523">
+<sc-if hint-placeholder-val="{{ true }}" value="{{ scheduleAllActive }}"><button aria-selected="true" role="tab" sc-camel-on-click="{{ showAllSchedules }}" type="button" class="student-detail-button-7bf02ab">Tất cả</button></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ scheduleAllInactive }}"><button aria-selected="false" role="tab" sc-camel-on-click="{{ showAllSchedules }}" type="button" class="student-detail-button-4f17580">Tất cả</button></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ schedulePathActive }}"><button aria-selected="true" role="tab" sc-camel-on-click="{{ showPathSchedules }}" type="button" class="student-detail-button-7bf02ab">Lộ trình</button></sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ schedulePathInactive }}"><button aria-selected="false" role="tab" sc-camel-on-click="{{ showPathSchedules }}" type="button" class="student-detail-button-4f17580">Lộ trình</button></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ scheduleStandaloneActive }}"><button aria-selected="true" role="tab" sc-camel-on-click="{{ showStandaloneSchedules }}" type="button" class="student-detail-button-7bf02ab">Khóa lẻ</button></sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ scheduleStandaloneInactive }}"><button aria-selected="false" role="tab" sc-camel-on-click="{{ showStandaloneSchedules }}" type="button" class="student-detail-button-4f17580">Khóa lẻ</button></sc-if>
+</div>
+<div class="ui-panel-634a28b"></div>
+</div>
+<div class="student-detail-panel-2303ff4">
+<sc-raw-table class="student-detail-sc-raw-table-102a456">
+<sc-raw-thead><sc-raw-tr class="ui-sc-raw-tr-f600716">
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Lịch học/thi</sc-raw-th>
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Nguồn gán</sc-raw-th>
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Lượt thi</sc-raw-th>
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Kết quả</sc-raw-th>
+</sc-raw-tr></sc-raw-thead>
+<sc-raw-tbody>
+<sc-for as="l" hint-placeholder-count="3" list="{{ lich }}">
+<sc-raw-tr>
+<sc-raw-td class="student-detail-sc-raw-td-45dfc65"><div class="student-detail-panel-9dc0a31"><span class="strong-text">{{ l.name }}</span><span class="student-detail-label-5812e68">Khóa học: {{ l.course }}</span><span class="student-schedule-time">Thời gian: {{ l.from }} → {{ l.to }}</span></div></sc-raw-td>
+<sc-raw-td class="student-detail-sc-raw-td-4765c9b"><span class="student-detail-label-2e2ef94">{{ l.kind }}</span></sc-raw-td>
+<sc-raw-td class="student-detail-sc-raw-td-a330f95">{{ l.tries }}</sc-raw-td>
+<sc-raw-td class="student-detail-sc-raw-td-4765c9b">
+<sc-if hint-placeholder-val="{{ true }}" value="{{ l.pass }}"><span class="student-detail-label-4b30e2d">Đạt</span></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ l.fail }}"><span class="student-detail-label-f5cb810">Chưa đạt</span></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ l.none }}"><span class="student-detail-label-982f118">Chưa làm</span></sc-if>
+</sc-raw-td>
+</sc-raw-tr>
+</sc-for>
+</sc-raw-tbody>
+</sc-raw-table>
+</div>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ tabKetQua }}">
+<div role="tabpanel" class="student-detail-panel-2bf3068">
+<div class="ui-panel-d78b093">
+<p class="muted-text">Mỗi dòng là một lượt thi đã ghi nhận. Chọn “Xem bài làm” để đối chiếu chi tiết câu trả lời.</p>
+<button type="button" class="ui-button-2491151"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path></svg>Xuất Excel kết quả trả lời</button>
+</div>
+<div class="student-detail-panel-2303ff4">
+<sc-raw-table class="student-detail-sc-raw-table-ce039e6">
+<sc-raw-thead><sc-raw-tr class="ui-sc-raw-tr-f600716">
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Bài thi</sc-raw-th>
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Lần thi</sc-raw-th>
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Thời gian làm bài</sc-raw-th>
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Kết quả</sc-raw-th>
+<sc-raw-th class="student-detail-sc-raw-th-72064d2">Thao tác</sc-raw-th>
+</sc-raw-tr></sc-raw-thead>
+<sc-raw-tbody>
+<sc-for as="k" hint-placeholder-count="3" list="{{ luot }}">
+<sc-raw-tr>
+<sc-raw-td class="student-detail-sc-raw-td-9db41de"><div class="student-detail-panel-ddce239"><span>{{ k.name }}</span><span class="student-detail-label-5812e68">Ngày thi: {{ k.ngay }}</span></div></sc-raw-td>
+<sc-raw-td class="student-detail-sc-raw-td-a330f95">{{ k.lan }}</sc-raw-td>
+<sc-raw-td class="student-detail-sc-raw-td-a330f95">{{ k.tg }}</sc-raw-td>
+<sc-raw-td class="student-detail-sc-raw-td-4765c9b"><div class="student-detail-panel-ddce239">
+<sc-if hint-placeholder-val="{{ true }}" value="{{ k.pass }}"><span class="student-detail-label-4b30e2d">Đạt</span></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ k.fail }}"><span class="student-detail-label-f5cb810">Chưa đạt</span></sc-if>
+<span class="student-detail-label-5812e68">{{ k.dung }}</span></div></sc-raw-td>
+<sc-raw-td class="student-detail-sc-raw-td-4765c9b"><div class="ui-panel-192902f">
+<button type="button" class="ui-button-5cf3c76">Xem bài làm</button>
+</div></sc-raw-td>
+</sc-raw-tr>
+</sc-for>
+</sc-raw-tbody>
+</sc-raw-table>
+</div>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ tabChungChi }}">
+<div role="tabpanel" class="student-detail-panel-ef9ddab">
+<article class="student-detail-article-012fead">
+<div class="student-detail-panel-45bb870">
+<div class="student-detail-panel-e63c9d9">
+<span class="student-detail-label-e263b81">ACACY</span>
+<span class="meta-text">CHỨNG NHẬN ĐÀO TẠO</span>
+<span class="student-detail-label-1b6e56e">Avery Dennison Test 1</span>
+</div>
+</div>
+<div class="student-detail-panel-adb5a5a">
+<span class="student-detail-label-4f4b453">K1 - fix lỗi 14 slide - đếm quiz - scorm 2004</span>
+<span class="ui-label-5d35eba">Cấp ngày 28/09/2026 · Khóa học: Test các bài học</span>
+<div class="student-detail-panel-d80745e">
+<button type="button" class="ui-button-5cf3c76">Xem</button>
+<button type="button" class="student-detail-button-bee5fcd">Tải về</button>
+</div>
+</div>
+</article>
+<div class="student-detail-panel-ca039ec">
+<svg aria-hidden="true" fill="none" height="28" sc-camel-view-box="0 0 24 24" stroke="#2456B8" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="28"><path d="M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM8.2 13.9 7 22l5-3 5 3-1.2-8.1"></path></svg>
+<p class="student-detail-text-2778111">Chứng chỉ chỉ được cấp khi học viên đạt toàn bộ lịch thi bắt buộc của phạm vi áp dụng và yêu cầu cấp đã được xử lý theo cấu hình tự động hoặc phê duyệt. Học viên xem lại trong mục Hồ sơ trên ứng dụng.</p>
+</div>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ tabCapDo }}">
+<div role="tabpanel" class="student-level-tab">
+<section class="student-level-card">
+<header class="student-level-header">
+<div><span>CẤP ĐỘ HỌC VIÊN</span><h2>Lộ trình phát triển năng lực</h2></div>
+<span class="student-current-level-badge">Hiện tại: Cấp độ 1</span>
+</header>
+<div class="student-level-workspace">
+<nav aria-label="Các cấp độ trong lộ trình" class="student-level-rail">
+<sc-for as="level" hint-placeholder-count="4" list="{{ levelSteps }}">
+<button aria-selected="{{ level.active }}" sc-camel-on-click="{{ level.go }}" type="button" class="student-level-rail-item">
+<sc-if hint-placeholder-val="{{ true }}" value="{{ level.achieved }}"><span class="student-level-rail-marker is-achieved" aria-hidden="true">✓</span></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ level.notAchieved }}"><span class="student-level-rail-marker is-not-achieved" aria-hidden="true">!</span></sc-if>
+<span class="student-level-rail-copy"><small>{{ level.rank }}</small><strong>{{ level.shortName }}</strong><em>{{ level.status }}</em></span>
+</button>
+</sc-for>
+</nav>
+<article class="student-level-detail-panel">
+<header>
+<div><span>CHI TIẾT CẤP ĐỘ</span><h3>{{ levelDetail.name }}</h3></div>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ levelDetail.achieved }}"><span class="student-level-status is-achieved">Đã đạt</span></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ levelDetail.notAchieved }}"><span class="student-level-status is-not-achieved">Chưa đạt</span></sc-if>
+</header>
+<div class="student-level-current-box"><span>Học viên hiện đang ở</span><strong>Cấp độ 1 — Chuẩn kỹ sư sơ cấp</strong><p>Đã đạt 1/4 cấp độ trong lộ trình.</p></div>
+<div class="student-level-detail-content">
+<section><span>Mô tả cấp độ</span><p>{{ levelDetail.description }}</p></section>
+<section><span>Điều kiện đạt</span><p>{{ levelDetail.requirement }}</p></section>
+<div class="student-level-detail-metrics"><div><span>Tiến độ</span><strong>{{ levelDetail.progress }}</strong></div><div><span>Kết quả đánh giá</span><strong>{{ levelDetail.score }}</strong></div></div>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ levelDetail.achieved }}"><section class="student-level-detail-reason is-achieved"><span>{{ levelDetail.reasonTitle }}</span><p>{{ levelDetail.reason }}</p></section></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ levelDetail.notAchieved }}"><section class="student-level-detail-reason is-not-achieved"><span>{{ levelDetail.reasonTitle }}</span><p>{{ levelDetail.reason }}</p></section></sc-if>
+</div>
+</article>
+</div>
+</section>
+</div>
+</sc-if>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ tabThongTin }}">
+<div role="tabpanel" class="student-info-tab">
+<div class="student-info-layout">
+<div class="student-info-column">
+<section class="student-info-card">
+<header class="student-info-card-header">
+<div class="student-info-card-title"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18"><path d="M4 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M10 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M18 8h4M20 6v4"></path></svg><h2>THÔNG TIN CÁ NHÂN</h2></div>
+<span class="student-info-header-note">Hồ sơ xác thực LMS</span>
+</header>
+<div class="student-profile-grid">
+<label class="student-info-field"><span>Họ và tên</span><input type="text" value="Avery Dennison Test 1"/></label>
+<label class="student-info-field"><span>Mã học viên</span><input readonly="readonly" type="text" value="ADTest1"/></label>
+<label class="student-info-field"><span>Ngày sinh</span><input type="date" value="1996-08-12"/></label>
+<label class="student-info-field"><span>Giới tính</span><select><option selected="selected">Nam</option><option>Nữ</option><option>Khác</option></select></label>
+<label class="student-info-field"><span>Số điện thoại</span><input type="tel" value="0987 654 321"/></label>
+<label class="student-info-field"><span>Email liên hệ</span><input type="email" value="adtest1@acacy.vn"/></label>
+<label class="student-info-field"><span>Phòng ban / Bộ phận</span><select><option selected="selected">Bộ phận 01</option><option>Bộ phận 02</option><option>Demo</option></select></label>
+<label class="student-info-field"><span>Chức danh công việc</span><input type="text" value="Nhân viên kỹ thuật / QC"/></label>
+<label class="student-info-field is-wide"><span>Người quản lý</span><select><option selected="selected">Nguyễn Văn Hùng — Trưởng bộ phận 01</option><option>Trần Minh Anh — Quản lý đào tạo</option></select></label>
+</div>
+</section>
+</div>
+<div class="student-info-column">
+<section class="student-info-card">
+<header class="student-info-card-header">
+<div class="student-info-card-title"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M19 8v6M16 11h6"></path></svg><h2>THÔNG TIN TÀI KHOẢN</h2></div>
+<span class="student-active-badge"><i></i>Active</span>
+</header>
+<div class="student-account-body">
+<div class="student-account-grid">
+<label class="student-info-field"><span>Tên đăng nhập</span><input readonly="readonly" type="text" value="ADTest1"/></label>
+<label class="student-info-field"><span>Trạng thái</span><span class="student-account-status">✓ Đang hoạt động</span></label>
+<label class="student-info-field"><span>Mật khẩu</span><input readonly="readonly" type="password" value="12345678"/></label>
+<label class="student-info-field"><span>Nhập lại mật khẩu</span><input readonly="readonly" type="password" value="12345678"/></label>
+</div>
+<div class="student-device-header"><strong>Mã thiết bị</strong><span>Có kiểm tra <b>Không kiểm tra</b></span></div>
+<div class="student-device-lock">🔒 Đang tắt kiểm tra mã thiết bị</div>
+<label class="student-device-row"><input type="text" value="IP14-PRO-MAX-77A90"/><span><input checked="checked" type="checkbox"/> Active</span></label>
+<label class="student-device-row"><input placeholder="Mã thiết bị 2" type="text"/><span><input type="checkbox"/> Active</span></label>
+<label class="student-device-row"><input placeholder="Mã thiết bị 3" type="text"/><span><input type="checkbox"/> Active</span></label>
+<div class="student-account-actions"><button type="button">Gửi lại hướng dẫn</button><button sc-camel-on-click="{{ openPassword }}" type="button">Đặt lại mật khẩu</button></div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</sc-if>
+</div>
+</main>
+</div>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ password }}">
+<div class="modal-backdrop">
+<section aria-label="Cập nhật mật khẩu" role="dialog" class="student-detail-section-94d0151">
+<h2 class="ui-heading-ae46a5c">Cập nhật mật khẩu</h2>
+<label class="form-field">Mật khẩu mới<input type="password" class="student-detail-input-946acbd"/></label>
+<label class="form-field">Nhập lại mật khẩu<input type="password" class="student-detail-input-946acbd"/></label>
+<div class="actions-row">
+<button sc-camel-on-click="{{ closeAll }}" type="button" class="ui-button-7ee8f8c">Hủy</button>
+<button sc-camel-on-click="{{ closeAll }}" type="button" class="ui-button-6998386">Lưu mật khẩu</button>
+</div>
+</section>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ confirmDelete }}">
+<div class="modal-backdrop">
+<section aria-label="Xóa học viên" role="alertdialog" class="student-detail-section-99de54d">
+<div class="student-detail-panel-9fa01ea"><svg aria-hidden="true" fill="none" height="24" sc-camel-view-box="0 0 24 24" stroke="#B4182E" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="24"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path></svg></div>
+<h2 class="ui-heading-ae46a5c">Xóa Avery Dennison Test 1?</h2>
+<p class="student-detail-text-fb099ce">Thao tác này không hoàn tác được. Nếu chỉ muốn tạm dừng, hãy chọn Ngưng hoạt động.</p>
+<div class="student-detail-panel-3f8e711">
+<button sc-camel-on-click="{{ closeAll }}" type="button" class="ui-button-7ee8f8c">Ngưng hoạt động</button>
+<button sc-camel-on-click="{{ closeAll }}" type="button" class="student-detail-button-54f5b56">Xóa vĩnh viễn</button>
+</div>
+</section>
+</div>
+</sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ toastOpen }}">
+<div aria-live="polite" role="status" class="student-list-toast">
+<b>✓</b>
+<span>{{ toast }}</span>
+<button aria-label="Đóng thông báo" sc-camel-on-click="{{ closeToast }}" type="button">×</button>
+</div>
+</sc-if>
+</div>
+</x-dc>
+<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1280}}' type="text/x-dc">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tab: 'thongtin', learningTab: 'lich', scheduleFilter: 'all', level: 'level1', more: false, password: false, confirmDelete: false, toast: '' };
+  }
+  renderVals() {
+    const P = {
+      home: 'M3 10.5 12 3l9 7.5V21h-6v-6H9v6H3z',
+      users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+      layers: 'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+      book: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5',
+      play: 'M3 3h18v18H3zM10 8l6 4-6 4z',
+      help: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01',
+      file: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M8 13h8M8 17h5',
+      chat: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
+      cal: 'M3 5h18v16H3zM16 3v4M8 3v4M3 10h18',
+      redo: 'M3 12a9 9 0 1 0 3-6.7L3 8M3 3v5h5',
+      folder: 'M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+      link: 'M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7',
+      target: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12zM12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'
+    };
+    const link = (label, d, href, active) => ({ label, d, href: href || '#', isHeader: false, isActive: !!active, isLink: !active });
+    const head = (label) => ({ label, isHeader: true, isActive: false, isLink: false, d: '', href: '#' });
+    const nav = [
+      head('NGƯỜI HỌC'), link('Học viên', P.users, 'students-list.html', true),
+      head('NỘI DUNG'), link('Chương trình', P.layers, '../programs/programs.html'), link('Khóa học', P.book, '../courses/courses.html'),
+      head('VẬN HÀNH'), link('Lịch học/thi', P.cal, '../schedules/schedules.html'), link('Lộ trình đào tạo', P.layers, '../learning-paths/learning-paths.html'),
+      head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, '../training-projects/training-projects.html')
+    ];
+    const s = this.state;
+    const keepScroll = (nextState) => {
+      const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft || 0;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
+      const restoreScroll = () => window.scrollTo(scrollLeft, scrollTop);
+      this.setState(nextState);
+      restoreScroll();
+      window.requestAnimationFrame(() => {
+        restoreScroll();
+        window.requestAnimationFrame(restoreScroll);
+      });
+    };
+    const tabDefs = [['thongtin', 'Thông tin', 0], ['hoctap', 'Quản lý thông tin học tập', 0]];
+    const tabs = tabDefs.map(([id, label, count]) => ({ label, count, hasCount: count > 0, active: s.tab === id, inactive: s.tab !== id, go: () => keepScroll({ tab: id }) }));
+    const learningTabDefs = [['lich', 'Lịch học/thi', 3], ['ketqua', 'Kết quả thi', 3], ['capdo', 'Cấp độ', 0], ['chungchi', 'Chứng chỉ', 1]];
+    const learningTabs = learningTabDefs.map(([id, label, count]) => ({ label, count, hasCount: count > 0, active: s.learningTab === id, inactive: s.learningTab !== id, go: () => keepScroll({ learningTab: id }) }));
+    const lichData = [
+      { id: 'a', name: 'K1 - fix lỗi 14 slide - đếm quiz - scorm 2004', course: 'Test các bài học', kind: 'Lộ trình', from: '28/09/2026 17:51', to: '28/09/2026 23:59', tries: '1 / 3', r: 'pass' },
+      { id: 'b', name: 'Test-4 quiz mix (1)', course: 'Test các bài học', kind: 'Lộ trình', from: '28/09/2026 15:49', to: '29/09/2026 23:59', tries: '2 / 3', r: 'fail' },
+      { id: 'c', name: 'Test Ispring 11-3 quiz ko tính điểm - Scorm 1.2', course: 'Test các bài học', kind: 'Khóa lẻ', from: '28/09/2026 15:50', to: '28/09/2026 23:59', tries: '0 / 3', r: 'none' }
+    ];
+    const filteredLichData = s.scheduleFilter === 'all' ? lichData : lichData.filter((l) => s.scheduleFilter === 'path' ? l.kind === 'Lộ trình' : l.kind === 'Khóa lẻ');
+    const lich = filteredLichData.map((l) => Object.assign({}, l, {
+      pass: l.r === 'pass', fail: l.r === 'fail', none: l.r === 'none'
+    }));
+    const luot = [
+      { name: 'K1 - fix lỗi 14 slide - đếm quiz - scorm 2004', lan: 'Lần 1', ngay: '28/09/2026', tg: '01:20', dung: '1/1 câu đúng', pass: true, fail: false },
+      { name: 'Test-4 quiz mix (1)', lan: 'Lần 2', ngay: '28/09/2026', tg: '02:05', dung: '0/1 câu đúng', pass: false, fail: true },
+      { name: 'Test-4 quiz mix (1)', lan: 'Lần 1', ngay: '28/09/2026', tg: '02:40', dung: '0/1 câu đúng', pass: false, fail: true }
+    ];
+    const levelData = [
+      { id: 'level1', rank: 'Bậc 1/4', shortName: 'Cấp độ 1', name: 'Cấp độ 1 — Chuẩn kỹ sư sơ cấp', status: 'Hiện tại · Đã đạt', achieved: true, description: 'Nắm được kiến thức hội nhập, an toàn và quy trình chất lượng cơ bản.', requirement: 'Đạt tất cả 2 lịch thi bắt buộc của cấp độ.', progress: '2/2 lịch thi bắt buộc', score: 'Điểm tốt nhất: 92%', reasonTitle: 'Kết quả', reason: 'Đã đạt đủ các lịch thi bắt buộc vào ngày 15/09/2026.' },
+      { id: 'level2', rank: 'Bậc 2/4', shortName: 'Cấp độ 2', name: 'Cấp độ 2 — Chuẩn kỹ sư', status: 'Chưa đạt', achieved: false, description: 'Thực hiện độc lập quy trình chuyên môn và xử lý các tình huống QC thường gặp.', requirement: 'Đạt tất cả 3 lịch thi bắt buộc của cấp độ.', progress: '2/3 lịch thi bắt buộc', score: 'Điểm tiêu chí 85% (tạm tính)', reasonTitle: 'Lý do chưa đạt', reason: 'Còn 1 lịch thi bắt buộc chưa đạt. Điểm trung bình tiêu chí không thay thế điều kiện này.' },
+      { id: 'level3', rank: 'Bậc 3/4', shortName: 'Cấp độ 3', name: 'Cấp độ 3 — Kỹ sư nâng cao', status: 'Chưa đạt', achieved: false, description: 'Xử lý tình huống nâng cao và có khả năng hướng dẫn nhân sự tại hiện trường.', requirement: 'Đạt toàn bộ lịch thi bắt buộc được cấu hình cho phạm vi cấp độ.', progress: 'Chưa mở', score: 'Chưa có kết quả hợp lệ', reasonTitle: 'Lý do chưa đạt', reason: 'Chưa hoàn thành điều kiện của Cấp độ 2.' },
+      { id: 'level4', rank: 'Bậc 4/4', shortName: 'Cấp độ 4', name: 'Cấp độ 4 — Chuyên gia', status: 'Chưa đạt', achieved: false, description: 'Đủ năng lực đánh giá chuyên môn, cố vấn và đào tạo nhân sự nội bộ.', requirement: 'Đạt toàn bộ lịch thi bắt buộc được cấu hình cho phạm vi cấp độ.', progress: 'Chưa mở', score: 'Chưa có kết quả hợp lệ', reasonTitle: 'Lý do chưa đạt', reason: 'Chưa hoàn thành điều kiện của Cấp độ 3.' }
+    ];
+    const levelSteps = levelData.map((level) => Object.assign({}, level, {
+      active: s.level === level.id,
+      notAchieved: !level.achieved,
+      go: () => keepScroll({ level: level.id })
+    }));
+    const levelDetail = levelSteps.find((level) => level.active) || levelSteps[0];
+    const closeAll = () => this.setState({ password: false, confirmDelete: false, more: false });
+    return {
+      nav, tabs, learningTabs, lich, luot, levelSteps, levelDetail,
+      tabThongTin: s.tab === 'thongtin', tabHocTap: s.tab === 'hoctap', tabLich: s.learningTab === 'lich', tabKetQua: s.learningTab === 'ketqua', tabCapDo: s.learningTab === 'capdo', tabChungChi: s.learningTab === 'chungchi',
+      moreOpen: s.more, password: s.password, confirmDelete: s.confirmDelete, toast: s.toast, toastOpen: !!s.toast,
+      scheduleAllActive: s.scheduleFilter === 'all', scheduleAllInactive: s.scheduleFilter !== 'all',
+      schedulePathActive: s.scheduleFilter === 'path', schedulePathInactive: s.scheduleFilter !== 'path',
+      scheduleStandaloneActive: s.scheduleFilter === 'standalone', scheduleStandaloneInactive: s.scheduleFilter !== 'standalone',
+      showAllSchedules: () => keepScroll({ scheduleFilter: 'all' }),
+      showPathSchedules: () => keepScroll({ scheduleFilter: 'path' }),
+      showStandaloneSchedules: () => keepScroll({ scheduleFilter: 'standalone' }),
+      toggleMore: () => this.setState({ more: !this.state.more }),
+      askDelete: () => this.setState({ confirmDelete: true, more: false }),
+      openPassword: () => this.setState({ password: true }),
+      saveStudent: () => this.setState({ toast: 'Đã lưu thay đổi thông tin học viên.' }),
+      closeToast: () => this.setState({ toast: '' }),
+      closeAll
+    };
+  }
+}
+</script>
+</body></html>
