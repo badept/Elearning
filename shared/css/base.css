@@ -116,6 +116,7 @@ a:hover {
   position: relative;
   display: flex;
   align-items: center;
+  gap: 8px;
   min-height: 62px;
   padding: 4px 10px 20px;
 }
@@ -123,12 +124,14 @@ a:hover {
 #dc-root .brand-row::before {
   content: "";
   display: block;
+  flex: 1 1 auto;
   width: min(190px, 100%);
+  max-width: 190px;
   aspect-ratio: 3491 / 1117;
   background: url("../../Heading%201%20-%20Logo%20Heading.png") center / contain no-repeat;
 }
 
-#dc-root .brand-row > * {
+#dc-root .brand-row > *:not(.sidebar-collapse-toggle) {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -138,6 +141,67 @@ a:hover {
   clip: rect(0, 0, 0, 0) !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+#dc-root .sidebar-collapse-toggle {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #DCE7FA;
+  background: rgba(255, 255, 255, .08);
+  border: 1px solid rgba(255, 255, 255, .18);
+  border-radius: 9px;
+}
+
+#dc-root .sidebar-collapse-toggle:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, .16);
+}
+
+@media (min-width: 900px) {
+  #dc-root .sidebar-collapse-toggle {
+    display: inline-flex;
+  }
+
+  #dc-root.sidebar-is-collapsed .app-sidebar,
+  #dc-root.sidebar-is-collapsed .ui-sidebar-a50515f {
+    flex-basis: 76px;
+    width: 76px;
+    padding-right: 10px;
+    padding-left: 10px;
+    align-items: center;
+  }
+
+  #dc-root.sidebar-is-collapsed .brand-row {
+    width: 44px;
+    min-height: 52px;
+    justify-content: center;
+    padding: 4px 0 12px;
+  }
+
+  #dc-root.sidebar-is-collapsed .brand-row::before,
+  #dc-root.sidebar-is-collapsed .sidebar-section-title,
+  #dc-root.sidebar-is-collapsed .ui-text-e1c7d10 {
+    display: none;
+  }
+
+  #dc-root.sidebar-is-collapsed .app-sidebar > a,
+  #dc-root.sidebar-is-collapsed .ui-sidebar-a50515f > a {
+    width: 48px;
+    min-height: 46px;
+    justify-content: center;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  #dc-root.sidebar-is-collapsed .app-sidebar > a > span,
+  #dc-root.sidebar-is-collapsed .ui-sidebar-a50515f > a > span {
+    display: none;
+  }
 }
 
 #dc-root .brand-subtitle {
