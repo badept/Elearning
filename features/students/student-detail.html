@@ -235,13 +235,20 @@
 <sc-if hint-placeholder-val="{{ true }}" value="{{ levelDetail.achieved }}"><span class="student-level-status is-achieved">Đã đạt</span></sc-if>
 <sc-if hint-placeholder-val="{{ false }}" value="{{ levelDetail.notAchieved }}"><span class="student-level-status is-not-achieved">Chưa đạt</span></sc-if>
 </header>
-<div class="student-level-current-box"><span>Học viên hiện đang ở</span><strong>Cấp độ 1 — Chuẩn kỹ sư sơ cấp</strong><p>Đã đạt 1/4 cấp độ trong lộ trình.</p></div>
-<div class="student-level-detail-content">
-<section><span>Mô tả cấp độ</span><p>{{ levelDetail.description }}</p></section>
-<section><span>Điều kiện đạt</span><p>{{ levelDetail.requirement }}</p></section>
-<div class="student-level-detail-metrics"><div><span>Tiến độ</span><strong>{{ levelDetail.progress }}</strong></div><div><span>Kết quả đánh giá</span><strong>{{ levelDetail.score }}</strong></div></div>
-<sc-if hint-placeholder-val="{{ true }}" value="{{ levelDetail.achieved }}"><section class="student-level-detail-reason is-achieved"><span>{{ levelDetail.reasonTitle }}</span><p>{{ levelDetail.reason }}</p></section></sc-if>
-<sc-if hint-placeholder-val="{{ false }}" value="{{ levelDetail.notAchieved }}"><section class="student-level-detail-reason is-not-achieved"><span>{{ levelDetail.reasonTitle }}</span><p>{{ levelDetail.reason }}</p></section></sc-if>
+<div class="student-level-summary-grid">
+<section class="student-level-current-box"><span>Học viên hiện đang ở</span><strong>Cấp độ 1 — Chuẩn kỹ sư cơ bản</strong><p>Đã đạt 1/4 cấp độ trong lộ trình.</p></section>
+<section class="student-level-progress-box"><span>Tiến độ {{ levelDetail.shortName }}</span><div><strong>{{ levelDetail.passed }}/{{ levelDetail.total }}</strong><small>lịch thi bắt buộc</small></div><progress max="100" value="{{ levelDetail.percent }}"></progress><b>{{ levelDetail.percent }}%</b></section>
+<section class="student-level-score-box"><span>Kết quả đánh giá <small>(tạm tính)</small></span><div><strong>{{ levelDetail.scoreValue }}</strong><em>{{ levelDetail.scoreStatus }}</em></div></section>
+</div>
+<div class="student-level-description"><span>Mô tả cấp độ</span><p>{{ levelDetail.description }}</p><span>Điều kiện đạt</span><p>{{ levelDetail.requirement }}</p></div>
+<section class="student-level-exam-section">
+<header><h4>Danh sách lịch thi bắt buộc ({{ levelDetail.total }})</h4></header>
+<sc-if hint-placeholder-val="{{ true }}" value="{{ levelHasExams }}"><div class="student-level-exam-table"><div class="student-level-exam-head"><span>STT</span><span>Tên lịch thi</span><span>Thuộc tiêu chí</span><span>Hạn hoàn thành</span><span>Kết quả</span><span>Trạng thái</span></div><sc-for as="exam" hint-placeholder-count="3" list="{{ levelExams }}"><div class="student-level-exam-row"><span>{{ exam.order }}</span><strong>{{ exam.name }}</strong><span>{{ exam.criterion }}</span><span class="{{ exam.deadlineClass }}">{{ exam.deadline }}<small>{{ exam.deadlineHelp }}</small></span><span><strong>{{ exam.result }}</strong><small>{{ exam.resultHelp }}</small></span><span class="student-level-exam-status {{ exam.statusClass }}">{{ exam.status }}</span></div></sc-for></div></sc-if>
+<sc-if hint-placeholder-val="{{ false }}" value="{{ levelHasExams }}"><p class="student-level-exam-empty">Cấp độ này chưa mở danh sách lịch thi bắt buộc.</p></sc-if>
+</section>
+<div class="student-level-action-grid">
+<section class="student-level-reason-box {{ levelDetail.reasonClass }}"><h4>{{ levelDetail.reasonTitle }}</h4><ul><sc-for as="reason" hint-placeholder-count="3" list="{{ levelReasons }}"><li>{{ reason.text }}</li></sc-for></ul></section>
+<section class="student-level-guidance-box"><h4>Hướng dẫn cho học viên</h4><ol><sc-for as="guide" hint-placeholder-count="3" list="{{ levelGuidance }}"><li>{{ guide.text }}</li></sc-for></ol></section>
 </div>
 </article>
 </div>
@@ -339,7 +346,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { tab: 'thongtin', learningTab: 'lich', scheduleFilter: 'all', level: 'level1', more: false, password: false, confirmDelete: false, toast: '' };
+    this.state = { tab: 'thongtin', learningTab: 'lich', scheduleFilter: 'all', level: 'level2', more: false, password: false, confirmDelete: false, toast: '' };
   }
   renderVals() {
     const P = {
@@ -396,20 +403,26 @@ class Component extends DCLogic {
       { name: 'Test-4 quiz mix (1)', lan: 'Lần 1', ngay: '28/09/2026', tg: '02:40', dung: '0/1 câu đúng', pass: false, fail: true }
     ];
     const levelData = [
-      { id: 'level1', rank: 'Bậc 1/4', shortName: 'Cấp độ 1', name: 'Cấp độ 1 — Chuẩn kỹ sư sơ cấp', status: 'Hiện tại · Đã đạt', achieved: true, description: 'Nắm được kiến thức hội nhập, an toàn và quy trình chất lượng cơ bản.', requirement: 'Đạt tất cả 2 lịch thi bắt buộc của cấp độ.', progress: '2/2 lịch thi bắt buộc', score: 'Điểm tốt nhất: 92%', reasonTitle: 'Kết quả', reason: 'Đã đạt đủ các lịch thi bắt buộc vào ngày 15/09/2026.' },
-      { id: 'level2', rank: 'Bậc 2/4', shortName: 'Cấp độ 2', name: 'Cấp độ 2 — Chuẩn kỹ sư', status: 'Chưa đạt', achieved: false, description: 'Thực hiện độc lập quy trình chuyên môn và xử lý các tình huống QC thường gặp.', requirement: 'Đạt tất cả 3 lịch thi bắt buộc của cấp độ.', progress: '2/3 lịch thi bắt buộc', score: 'Điểm tiêu chí 85% (tạm tính)', reasonTitle: 'Lý do chưa đạt', reason: 'Còn 1 lịch thi bắt buộc chưa đạt. Điểm trung bình tiêu chí không thay thế điều kiện này.' },
-      { id: 'level3', rank: 'Bậc 3/4', shortName: 'Cấp độ 3', name: 'Cấp độ 3 — Kỹ sư nâng cao', status: 'Chưa đạt', achieved: false, description: 'Xử lý tình huống nâng cao và có khả năng hướng dẫn nhân sự tại hiện trường.', requirement: 'Đạt toàn bộ lịch thi bắt buộc được cấu hình cho phạm vi cấp độ.', progress: 'Chưa mở', score: 'Chưa có kết quả hợp lệ', reasonTitle: 'Lý do chưa đạt', reason: 'Chưa hoàn thành điều kiện của Cấp độ 2.' },
-      { id: 'level4', rank: 'Bậc 4/4', shortName: 'Cấp độ 4', name: 'Cấp độ 4 — Chuyên gia', status: 'Chưa đạt', achieved: false, description: 'Đủ năng lực đánh giá chuyên môn, cố vấn và đào tạo nhân sự nội bộ.', requirement: 'Đạt toàn bộ lịch thi bắt buộc được cấu hình cho phạm vi cấp độ.', progress: 'Chưa mở', score: 'Chưa có kết quả hợp lệ', reasonTitle: 'Lý do chưa đạt', reason: 'Chưa hoàn thành điều kiện của Cấp độ 3.' }
+      { id:'level1',rank:'Bậc 1/4',shortName:'Cấp độ 1',name:'Cấp độ 1 — Chuẩn kỹ sư cơ bản',status:'Hiện tại · Đã đạt',achieved:true,description:'Nắm được kiến thức hội nhập, an toàn và quy trình chất lượng cơ bản.',requirement:'Đạt tất cả 2 lịch thi bắt buộc của cấp độ.',passed:2,total:2,percent:100,scoreValue:'92%',scoreStatus:'Đã đủ điều kiện',exams:[{order:1,name:'Bài 1: Hội nhập và an toàn',criterion:'Kiến thức cơ bản',deadline:'15/09/2026',result:'92%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:2,name:'Bài 2: Quy trình chất lượng',criterion:'Quy trình kỹ thuật',deadline:'15/09/2026',result:'88%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false}],reasons:['Đã hoàn thành toàn bộ lịch thi bắt buộc của cấp độ.'],guidance:['Tiếp tục hoàn thành các lịch thi của Cấp độ 2.'] },
+      { id:'level2',rank:'Bậc 2/4',shortName:'Cấp độ 2',name:'Cấp độ 2 — Chuẩn kỹ sư',status:'Chưa đạt',achieved:false,description:'Thực hiện độc lập quy trình chuyên môn và xử lý các tình huống QC thường gặp.',requirement:'Đạt tất cả 3 lịch thi bắt buộc của cấp độ. Không xét điểm trung bình, chỉ xét trạng thái đạt của từng lịch thi.',passed:2,total:3,percent:67,scoreValue:'85%',scoreStatus:'Chưa đủ điều kiện',exams:[{order:1,name:'Bài 1: An toàn lao động',criterion:'Kiến thức cơ bản',deadline:'31/10/2026',result:'92%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:2,name:'Bài 2: Quy trình vận hành',criterion:'Quy trình kỹ thuật',deadline:'31/10/2026',result:'78%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:3,name:'Bài 3: Xử lý tình huống QC',criterion:'Xử lý tình huống',deadline:'20/10/2026',result:'Chưa thi',resultHelp:'—',status:'Chưa đạt',passed:false,overdue:true}],reasons:['Còn 1 lịch thi bắt buộc chưa đạt: Bài 3 – Xử lý tình huống QC.','Lịch thi này đã quá hạn 5 ngày (hạn hoàn thành: 20/10/2026).','Học viên cần hoàn thành và đạt bài thi này để được nâng lên Cấp độ 2.'],guidance:['Ôn tập lại nội dung Bài 3 – Xử lý tình huống QC.','Tham gia lịch thi sớm nhất có thể.','Sau khi đạt, hệ thống sẽ tự động xét nâng cấp độ.'] },
+      { id:'level3',rank:'Bậc 3/4',shortName:'Cấp độ 3',name:'Cấp độ 3 — Kỹ sư nâng cao',status:'Chưa đạt',achieved:false,description:'Xử lý tình huống nâng cao và có khả năng hướng dẫn nhân sự tại hiện trường.',requirement:'Đạt toàn bộ 3 lịch thi bắt buộc được cấu hình cho cấp độ.',passed:0,total:3,percent:0,scoreValue:'—',scoreStatus:'Chưa mở',exams:[],reasons:['Chưa hoàn thành điều kiện của Cấp độ 2.'],guidance:['Hoàn thành Cấp độ 2 để mở các lịch thi của cấp độ này.'] },
+      { id:'level4',rank:'Bậc 4/4',shortName:'Cấp độ 4',name:'Cấp độ 4 — Chuyên gia',status:'Chưa đạt',achieved:false,description:'Đủ năng lực đánh giá chuyên môn, cố vấn và đào tạo nhân sự nội bộ.',requirement:'Đạt toàn bộ 3 lịch thi bắt buộc được cấu hình cho cấp độ.',passed:0,total:3,percent:0,scoreValue:'—',scoreStatus:'Chưa mở',exams:[],reasons:['Chưa hoàn thành điều kiện của Cấp độ 3.'],guidance:['Hoàn thành Cấp độ 3 để mở các lịch thi của cấp độ này.'] }
     ];
     const levelSteps = levelData.map((level) => Object.assign({}, level, {
       active: s.level === level.id,
       notAchieved: !level.achieved,
+      reasonClass: level.achieved ? 'is-achieved' : 'is-not-achieved',
+      reasonTitle: level.achieved ? 'Kết quả cấp độ' : 'Lý do chưa đạt',
       go: () => keepScroll({ level: level.id })
     }));
     const levelDetail = levelSteps.find((level) => level.active) || levelSteps[0];
+    const levelExams = levelDetail.exams.map((exam) => Object.assign({}, exam, {statusClass:exam.passed?'is-passed':'is-failed',deadlineClass:exam.overdue?'is-overdue':'',deadlineHelp:exam.overdue?'Quá hạn 5 ngày':''}));
+    const levelHasExams = levelExams.length > 0;
+    const levelReasons = levelDetail.reasons.map((text) => ({ text }));
+    const levelGuidance = levelDetail.guidance.map((text) => ({ text }));
     const closeAll = () => this.setState({ password: false, confirmDelete: false, more: false });
     return {
-      nav, tabs, learningTabs, lich, luot, levelSteps, levelDetail,
+      nav, tabs, learningTabs, lich, luot, levelSteps, levelDetail, levelExams, levelHasExams, levelReasons, levelGuidance,
       tabThongTin: s.tab === 'thongtin', tabHocTap: s.tab === 'hoctap', tabLich: s.learningTab === 'lich', tabKetQua: s.learningTab === 'ketqua', tabCapDo: s.learningTab === 'capdo', tabChungChi: s.learningTab === 'chungchi',
       moreOpen: s.more, password: s.password, confirmDelete: s.confirmDelete, toast: s.toast, toastOpen: !!s.toast,
       scheduleAllActive: s.scheduleFilter === 'all', scheduleAllInactive: s.scheduleFilter !== 'all',

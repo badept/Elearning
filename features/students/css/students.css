@@ -2057,15 +2057,18 @@
 
 #dc-root .student-level-rail {
   position: relative;
+  height: 368px;
   display: grid;
+  grid-template-rows: repeat(4, 92px);
   align-content: start;
+  align-self: start;
   gap: 0;
 }
 
 #dc-root .student-level-rail::before {
   position: absolute;
-  top: 28px;
-  bottom: 28px;
+  top: 46px;
+  bottom: 46px;
   left: 17px;
   width: 2px;
   content: "";
@@ -2074,7 +2077,9 @@
 
 #dc-root .student-level-rail-item {
   position: relative;
-  min-height: 84px;
+  width: 100%;
+  height: 92px;
+  min-height: 92px;
   padding: 10px 12px 10px 54px;
   display: flex;
   align-items: center;
@@ -2293,6 +2298,148 @@
   color: #A91F35 !important;
 }
 
+#dc-root .student-level-workspace {
+  grid-template-columns: minmax(220px, .48fr) minmax(640px, 1.52fr);
+  gap: 22px;
+}
+
+#dc-root .student-level-detail-panel {
+  min-width: 0;
+}
+
+#dc-root .student-level-summary-grid {
+  padding: 14px 16px 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+#dc-root .student-level-summary-grid > section {
+  min-height: 94px;
+  margin: 0;
+  padding: 12px 14px;
+  display: grid;
+  align-content: center;
+  gap: 6px;
+  background: #F8FAFD;
+  border: 1px solid #DCE5F1;
+  border-radius: 9px;
+}
+
+#dc-root .student-level-summary-grid > section > span {
+  color: #687792;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+#dc-root .student-level-summary-grid .student-level-current-box {
+  color: inherit;
+  background: #F5F9FF;
+  border-color: #D6E4F7;
+}
+
+#dc-root .student-level-progress-box {
+  position: relative;
+}
+
+#dc-root .student-level-progress-box > div,
+#dc-root .student-level-score-box > div {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+
+#dc-root .student-level-progress-box strong,
+#dc-root .student-level-score-box strong {
+  color: #13234B;
+  font-size: 22px;
+  line-height: 1;
+}
+
+#dc-root .student-level-progress-box small {
+  color: #596985;
+  font-size: 9px;
+}
+
+#dc-root .student-level-progress-box progress {
+  width: calc(100% - 42px);
+  height: 8px;
+  overflow: hidden;
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+}
+
+#dc-root .student-level-progress-box progress::-webkit-progress-bar { background: #CBD5E3; border-radius: 999px; }
+#dc-root .student-level-progress-box progress::-webkit-progress-value { background: #1AA56C; border-radius: 999px; }
+#dc-root .student-level-progress-box progress::-moz-progress-bar { background: #1AA56C; border-radius: 999px; }
+#dc-root .student-level-progress-box > b { position: absolute; right: 13px; bottom: 13px; color: #41557A; font-size: 11px; }
+
+#dc-root .student-level-score-box em {
+  padding: 5px 9px;
+  color: #9C6500;
+  background: #FFF0CF;
+  border-radius: 999px;
+  font-size: 9px;
+  font-style: normal;
+  font-weight: 700;
+}
+
+#dc-root .student-level-description {
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 8px 12px;
+  align-items: start;
+}
+
+#dc-root .student-level-description > span { color: #687792; font-size: 10px; font-weight: 700; }
+#dc-root .student-level-description > p { margin: 0; color: #40506E; font-size: 10px; line-height: 1.55; }
+
+#dc-root .student-level-exam-section {
+  margin: 0 16px;
+  overflow: hidden;
+  border: 1px solid #DCE4EF;
+  border-radius: 9px;
+}
+
+#dc-root .student-level-exam-section > header { padding: 10px 13px; background: #F8FAFD; border-bottom: 1px solid #E1E7F0; }
+#dc-root .student-level-exam-section h4 { margin: 0; color: #172A50; font-size: 11px; }
+#dc-root .student-level-exam-table { overflow-x: auto; }
+#dc-root .student-level-exam-head,
+#dc-root .student-level-exam-row { min-width: 720px; display: grid; grid-template-columns: 48px 1.45fr 1.15fr 1fr .85fr .8fr; align-items: center; }
+#dc-root .student-level-exam-head { color: #66758F; background: #F5F8FC; font-size: 9px; font-weight: 700; }
+#dc-root .student-level-exam-head > span,
+#dc-root .student-level-exam-row > span,
+#dc-root .student-level-exam-row > strong { min-width: 0; padding: 9px 10px; }
+#dc-root .student-level-exam-row { color: #344563; border-top: 1px solid #E6EBF2; font-size: 9px; }
+#dc-root .student-level-exam-row > strong { color: #142A53; font-size: 9px; }
+#dc-root .student-level-exam-row span > small { margin-top: 2px; display: block; color: #71809B; font-size: 8px; }
+#dc-root .student-level-exam-row .is-overdue { color: #C0263D; font-weight: 700; }
+#dc-root .student-level-exam-row .is-overdue small { color: #C0263D; }
+#dc-root .student-level-exam-status { width: fit-content; margin-left: 9px; padding: 5px 8px!important; border-radius: 999px; font-weight: 700; }
+#dc-root .student-level-exam-status.is-passed { color: #14734A; background: #E6F7EE; }
+#dc-root .student-level-exam-status.is-failed { color: #B11F36; background: #FDECEF; }
+#dc-root .student-level-exam-empty { margin: 0; padding: 18px; color: #71809B; text-align: center; font-size: 10px; }
+
+#dc-root .student-level-action-grid {
+  padding: 12px 16px 16px;
+  display: grid;
+  grid-template-columns: 1.3fr .9fr;
+  gap: 10px;
+}
+
+#dc-root .student-level-action-grid > section { padding: 12px 14px; border-radius: 9px; }
+#dc-root .student-level-action-grid h4 { margin: 0 0 7px; font-size: 10px; }
+#dc-root .student-level-action-grid ul,
+#dc-root .student-level-action-grid ol { margin: 0; padding-left: 18px; color: #44536F; font-size: 9px; line-height: 1.7; }
+#dc-root .student-level-reason-box.is-not-achieved { background: #FFF3F5; border-left: 3px solid #D32640; }
+#dc-root .student-level-reason-box.is-not-achieved h4 { color: #B11F36; }
+#dc-root .student-level-reason-box.is-achieved { background: #EFF9F3; border-left: 3px solid #1D9660; }
+#dc-root .student-level-reason-box.is-achieved h4 { color: #176E4A; }
+#dc-root .student-level-guidance-box { background: #FFF8E8; border: 1px solid #F0D391; }
+#dc-root .student-level-guidance-box h4 { color: #94600A; }
+
 #dc-root .student-account-summary {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
@@ -2344,6 +2491,14 @@
 
   #dc-root .student-level-workspace {
     grid-template-columns: 1fr;
+  }
+
+  #dc-root .student-level-summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #dc-root .student-level-score-box {
+    grid-column: 1 / -1;
   }
 
   #dc-root .student-account-summary {
@@ -2401,11 +2556,44 @@
   }
 
   #dc-root .student-level-rail-item {
-    min-height: 72px;
+    height: 78px;
+    min-height: 78px;
+  }
+
+  #dc-root .student-level-rail {
+    height: 312px;
+    grid-template-rows: repeat(4, 78px);
+  }
+
+  #dc-root .student-level-rail::before {
+    top: 39px;
+    bottom: 39px;
   }
 
   #dc-root .student-level-detail-metrics {
     grid-template-columns: 1fr;
+  }
+
+  #dc-root .student-level-summary-grid,
+  #dc-root .student-level-description,
+  #dc-root .student-level-action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #dc-root .student-level-score-box {
+    grid-column: auto;
+  }
+
+  #dc-root .student-level-summary-grid,
+  #dc-root .student-level-description,
+  #dc-root .student-level-action-grid {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  #dc-root .student-level-exam-section {
+    margin-right: 12px;
+    margin-left: 12px;
   }
 
   #dc-root .student-profile-grid,
