@@ -242,14 +242,16 @@
             <sc-if hint-placeholder-val="{{ false }}" value="{{ tabCriteria }}">
               <div role="tabpanel" class="ui-panel-09f4a2f project-criteria-panel">
                 <div class="project-criteria-heading">
-                  <div><strong>Danh mục tiêu chí dùng chung</strong><span>{{ criteriaCount }} tiêu chí đã gán</span></div>
-                  <button sc-camel-on-click="{{ openCriteriaPicker }}" type="button">＋ Thêm tiêu chí</button>
+                  <div><strong>Tiêu chí đào tạo của dự án</strong><span>{{ criteriaCount }} tiêu chí</span></div>
+                  <div class="project-criteria-heading-actions">
+                    <button sc-camel-on-click="{{ openCriteriaCreate }}" type="button">＋ Thêm tiêu chí</button>
+                  </div>
                 </div>
                 <div class="project-criteria-list">
                   <sc-for as="criterion" hint-placeholder-count="2" list="{{ assignedCriteria }}">
                     <article class="project-criterion-row {{ criterion.rowClass }}">
-                      <div><strong>{{ criterion.code }} · {{ criterion.name }}</strong><small>Đang dùng trong {{ criterion.projectCount }} dự án</small></div>
-                      <button sc-camel-on-click="{{ criterion.remove }}" type="button">Bỏ gán</button>
+                      <div><strong>{{ criterion.code }} · {{ criterion.name }}</strong></div>
+                      <button sc-camel-on-click="{{ criterion.remove }}" type="button">Xóa</button>
                     </article>
                   </sc-for>
                   <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaEmpty }}"><p class="criteria-empty">Dự án chưa có tiêu chí đào tạo.</p></sc-if>
@@ -393,12 +395,25 @@
           </section>
         </div>
       </sc-if>
-      <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaPickerOpen }}">
+      <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaCreateOpen }}">
         <div class="modal-backdrop">
-          <section aria-label="Thêm tiêu chí vào dự án" aria-modal="true" role="dialog" class="training-project-detail-section-47380eb project-criteria-dialog">
-            <div class="project-program-dialog-heading"><div><h2 class="ui-heading-ae46a5c">Thêm tiêu chí</h2></div><button aria-label="Đóng" sc-camel-on-click="{{ closeCriteriaPicker }}" type="button">×</button></div>
-            <div class="project-criteria-picker-list"><sc-for as="criterion" hint-placeholder-count="3" list="{{ criteriaChoices }}"><button aria-pressed="{{ criterion.ariaPressed }}" class="{{ criterion.className }}" sc-camel-on-click="{{ criterion.toggle }}" type="button"><b>{{ criterion.mark }}</b><span><strong>{{ criterion.code }}</strong>{{ criterion.name }}</span></button></sc-for><sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaChoicesEmpty }}"><p class="criteria-empty">Tất cả tiêu chí đã được gán.</p></sc-if></div>
-            <div class="actions-row"><button sc-camel-on-click="{{ closeCriteriaPicker }}" type="button" class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ saveCriteriaPicker }}" type="button" class="ui-button-6998386">Lưu tiêu chí</button></div>
+          <section aria-label="Thêm tiêu chí đào tạo" aria-modal="true" role="dialog" class="training-project-detail-section-47380eb project-program-dialog project-criteria-dialog">
+            <div class="project-program-dialog-heading"><div><h2 class="ui-heading-ae46a5c">Thêm tiêu chí đào tạo</h2></div><button aria-label="Đóng" sc-camel-on-click="{{ closeCriteriaCreate }}" type="button">×</button></div>
+            <div class="ui-panel-ba0ec76">
+              <label class="form-field">Mã tiêu chí <span class="danger-text">*</span><input placeholder="VD: TC04" sc-camel-on-input="{{ onCriterionCode }}" type="text" value="{{ criterionCode }}" class="form-control"/></label>
+              <label class="form-field">Tên tiêu chí <span class="danger-text">*</span><input placeholder="VD: Kỹ năng xử lý phản đối" sc-camel-on-input="{{ onCriterionName }}" type="text" value="{{ criterionName }}" class="form-control"/></label>
+            </div>
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ criterionErrorOpen }}"><p class="project-program-error">{{ criterionError }}</p></sc-if>
+            <div class="actions-row"><button sc-camel-on-click="{{ closeCriteriaCreate }}" type="button" class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ saveCriteriaCreate }}" type="button" class="ui-button-6998386">Thêm tiêu chí</button></div>
+          </section>
+        </div>
+      </sc-if>
+      <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaDeleteOpen }}">
+        <div class="modal-backdrop">
+          <section aria-label="Xác nhận xóa tiêu chí đào tạo" aria-modal="true" role="dialog" class="training-project-detail-section-47380eb project-program-dialog project-criteria-dialog">
+            <div class="project-program-dialog-heading"><div><h2 class="ui-heading-ae46a5c">Xóa tiêu chí đào tạo?</h2></div><button aria-label="Đóng" sc-camel-on-click="{{ cancelCriteriaDelete }}" type="button">×</button></div>
+            <p class="project-criteria-delete-message">Tiêu chí <strong>{{ criteriaDeleteLabel }}</strong> sẽ bị xóa khỏi dự án. Bạn có muốn tiếp tục?</p>
+            <div class="actions-row"><button sc-camel-on-click="{{ cancelCriteriaDelete }}" type="button" class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ confirmCriteriaDelete }}" type="button" class="ui-button-10e0882">Xóa tiêu chí</button></div>
           </section>
         </div>
       </sc-if>
@@ -408,10 +423,15 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
+    const requestedTab = new URLSearchParams(window.location.search).get('tab');
     this.state = {
-      tab: 'programs', more: false, edit: false, loginOff: {},
-      vals: { bophan: ['Bộ phận 01', 'Bộ phận 02'] }, selectedCriteria: { tc01: true, tc02: true },
-      rowEdit: null, rowAsk: null, adding: false, programAdd: false, programName: '', programCode: '', programDescription: '', programError: '', addedPrograms: [], criteriaPicker: false, pendingCriteria: {}
+      tab: ['programs', 'tieuchi', 'bophan', 'login'].includes(requestedTab) ? requestedTab : 'programs', more: false, edit: false, loginOff: {},
+      vals: { bophan: ['Bộ phận 01', 'Bộ phận 02'] },
+      criteria: [
+        { id: 'tc01', code: 'TC01', name: 'Kỹ năng giao tiếp với khách hàng' },
+        { id: 'tc02', code: 'TC02', name: 'Kỹ năng bán hàng' }
+      ],
+      rowEdit: null, rowAsk: null, adding: false, programAdd: false, programName: '', programCode: '', programDescription: '', programError: '', addedPrograms: [], criteriaCreate: false, criterionCode: '', criterionName: '', criterionError: '', criteriaDelete: null
     };
   }
   renderVals() {
@@ -432,7 +452,7 @@ class Component extends DCLogic {
       head('NGƯỜI HỌC'), link('Học viên', P.users, '../students/students-list.html'),
       head('NỘI DUNG'), link('Chương trình', P.layers, '../programs/programs.html'), link('Khóa học', P.book, '../courses/courses.html'),
       head('VẬN HÀNH'), link('Lịch học/thi', P.cal, '../schedules/schedules.html'), link('Lộ trình đào tạo', P.layers, '../learning-paths/learning-paths.html'),
-      head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, 'training-projects.html', true), link('Tiêu chí đào tạo', P.target, 'training-criteria.html')
+      head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, 'training-projects.html', true)
     ];
     const s = this.state;
     const loginDefs = ['Mã hoặc số điện thoại học viên', 'Tên đăng nhập và mật khẩu của dự án', 'Tên đăng nhập và mật khẩu hệ thống', 'Mã nhân viên'];
@@ -448,30 +468,10 @@ class Component extends DCLogic {
       ['PRODUCT', 'Kiến thức sản phẩm', 2, '2 lộ trình đang sử dụng', '../programs/programs.html'],
       ['MANAGER', 'Quản lý cửa hàng', 2, 'Lộ trình quản lý cửa hàng', '../programs/programs.html']
     ].map((p) => ({ code:p[0], name:p[1], courses:p[2], paths:p[3], href:p[4] })).concat(s.addedPrograms);
-    const criteriaCatalog = [
-      { id: 'tc01', code: 'TC01', name: 'Kỹ năng giao tiếp với khách hàng', projectCount: 2 },
-      { id: 'tc02', code: 'TC02', name: 'Kỹ năng bán hàng', projectCount: 1 },
-      { id: 'tc03', code: 'TC03', name: 'Kiến thức sản phẩm', projectCount: 1 }
-    ];
-    const assignedCriteria = criteriaCatalog.filter((criterion) => s.selectedCriteria[criterion.id]).map((criterion) => Object.assign({}, criterion, {
+    const assignedCriteria = s.criteria.map((criterion) => Object.assign({}, criterion, {
       rowClass: 'is-assigned',
-      remove: () => {
-        const next = Object.assign({}, this.state.selectedCriteria);
-        delete next[criterion.id];
-        this.setState({ selectedCriteria: next });
-      }
+      remove: () => this.setState({ criteriaDelete: criterion })
     }));
-    const criteriaChoices = criteriaCatalog.filter((criterion) => !s.selectedCriteria[criterion.id]).map((criterion) => {
-      const selected = !!s.pendingCriteria[criterion.id];
-      return Object.assign({}, criterion, {
-        ariaPressed: String(selected), className: selected ? 'is-selected' : '', mark: selected ? '✓' : '',
-        toggle: () => {
-          const next = Object.assign({}, this.state.pendingCriteria);
-          if (next[criterion.id]) delete next[criterion.id]; else next[criterion.id] = true;
-          this.setState({ pendingCriteria: next });
-        }
-      });
-    });
     const criteriaCount = assignedCriteria.length;
     const listKey = 'bophan';
     const list = s.vals[listKey] || [];
@@ -490,19 +490,35 @@ class Component extends DCLogic {
     const tabs = tabDefs.map(([id, label, count]) => ({ label, count, active: s.tab === id, inactive: s.tab !== id, go: () => this.setState({ tab: id, more: false, rowEdit: null, rowAsk: null, adding: false }) }));
     const hints = { bophan: 'Bộ phận dùng để lọc học viên và gán lịch học/thi cho cả nhóm.' };
     return {
-      nav, tabs, logins, values, projectPrograms, assignedCriteria, criteriaChoices, criteriaCount, criteriaEmpty: assignedCriteria.length === 0, criteriaChoicesEmpty: criteriaChoices.length === 0,
+      nav, tabs, logins, values, projectPrograms, assignedCriteria, criteriaCount, criteriaEmpty: assignedCriteria.length === 0,
       tabPrograms: s.tab === 'programs', tabLogin: s.tab === 'login', tabCriteria: s.tab === 'tieuchi', tabList: s.tab === 'bophan',
       listHint: hints[listKey], addLabel: 'Thêm bộ phận',
       adding: s.adding, emptyList: list.length === 0 && !s.adding,
-      moreOpen: s.more, editOpen: s.edit, programAddOpen: s.programAdd, criteriaPickerOpen: s.criteriaPicker, programName: s.programName, programCode: s.programCode, programDescription: s.programDescription, programError: s.programError, programErrorOpen: !!s.programError,
+      moreOpen: s.more, editOpen: s.edit, programAddOpen: s.programAdd, criteriaCreateOpen: s.criteriaCreate, criteriaDeleteOpen: !!s.criteriaDelete, criteriaDeleteLabel: s.criteriaDelete ? s.criteriaDelete.code + ' · ' + s.criteriaDelete.name : '', programName: s.programName, programCode: s.programCode, programDescription: s.programDescription, programError: s.programError, programErrorOpen: !!s.programError, criterionCode: s.criterionCode, criterionName: s.criterionName, criterionError: s.criterionError, criterionErrorOpen: !!s.criterionError,
       toggleMore: () => this.setState({ more: !this.state.more }),
       openEdit: () => this.setState({ edit: true, more: false }),
       closeEdit: () => this.setState({ edit: false }),
       openProgramAdd: () => this.setState({ programAdd: true, programName: '', programCode: '', programDescription: '', programError: '' }),
       closeProgramAdd: () => this.setState({ programAdd: false, programError: '' }),
-      openCriteriaPicker: () => this.setState({ criteriaPicker: true, pendingCriteria: {} }),
-      closeCriteriaPicker: () => this.setState({ criteriaPicker: false, pendingCriteria: {} }),
-      saveCriteriaPicker: () => this.setState({ criteriaPicker: false, selectedCriteria: Object.assign({}, this.state.selectedCriteria, this.state.pendingCriteria), pendingCriteria: {} }),
+      openCriteriaCreate: () => this.setState({ criteriaCreate: true, criterionCode: '', criterionName: '', criterionError: '' }),
+      closeCriteriaCreate: () => this.setState({ criteriaCreate: false, criterionError: '' }),
+      cancelCriteriaDelete: () => this.setState({ criteriaDelete: null }),
+      confirmCriteriaDelete: () => {
+        const target = this.state.criteriaDelete;
+        if (!target) return;
+        this.setState({ criteria: this.state.criteria.filter((criterion) => criterion.id !== target.id), criteriaDelete: null });
+      },
+      onCriterionCode: (e) => this.setState({ criterionCode: e.target.value.toUpperCase().replace(/[^A-Z0-9_-]/g, ''), criterionError: '' }),
+      onCriterionName: (e) => this.setState({ criterionName: e.target.value, criterionError: '' }),
+      saveCriteriaCreate: () => {
+        const code = this.state.criterionCode.trim();
+        const name = this.state.criterionName.trim();
+        if (!code || !name) { this.setState({ criterionError: 'Vui lòng nhập mã và tên tiêu chí.' }); return; }
+        if (this.state.criteria.some((criterion) => criterion.code.toLowerCase() === code.toLowerCase())) { this.setState({ criterionError: 'Mã tiêu chí đã tồn tại trong dự án.' }); return; }
+        const id = 'custom-' + Date.now();
+        const criterion = { id, code, name };
+        this.setState({ criteria: this.state.criteria.concat([criterion]), criteriaCreate: false, criterionCode: '', criterionName: '', criterionError: '' });
+      },
       onProgramName: (e) => this.setState({ programName: e.target.value, programError: '' }),
       onProgramCode: (e) => this.setState({ programCode: e.target.value.toUpperCase().replace(/[^A-Z0-9_-]/g, ''), programError: '' }),
       onProgramDescription: (e) => this.setState({ programDescription: e.target.value }),

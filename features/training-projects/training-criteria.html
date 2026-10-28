@@ -2,6 +2,8 @@
 <html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="refresh" content="0;url=training-project-detail.html?tab=tieuchi"/>
+<script>window.location.replace('training-project-detail.html?tab=tieuchi');</script>
 <script defer src="../../shared/js/navigation.js"></script>
 <title>Tiêu chí đào tạo – AcaSys</title>
 <script src="js/training-projects-5270744d.js"></script>
@@ -66,7 +68,7 @@ class Component extends DCLogic {
       head('NGƯỜI HỌC'), link('Học viên', P.users, '../students/students-list.html'),
       head('NỘI DUNG'), link('Chương trình', P.layers, '../programs/programs.html'), link('Khóa học', P.book, '../courses/courses.html'),
       head('VẬN HÀNH'), link('Lịch học/thi', P.cal, '../schedules/schedules.html'), link('Lộ trình đào tạo', P.layers, '../learning-paths/learning-paths.html'),
-      head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, 'training-projects.html'), link('Tiêu chí đào tạo', P.target, 'training-criteria.html', true)
+      head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, 'training-projects.html', true)
     ];
     const q = this.state.query.trim().toLowerCase();
     const criteria = this.state.criteria.filter((criterion) => !q || criterion.code.toLowerCase().includes(q) || criterion.name.toLowerCase().includes(q));
