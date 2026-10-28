@@ -912,7 +912,7 @@
                         Mỗi lịch thi gắn đúng một bài học. Câu hỏi của đề chỉ được lấy từ bài học đó.
                       </p>
                     </div>
-                    <a href="../schedules/schedule-detail.html?mode=create&amp;type=exam&amp;course=chot-sale-5-buoc" class="course-detail-schedule-create">
+                    <a href="../schedules/schedule-detail.html?mode=create&amp;type=exam&amp;course=chot-sale-5-buoc&amp;origin=course" class="course-detail-schedule-create">
                       <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" width="18">
                         <path d="M12 5v14M5 12h14"></path>
                       </svg>
@@ -1532,7 +1532,7 @@
           const lessonName = {};
           L.forEach((l) => { lessonName[l.id] = l.name; });
           const QS = s.questions.filter((q) => lessonName[q[0]]);
-          const schedules = s.courseSchedules.map((item) => Object.assign({}, item, { href: '../schedules/schedule-detail.html?mode=view&type=' + item.type + '&course=chot-sale-5-buoc&schedule=' + item.code + '&lessons=' + item.lessonIds.join(',') }));
+          const schedules = s.courseSchedules.map((item) => Object.assign({}, item, { href: '../schedules/schedule-detail.html?mode=view&type=' + item.type + '&course=chot-sale-5-buoc&schedule=' + item.code + '&lessons=' + item.lessonIds.join(',') + '&origin=course' }));
           const assignLessons = L.map((lesson, index) => {
             const selected = !!s.selectedScheduleLessons[lesson.id];
             return {

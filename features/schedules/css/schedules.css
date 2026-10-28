@@ -202,6 +202,8 @@
 #dc-root .schedule-form-grid textarea:focus { border-color:#2456B8; box-shadow:0 0 0 3px rgba(36,86,184,.1); }
 #dc-root .schedule-form-grid input[readonly] { background:#F2F5F9; }
 #dc-root .schedule-form-grid small { color:#8792A6; font-size:9px; font-weight:400; }
+#dc-root .schedule-form-grid select:disabled { color:#66748C; background:#F2F5F9; cursor:not-allowed; }
+#dc-root .schedule-form-grid .schedule-lesson-lock-note { color:#A45B00; font-weight:600; line-height:1.45; }
 
 #dc-root .schedule-content-list { padding:14px 20px 4px; display:grid; gap:9px; }
 #dc-root .schedule-linked-source { margin:16px 20px 0; padding:10px 12px; display:flex; flex-wrap:wrap; align-items:center; gap:10px; color:#64718B; background:#F4F7FB; border:1px solid #DCE5F0; border-radius:8px; font-size:10px; }
@@ -511,8 +513,13 @@
 #dc-root .schedule-link-gate > div { display:grid; gap:4px; }
 #dc-root .schedule-link-gate strong { color:#694A0B; font-size:11px; }
 #dc-root .schedule-link-gate span { color:#856526; font-size:10px; }
+#dc-root .schedule-login-layout { display:grid; grid-template-columns:minmax(0,1fr); gap:16px; align-items:start; }
+#dc-root .schedule-login-layout.has-detail { grid-template-columns:minmax(0,1.25fr) minmax(300px,.75fr); }
+#dc-root .schedule-login-layout > .schedule-login-methods { margin:0 16px; }
+#dc-root .schedule-login-layout.has-detail > .schedule-login-methods { margin:0 0 0 16px; }
 #dc-root .schedule-login-methods { margin:0 16px; display:grid; gap:9px; }
 #dc-root .schedule-login-methods article { min-height:88px; padding:13px 15px; display:grid; grid-template-columns:34px minmax(0,1fr) 80px 42px; gap:13px; align-items:center; background:#FFF; border:1px solid #DDE5EF; border-radius:10px; }
+#dc-root .schedule-login-methods article.is-selected { background:#F2F6FD; border-color:#7DA4DF; box-shadow:inset 3px 0 #2456B8; }
 #dc-root .schedule-login-methods-generated article { grid-template-columns:34px minmax(0,1fr) 80px 42px 92px; }
 #dc-root .schedule-login-number { width:32px; height:32px; display:flex; align-items:center; justify-content:center; color:#2456B8; background:#EAF2FF; border-radius:50%; font-weight:700; }
 #dc-root .schedule-login-methods article > div { display:grid; gap:3px; }
@@ -525,6 +532,18 @@
 #dc-root .schedule-generated-link > span { min-width:0; display:grid; gap:4px; }
 #dc-root .schedule-generated-link strong { overflow:hidden; color:#164E9A; text-overflow:ellipsis; white-space:nowrap; }
 #dc-root .schedule-generated-link button { min-height:34px; padding:0 12px; border:0; border-radius:7px; color:#FFF; background:#2456B8; font-weight:700; }
+#dc-root .schedule-login-detail { position:sticky; top:16px; margin:0 16px 0 0; padding:18px; display:grid; gap:16px; background:#FFF; border:1px solid #DCE4EF; border-radius:10px; box-shadow:0 10px 28px rgba(25,52,91,.08); }
+#dc-root .schedule-login-detail > header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+#dc-root .schedule-login-detail > header > div { display:grid; gap:4px; }
+#dc-root .schedule-login-detail > header small { color:#2456B8; font-size:9px; font-weight:750; letter-spacing:.04em; }
+#dc-root .schedule-login-detail > header strong { color:#243754; font-size:12px; }
+#dc-root .schedule-login-detail > header button { width:30px; height:30px; flex:0 0 auto; color:#64718A; background:#FFF; border:1px solid #D7E0EC; border-radius:7px; font-size:18px; line-height:1; }
+#dc-root .schedule-login-detail-qr { padding:18px; display:grid; place-items:center; gap:10px; color:#64718A; background:#F8FAFC; border:1px solid #DCE4EF; border-radius:9px; font-size:9px; }
+#dc-root .schedule-login-detail-qr svg { width:min(100%,280px); aspect-ratio:1; padding:8px; background:#FFF; border:1px solid #D8E0EB; border-radius:8px; shape-rendering:crispEdges; }
+#dc-root .schedule-login-detail label { display:grid; gap:6px; color:#66738A; font-size:9px; font-weight:650; }
+#dc-root .schedule-login-detail label > div { min-width:0; min-height:42px; padding:5px 5px 5px 11px; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:8px; background:#F8FAFD; border:1px solid #D7E0EC; border-radius:8px; }
+#dc-root .schedule-login-detail label strong { overflow:hidden; color:#174F9E; text-overflow:ellipsis; white-space:nowrap; font-size:10px; }
+#dc-root .schedule-login-detail label button { min-height:32px; padding:0 10px; color:#FFF; background:#2456B8; border:0; border-radius:6px; font-size:9px; font-weight:700; }
 #dc-root .schedule-method-status { padding:5px 8px; color:#77839A; text-align:center; background:#EEF1F5; border-radius:999px; font-size:9px; }
 #dc-root .schedule-method-status.is-on { color:#14734A; background:#E5F6EC; }
 #dc-root .schedule-access-note { margin:16px; padding:13px 15px; display:flex; gap:11px; color:#4B5D79; background:#FFF9E9; border:1px solid #F0D99D; border-radius:9px; }
@@ -547,20 +566,20 @@
 #dc-root .schedule-setting-field input:focus { border-color:#2456B8; box-shadow:0 0 0 3px rgba(36,86,184,.1); }
 #dc-root .schedule-setting-field em { color:#6E7C94; font-style:normal; font-weight:500; }
 #dc-root .schedule-setting-field small { font-weight:400; }
-#dc-root .schedule-reminder-summary { padding:12px 16px; display:grid; gap:8px; color:#52617A; background:#F8FAFD; font-size:9px; }
-#dc-root .schedule-reminder-summary span { padding:7px 9px; color:#176F4A; background:#EAF7F0; border-radius:6px; }
 #dc-root .schedule-result-settings { margin:0 16px 16px; }
-#dc-root .schedule-result-settings .schedule-section-heading label { display:grid; gap:4px; color:#64718B; font-size:9px; }
-#dc-root .schedule-result-settings select { min-width:220px; height:36px; padding:0 9px; color:#30415E; background:#FFF; border:1px solid #C8D5E7; border-radius:7px; }
+#dc-root .schedule-result-settings > h3 { margin:0; padding:14px 16px; color:#263958; font-size:12px; border-bottom:1px solid #E6EBF2; }
+#dc-root .schedule-result-mode label { padding:16px; display:grid; gap:7px; color:#64718B; font-size:9px; }
+#dc-root .schedule-result-settings select { width:100%; height:40px; padding:0 11px; color:#30415E; background:#FFF; border:1px solid #C8D5E7; border-radius:7px; }
 #dc-root .schedule-result-grid { padding:14px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:9px; }
 #dc-root .schedule-result-grid-detailed { grid-template-columns:repeat(3,minmax(0,1fr)); }
-#dc-root .schedule-result-option { min-height:65px; padding:10px; display:grid; grid-template-columns:22px minmax(0,1fr); gap:8px; align-items:center; text-align:left; background:#FFF; border:1px solid #DDE5EF; border-radius:8px; }
-#dc-root .schedule-result-option > b { width:20px; height:20px; display:flex; align-items:center; justify-content:center; color:#FFF; border:1px solid #B9C6D8; border-radius:5px; }
+#dc-root .schedule-result-option { min-height:52px; padding:10px; display:grid; grid-template-columns:34px minmax(0,1fr); gap:9px; align-items:center; text-align:left; background:#FFF; border:1px solid #DDE5EF; border-radius:8px; }
+#dc-root .schedule-result-option > b { width:32px; height:18px; display:flex; align-items:center; justify-content:flex-end; padding:2px; color:#FFF; background:#D5DBE3; border:0; border-radius:999px; font-size:8px; }
+#dc-root .schedule-result-option > b::before { width:14px; height:14px; content:""; background:#FFF; border-radius:50%; box-shadow:0 1px 2px rgba(25,43,70,.2); }
 #dc-root .schedule-result-option > span { display:grid; gap:3px; }
 #dc-root .schedule-result-option strong { color:#344560; font-size:9px; }
 #dc-root .schedule-result-option small { color:#8390A5; font-size:8px; }
 #dc-root .schedule-result-option.is-selected { background:#F1F6FF; border-color:#9EBBE6; }
-#dc-root .schedule-result-option.is-selected > b { background:#2456B8; border-color:#2456B8; }
+#dc-root .schedule-result-option.is-selected > b { justify-content:flex-start; background:#2456B8; }
 
 @media (max-width:1200px) {
   #dc-root .schedule-beginner-guide { grid-template-columns:1fr; }
@@ -636,6 +655,10 @@
   #dc-root .schedule-login-methods-generated article { grid-template-columns:34px minmax(0,1fr) 42px; }
   #dc-root .schedule-generate-link { grid-column:2 / -1; justify-self:start; }
   #dc-root .schedule-generated-link { grid-column:2 / -1; grid-template-columns:1fr; }
+  #dc-root .schedule-login-layout,
+  #dc-root .schedule-login-layout.has-detail { grid-template-columns:1fr; }
+  #dc-root .schedule-login-layout > .schedule-login-methods { margin:0 16px; }
+  #dc-root .schedule-login-detail { position:static; margin:0 16px; }
   #dc-root .schedule-link-gate { align-items:stretch; flex-direction:column; }
   #dc-root .schedule-business-workspace { grid-template-columns:1fr; }
   #dc-root .schedule-business-tabs { position:static; grid-template-columns:repeat(4,minmax(150px,1fr)); overflow-x:auto; border-bottom:1px solid #DCE4F0; }
