@@ -1073,7 +1073,7 @@
 
 #dc-root .student-filter-grid {
   display: grid;
-  grid-template-columns: minmax(240px, 1.3fr) repeat(3, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   gap: 12px;
   padding: 16px 18px 12px;
 }
@@ -1398,6 +1398,11 @@
     grid-template-columns: 1fr;
   }
 
+  #dc-root .student-filter-result {
+    flex: 1 0 100%;
+    text-align: left;
+  }
+
   #dc-root .student-delete-dialog {
     grid-template-columns: 1fr;
   }
@@ -1408,6 +1413,12 @@
 
   #dc-root .student-password-confirm-body {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 899px) {
+  #dc-root .students-list-panel-4e551fd {
+    display: block;
   }
 }
 
@@ -1988,7 +1999,8 @@
 }
 
 #dc-root .student-level-card {
-  max-width: 1120px;
+  width: 100%;
+  max-width: none;
   overflow: hidden;
   background: #FFFFFF;
   border: 1px solid #D9E2EF;

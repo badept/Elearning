@@ -1,7 +1,7 @@
 #dc-root .path-main {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 28px 32px 48px;
+  padding: clamp(18px, 2vw, 30px) clamp(16px, 2.4vw, 36px) clamp(32px, 4vw, 52px);
 }
 
 #dc-root .path-heading,
@@ -88,7 +88,7 @@
 
 #dc-root .path-summary {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
   margin-bottom: 16px;
 }
@@ -264,7 +264,7 @@
 
 #dc-root .path-detail-layout {
   display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
+  grid-template-columns: minmax(220px, .28fr) minmax(0, 1fr);
   gap: 16px;
 }
 

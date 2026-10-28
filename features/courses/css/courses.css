@@ -1460,7 +1460,7 @@
   flex: 1 1 auto;
   min-height: 0;
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr);
+  grid-template-columns: minmax(240px, .32fr) minmax(0, 1fr);
   overflow: hidden;
 }
 
@@ -2006,5 +2006,11 @@
 
   #dc-root .course-detail-assign-index {
     display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  #dc-root .course-detail-panel-d8e198a {
+    display: block;
   }
 }

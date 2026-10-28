@@ -1,6 +1,6 @@
 /* Schedule operations and configuration. */
 #dc-root .schedule-main,
-#dc-root .schedule-detail-main { width:100%; padding:24px; display:grid; gap:20px; }
+#dc-root .schedule-detail-main { width:100%; min-width:0; padding:clamp(16px,2vw,28px); display:grid; grid-template-columns:minmax(0,1fr); gap:clamp(14px,1.6vw,22px); }
 #dc-root .schedule-page-heading,
 #dc-root .schedule-detail-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; }
 #dc-root .schedule-page-heading h1,
@@ -20,7 +20,7 @@
 #dc-root .schedule-secondary-button { color:#33415F; background:#FFF; border:1px solid #C8D4E5; }
 #dc-root .schedule-small-primary { min-height:34px; }
 
-#dc-root .schedule-kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; }
+#dc-root .schedule-kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:14px; }
 #dc-root .schedule-kpis article { min-height:112px; padding:17px; display:flex; align-items:center; gap:14px; background:#FFF; border:1px solid #DDE4EF; border-radius:12px; }
 #dc-root .schedule-kpis article > div { display:grid; gap:3px; }
 #dc-root .schedule-kpis article span:not(.schedule-kpi-icon),
@@ -37,7 +37,12 @@
 #dc-root .schedule-config-card,
 #dc-root .schedule-config-nav,
 #dc-root .schedule-config-summary { background:#FFF; border:1px solid #DCE4F0; border-radius:12px; }
-#dc-root .schedule-filter-grid { padding:17px; display:grid; grid-template-columns:1.5fr repeat(3,minmax(155px,1fr)); gap:12px; }
+#dc-root .schedule-main > *,
+#dc-root .schedule-detail-main > *,
+#dc-root .schedule-table-card,
+#dc-root .schedule-filter-panel,
+#dc-root .schedule-kpis { min-width:0; }
+#dc-root .schedule-filter-grid { padding:17px; display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }
 #dc-root .schedule-filter-field { min-width:0; display:grid; gap:6px; color:#5A6883; font-size:11px; font-weight:650; }
 #dc-root .schedule-filter-field sc-raw-select,
 #dc-root .schedule-filter-field select { width:100%; height:42px; padding:0 10px; color:#243350; background:#FFF; border:1px solid #C9D5E7; border-radius:8px; }
@@ -101,7 +106,7 @@
 #dc-root .schedule-dialog-header h2 { margin:0 0 5px; color:#13234B; font-size:21px; }
 #dc-root .schedule-dialog-header p { margin:0; color:#68758F; font-size:12px; }
 #dc-root .schedule-dialog-header > button { width:36px; height:36px; color:#50607E; background:#FFF; border:1px solid #C9D5E6; border-radius:50%; font-size:22px; }
-#dc-root .schedule-create-options { padding:20px 22px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+#dc-root .schedule-create-options { padding:20px 22px; display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:12px; }
 #dc-root .schedule-create-option { min-height:168px; padding:16px; display:flex; flex-direction:column; align-items:flex-start; gap:9px; text-align:left; background:#FFF; border:1px solid #D2DCEB; border-radius:10px; }
 #dc-root .schedule-create-option > span { width:38px; height:38px; display:flex; align-items:center; justify-content:center; color:#1C5BBB; background:#EAF2FF; border-radius:9px; font-weight:700; }
 #dc-root .schedule-create-option strong { color:#182A50; }
@@ -146,7 +151,7 @@
 #dc-root .schedule-beginner-guide > ol small { color:#748199; font-size:9px; line-height:1.4; }
 #dc-root .schedule-guide-note { grid-column:1 / -1; margin:0; padding-top:13px; color:#61708A; border-top:1px solid #D9E5F4; font-size:10px; }
 #dc-root .schedule-show-guide { width:max-content; min-height:38px; padding:0 13px; color:#2456B8; background:#EEF4FF; border:1px solid #C9D9F1; border-radius:8px; font-weight:650; }
-#dc-root .schedule-config-layout { display:grid; grid-template-columns:250px minmax(0,1fr) 230px; gap:16px; align-items:start; }
+#dc-root .schedule-config-layout { display:grid; grid-template-columns:minmax(210px,.28fr) minmax(0,1fr) minmax(200px,.25fr); gap:16px; align-items:start; }
 #dc-root .schedule-config-nav,
 #dc-root .schedule-config-summary { position:sticky; top:16px; overflow:hidden; }
 #dc-root .schedule-config-nav h2,
@@ -571,6 +576,12 @@
   #dc-root .schedule-student-filter-controls { width:100%; flex-wrap:wrap; }
   #dc-root .schedule-result-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
   #dc-root .schedule-settings-columns-3 { grid-template-columns:1fr; }
+}
+@media (max-width:900px) {
+  #dc-root .schedule-page-heading,
+  #dc-root .schedule-detail-heading { align-items:flex-start; flex-wrap:wrap; }
+  #dc-root .schedule-heading-actions,
+  #dc-root .schedule-detail-heading > div:last-child { flex:1 1 100%; }
 }
 @media (max-width:760px) {
   #dc-root .schedule-main,
