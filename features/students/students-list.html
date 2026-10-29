@@ -209,7 +209,7 @@
                   Học viên
                 </h1>
                 <p class="ui-text-4e5f0ed">
-                  {{ total }} học viên trong dự án ACACY PRESENTATION
+                  {{ total }} học viên trong dự án {{ currentProject }}
                 </p>
               </div>
               <div
@@ -502,7 +502,7 @@
                     Thêm học viên
                   </h2>
                   <p class="ui-text-2a5324c">
-                    Dự án: ACACY PRESENTATION
+                    Dự án: {{ currentProject }}
                   </p>
                 </div>
                 <button
@@ -757,15 +757,16 @@
           ];
           const avatarTones = ['blue', 'red', 'green', 'amber'];
           const data = [
-            { id: 'ADTest1', name: 'Avery Dennison Test 1', initials: 'AT', phone: '0901000001', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true },
-            { id: 'ADTest2', name: 'Avery Dennison Test 2', initials: 'AT', phone: '0901000002', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true },
-            { id: 'ADTest3', name: 'Avery Dennison Test 3', initials: 'AT', phone: '0901000003', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: true },
-            { id: 'HVDEMO001', name: 'Học viên demo 01', initials: 'HV', phone: '0901000004', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true },
-            { id: 'ACACYDEMO01', name: 'ACACYDEMO01', initials: 'AC', phone: '0901000005', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: true },
-            { id: 'ACACYDEMO02', name: 'ACACYDEMO_02', initials: 'AC', phone: '0901000006', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: false }
+            { id: 'ADTest1', name: 'Avery Dennison Test 1', initials: 'AT', phone: '0901000001', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true, project: 'ACACY PRESENTATION' },
+            { id: 'ADTest2', name: 'Avery Dennison Test 2', initials: 'AT', phone: '0901000002', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true, project: 'ACACY PRESENTATION' },
+            { id: 'ADTest3', name: 'Avery Dennison Test 3', initials: 'AT', phone: '0901000003', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: true, project: 'ACACY PRESENTATION' },
+            { id: 'HVDEMO001', name: 'Học viên demo 01', initials: 'HV', phone: '0901000004', bp: 'Bộ phận 01', cd: 'Cấp độ 1', active: true, project: 'ACACY PRESENTATION' },
+            { id: 'ACACYDEMO01', name: 'ACACYDEMO01', initials: 'AC', phone: '0901000005', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: true, project: 'ACACY DEMO' },
+            { id: 'ACACYDEMO02', name: 'ACACYDEMO_02', initials: 'AC', phone: '0901000006', bp: 'Bộ phận 02', cd: 'Cấp độ 0', active: false, project: 'ACACY DEMO' }
           ];
+          const currentProject = (typeof window !== 'undefined' && window.AcaProjectScope) ? window.AcaProjectScope.get() : 'ACACY PRESENTATION';
           const q = (this.state.q || '').trim().toLowerCase();
-          const available = data.filter((r) => !this.state.deleted[r.id]);
+          const available = data.filter((r) => r.project === currentProject && !this.state.deleted[r.id]);
           const filtered = available.filter((r) => {
             const matchesQuery = !q || r.name.toLowerCase().includes(q) || r.id.toLowerCase().includes(q) || r.phone.includes(q);
             const matchesDepartment = this.state.department === 'all' || r.bp === this.state.department;
@@ -807,7 +808,7 @@
           const pendingDelete = this.state.pendingDelete;
           const pendingPassword = this.state.pendingPassword;
           return {
-            nav, rows, q: this.state.qInput, department: this.state.department, level: this.state.level, status: this.state.status,
+            nav, rows, currentProject, q: this.state.qInput, department: this.state.department, level: this.state.level, status: this.state.status,
             total: available.length, shown: filtered.length, empty: filtered.length === 0,
             selectedCount, selectionActive: selectedCount > 0,
             selectAllClass: allFilteredSelected ? 'is-selected' : someFilteredSelected ? 'is-partial' : '',

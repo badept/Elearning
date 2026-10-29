@@ -59,7 +59,7 @@
 <div class="ui-panel-b02d809">
 <div class="ui-panel-d08feb7">
 <h1 class="ui-title-fbb879b">Chương trình</h1>
-<p class="muted-text">{{ total }} chương trình trong dự án ACACY PRESENTATION. Chương trình dùng để nhóm khóa học; Level được quản lý tại Lộ trình đào tạo.</p>
+<p class="muted-text">{{ total }} chương trình trong dự án {{ currentProject }}. Chương trình dùng để nhóm khóa học; Level được quản lý tại Lộ trình đào tạo.</p>
 </div>
 <button sc-camel-on-click="{{ openAdd }}" type="button" class="ui-button-53d3bfd">
 <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" width="18"><path d="M12 5v14M5 12h14"></path></svg>Thêm chương trình</button>
@@ -119,7 +119,7 @@
 <div class="modal-backdrop">
 <section aria-label="Thêm chương trình" role="dialog" class="ui-section-fc408b0">
 <h2 class="ui-heading-ae46a5c">Thêm chương trình</h2>
-<p class="ui-text-4333d42">Dự án: ACACY PRESENTATION</p>
+<p class="ui-text-4333d42">Dự án: {{ currentProject }}</p>
 <label class="form-field">Tên chương trình <span class="danger-text">*</span><input placeholder="VD: Chăm sóc khách hàng" type="text" class="form-control"/></label>
 <label class="form-field">Mã chương trình<input type="text" class="form-control"/><span class="ui-label-b98d342">Chỉ nhập được khi tạo mới</span></label>
 <div class="actions-row">
@@ -157,21 +157,24 @@ class Component extends DCLogic {
       head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, '../training-projects/training-projects.html')
     ];
     const data = [
-      { id: 'hn', name: 'Hội nhập nhân viên mới', count: 3, levels: ['Lộ trình hội nhập nhân viên mới'] },
-      { id: 'bh', name: 'Kỹ năng bán hàng', count: 3, levels: ['Lộ trình phát triển năng lực bán hàng'] },
-      { id: 'tb', name: 'Trưng bày sản phẩm', count: 2, levels: ['Lộ trình phát triển năng lực bán hàng'] },
-      { id: 'sp', name: 'Kiến thức sản phẩm', count: 2, levels: ['2 lộ trình đang sử dụng'] },
-      { id: 'ql', name: 'Quản lý cửa hàng', count: 2, levels: ['Lộ trình quản lý cửa hàng'] }
+      { id: 'hn', name: 'Hội nhập nhân viên mới', count: 3, levels: ['Lộ trình hội nhập nhân viên mới'], project: 'ACACY PRESENTATION' },
+      { id: 'bh', name: 'Kỹ năng bán hàng', count: 3, levels: ['Lộ trình phát triển năng lực bán hàng'], project: 'ACACY PRESENTATION' },
+      { id: 'tb', name: 'Trưng bày sản phẩm', count: 2, levels: ['Lộ trình phát triển năng lực bán hàng'], project: 'ACACY PRESENTATION' },
+      { id: 'sp', name: 'Kiến thức sản phẩm', count: 2, levels: ['2 lộ trình đang sử dụng'], project: 'ACACY PRESENTATION' },
+      { id: 'ql', name: 'Quản lý cửa hàng', count: 2, levels: ['Lộ trình quản lý cửa hàng'], project: 'ACACY PRESENTATION' },
+      { id: 'demo-onboard', name: 'Hội nhập dự án Demo', count: 1, levels: ['Chưa thuộc lộ trình'], project: 'ACACY DEMO' }
     ];
     const s = this.state;
+    const currentProject = (typeof window !== 'undefined' && window.AcaProjectScope) ? window.AcaProjectScope.get() : 'ACACY PRESENTATION';
     const q = (s.q || '').trim().toLowerCase();
-    const filtered = data.filter((r) => !q || r.name.toLowerCase().includes(q));
+    const projectData = data.filter((r) => r.project === currentProject);
+    const filtered = projectData.filter((r) => !q || r.name.toLowerCase().includes(q));
     const rows = filtered.map((r) => Object.assign({}, r, {
       menuOpen: s.menu === r.id,
       menu: () => this.setState({ menu: this.state.menu === r.id ? null : r.id })
     }));
     return {
-      nav, rows, q: s.q, total: data.length, shown: filtered.length, empty: filtered.length === 0,
+      nav, rows, q: s.q, currentProject, total: projectData.length, shown: filtered.length, empty: filtered.length === 0,
       addOpen: s.add,
       onSearch: (e) => this.setState({ q: e.target.value }),
       openAdd: () => this.setState({ add: true }),

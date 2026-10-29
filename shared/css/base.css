@@ -1504,3 +1504,59 @@ a:hover {
     font-size: clamp(23px, 7vw, 30px);
   }
 }
+.global-project-menu {
+  position: fixed;
+  z-index: 10000;
+  width: min(288px, calc(100vw - 24px));
+  padding: 12px;
+  border: 1px solid #d7e1f1;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(22, 49, 96, 0.18);
+}
+
+.global-project-menu[hidden] {
+  display: none;
+}
+
+.global-project-menu strong,
+.global-project-menu small {
+  display: block;
+}
+
+/* Project scope is handled globally; hide legacy page-local project popovers. */
+.schedule-project-popover {
+  display: none !important;
+}
+
+.global-project-menu strong {
+  margin: 2px 4px 10px;
+  color: #152a55;
+  font-size: 14px;
+}
+
+.global-project-menu button {
+  width: 100%;
+  padding: 11px 12px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #263a62;
+  font: inherit;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.global-project-menu button:hover,
+.global-project-menu button.is-current {
+  background: #edf4ff;
+  color: #245bc3;
+}
+
+.global-project-menu small {
+  margin: 10px 4px 2px;
+  color: #6d7b95;
+  font-size: 11px;
+  line-height: 1.45;
+}

@@ -971,7 +971,7 @@
                 <div class="course-detail-assign-grid">
                   <label class="ui-field-4ee83e9">Tên lịch thi <span class="ui-label-aaa496a">*</span><input sc-camel-on-input="{{ onScheduleName }}" type="text" value="{{ scheduleDraftName }}" class="ui-input-a6dbc1a"/></label>
                   <label class="ui-field-4ee83e9">Khóa học<input readonly="readonly" type="text" value="Chốt sale hiệu quả trong 5 bước" class="ui-input-a6dbc1a"/></label>
-                  <label class="ui-field-4ee83e9">Loại lịch <span class="ui-label-aaa496a">*</span><sc-raw-select class="course-detail-sc-raw-select-adaf37f"><option>Chỉ thi</option><option>Học và thi</option></sc-raw-select></label>
+                  <label class="ui-field-4ee83e9">Loại lịch <span class="ui-label-aaa496a">*</span><sc-raw-select class="course-detail-sc-raw-select-adaf37f"><option>Học và thi</option><option>Chỉ học</option><option>Chỉ thi</option></sc-raw-select></label>
                 </div>
                 <section class="course-detail-assign-section">
                   <div class="course-detail-lesson-linked-header">
@@ -1477,8 +1477,8 @@
             scheduleDraftName: 'Đánh giá chốt đơn và chăm sóc sau bán',
             selectedScheduleLessons: { 4: true },
             courseSchedules: [
-              { code: 'SCH-2026-018', type: 'exam', name: 'Đánh giá chốt đơn và chăm sóc sau bán', kind: 'Lịch thi theo bài học', scope: 'Bài 4 · 2 câu hỏi đúng phạm vi', from: '25/10/2026 08:00', to: '25/10/2026 23:59', students: 48, status: 'Đã phát hành', active: true, draft: false, lessonIds: [4] },
-              { code: 'SCH-2026-021', type: 'learning', name: 'Ôn tập xử lý băn khoăn của khách', kind: 'Học và thi theo bài', scope: 'Bài 3 · 2 câu hỏi của bài học', from: '28/10/2026 08:00', to: '30/10/2026 23:59', students: 24, status: 'Bản nháp', active: false, draft: true, lessonIds: [3] }
+              { code: 'SCH-2026-018', type: 'exam', name: 'Đánh giá chốt đơn và chăm sóc sau bán', kind: 'Chỉ thi', scope: 'Bài 4 · 2 câu hỏi đúng phạm vi', from: '25/10/2026 08:00', to: '25/10/2026 23:59', students: 48, status: 'Đã phát hành', active: true, draft: false, lessonIds: [4] },
+              { code: 'SCH-2026-021', type: 'learning', name: 'Ôn tập xử lý băn khoăn của khách', kind: 'Học và thi', scope: 'Bài 3 · 2 câu hỏi của bài học', from: '28/10/2026 08:00', to: '30/10/2026 23:59', students: 24, status: 'Bản nháp', active: false, draft: true, lessonIds: [3] }
             ],
             docs: [
               { name: 'Kịch bản chào hỏi khách hàng', meta: 'Tệp PDF · 2 trang', link: false, lessonId: 1 },
@@ -1784,7 +1784,7 @@
               const lesson = selectedAssignLessons[0];
               const scope = 'Bài ' + (L.indexOf(lesson) + 1) + ' · ' + assignQuestionCount + ' câu hỏi đúng phạm vi';
               const created = {
-                code: 'SCH-2026-0' + sequence, type: 'exam', name: this.state.scheduleDraftName || 'Lịch thi mới', kind: 'Lịch thi theo bài học',
+                code: 'SCH-2026-0' + sequence, type: 'exam', name: this.state.scheduleDraftName || 'Lịch thi mới', kind: 'Chỉ thi',
                 scope, from: '25/10/2026 08:00', to: '25/10/2026 23:59', students: 0, status: 'Bản nháp', active: false, draft: true,
                 lessonIds: selectedAssignLessons.map((lesson) => lesson.id)
               };

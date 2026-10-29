@@ -105,7 +105,7 @@
 <sc-if hint-placeholder-val="{{ true }}" value="{{ p.on }}"><button aria-checked="true" aria-label="Đang sử dụng" role="switch" sc-camel-on-click="{{ p.toggle }}" type="button" class="training-projects-button-aa08b2f"><span class="training-projects-label-7eb8aaa"></span></button>Đang sử dụng</sc-if>
 <sc-if hint-placeholder-val="{{ false }}" value="{{ p.off }}"><button aria-checked="false" aria-label="Đang sử dụng" role="switch" sc-camel-on-click="{{ p.toggle }}" type="button" class="training-projects-button-c22a1b1"><span class="training-projects-label-7eb8aaa"></span></button>Đã ngưng</sc-if>
 </div>
-<a href="training-project-detail.html" class="training-projects-link-d0951d3">Mở dự án<svg aria-hidden="true" fill="none" height="16" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="16"><path d="m9 18 6-6-6-6"></path></svg></a>
+<a href="training-project-detail.html" sc-camel-on-click="{{ p.open }}" class="training-projects-link-d0951d3">Mở dự án<svg aria-hidden="true" fill="none" height="16" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="16"><path d="m9 18 6-6-6-6"></path></svg></a>
 </div>
 </article>
 </sc-for>
@@ -187,12 +187,14 @@ class Component extends DCLogic {
       { id: 'tc03', code: 'TC03', name: 'Kiến thức sản phẩm' }
     ];
     const data = [
-      { id: 'p1', name: 'ACACY PRESENTATION', code: 'ACACY_PRESENTATION', customer: 'ACA Office Văn Phòng', current: true },
-      { id: 'p2', name: 'ACACY DEMO', code: 'DEMO', customer: '—', current: false }
+      { id: 'p1', name: 'ACACY PRESENTATION', code: 'ACACY_PRESENTATION', customer: 'ACA Office Văn Phòng' },
+      { id: 'p2', name: 'ACACY DEMO', code: 'DEMO', customer: '—' }
     ];
     const s = this.state;
+    const currentProject = (typeof window !== 'undefined' && window.AcaProjectScope) ? window.AcaProjectScope.get() : 'ACACY PRESENTATION';
     const projects = data.map((p) => Object.assign({}, p, {
-      on: !s.off[p.id], off: !!s.off[p.id], menuOpen: s.menu === p.id,
+      current: p.name === currentProject, on: !s.off[p.id], off: !!s.off[p.id], menuOpen: s.menu === p.id,
+      open: () => { if (window.AcaProjectScope) window.localStorage.setItem('acasys.currentProject', p.name); },
       toggle: () => this.setState({ off: Object.assign({}, this.state.off, { [p.id]: !this.state.off[p.id] }) }),
       menu: () => this.setState({ menu: this.state.menu === p.id ? null : p.id })
     }));
@@ -208,7 +210,7 @@ class Component extends DCLogic {
       });
     });
     return {
-      nav, projects, createCriteria, drawer: s.drawer,
+      nav, projects, createCriteria, currentProject, drawer: s.drawer,
       openDrawer: () => this.setState({ drawer: true, newProjectCriteria: {} }),
       closeDrawer: () => this.setState({ drawer: false })
     };
