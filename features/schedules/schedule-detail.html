@@ -1,103 +1,693 @@
 <!DOCTYPE html>
-<html lang="vi"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><script defer src="../../shared/js/navigation.js"></script><title>Chi tiết lịch học/thi – AcaSys</title><script src="js/schedules-runtime.js"></script><link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/></head><body><x-dc><helmet><link href="../../shared/css/base.css" rel="stylesheet"/><link href="css/schedules.css" rel="stylesheet"/></helmet>
-<div class="app-shell"><nav aria-label="Menu chính" class="app-sidebar"><div class="brand-row"><div class="brand-logo">A</div><div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div></div><sc-for as="item" hint-placeholder-count="10" list="{{ nav }}"><sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}"><p class="sidebar-section-title">{{ item.label }}</p></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}"><a aria-current="page" href="{{ item.href }}" class="ui-link-b975ab7"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if><sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}"><a href="{{ item.href }}" class="ui-link-dbb06b9"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if></sc-for></nav>
-<div class="app-content"><header class="ui-header-fc3ec06"><button aria-label="Đổi dự án" sc-camel-on-click="{{ toggleProjectMenu }}" type="button" class="ui-button-1cba726"><span class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">{{ currentProject }}</span></span></button><label class="ui-field-0b7aaec"><span class="visually-hidden">Tìm trong hệ thống</span><input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search" class="ui-input-956a9ed"/></label><button sc-camel-on-click="{{ toggleLanguageMenu }}" type="button" class="ui-button-e0d1029">{{ language }}</button><button aria-label="Tài khoản" sc-camel-on-click="{{ toggleAccountMenu }}" type="button" class="ui-button-0798c7a"><span class="ui-label-fcfeba1">T</span><span class="ui-label-69babcb"><span class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span></button></header>
-<sc-if hint-placeholder-val="{{ false }}" value="{{ projectMenuOpen }}"><div class="schedule-header-popover schedule-project-popover"><strong>Chọn dự án</strong><button sc-camel-on-click="{{ chooseAcacy }}" type="button">✓ ACACY PRESENTATION</button><button sc-camel-on-click="{{ chooseInternal }}" type="button">Đào tạo nội bộ 2026</button></div></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ languageMenuOpen }}"><div class="schedule-header-popover schedule-language-popover"><button sc-camel-on-click="{{ chooseVietnamese }}" type="button">Tiếng Việt</button><button sc-camel-on-click="{{ chooseEnglish }}" type="button">English</button><button sc-camel-on-click="{{ chooseJapanese }}" type="button">日本語</button></div></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ accountMenuOpen }}"><div class="schedule-header-popover schedule-account-popover"><strong>Trainer</strong><span>trainer@acacy.vn</span><button sc-camel-on-click="{{ closeHeaderMenus }}" type="button">Đóng menu</button></div></sc-if>
-<main class="schedule-detail-main"><nav aria-label="Đường dẫn" class="schedule-breadcrumb"><sc-if hint-placeholder-val="{{ false }}" value="{{ courseContext }}"><a href="../courses/courses.html">Khóa học</a><span>›</span><a href="../courses/course-detail.html?tab=lichthi">Chốt sale hiệu quả trong 5 bước</a><span>›</span><span>{{ headingTitle }}</span></sc-if><sc-if hint-placeholder-val="{{ true }}" value="{{ scheduleContext }}"><a href="schedules.html">Lịch học/thi</a><span>›</span><span>{{ pageTitle }}</span></sc-if></nav>
-<section class="schedule-detail-heading"><div><div class="schedule-title-line"><h1>{{ headingTitle }}</h1><span class="schedule-status schedule-status-{{ scheduleStatus }}"><i></i>{{ scheduleStatusLabel }}</span></div><p>{{ scheduleCode }} · {{ operationLabel }} · {{ updatedText }}</p></div><div><button sc-camel-on-click="{{ openPreview }}" type="button" class="schedule-secondary-button">Xem trước</button><button sc-camel-on-click="{{ saveDraft }}" type="button" class="schedule-primary-button">{{ saveActionLabel }}</button></div></section>
-<section class="schedule-business-workspace {{ readOnlyClass }}"><nav aria-label="Các nhóm thông tin" class="schedule-business-tabs"><sc-for as="tab" hint-placeholder-count="4" list="{{ detailTabs }}"><button aria-current="{{ tab.ariaCurrent }}" sc-camel-on-click="{{ tab.open }}" type="button" class="{{ tab.className }}"><span>{{ tab.icon }}</span><strong>{{ tab.label }}</strong></button></sc-for></nav>
+<html lang="vi">
 
-<sc-if hint-placeholder-val="{{ true }}" value="{{ tabDetails }}"><div class="schedule-business-panel"><header class="schedule-business-heading"><div><p>THÔNG TIN LỊCH</p><h2>{{ detailsHeadingTitle }}</h2></div><span class="schedule-required-note">* Bắt buộc</span></header>
-<section class="schedule-config-section {{ detailsLockedClass }}"><div class="schedule-section-heading"><div><span class="schedule-section-icon">1</span><div><h3>Thông tin chung</h3></div></div><sc-if hint-placeholder-val="{{ false }}" value="{{ detailsLocked }}"><span class="schedule-section-lock">🔒 Đã khóa sau phát hành</span></sc-if></div><div class="schedule-form-grid schedule-form-grid-3"><label><span>Mã lịch</span><input readonly="readonly" type="text" value="{{ scheduleCode }}"/></label><label class="span-2"><span>Tên lịch *</span><input disabled="{{ detailsLocked }}" type="text" value="{{ pageTitle }}"/></label><label><span>Dự án đào tạo *</span><select disabled="{{ detailsLocked }}"><option>ACACY PRESENTATION</option><option>Đào tạo nội bộ 2026</option></select></label><label><span>Loại lịch *</span><select disabled="{{ detailsLocked }}" sc-camel-on-change="{{ onOperationChange }}" value="{{ operationValue }}"><option value="learning">Học và thi</option><option value="study">Chỉ học</option><option value="exam">Chỉ thi</option></select></label><sc-if hint-placeholder-val="{{ true }}" value="{{ notStudyOnlyMode }}"><label><span>Tag 1</span><select disabled="{{ detailsLocked }}"><option>Đào tạo bắt buộc</option><option>Đánh giá định kỳ</option></select></label></sc-if><label><span>{{ linkedCourseLabel }}</span><select aria-disabled="{{ courseSelectionLockedAria }}" disabled="{{ courseSelectionLocked }}" sc-camel-on-change="{{ onLinkedCourseChange }}" value="{{ linkedCourseValue }}"><sc-for as="course" hint-placeholder-count="2" list="{{ linkedCourseOptions }}"><option value="{{ course.value }}">{{ course.label }}</option></sc-for></select></label><label><span>{{ linkedItemLabel }}</span><select aria-disabled="{{ lessonSelectionLockedAria }}" disabled="{{ lessonSelectionLocked }}" sc-camel-on-change="{{ onLinkedItemChange }}" value="{{ linkedItemValue }}"><sc-for as="item" hint-placeholder-count="4" list="{{ linkedItemOptions }}"><option value="{{ item.value }}">{{ item.label }}</option></sc-for></select><sc-if hint-placeholder-val="{{ false }}" value="{{ lessonSelectionLocked }}"><small class="schedule-lesson-lock-note">🔒 Lịch đã phát hành, không thể sửa bài thi.</small></sc-if></label><label class="span-3"><span>Ghi chú nội bộ</span><textarea disabled="{{ detailsLocked }}" rows="3" value="{{ defaultDescription }}"></textarea></label></div></section>
-<section class="schedule-config-section schedule-time-section {{ detailsLockedClass }}"><div class="schedule-section-heading"><div><span class="schedule-section-icon">2</span><div><h3>Thời gian mở lịch</h3></div></div><sc-if hint-placeholder-val="{{ false }}" value="{{ detailsLocked }}"><span class="schedule-section-lock">🔒 Đã khóa sau phát hành</span></sc-if></div><div class="schedule-form-grid schedule-time-grid"><label><span>Bắt đầu *</span><input disabled="{{ detailsLocked }}" type="datetime-local" value="{{ scheduleStart }}"/></label><label><span>Kết thúc *</span><input disabled="{{ detailsLocked }}" type="datetime-local" value="{{ scheduleEnd }}"/></label></div></section>
-<sc-if hint-placeholder-val="{{ false }}" value="{{ examMode }}"><section class="schedule-config-section"><div class="schedule-section-heading"><div><span class="schedule-section-icon">3</span><div><h3>Quy định bài thi</h3></div></div></div><div class="schedule-question-bank-summary"><div><span>Ngân hàng câu hỏi của bài đã chọn</span><strong>{{ questionBankLesson }}</strong></div><dl><div><dt>Trắc nghiệm</dt><dd>{{ availableMultiple }}</dd></div><div><dt>Tự luận</dt><dd>{{ availableEssay }}</dd></div><div><dt>Ghi âm</dt><dd>{{ availableAudio }}</dd></div><div><dt>Tổng cộng</dt><dd>{{ availableTotal }}</dd></div></dl></div><div class="schedule-form-grid schedule-exam-rules-grid"><label><span>Số câu trắc nghiệm dùng trong đề *</span><input max="{{ availableMultiple }}" min="0" type="number" value="{{ availableMultiple }}"/><small>Tối đa {{ availableMultiple }} câu đang có</small></label><label><span>Số câu tự luận dùng trong đề *</span><input max="{{ availableEssay }}" min="0" type="number" value="{{ availableEssay }}"/><small>Tối đa {{ availableEssay }} câu đang có</small></label><label><span>Số câu ghi âm dùng trong đề *</span><input max="{{ availableAudio }}" min="0" type="number" value="{{ availableAudio }}"/><small>Tối đa {{ availableAudio }} câu đang có</small></label><label><span>Thời gian thi (phút) *</span><input min="1" type="number" value="40"/></label><label><span>Điểm / phần trăm đạt *</span><input min="0" max="100" type="number" value="80"/></label><label><span>Số lần thi tối đa *</span><input min="1" type="number" value="{{ maxAttempts }}"/></label><label><span>Đề thi khi thi lại</span><select><option>Trộn lại trong đúng bài học</option><option>Dùng lại đề trước</option></select></label><label><span>Đảo thứ tự câu hỏi</span><select><option>Có</option><option>Không</option></select></label><label><span>Đảo thứ tự đáp án</span><select><option>Có</option><option>Không</option></select></label><label class="span-2"><span>Tiêu chí đào tạo</span><select><option>TC01 · Kỹ năng giao tiếp với khách hàng</option><option>TC02 · Kỹ năng bán hàng</option></select></label></div></section></sc-if>
-<section class="schedule-config-section"><div class="schedule-section-heading"><div><span class="schedule-section-icon">{{ otherSectionNumber }}</span><div><h3>{{ otherSectionTitle }}</h3><sc-if hint-placeholder-val="{{ true }}" value="{{ notStudyOnlyMode }}"><p>Các tùy chọn được giữ đúng theo hệ thống hiện tại.</p></sc-if></div></div></div><sc-if hint-placeholder-val="{{ false }}" value="{{ studyOnlyMode }}"><div class="schedule-form-grid schedule-form-grid-3 schedule-study-extra-fields"><label><span>Tag 1</span><select><option>Đào tạo bắt buộc</option><option>Đánh giá định kỳ</option></select></label><label><span>Tiêu chí đào tạo</span><select><option>TC01 · Kỹ năng giao tiếp với khách hàng</option><option>TC02 · Kỹ năng bán hàng</option></select></label></div></sc-if><div class="schedule-setting-grid"><article><div><strong>Chỉ dành cho học viên được chỉ định</strong><small>Người ngoài danh sách không thể mở lịch bằng link.</small></div><button aria-checked="{{ designatedOnlyAria }}" class="schedule-switch {{ designatedOnlyClass }}" role="switch" sc-camel-on-click="{{ toggleDesignatedOnly }}" type="button"><i></i></button></article><article><div><strong>Tính bằng điểm số</strong><small>Ngưỡng đạt được tính theo điểm thay vì phần trăm.</small></div><button aria-checked="{{ countScoreAria }}" class="schedule-switch {{ countScoreClass }}" role="switch" sc-camel-on-click="{{ toggleCountScore }}" type="button"><i></i></button></article><article><div><strong>Theo thời gian học viên</strong><small>Thời gian bắt đầu từ lần truy cập đầu tiên.</small></div><button aria-checked="{{ individualTimeAria }}" class="schedule-switch {{ individualTimeClass }}" role="switch" sc-camel-on-click="{{ toggleIndividualTime }}" type="button"><i></i></button></article><article><div><strong>Đánh giá sau thi</strong><small>Hiện biểu mẫu phản hồi sau khi học viên hoàn thành.</small></div><button aria-checked="{{ postEvaluationAria }}" class="schedule-switch {{ postEvaluationClass }}" role="switch" sc-camel-on-click="{{ togglePostEvaluation }}" type="button"><i></i></button></article><article><div><strong>Dành cho Coaching</strong><small>Đánh dấu lịch phục vụ nghiệp vụ Coaching.</small></div><button aria-checked="{{ coachingAria }}" class="schedule-switch {{ coachingClass }}" role="switch" sc-camel-on-click="{{ toggleCoaching }}" type="button"><i></i></button></article><article><div><strong>Cấp chứng chỉ</strong><small>Cấp chứng chỉ khi học viên đáp ứng điều kiện của lịch.</small></div><button aria-checked="{{ certificateAria }}" class="schedule-switch {{ certificateClass }}" role="switch" sc-camel-on-click="{{ toggleCertificate }}" type="button"><i></i></button></article><article><div><strong>KPI</strong><small>Ghi nhận kết quả lịch vào báo cáo KPI đào tạo.</small></div><button aria-checked="{{ kpiAria }}" class="schedule-switch {{ kpiClass }}" role="switch" sc-camel-on-click="{{ toggleKpi }}" type="button"><i></i></button></article></div></section></div></sc-if>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="../../shared/js/project-data.js"></script>
+  <script defer src="../../shared/js/navigation.js"></script>
+  <title>Chi tiết lịch học/thi – AcaSys</title>
+  <script src="js/schedules-runtime.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
+</head>
 
-<sc-if hint-placeholder-val="{{ false }}" value="{{ tabStudents }}"><div class="schedule-business-panel"><header class="schedule-business-heading"><div><p>HỌC VIÊN THAM GIA</p><h2>Danh sách nhận lịch</h2></div></header><div class="schedule-student-toolbar"><div class="schedule-student-filter-controls"><div class="schedule-student-search"><input placeholder="Tìm theo tên hoặc mã học viên" sc-camel-on-input="{{ onStudentQuery }}" type="search" value="{{ studentQueryInput }}"/></div><label><span>Bộ phận</span><select sc-camel-on-change="{{ onStudentDepartment }}" value="{{ studentDepartment }}"><option value="all">Tất cả bộ phận</option><option value="Bộ phận 01">Bộ phận 01</option><option value="Bộ phận 02">Bộ phận 02</option><option value="Demo">Demo</option></select></label><label><span>Cấp độ</span><select sc-camel-on-change="{{ onStudentLevel }}" value="{{ studentLevel }}"><option value="all">Tất cả cấp độ</option><option value="Cấp độ 0">Cấp độ 0</option><option value="Cấp độ 1">Cấp độ 1</option></select></label><button sc-camel-on-click="{{ applyStudentSearch }}" type="button" class="schedule-primary-button">Tìm kiếm</button><button sc-camel-on-click="{{ clearStudentSearch }}" type="button" class="schedule-secondary-button">Làm mới</button></div><span>Hiển thị <strong>{{ filteredStudentCount }}</strong> / {{ studentTotal }} · Đã chọn <strong>{{ audienceCount }}</strong></span></div><div class="schedule-student-data"><div class="schedule-student-data-head"><button aria-label="Chọn tất cả học viên đang hiển thị" aria-pressed="{{ selectVisibleAria }}" sc-camel-on-click="{{ toggleVisibleStudents }}" title="Chọn tất cả kết quả lọc" type="button" class="schedule-check-button schedule-header-check {{ selectVisibleClass }}">{{ selectVisibleMark }}</button><span>Học viên</span><span>Bộ phận</span><span>Cấp độ</span><span>Quyền truy cập</span><span>Thao tác</span></div><sc-for as="s" hint-placeholder-count="6" list="{{ manualStudents }}"><div class="schedule-student-data-row {{ s.rowClass }}"><button aria-label="Chọn {{ s.name }}" aria-pressed="{{ s.ariaSelected }}" sc-camel-on-click="{{ s.toggle }}" type="button" class="schedule-check-button {{ s.selectedClass }}">{{ s.mark }}</button><div class="schedule-student-identity"><span class="schedule-student-avatar">{{ s.initials }}</span><span><strong>{{ s.name }}</strong><small>{{ s.code }}</small></span></div><span>{{ s.department }}</span><span>{{ s.level }}</span><span class="schedule-access-state {{ s.accessClass }}">{{ s.accessLabel }}</span><div class="schedule-student-actions"><button sc-camel-on-click="{{ s.toggleLock }}" type="button">{{ s.lockAction }}</button><a href="../students/student-detail.html">Hồ sơ</a></div></div></sc-for><sc-if hint-placeholder-val="{{ false }}" value="{{ manualEmpty }}"><p class="schedule-student-empty">Không tìm thấy học viên phù hợp.</p></sc-if></div></div></sc-if>
-
-<sc-if hint-placeholder-val="{{ false }}" value="{{ tabAccess }}">
-  <div class="schedule-business-panel">
-    <header class="schedule-business-heading"><div><p>LINK ĐĂNG NHẬP</p><h2>Tạo link và mã QR theo từng cách đăng nhập</h2></div></header>
-    <sc-if hint-placeholder-val="{{ false }}" value="{{ linkNeedsSave }}"><div class="schedule-link-gate"><div><strong>Chưa thể tạo link</strong><span>Hãy lưu toàn bộ cấu hình lịch trước.</span></div><button sc-camel-on-click="{{ openDetails }}" type="button" class="schedule-primary-button">Về thông tin lịch</button></div></sc-if>
-    <sc-if hint-placeholder-val="{{ true }}" value="{{ linkCanGenerate }}">
-      <div class="schedule-login-layout {{ loginLayoutClass }}">
-        <div class="schedule-login-methods schedule-login-methods-generated">
-          <sc-for as="m" hint-placeholder-count="4" list="{{ loginMethods }}">
-            <article class="{{ m.selectedClass }}">
-              <span class="schedule-login-number">{{ m.number }}</span>
-              <div><strong>{{ m.name }}</strong><p>{{ m.description }}</p><small>{{ m.example }}</small></div>
-              <span class="schedule-method-status {{ m.statusClass }}">{{ m.statusText }}</span>
-              <button aria-checked="{{ m.ariaChecked }}" class="schedule-switch {{ m.switchClass }}" role="switch" sc-camel-on-click="{{ m.toggle }}" type="button"><i></i></button>
-              <sc-if hint-placeholder-val="{{ true }}" value="{{ m.notGenerated }}"><button disabled="{{ m.generateDisabled }}" sc-camel-on-click="{{ m.generate }}" type="button" class="schedule-generate-link">Tạo link</button></sc-if>
-              <sc-if hint-placeholder-val="{{ false }}" value="{{ m.generated }}"><div class="schedule-generated-link"><span><small>Mã đăng nhập</small><strong>{{ m.loginCode }}</strong></span><span><small>Link đăng nhập</small><strong>{{ m.loginLink }}</strong></span><button sc-camel-on-click="{{ m.openDetail }}" type="button">Xem QR</button></div></sc-if>
-            </article>
-          </sc-for>
-        </div>
-        <sc-if hint-placeholder-val="{{ false }}" value="{{ loginDetailOpen }}">
-          <aside class="schedule-login-detail">
-            <header><div><small>PHƯƠNG THỨC ĐĂNG NHẬP</small><strong>{{ loginDetailName }}</strong></div><button aria-label="Đóng khung chi tiết link" sc-camel-on-click="{{ closeLoginDetail }}" type="button">×</button></header>
-            <div class="schedule-login-detail-qr">
-              <svg aria-label="Mã QR đăng nhập {{ loginDetailCode }}" role="img" viewBox="0 0 21 21"><rect fill="#fff" height="21" width="21"/><g fill="#101010"><rect height="7" width="7" x="1" y="1"/><rect height="7" width="7" x="13" y="1"/><rect height="7" width="7" x="1" y="13"/><path d="M9 1h2v2H9zM8 4h1v3H8zM10 4h2v1h-2zM9 7h3v2H9zM13 9h2v1h-2zM16 8h1v3h-1zM18 9h2v2h-2zM8 10h2v2H8zM11 10h1v3h-1zM13 12h4v1h-4zM18 12h2v2h-2zM8 14h2v1H8zM10 15h2v3h-2zM13 14h1v2h-1zM15 15h2v2h-2zM18 16h2v1h-2zM8 18h1v2H8zM12 18h3v2h-3zM16 18h1v2h-1zM19 19h1v1h-1z"/></g><g fill="#fff"><rect height="5" width="5" x="2" y="2"/><rect height="5" width="5" x="14" y="2"/><rect height="5" width="5" x="2" y="14"/></g><g fill="#101010"><rect height="3" width="3" x="3" y="3"/><rect height="3" width="3" x="15" y="3"/><rect height="3" width="3" x="3" y="15"/></g></svg>
-              <span>Quét mã để mở trang đăng nhập</span>
-            </div>
-            <label><span>Mã đăng nhập</span><div><strong>{{ loginDetailCode }}</strong><button sc-camel-on-click="{{ copyLoginDetail }}" type="button">Sao chép</button></div></label>
-            <label><span>Link đăng nhập</span><div><strong>{{ loginDetailLink }}</strong><button sc-camel-on-click="{{ copyLoginDetail }}" type="button">Sao chép</button></div></label>
-          </aside>
+<body><x-dc>
+    <helmet>
+      <link href="../../shared/css/base.css?v=20261104-flex3" rel="stylesheet" />
+      <link href="css/schedules.css?v=20261105-fixed-step-nav" rel="stylesheet" />
+    </helmet>
+    <div class="app-shell">
+      <nav aria-label="Menu chính" class="app-sidebar">
+        <div class="brand-row">
+          <div class="brand-logo">A</div>
+          <div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div>
+        </div><sc-for as="item" hint-placeholder-count="10" list="{{ nav }}"><sc-if hint-placeholder-val="{{ false }}"
+            value="{{ item.isHeader }}">
+            <p class="sidebar-section-title">{{ item.label }}</p>
+          </sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}"><a aria-current="page"
+              href="{{ item.href }}" class="ui-link-b975ab7"><svg aria-hidden="true" fill="none" height="20"
+                sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="1.8" width="20">
+                <path d="{{ item.d }}"></path>
+              </svg><span>{{ item.label }}</span></a></sc-if><sc-if hint-placeholder-val="{{ true }}"
+            value="{{ item.isLink }}"><a href="{{ item.href }}" class="ui-link-dbb06b9"><svg aria-hidden="true"
+                fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round"
+                stroke-linejoin="round" stroke-width="1.8" width="20">
+                <path d="{{ item.d }}"></path>
+              </svg><span>{{ item.label }}</span></a></sc-if></sc-for>
+      </nav>
+      <div class="app-content">
+        <header class="ui-header-fc3ec06"><button aria-label="Đổi dự án" sc-camel-on-click="{{ toggleProjectMenu }}"
+            type="button" class="ui-button-1cba726"><span class="ui-label-69babcb"><span class="meta-text">Dự
+                án</span><span class="strong-text">{{ currentProject }}</span></span></button><label
+            class="ui-field-0b7aaec"><span class="visually-hidden">Tìm trong hệ thống</span><input
+              placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search"
+              class="ui-input-956a9ed" /></label><button sc-camel-on-click="{{ toggleLanguageMenu }}" type="button"
+            class="ui-button-e0d1029">{{ language }}</button><button aria-label="Tài khoản"
+            sc-camel-on-click="{{ toggleAccountMenu }}" type="button" class="ui-button-0798c7a"><span
+              class="ui-label-fcfeba1">T</span><span class="ui-label-69babcb"><span
+                class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span></button>
+        </header>
+        <sc-if hint-placeholder-val="{{ false }}" value="{{ languageMenuOpen }}">
+          <div class="schedule-header-popover schedule-language-popover"><button
+              sc-camel-on-click="{{ chooseVietnamese }}" type="button">Tiếng Việt</button><button
+              sc-camel-on-click="{{ chooseEnglish }}" type="button">English</button><button
+              sc-camel-on-click="{{ chooseJapanese }}" type="button">日本語</button></div>
+        </sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ accountMenuOpen }}">
+          <div class="schedule-header-popover schedule-account-popover">
+            <strong>Trainer</strong><span>trainer@acacy.vn</span><button sc-camel-on-click="{{ closeHeaderMenus }}"
+              type="button">Đóng menu</button></div>
         </sc-if>
+        <main class="schedule-detail-main">
+          <nav aria-label="Đường dẫn" class="schedule-breadcrumb"><sc-if hint-placeholder-val="{{ false }}"
+              value="{{ courseContext }}"><a href="../courses/courses.html">Khóa học</a><span>›</span><a
+                href="../courses/course-detail.html?tab=lichthi">Chốt sale hiệu quả trong 5
+                bước</a><span>›</span><span>{{ headingTitle }}</span></sc-if><sc-if hint-placeholder-val="{{ true }}"
+              value="{{ scheduleContext }}"><a href="schedules.html">Lịch học/thi</a><span>›</span><span>{{ pageTitle
+                }}</span></sc-if></nav>
+          <section class="schedule-detail-heading">
+            <div>
+              <div class="schedule-title-line">
+                <h1>{{ headingTitle }}</h1><span class="schedule-status schedule-status-{{ scheduleStatus }}"><i></i>{{
+                  scheduleStatusLabel }}</span>
+              </div>
+              <p>{{ scheduleCode }} · {{ operationLabel }} · {{ scheduleScopeLabel }} · {{ updatedText }}</p>
+            </div>
+            <div><button sc-camel-on-click="{{ openPreview }}" type="button" class="schedule-secondary-button">Xem
+                trước</button><button sc-camel-on-click="{{ saveDraft }}" type="button"
+                class="schedule-primary-button">{{ saveActionLabel }}</button></div>
+          </section>
+          <section class="schedule-business-workspace {{ readOnlyClass }}">
+            <nav aria-label="Các nhóm thông tin" class="schedule-business-tabs"><sc-for as="tab"
+                hint-placeholder-count="4" list="{{ detailTabs }}"><button aria-current="{{ tab.ariaCurrent }}"
+                  sc-camel-on-click="{{ tab.open }}" type="button" class="{{ tab.className }}"><span>{{ tab.icon
+                    }}</span><strong>{{ tab.label }}</strong></button></sc-for></nav>
+
+            <sc-if hint-placeholder-val="{{ true }}" value="{{ tabDetails }}">
+              <div class="schedule-business-panel">
+                <header class="schedule-business-heading">
+                  <div>
+                    <p>THÔNG TIN LỊCH</p>
+                    <h2>{{ detailsHeadingTitle }}</h2>
+                  </div><span class="schedule-required-note">* Bắt buộc</span>
+                </header>
+                <section class="schedule-config-section {{ detailsLockedClass }}">
+                  <div class="schedule-section-heading">
+                    <div><span class="schedule-section-icon">1</span>
+                      <div>
+                        <h3>Thông tin chung</h3>
+                      </div>
+                    </div><sc-if hint-placeholder-val="{{ false }}" value="{{ detailsLocked }}"><span
+                        class="schedule-section-lock">🔒 Đã khóa sau phát hành</span></sc-if>
+                  </div>
+                  <div class="schedule-form-grid schedule-form-grid-3"><label><span>Mã lịch</span><input
+                        readonly="readonly" type="text" value="{{ scheduleCode }}" /></label><label
+                      class="span-2"><span>Tên lịch *</span><input disabled="{{ detailsLocked }}" type="text"
+                        value="{{ pageTitle }}" /></label><label><span>Dự án đào tạo *</span><select disabled="disabled"
+                        title="Dự án được lấy theo phạm vi đang chọn">
+                        <option>{{ currentProject }}</option>
+                      </select></label><label><span>Loại lịch *</span><select disabled="{{ detailsLocked }}"
+                        sc-camel-on-change="{{ onOperationChange }}" value="{{ operationValue }}">
+                        <option value="learning">Học và thi</option>
+                        <option value="study">Chỉ học</option>
+                        <option value="exam">Chỉ thi</option>
+                      </select></label><label><span>Phạm vi trên ứng dụng *</span><select
+                        aria-disabled="{{ scopeSelectionLockedAria }}" disabled="{{ scopeSelectionLocked }}"
+                        sc-camel-on-change="{{ onScheduleScopeChange }}" value="{{ scheduleScope }}">
+                        <option value="path">Thuộc lộ trình</option>
+                        <option value="standalone">Khóa lẻ</option>
+                      </select><small>{{ scheduleScopeHelp }}</small></label><sc-if hint-placeholder-val="{{ false }}"
+                      value="{{ pathScope }}"><label class="span-2"><span>Lộ trình *</span><select
+                          disabled="{{ pathSelectionLocked }}" sc-camel-on-change="{{ onPathChange }}"
+                          value="{{ pathValue }}"><sc-for as="path" hint-placeholder-count="2" list="{{ pathOptions }}">
+                            <option value="{{ path.value }}">{{ path.label }}</option>
+                          </sc-for></select></label><label><span>Bước trong lộ trình *</span><select
+                          disabled="{{ pathSelectionLocked }}" sc-camel-on-change="{{ onPathStepChange }}"
+                          value="{{ pathStepValue }}"><sc-for as="step" hint-placeholder-count="3"
+                            list="{{ pathStepOptions }}">
+                            <option value="{{ step.value }}">{{ step.label }}</option>
+                          </sc-for></select><small>Khóa học được suy ra từ bước đã chọn.</small></label></sc-if><sc-if
+                      hint-placeholder-val="{{ true }}" value="{{ notStudyOnlyMode }}"><label><span>Tag 1 (Nhãn quản lý)</span><select
+                          data-project-sync="off" disabled="{{ managementLabelLocked }}" sc-camel-on-change="{{ onManagementLabelChange }}"
+                          value="{{ managementLabelValue }}"><option value="">Chọn nhãn quản lý</option><sc-for
+                            as="managementLabel" hint-placeholder-count="2" list="{{ managementLabelOptions }}"><option
+                              value="{{ managementLabel.value }}">{{ managementLabel.label }}</option></sc-for>
+                        </select><small>Lấy từ danh mục Nhãn quản lý của dự án đang chọn.</small></label></sc-if><label><span>{{ linkedCourseLabel }}</span><select
+                        aria-disabled="{{ courseSelectionLockedAria }}" disabled="{{ courseSelectionLocked }}"
+                        sc-camel-on-change="{{ onLinkedCourseChange }}" value="{{ linkedCourseValue }}"><sc-for
+                          as="course" hint-placeholder-count="2" list="{{ linkedCourseOptions }}">
+                          <option value="{{ course.value }}">{{ course.label }}</option>
+                        </sc-for></select><small>{{ linkedCourseHelp }}</small></label><label><span>{{ linkedItemLabel
+                        }}</span><select aria-disabled="{{ lessonSelectionLockedAria }}"
+                        disabled="{{ lessonSelectionLocked }}" sc-camel-on-change="{{ onLinkedItemChange }}"
+                        value="{{ linkedItemValue }}"><sc-for as="item" hint-placeholder-count="4"
+                          list="{{ linkedItemOptions }}">
+                          <option value="{{ item.value }}">{{ item.label }}</option>
+                        </sc-for></select><small>Chỉ chọn đúng một bài học cho mỗi lịch.</small><sc-if
+                        hint-placeholder-val="{{ false }}" value="{{ lessonSelectionLocked }}"><small
+                          class="schedule-lesson-lock-note">🔒 Lịch đã phát hành, không thể sửa phạm vi hoặc bài
+                          học.</small></sc-if></label><label class="span-3"><span>Ghi chú nội bộ</span><textarea
+                        disabled="{{ detailsLocked }}" rows="3" value="{{ defaultDescription }}"></textarea></label>
+                  </div>
+                </section>
+                <section class="schedule-config-section schedule-time-section {{ detailsLockedClass }}">
+                  <div class="schedule-section-heading">
+                    <div><span class="schedule-section-icon">2</span>
+                      <div>
+                        <h3>Thời gian mở lịch</h3>
+                      </div>
+                    </div><sc-if hint-placeholder-val="{{ false }}" value="{{ detailsLocked }}"><span
+                        class="schedule-section-lock">🔒 Đã khóa sau phát hành</span></sc-if>
+                  </div>
+                  <div class="schedule-form-grid schedule-time-grid"><label><span>Bắt đầu *</span><input
+                        disabled="{{ detailsLocked }}" type="datetime-local"
+                        value="{{ scheduleStart }}" /></label><label><span>Kết thúc *</span><input
+                        disabled="{{ detailsLocked }}" type="datetime-local" value="{{ scheduleEnd }}" /></label></div>
+                </section>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ examMode }}">
+                  <section class="schedule-config-section">
+                    <div class="schedule-section-heading">
+                      <div><span class="schedule-section-icon">3</span>
+                        <div>
+                          <h3>Quy định bài thi</h3>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="schedule-question-bank-summary">
+                      <div><span>Ngân hàng câu hỏi của bài đã chọn</span><strong>{{ questionBankLesson }}</strong></div>
+                      <dl>
+                        <div>
+                          <dt>Trắc nghiệm</dt>
+                          <dd>{{ availableMultiple }}</dd>
+                        </div>
+                        <div>
+                          <dt>Tự luận</dt>
+                          <dd>{{ availableEssay }}</dd>
+                        </div>
+                        <div>
+                          <dt>Ghi âm</dt>
+                          <dd>{{ availableAudio }}</dd>
+                        </div>
+                        <div>
+                          <dt>Tổng cộng</dt>
+                          <dd>{{ availableTotal }}</dd>
+                        </div>
+                      </dl>
+                    </div>
+                    <div class="schedule-form-grid schedule-exam-rules-grid"><label><span>Số câu trắc nghiệm dùng trong
+                          đề *</span><input max="{{ availableMultiple }}" min="0" type="number"
+                          value="{{ availableMultiple }}" /><small>Tối đa {{ availableMultiple }} câu đang
+                          có</small></label><label><span>Số câu tự luận dùng trong đề *</span><input
+                          max="{{ availableEssay }}" min="0" type="number" value="{{ availableEssay }}" /><small>Tối đa
+                          {{ availableEssay }} câu đang có</small></label><label><span>Số câu ghi âm dùng trong đề
+                          *</span><input max="{{ availableAudio }}" min="0" type="number"
+                          value="{{ availableAudio }}" /><small>Tối đa {{ availableAudio }} câu đang
+                          có</small></label><label><span>Thời gian thi (phút) *</span><input min="1" type="number"
+                          value="40" /></label><label><span>Điểm / phần trăm đạt *</span><input min="0" max="100"
+                          type="number" value="80" /></label><label><span>Số lần thi tối đa *</span><input min="1"
+                          type="number" value="{{ maxAttempts }}" /></label><label><span>Đề thi khi thi
+                          lại</span><select>
+                          <option>Trộn lại trong đúng bài học</option>
+                          <option>Dùng lại đề trước</option>
+                        </select></label><label><span>Đảo thứ tự câu hỏi</span><select>
+                          <option>Có</option>
+                          <option>Không</option>
+                        </select></label><label><span>Đảo thứ tự đáp án</span><select>
+                          <option>Có</option>
+                          <option>Không</option>
+                        </select></label><label class="span-2"><span>Tiêu chí đào tạo</span><select>
+                          <option>TC01 · Kỹ năng giao tiếp với khách hàng</option>
+                          <option>TC02 · Kỹ năng bán hàng</option>
+                        </select></label></div>
+                  </section>
+                </sc-if>
+                <section class="schedule-config-section">
+                  <div class="schedule-section-heading">
+                    <div><span class="schedule-section-icon">{{ otherSectionNumber }}</span>
+                      <div>
+                        <h3>{{ otherSectionTitle }}</h3><sc-if hint-placeholder-val="{{ true }}"
+                          value="{{ notStudyOnlyMode }}">
+                          <p>Các tùy chọn được giữ đúng theo hệ thống hiện tại.</p>
+                        </sc-if>
+                      </div>
+                    </div>
+                  </div><sc-if hint-placeholder-val="{{ false }}" value="{{ studyOnlyMode }}">
+                    <div class="schedule-form-grid schedule-form-grid-3 schedule-study-extra-fields"><label><span>Tag
+                          1</span><select>
+                          <option>Đào tạo bắt buộc</option>
+                          <option>Đánh giá định kỳ</option>
+                        </select></label><label><span>Tiêu chí đào tạo</span><select>
+                          <option>TC01 · Kỹ năng giao tiếp với khách hàng</option>
+                          <option>TC02 · Kỹ năng bán hàng</option>
+                        </select></label></div>
+                  </sc-if>
+                  <div class="schedule-setting-grid">
+                    <article>
+                      <div><strong>Chỉ dành cho học viên được chỉ định</strong><small>Người ngoài danh sách không thể mở
+                          lịch bằng link.</small></div><button aria-checked="{{ designatedOnlyAria }}"
+                        class="schedule-switch {{ designatedOnlyClass }}" role="switch"
+                        sc-camel-on-click="{{ toggleDesignatedOnly }}" type="button"><i></i></button>
+                    </article>
+                    <article>
+                      <div><strong>Tính bằng điểm số</strong><small>Ngưỡng đạt được tính theo điểm thay vì phần
+                          trăm.</small></div><button aria-checked="{{ countScoreAria }}"
+                        class="schedule-switch {{ countScoreClass }}" role="switch"
+                        sc-camel-on-click="{{ toggleCountScore }}" type="button"><i></i></button>
+                    </article>
+                    <article>
+                      <div><strong>Theo thời gian học viên</strong><small>Thời gian bắt đầu từ lần truy cập đầu
+                          tiên.</small></div><button aria-checked="{{ individualTimeAria }}"
+                        class="schedule-switch {{ individualTimeClass }}" role="switch"
+                        sc-camel-on-click="{{ toggleIndividualTime }}" type="button"><i></i></button>
+                    </article>
+                    <article>
+                      <div><strong>Đánh giá sau thi</strong><small>Hiện biểu mẫu phản hồi sau khi học viên hoàn
+                          thành.</small></div><button aria-checked="{{ postEvaluationAria }}"
+                        class="schedule-switch {{ postEvaluationClass }}" role="switch"
+                        sc-camel-on-click="{{ togglePostEvaluation }}" type="button"><i></i></button>
+                    </article>
+                    <article>
+                      <div><strong>Dành cho Coaching</strong><small>Đánh dấu lịch phục vụ nghiệp vụ Coaching.</small>
+                      </div><button aria-checked="{{ coachingAria }}" class="schedule-switch {{ coachingClass }}"
+                        role="switch" sc-camel-on-click="{{ toggleCoaching }}" type="button"><i></i></button>
+                    </article>
+                    <article>
+                      <div><strong>Cấp chứng chỉ</strong><small>Cấp chứng chỉ khi học viên đáp ứng điều kiện của
+                          lịch.</small></div><button aria-checked="{{ certificateAria }}"
+                        class="schedule-switch {{ certificateClass }}" role="switch"
+                        sc-camel-on-click="{{ toggleCertificate }}" type="button"><i></i></button>
+                    </article>
+                    <article>
+                      <div><strong>KPI</strong><small>Ghi nhận kết quả lịch vào báo cáo KPI đào tạo.</small></div>
+                      <button aria-checked="{{ kpiAria }}" class="schedule-switch {{ kpiClass }}" role="switch"
+                        sc-camel-on-click="{{ toggleKpi }}" type="button"><i></i></button>
+                    </article>
+                  </div>
+                </section>
+              </div>
+            </sc-if>
+
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ tabStudents }}">
+              <div class="schedule-business-panel">
+                <header class="schedule-business-heading">
+                  <div>
+                    <p>HỌC VIÊN THAM GIA</p>
+                    <h2>Danh sách nhận lịch</h2>
+                  </div>
+                </header>
+                <div class="schedule-student-toolbar">
+                  <div class="schedule-student-filter-controls">
+                    <div class="schedule-student-search"><input placeholder="Tìm theo tên hoặc mã học viên"
+                        sc-camel-on-input="{{ onStudentQuery }}" type="search" value="{{ studentQueryInput }}" /></div>
+                    <label><span>Bộ phận</span><select sc-camel-on-change="{{ onStudentDepartment }}"
+                        value="{{ studentDepartment }}">
+                        <option value="all">Tất cả bộ phận</option>
+                        <option value="Bộ phận 01">Bộ phận 01</option>
+                        <option value="Bộ phận 02">Bộ phận 02</option>
+                        <option value="Demo">Demo</option>
+                      </select></label><label><span>Cấp độ</span><select sc-camel-on-change="{{ onStudentLevel }}"
+                        value="{{ studentLevel }}">
+                        <option value="all">Tất cả cấp độ</option>
+                        <option value="Cấp độ 0">Cấp độ 0</option>
+                        <option value="Cấp độ 1">Cấp độ 1</option>
+                        <option value="Cấp độ 2">Cấp độ 2</option>
+                        <option value="Cấp độ 3">Cấp độ 3</option>
+                        <option value="Cấp độ 4">Cấp độ 4</option>
+                      </select></label><button sc-camel-on-click="{{ applyStudentSearch }}" type="button"
+                      class="schedule-primary-button">Tìm kiếm</button><button
+                      sc-camel-on-click="{{ clearStudentSearch }}" type="button" class="schedule-secondary-button">Làm
+                      mới</button>
+                  </div><span>Hiển thị <strong>{{ filteredStudentCount }}</strong> / {{ studentTotal }} · Đã chọn
+                    <strong>{{ audienceCount }}</strong></span>
+                </div>
+                <div class="schedule-student-data">
+                  <div class="schedule-student-data-head"><button aria-label="Chọn tất cả học viên đang hiển thị"
+                      aria-pressed="{{ selectVisibleAria }}" sc-camel-on-click="{{ toggleVisibleStudents }}"
+                      title="Chọn tất cả kết quả lọc" type="button"
+                      class="schedule-check-button schedule-header-check {{ selectVisibleClass }}">{{ selectVisibleMark
+                      }}</button><span>Học viên</span><span>Bộ phận</span><span>Cấp độ trong dự án</span><span>Quyền
+                      truy cập</span><span>Thao tác</span></div><sc-for as="s" hint-placeholder-count="6"
+                    list="{{ manualStudents }}">
+                    <div class="schedule-student-data-row {{ s.rowClass }}"><button aria-label="Chọn {{ s.name }}"
+                        aria-pressed="{{ s.ariaSelected }}" sc-camel-on-click="{{ s.toggle }}" type="button"
+                        class="schedule-check-button {{ s.selectedClass }}">{{ s.mark }}</button>
+                      <div class="schedule-student-identity"><span class="schedule-student-avatar">{{ s.initials
+                          }}</span><span><strong>{{ s.name }}</strong><small>{{ s.code }}</small></span></div><span>{{
+                        s.department }}</span><span>{{ s.level }}</span><span
+                        class="schedule-access-state {{ s.accessClass }}">{{ s.accessLabel }}</span>
+                      <div class="schedule-student-actions"><button sc-camel-on-click="{{ s.toggleLock }}"
+                          type="button">{{ s.lockAction }}</button><a href="../students/student-detail.html">Hồ sơ</a>
+                      </div>
+                    </div>
+                  </sc-for><sc-if hint-placeholder-val="{{ false }}" value="{{ manualEmpty }}">
+                    <p class="schedule-student-empty">Không tìm thấy học viên phù hợp.</p>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ tabAccess }}">
+              <div class="schedule-business-panel">
+                <header class="schedule-business-heading">
+                  <div>
+                    <p>LINK ĐĂNG NHẬP</p>
+                    <h2>Tạo link và mã QR theo từng cách đăng nhập</h2>
+                  </div>
+                </header>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ linkNeedsSave }}">
+                  <div class="schedule-link-gate">
+                    <div><strong>Chưa thể tạo link</strong><span>Hãy lưu toàn bộ cấu hình lịch trước.</span></div>
+                    <button sc-camel-on-click="{{ openDetails }}" type="button" class="schedule-primary-button">Về thông
+                      tin lịch</button>
+                  </div>
+                </sc-if>
+                <sc-if hint-placeholder-val="{{ true }}" value="{{ linkCanGenerate }}">
+                  <div class="schedule-login-layout {{ loginLayoutClass }}">
+                    <div class="schedule-login-methods schedule-login-methods-generated">
+                      <sc-for as="m" hint-placeholder-count="4" list="{{ loginMethods }}">
+                        <article class="{{ m.selectedClass }}">
+                          <span class="schedule-login-number">{{ m.number }}</span>
+                          <div><strong>{{ m.name }}</strong>
+                            <p>{{ m.description }}</p><small>{{ m.example }}</small>
+                          </div>
+                          <span class="schedule-method-status {{ m.statusClass }}">{{ m.statusText }}</span>
+                          <button aria-checked="{{ m.ariaChecked }}" class="schedule-switch {{ m.switchClass }}"
+                            role="switch" sc-camel-on-click="{{ m.toggle }}" type="button"><i></i></button>
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ m.notGenerated }}"><button
+                              disabled="{{ m.generateDisabled }}" sc-camel-on-click="{{ m.generate }}" type="button"
+                              class="schedule-generate-link">Tạo link</button></sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ m.generated }}">
+                            <div class="schedule-generated-link"><span><small>Mã đăng nhập</small><strong>{{ m.loginCode
+                                  }}</strong></span><span><small>Link đăng nhập</small><strong>{{ m.loginLink
+                                  }}</strong></span><button sc-camel-on-click="{{ m.openDetail }}" type="button">Xem
+                                QR</button></div>
+                          </sc-if>
+                        </article>
+                      </sc-for>
+                    </div>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ loginDetailOpen }}">
+                      <aside class="schedule-login-detail">
+                        <header>
+                          <div><small>PHƯƠNG THỨC ĐĂNG NHẬP</small><strong>{{ loginDetailName }}</strong></div><button
+                            aria-label="Đóng khung chi tiết link" sc-camel-on-click="{{ closeLoginDetail }}"
+                            type="button">×</button>
+                        </header>
+                        <div class="schedule-login-detail-qr">
+                          <svg aria-label="Mã QR đăng nhập {{ loginDetailCode }}" role="img" viewBox="0 0 21 21">
+                            <rect fill="#fff" height="21" width="21" />
+                            <g fill="#101010">
+                              <rect height="7" width="7" x="1" y="1" />
+                              <rect height="7" width="7" x="13" y="1" />
+                              <rect height="7" width="7" x="1" y="13" />
+                              <path
+                                d="M9 1h2v2H9zM8 4h1v3H8zM10 4h2v1h-2zM9 7h3v2H9zM13 9h2v1h-2zM16 8h1v3h-1zM18 9h2v2h-2zM8 10h2v2H8zM11 10h1v3h-1zM13 12h4v1h-4zM18 12h2v2h-2zM8 14h2v1H8zM10 15h2v3h-2zM13 14h1v2h-1zM15 15h2v2h-2zM18 16h2v1h-2zM8 18h1v2H8zM12 18h3v2h-3zM16 18h1v2h-1zM19 19h1v1h-1z" />
+                            </g>
+                            <g fill="#fff">
+                              <rect height="5" width="5" x="2" y="2" />
+                              <rect height="5" width="5" x="14" y="2" />
+                              <rect height="5" width="5" x="2" y="14" />
+                            </g>
+                            <g fill="#101010">
+                              <rect height="3" width="3" x="3" y="3" />
+                              <rect height="3" width="3" x="15" y="3" />
+                              <rect height="3" width="3" x="3" y="15" />
+                            </g>
+                          </svg>
+                          <span>Quét mã để mở trang đăng nhập</span>
+                        </div>
+                        <label><span>Mã đăng nhập</span>
+                          <div><strong>{{ loginDetailCode }}</strong><button sc-camel-on-click="{{ copyLoginDetail }}"
+                              type="button">Sao chép</button></div>
+                        </label>
+                        <label><span>Link đăng nhập</span>
+                          <div><strong>{{ loginDetailLink }}</strong><button sc-camel-on-click="{{ copyLoginDetail }}"
+                              type="button">Sao chép</button></div>
+                        </label>
+                      </aside>
+                    </sc-if>
+                  </div>
+                </sc-if>
+                <div class="schedule-access-note"><b>i</b>
+                  <div><strong>Mỗi cách đăng nhập có mã, link và QR riêng</strong>
+                    <p>Chỉ tạo sau khi lịch đã được lưu cấu hình.</p>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ tabSettings }}">
+              <div class="schedule-business-panel">
+                <header class="schedule-business-heading">
+                  <div>
+                    <p>CẤU HÌNH VẬN HÀNH</p>
+                    <h2>Tự động hóa, giám sát và hiển thị kết quả</h2><span>Các tùy chọn của hệ thống cũ được giữ đầy đủ
+                      và mô tả rõ tác động ngay tại màn hình.</span>
+                  </div>
+                  <div class="schedule-heading-inline"><button sc-camel-on-click="{{ resetSettings }}" type="button"
+                      class="schedule-secondary-button">Khôi phục mặc định</button><button
+                      sc-camel-on-click="{{ saveDraft }}" type="button" class="schedule-primary-button">Lưu cấu
+                      hình</button></div>
+                </header>
+                <div class="schedule-settings-columns schedule-settings-columns-3">
+                  <section class="schedule-settings-group">
+                    <h3>Nâng cấp độ trong dự án</h3>
+                    <div class="schedule-setting-list">
+                      <article>
+                        <div><strong>Tự động nâng cấp độ</strong><small>{{ autoLevelHelp }}</small></div><button
+                          aria-checked="{{ autoLevelAria }}" aria-disabled="{{ autoLevelDisabledAria }}"
+                          class="schedule-switch {{ autoLevelClass }} {{ autoLevelDisabledClass }}"
+                          disabled="{{ autoLevelDisabled }}" role="switch" sc-camel-on-click="{{ toggleAutoLevel }}"
+                          type="button"><i></i></button>
+                      </article><sc-if hint-placeholder-val="{{ false }}" value="{{ autoLevelEnabled }}"><label
+                          class="schedule-setting-field schedule-level-target-field"><span>Cấp độ được nâng sau khi
+                            đạt</span><input readonly="readonly" title="Được suy ra từ Level của khóa học" type="text"
+                            value="{{ targetLevel }}" /><small>Hệ thống lấy Level nội dung từ khóa học của bài thi;
+                            người dùng không chọn thủ công tại lịch.</small></label></sc-if>
+                    </div>
+                  </section>
+                  <sc-if hint-placeholder-val="{{ true }}" value="{{ examConfigMode }}">
+                    <section class="schedule-settings-group">
+                      <h3>Cấu hình giám sát khi thi</h3>
+                      <div class="schedule-setting-list">
+                        <article>
+                          <div><strong>Chụp hình</strong><small>Yêu cầu camera và chụp hình định kỳ trong lúc làm
+                              bài.</small></div><button aria-checked="{{ proctoringAria }}"
+                            class="schedule-switch {{ proctoringClass }}" role="switch"
+                            sc-camel-on-click="{{ toggleProctoring }}" type="button"><i></i></button>
+                        </article><sc-if hint-placeholder-val="{{ false }}" value="{{ proctoringEnabled }}"><label
+                            class="schedule-setting-field"><span>Số giây mỗi lần chụp</span>
+                            <div><input min="1" sc-camel-on-input="{{ onCaptureInterval }}" type="number"
+                                value="{{ captureInterval }}" /><em>giây</em></div><small>Hệ thống tự chụp lại theo chu
+                              kỳ này.</small>
+                          </label></sc-if>
+                      </div>
+                    </section>
+                  </sc-if>
+                  <section class="schedule-settings-group">
+                    <h3>Cấu hình tự động nhắc nhở</h3>
+                    <div class="schedule-setting-list">
+                      <article>
+                        <div><strong>Tự động nhắc lịch</strong><small>Gửi thông báo theo các mốc thời gian đã
+                            chọn.</small></div><button aria-checked="{{ remindersAria }}"
+                          class="schedule-switch {{ remindersClass }}" role="switch"
+                          sc-camel-on-click="{{ toggleReminders }}" type="button"><i></i></button>
+                      </article>
+                    </div>
+                  </section>
+                </div>
+                <sc-if hint-placeholder-val="{{ true }}" value="{{ examConfigMode }}">
+                  <section class="schedule-settings-group schedule-result-settings">
+                    <h3>Cấu hình hiển thị sau thi</h3>
+                    <div class="schedule-result-grid schedule-result-grid-detailed"><sc-for as="o"
+                        hint-placeholder-count="11" list="{{ resultOptions }}"><button
+                          aria-pressed="{{ o.ariaPressed }}" sc-camel-on-click="{{ o.toggle }}" type="button"
+                          class="schedule-result-option {{ o.className }}"><b></b><span><strong>{{ o.label
+                              }}</strong></span></button></sc-for></div>
+                  </section>
+                  <section class="schedule-settings-group schedule-result-settings schedule-result-mode">
+                    <h3>Cấu hình hiển thị kết quả học/thi</h3>
+                    <label><span>Hình thức hiển thị kết quả</span><select sc-camel-on-change="{{ onResultDisplayMode }}"
+                        value="{{ resultDisplayMode }}">
+                        <option value="schedule">Theo hệ thống</option>
+                        <option value="status">Theo trạng thái</option>
+                        <option value="percent">Theo phần trăm đạt được</option>
+                        <option value="score">Theo điểm đạt được</option>
+                      </select></label>
+                  </section>
+                </sc-if>
+              </div>
+            </sc-if>
+            <footer class="schedule-step-footer"><sc-if hint-placeholder-val="{{ false }}"
+                value="{{ hasPreviousStep }}"><button sc-camel-on-click="{{ previousStep }}" type="button"
+                  class="schedule-secondary-button">← Quay lại</button></sc-if><sc-if hint-placeholder-val="{{ true }}"
+                value="{{ firstStep }}"><span></span></sc-if>
+              <div><span>Bước {{ currentStepNumber }}/4</span><strong>{{ currentStepLabel }}</strong></div><sc-if
+                hint-placeholder-val="{{ true }}" value="{{ hasNextStep }}"><button sc-camel-on-click="{{ nextStep }}"
+                  type="button" class="schedule-primary-button">Tiếp tục →</button></sc-if><sc-if
+                hint-placeholder-val="{{ false }}" value="{{ lastStep }}"><button sc-camel-on-click="{{ saveDraft }}"
+                  type="button" class="schedule-primary-button">Lưu thay đổi</button></sc-if>
+            </footer>
+          </section>
+        </main>
       </div>
-    </sc-if>
-    <div class="schedule-access-note"><b>i</b><div><strong>Mỗi cách đăng nhập có mã, link và QR riêng</strong><p>Chỉ tạo sau khi lịch đã được lưu cấu hình.</p></div></div>
-  </div>
-</sc-if>
 
-<sc-if hint-placeholder-val="{{ false }}" value="{{ tabSettings }}"><div class="schedule-business-panel"><header class="schedule-business-heading"><div><p>CẤU HÌNH VẬN HÀNH</p><h2>Tự động hóa, giám sát và hiển thị kết quả</h2><span>Các tùy chọn của hệ thống cũ được giữ đầy đủ và mô tả rõ tác động ngay tại màn hình.</span></div><div class="schedule-heading-inline"><button sc-camel-on-click="{{ resetSettings }}" type="button" class="schedule-secondary-button">Khôi phục mặc định</button><button sc-camel-on-click="{{ saveDraft }}" type="button" class="schedule-primary-button">Lưu cấu hình</button></div></header>
-<div class="schedule-settings-columns schedule-settings-columns-3"><section class="schedule-settings-group"><h3>Cấu hình chung</h3><div class="schedule-setting-list"><article><div><strong>Tự động nâng Level</strong><small>Chỉ xét nâng Level sau khi học viên đạt đủ điều kiện của lộ trình, không dựa vào riêng một lịch thi.</small></div><button aria-checked="{{ autoLevelAria }}" class="schedule-switch {{ autoLevelClass }}" role="switch" sc-camel-on-click="{{ toggleAutoLevel }}" type="button"><i></i></button></article></div></section>
-<sc-if hint-placeholder-val="{{ true }}" value="{{ examConfigMode }}"><section class="schedule-settings-group"><h3>Cấu hình giám sát khi thi</h3><div class="schedule-setting-list"><article><div><strong>Chụp hình</strong><small>Yêu cầu camera và chụp hình định kỳ trong lúc làm bài.</small></div><button aria-checked="{{ proctoringAria }}" class="schedule-switch {{ proctoringClass }}" role="switch" sc-camel-on-click="{{ toggleProctoring }}" type="button"><i></i></button></article><sc-if hint-placeholder-val="{{ false }}" value="{{ proctoringEnabled }}"><label class="schedule-setting-field"><span>Số giây mỗi lần chụp</span><div><input min="1" sc-camel-on-input="{{ onCaptureInterval }}" type="number" value="{{ captureInterval }}"/><em>giây</em></div><small>Hệ thống tự chụp lại theo chu kỳ này.</small></label></sc-if></div></section></sc-if>
-<section class="schedule-settings-group"><h3>Cấu hình tự động nhắc nhở</h3><div class="schedule-setting-list"><article><div><strong>Tự động nhắc lịch</strong><small>Gửi thông báo theo các mốc thời gian đã chọn.</small></div><button aria-checked="{{ remindersAria }}" class="schedule-switch {{ remindersClass }}" role="switch" sc-camel-on-click="{{ toggleReminders }}" type="button"><i></i></button></article></div></section></div>
-<sc-if hint-placeholder-val="{{ true }}" value="{{ examConfigMode }}">
-  <section class="schedule-settings-group schedule-result-settings">
-    <h3>Cấu hình hiển thị sau thi</h3>
-    <div class="schedule-result-grid schedule-result-grid-detailed"><sc-for as="o" hint-placeholder-count="11" list="{{ resultOptions }}"><button aria-pressed="{{ o.ariaPressed }}" sc-camel-on-click="{{ o.toggle }}" type="button" class="schedule-result-option {{ o.className }}"><b></b><span><strong>{{ o.label }}</strong></span></button></sc-for></div>
-  </section>
-  <section class="schedule-settings-group schedule-result-settings schedule-result-mode">
-    <h3>Cấu hình hiển thị kết quả học/thi</h3>
-    <label><span>Hình thức hiển thị kết quả</span><select sc-camel-on-change="{{ onResultDisplayMode }}" value="{{ resultDisplayMode }}"><option value="schedule">Theo hệ thống</option><option value="status">Theo trạng thái</option><option value="percent">Theo phần trăm đạt được</option><option value="score">Theo điểm đạt được</option></select></label>
-  </section>
-</sc-if></div></sc-if>
-<footer class="schedule-step-footer"><sc-if hint-placeholder-val="{{ false }}" value="{{ hasPreviousStep }}"><button sc-camel-on-click="{{ previousStep }}" type="button" class="schedule-secondary-button">← Quay lại</button></sc-if><sc-if hint-placeholder-val="{{ true }}" value="{{ firstStep }}"><span></span></sc-if><div><span>Bước {{ currentStepNumber }}/4</span><strong>{{ currentStepLabel }}</strong></div><sc-if hint-placeholder-val="{{ true }}" value="{{ hasNextStep }}"><button sc-camel-on-click="{{ nextStep }}" type="button" class="schedule-primary-button">Tiếp tục →</button></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ lastStep }}"><button sc-camel-on-click="{{ saveDraft }}" type="button" class="schedule-primary-button">Lưu thay đổi</button></sc-if></footer></section></main></div>
-
-<sc-if hint-placeholder-val="{{ false }}" value="{{ submitOpen }}"><div class="schedule-modal-backdrop"><section aria-label="Rà soát và gửi duyệt" aria-modal="true" class="schedule-submit-dialog" role="dialog"><div class="schedule-dialog-header"><div><h2>Rà soát trước khi gửi duyệt</h2><p>Hệ thống đã kiểm tra dữ liệu ảnh hưởng đến việc phát hành.</p></div><button aria-label="Đóng" sc-camel-on-click="{{ closeSubmit }}" type="button">×</button></div><div class="schedule-submit-body"><ul class="schedule-workflow-checks"><li><b>✓</b><span><strong>Thông tin lịch hợp lệ</strong><small>Mã lịch, nội dung và thời gian đã đầy đủ.</small></span></li><li><b>✓</b><span><strong>Danh sách học viên sẵn sàng</strong><small>{{ audienceCount }} học viên được chỉ định.</small></span></li><li><b>✓</b><span><strong>Quy định bài thi hợp lệ</strong><small>Điểm đạt 80% · tối đa 5 lượt.</small></span></li></ul><div><span>Người duyệt</span><strong>Nguyễn Thị Lan — L&amp;D Manager</strong></div></div><div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closeSubmit }}" type="button" class="schedule-secondary-button">Quay lại</button><button sc-camel-on-click="{{ confirmSubmit }}" type="button" class="schedule-primary-button">Gửi duyệt</button></div></section></div></sc-if>
-<sc-if hint-placeholder-val="{{ false }}" value="{{ previewOpen }}"><div class="schedule-modal-backdrop"><section aria-label="Xem trước lịch" aria-modal="true" class="schedule-preview-dialog" role="dialog"><div class="schedule-dialog-header"><div><h2>Xem trước lịch học viên nhận được</h2><p>{{ scheduleCode }} · {{ operationLabel }}</p></div><button aria-label="Đóng" sc-camel-on-click="{{ closePreview }}" type="button">×</button></div><div class="schedule-preview-body"><h3>{{ pageTitle }}</h3><p>{{ scheduleTimeText }}</p><div><span>{{ audienceCount }} học viên</span><span>{{ contentCount }} nội dung</span><span>Điểm đạt: 80%</span></div></div><div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closePreview }}" type="button" class="schedule-primary-button">Đóng xem trước</button></div></section></div></sc-if>
-<sc-if hint-placeholder-val="{{ false }}" value="{{ addContentOpen }}"><div class="schedule-modal-backdrop"><section aria-label="Thêm nội dung" aria-modal="true" class="schedule-add-content-dialog" role="dialog"><div class="schedule-dialog-header"><div><h2>{{ addContentLabel }}</h2><p>Chọn từ khóa học và bài thi đã có.</p></div><button aria-label="Đóng" sc-camel-on-click="{{ closeAddContent }}" type="button">×</button></div><div class="schedule-add-content-list"><sc-for as="o" hint-placeholder-count="4" list="{{ contentOptions }}"><button sc-camel-on-click="{{ o.choose }}" type="button" class="schedule-content-option schedule-content-option-{{ o.selected }}"><span>{{ o.kind }}</span><div><strong>{{ o.name }}</strong><small>{{ o.meta }}</small></div><b>{{ o.mark }}</b></button></sc-for></div><div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closeAddContent }}" type="button" class="schedule-secondary-button">Hủy</button><button sc-camel-on-click="{{ confirmAddContent }}" type="button" class="schedule-primary-button">Thêm nội dung</button></div></section></div></sc-if>
-<sc-if hint-placeholder-val="{{ false }}" value="{{ workflowDialogOpen }}"><div class="schedule-modal-backdrop"><section aria-label="{{ workflowDialogTitle }}" aria-modal="true" class="schedule-workflow-dialog" role="dialog"><div class="schedule-dialog-header"><div><span class="schedule-workflow-stage">BƯỚC {{ workflowDialogNumber }}/5</span><h2>{{ workflowDialogTitle }}</h2><p>{{ workflowDialogSubtitle }}</p></div><button aria-label="Đóng" sc-camel-on-click="{{ closeWorkflowDialog }}" type="button">×</button></div><div class="schedule-workflow-dialog-body"><ul><sc-for as="d" hint-placeholder-count="3" list="{{ workflowDialogItems }}"><li><b>{{ d.icon }}</b><span><strong>{{ d.label }}</strong><small>{{ d.help }}</small></span></li></sc-for></ul></div><div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closeWorkflowDialog }}" type="button" class="schedule-secondary-button">Đóng</button><sc-if hint-placeholder-val="{{ false }}" value="{{ showRejectAction }}"><button sc-camel-on-click="{{ rejectSchedule }}" type="button" class="schedule-secondary-button">Yêu cầu chỉnh sửa</button></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ showApproveAction }}"><button sc-camel-on-click="{{ approveSchedule }}" type="button" class="schedule-primary-button">Phê duyệt lịch</button></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ showPublishAction }}"><button sc-camel-on-click="{{ publishSchedule }}" type="button" class="schedule-primary-button">Xác nhận phát hành</button></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ showCloseAction }}"><button sc-camel-on-click="{{ closeSchedule }}" type="button" class="schedule-danger-button">Xác nhận đóng lịch</button></sc-if></div></section></div></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ toastOpen }}"><div class="schedule-toast"><b>✓</b><span>{{ toast }}</span><button aria-label="Đóng thông báo" sc-camel-on-click="{{ closeToast }}" type="button">×</button></div></sc-if>
-</div></x-dc>
-<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1100}}' type="text/x-dc">
+      <sc-if hint-placeholder-val="{{ false }}" value="{{ submitOpen }}">
+        <div class="schedule-modal-backdrop">
+          <section aria-label="Rà soát và gửi duyệt" aria-modal="true" class="schedule-submit-dialog" role="dialog">
+            <div class="schedule-dialog-header">
+              <div>
+                <h2>Rà soát trước khi gửi duyệt</h2>
+                <p>Hệ thống đã kiểm tra dữ liệu ảnh hưởng đến việc phát hành.</p>
+              </div><button aria-label="Đóng" sc-camel-on-click="{{ closeSubmit }}" type="button">×</button>
+            </div>
+            <div class="schedule-submit-body">
+              <ul class="schedule-workflow-checks">
+                <li><b>✓</b><span><strong>Thông tin lịch hợp lệ</strong><small>Mã lịch, nội dung và thời gian đã đầy
+                      đủ.</small></span></li>
+                <li><b>✓</b><span><strong>Danh sách học viên sẵn sàng</strong><small>{{ audienceCount }} học viên được
+                      chỉ định.</small></span></li>
+                <li><b>✓</b><span><strong>Quy định bài thi hợp lệ</strong><small>Điểm đạt 80% · tối đa 5
+                      lượt.</small></span></li>
+              </ul>
+              <div><span>Người duyệt</span><strong>Nguyễn Thị Lan — L&amp;D Manager</strong></div>
+            </div>
+            <div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closeSubmit }}" type="button"
+                class="schedule-secondary-button">Quay lại</button><button sc-camel-on-click="{{ confirmSubmit }}"
+                type="button" class="schedule-primary-button">Gửi duyệt</button></div>
+          </section>
+        </div>
+      </sc-if>
+      <sc-if hint-placeholder-val="{{ false }}" value="{{ previewOpen }}">
+        <div class="schedule-modal-backdrop">
+          <section aria-label="Xem trước lịch" aria-modal="true" class="schedule-preview-dialog" role="dialog">
+            <div class="schedule-dialog-header">
+              <div>
+                <h2>Xem trước lịch học viên nhận được</h2>
+                <p>{{ scheduleCode }} · {{ operationLabel }}</p>
+              </div><button aria-label="Đóng" sc-camel-on-click="{{ closePreview }}" type="button">×</button>
+            </div>
+            <div class="schedule-preview-body">
+              <h3>{{ pageTitle }}</h3>
+              <p>{{ scheduleTimeText }}</p>
+              <div><span>{{ audienceCount }} học viên</span><span>{{ contentCount }} nội dung</span><span>Điểm đạt:
+                  80%</span></div>
+            </div>
+            <div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closePreview }}" type="button"
+                class="schedule-primary-button">Đóng xem trước</button></div>
+          </section>
+        </div>
+      </sc-if>
+      <sc-if hint-placeholder-val="{{ false }}" value="{{ addContentOpen }}">
+        <div class="schedule-modal-backdrop">
+          <section aria-label="Thêm nội dung" aria-modal="true" class="schedule-add-content-dialog" role="dialog">
+            <div class="schedule-dialog-header">
+              <div>
+                <h2>{{ addContentLabel }}</h2>
+                <p>Chọn từ khóa học và bài thi đã có.</p>
+              </div><button aria-label="Đóng" sc-camel-on-click="{{ closeAddContent }}" type="button">×</button>
+            </div>
+            <div class="schedule-add-content-list"><sc-for as="o" hint-placeholder-count="4"
+                list="{{ contentOptions }}"><button sc-camel-on-click="{{ o.choose }}" type="button"
+                  class="schedule-content-option schedule-content-option-{{ o.selected }}"><span>{{ o.kind }}</span>
+                  <div><strong>{{ o.name }}</strong><small>{{ o.meta }}</small></div><b>{{ o.mark }}</b>
+                </button></sc-for></div>
+            <div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closeAddContent }}" type="button"
+                class="schedule-secondary-button">Hủy</button><button sc-camel-on-click="{{ confirmAddContent }}"
+                type="button" class="schedule-primary-button">Thêm nội dung</button></div>
+          </section>
+        </div>
+      </sc-if>
+      <sc-if hint-placeholder-val="{{ false }}" value="{{ workflowDialogOpen }}">
+        <div class="schedule-modal-backdrop">
+          <section aria-label="{{ workflowDialogTitle }}" aria-modal="true" class="schedule-workflow-dialog"
+            role="dialog">
+            <div class="schedule-dialog-header">
+              <div><span class="schedule-workflow-stage">BƯỚC {{ workflowDialogNumber }}/5</span>
+                <h2>{{ workflowDialogTitle }}</h2>
+                <p>{{ workflowDialogSubtitle }}</p>
+              </div><button aria-label="Đóng" sc-camel-on-click="{{ closeWorkflowDialog }}" type="button">×</button>
+            </div>
+            <div class="schedule-workflow-dialog-body">
+              <ul><sc-for as="d" hint-placeholder-count="3" list="{{ workflowDialogItems }}">
+                  <li><b>{{ d.icon }}</b><span><strong>{{ d.label }}</strong><small>{{ d.help }}</small></span></li>
+                </sc-for></ul>
+            </div>
+            <div class="schedule-dialog-actions"><button sc-camel-on-click="{{ closeWorkflowDialog }}" type="button"
+                class="schedule-secondary-button">Đóng</button><sc-if hint-placeholder-val="{{ false }}"
+                value="{{ showRejectAction }}"><button sc-camel-on-click="{{ rejectSchedule }}" type="button"
+                  class="schedule-secondary-button">Yêu cầu chỉnh sửa</button></sc-if><sc-if
+                hint-placeholder-val="{{ false }}" value="{{ showApproveAction }}"><button
+                  sc-camel-on-click="{{ approveSchedule }}" type="button" class="schedule-primary-button">Phê duyệt
+                  lịch</button></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ showPublishAction }}"><button
+                  sc-camel-on-click="{{ publishSchedule }}" type="button" class="schedule-primary-button">Xác nhận phát
+                  hành</button></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ showCloseAction }}"><button
+                  sc-camel-on-click="{{ closeSchedule }}" type="button" class="schedule-danger-button">Xác nhận đóng
+                  lịch</button></sc-if></div>
+          </section>
+        </div>
+      </sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ toastOpen }}">
+        <div class="schedule-toast"><b>✓</b><span>{{ toast }}</span><button aria-label="Đóng thông báo"
+            sc-camel-on-click="{{ closeToast }}" type="button">×</button></div>
+      </sc-if>
+    </div>
+  </x-dc>
+  <script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1100}}' type="text/x-dc">
 class Component extends DCLogic {
-  constructor(props){super(props);const query=typeof window!=='undefined'&&window.location?new URLSearchParams(window.location.search):null;const requestedMode=query?query.get('mode'):'';const isCreating=requestedMode==='create';const requestedType=query?query.get('type'):'';const requestedCourse=query?query.get('course'):'';const requestedOrigin=query?query.get('origin'):'';const requestedLessons=query?query.get('lessons'):'';const requestedSchedule=query?query.get('schedule'):'';const requestedStatus=query?query.get('status'):'';const scheduleType=requestedType==='exam'?'exam':requestedType==='class'?'class':'learning';const courseFixed=requestedOrigin==='course'&&requestedCourse==='chot-sale-5-buoc';const sourceCourse=requestedCourse==='chot-sale-5-buoc'||(isCreating&&scheduleType==='exam')?'sales':'';const scheduleCode=requestedSchedule||(isCreating?'SCH-2026-MỚI':'LH-2026-014');const validStatus=['draft','pending','approved','active','ended'].indexOf(requestedStatus)!==-1?requestedStatus:'';const requestedLessonIds=requestedLessons?requestedLessons.split(',').map(Number).filter(id=>id>=1&&id<=4):[];const selectedLessonIds=requestedLessonIds.length?[requestedLessonIds[0]]:(scheduleCode==='SCH-2026-021'?[3]:[4]);this.state={tab:'details',isCreating,scheduleType,sourceCourse,courseFixed,origin:requestedOrigin||'schedules',scheduleCode,selectedLessonIds,viewOnly:false,selectedStudents:{ADTest1:true,ADTest2:true,ADTest3:true,HVDEMO001:true},lockedStudents:{},generatedLinks:{},studentQueryInput:'',studentQuery:'',studentDepartment:'all',studentLevel:'all',submitOpen:false,previewOpen:false,addContentOpen:false,selectedContent:sourceCourse==='sales'?'scope-lesson-'+selectedLessonIds[0]:scheduleType==='exam'?'exam-product':'course-sale',addedContent:[],removedContent:{},designatedOnly:true,countScore:true,individualTime:false,postEvaluation:false,coaching:false,certificate:true,kpi:false,autoLevel:false,reminders:true,proctoring:true,captureInterval:3,loginMethods:{system:true,project:true,phone:true,employee:true},resultDisplayMode:'schedule',resultOptions:{score:false,percent:true,allQuestions:false,studentAnswers:false,correctAnswers:false,questionResult:false,correctCount:false,wrongCount:false,examResult:true,correctList:false,wrongList:true},scheduleStatus:isCreating?'draft':validStatus||(scheduleCode==='SCH-2026-018'?'active':'draft'),workflowStage:1,workflowDialog:0,updatedText:isCreating?'Chưa lưu':'Cập nhật 10 phút trước',toast:'',projectMenu:false,languageMenu:false,accountMenu:false,currentProject:'ACACY PRESENTATION',language:'Tiếng Việt'};}
+  constructor(props){super(props);const query=typeof window!=='undefined'&&window.location?new URLSearchParams(window.location.search):null;const requestedMode=query?query.get('mode'):'';const isCreating=requestedMode==='create';const requestedType=query?query.get('type'):'';const requestedCourse=query?query.get('course'):'';const requestedOrigin=query?query.get('origin'):'';const requestedLessons=query?query.get('lessons'):'';const requestedItem=query?query.get('item'):'';const requestedSchedule=query?query.get('schedule'):'';const requestedStatus=query?query.get('status'):'';const requestedScope=query?query.get('scope'):'';const requestedPath=query?query.get('path'):'';const requestedStep=query?query.get('step'):'';const scheduleType=requestedType==='exam'?'exam':requestedType==='class'?'class':'learning';const courseFixed=requestedOrigin==='course'&&requestedCourse==='chot-sale-5-buoc';const sourceCourse=requestedCourse==='chot-sale-5-buoc'||(isCreating&&scheduleType==='exam')?'sales':'';const scheduleCode=requestedSchedule||(isCreating?'SCH-2026-MỚI':'LH-2026-014');const validStatus=['draft','pending','approved','active','ended'].indexOf(requestedStatus)!==-1?requestedStatus:'';const requestedLessonIds=requestedLessons?requestedLessons.split(',').map(Number).filter(id=>id>=1&&id<=4):[];const selectedLessonIds=requestedLessonIds.length?[requestedLessonIds[0]]:(scheduleCode==='SCH-2026-021'?[3]:[4]);const scheduleScope=courseFixed?'standalone':requestedScope==='path'?'path':'standalone';this.state={tab:'details',isCreating,scheduleType,sourceCourse,courseFixed,origin:requestedOrigin||'schedules',scheduleCode,scheduleScope,selectedPath:requestedPath,selectedPathStep:requestedStep,selectedLessonIds,selectedManagementLabel:'',viewOnly:false,selectedStudents:{ADTest1:true,ADTest2:true,ADTest3:true,HVDEMO001:true},lockedStudents:{},generatedLinks:{},studentQueryInput:'',studentQuery:'',studentDepartment:'all',studentLevel:'all',submitOpen:false,previewOpen:false,addContentOpen:false,selectedContent:requestedItem||(sourceCourse==='sales'?'scope-lesson-'+selectedLessonIds[0]:scheduleType==='exam'?'exam-product':'course-sale'),addedContent:[],removedContent:{},designatedOnly:true,countScore:true,individualTime:false,postEvaluation:false,coaching:false,certificate:true,kpi:false,autoLevel:false,targetLevel:'Cấp độ 2',reminders:true,proctoring:true,captureInterval:3,loginMethods:{system:true,project:true,phone:true,employee:true},resultDisplayMode:'schedule',resultOptions:{score:false,percent:true,allQuestions:false,studentAnswers:false,correctAnswers:false,questionResult:false,correctCount:false,wrongCount:false,examResult:true,correctList:false,wrongList:true},scheduleStatus:isCreating?'draft':validStatus||(scheduleCode==='SCH-2026-018'?'active':'draft'),workflowStage:1,workflowDialog:0,updatedText:isCreating?'Chưa lưu':'Cập nhật 10 phút trước',toast:'',projectMenu:false,languageMenu:false,accountMenu:false,currentProject:'ACACY PRESENTATION',language:'Tiếng Việt'};}
   renderVals(){
+    const scopedProject=(typeof window!=='undefined'&&window.AcaProjectScope)?window.AcaProjectScope.get():'ACACY PRESENTATION';
+    const projectCatalog=window.AcaProjectData?window.AcaProjectData.get(scopedProject):{departments:[],criteria:[],tags:[],managementLabels:[]};
+    if(this.state.currentProject!==scopedProject)this.state.currentProject=scopedProject;
+    const managementLabelOptions=(projectCatalog.managementLabels||[]).map(label=>({value:label.code,label:label.code+' · '+label.name}));
+    const managementLabelValue=managementLabelOptions.some(label=>label.value===this.state.selectedManagementLabel)?this.state.selectedManagementLabel:'';
+    if(!this.state.projectAudienceInitialized){
+      if(scopedProject==='ACACY DEMO')this.state.selectedStudents={ACACYDEMO01:true,ACACYDEMO_02:true};
+      this.state.projectAudienceInitialized=true;
+    }
     const P={users:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 4 0 0 0-4 4v2',layers:'M12 2 2 7l10 5 10-5-10-5z',book:'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5',cal:'M3 5h18v16H3zM16 3v4M8 3v4',folder:'M3 6a2 2 0 0 1 2-2h4l2 3h8v13H3z'};const link=(label,d,href,active)=>({label,d,href,isHeader:false,isActive:!!active,isLink:!active});const head=label=>({label,isHeader:true,isActive:false,isLink:false,d:'',href:'#'});const nav=[head('NGƯỜI HỌC'),link('Học viên',P.users,'../students/students-list.html'),head('NỘI DUNG'),link('Chương trình',P.layers,'../programs/programs.html'),link('Khóa học',P.book,'../courses/courses.html'),head('VẬN HÀNH'),link('Lịch học/thi',P.cal,'schedules.html',true),link('Lộ trình đào tạo',P.layers,'../learning-paths/learning-paths.html'),head('THIẾT LẬP'),link('Dự án đào tạo',P.folder,'../training-projects/training-projects.html')];
     const keepScroll=next=>{if(typeof window==='undefined'){this.setState(next);return;}const x=window.pageXOffset||0,y=window.pageYOffset||0,restore=()=>window.scrollTo(x,y);this.setState(next);restore();window.requestAnimationFrame(()=>window.requestAnimationFrame(restore));};const isExam=this.state.scheduleType==='exam';const studyOnly=this.state.scheduleType==='class';const fromSalesCourse=this.state.sourceCourse==='sales';const singleProductExam=this.state.scheduleCode==='SCH-2026-014';const salesLessonCatalog=[{id:1,n:1,name:'Chào hỏi và tìm hiểu nhu cầu',pages:18,qn:3},{id:2,n:2,name:'Giới thiệu sản phẩm phù hợp',pages:22,qn:3},{id:3,n:3,name:'Xử lý băn khoăn của khách',pages:12,qn:2},{id:4,n:4,name:'Chốt đơn và chăm sóc sau bán',pages:15,qn:2}];const selectedSalesLessons=salesLessonCatalog.filter(l=>this.state.selectedLessonIds.indexOf(l.id)!==-1).slice(0,1);const selectedSalesLesson=selectedSalesLessons[0]||salesLessonCatalog[3];const salesQuestionCount=selectedSalesLesson.qn;const salesScopeName='Bài '+selectedSalesLesson.n+' · '+salesQuestionCount+' câu hỏi';const salesScopeLabel='Chỉ Bài '+selectedSalesLesson.n+': '+selectedSalesLesson.name;const pageTitle=studyOnly?'Lịch học '+selectedSalesLesson.name.toLowerCase():singleProductExam?'Đánh giá kiến thức sản phẩm – Bài 1':fromSalesCourse?(this.state.scheduleCode==='SCH-2026-021'?'Ôn tập xử lý băn khoăn của khách':'Đánh giá '+selectedSalesLesson.name.toLowerCase()):(isExam?'Kỳ thi đánh giá hội nhập – Tháng 10':'Lộ trình hội nhập nhân viên mới – Tháng 10');const headingTitle=this.state.isCreating?(studyOnly?'Tạo lịch học':'Tạo lịch thi'):pageTitle;const saveActionLabel=this.state.isCreating?(studyOnly?'Tạo lịch học':'Tạo lịch thi'):'Lưu thay đổi';const operationValue=isExam?'exam':studyOnly?'study':'learning';const operationLabel=isExam?'Chỉ thi':studyOnly?'Chỉ học':'Học và thi';const defaultDescription=studyOnly?'Lịch học dành cho bài “'+selectedSalesLesson.name+'”.':fromSalesCourse?'Lịch thi gắn đúng một bài học. Câu hỏi chỉ lấy từ “'+selectedSalesLesson.name+'”.':singleProductExam?'Lịch thi chỉ sử dụng câu hỏi thuộc Bài 1: Đánh giá kiến thức sản phẩm.':(isExam?'Kỳ thi đánh giá kiến thức hội nhập dành cho nhân viên mới trong tháng 10/2026.':'Chương trình hội nhập bắt buộc dành cho nhân viên mới trong tháng 10/2026.');const scheduleStart=this.state.scheduleCode==='SCH-2026-018'?'2026-10-25T08:00':this.state.scheduleCode==='SCH-2026-021'?'2026-10-28T08:00':'2026-10-20T08:00';const scheduleEnd=this.state.scheduleCode==='SCH-2026-018'?'2026-10-25T23:59':this.state.scheduleCode==='SCH-2026-021'?'2026-10-30T23:59':'2026-11-15T23:59';const scheduleTimeText=scheduleStart.replace('T',' ')+' → '+scheduleEnd.replace('T',' ');const maxAttempts=isExam?3:5;
-    const linkedCourseLabel=isExam||studyOnly?'Khóa học *':'Chương trình *';const linkedScopeLabel=studyOnly?'Bài học':fromSalesCourse?'Bài học của lịch thi *':isExam?'Bài học của lịch thi *':'Phạm vi nội dung';const linkedCourseOptions=isExam||studyOnly?[{value:'sales',label:'Chốt sale hiệu quả trong 5 bước'},{value:'product',label:'Danh mục sản phẩm 2026'}]:[{value:'onboarding',label:'Chương trình Hội nhập nhân viên mới'}];const linkedCourseValue=isExam||studyOnly?(fromSalesCourse?'sales':'product'):'onboarding';const linkedItemOptions=fromSalesCourse?salesLessonCatalog.map(l=>({value:String(l.id),label:'Bài '+l.n+': '+l.name})):isExam||studyOnly?[{value:'exam-product',label:'Bài 1: Đánh giá kiến thức sản phẩm'},{value:'exam-final',label:'Bài 2: Kiểm tra hội nhập cuối khóa'}]:[{value:'all-program',label:'Toàn bộ chương trình · 2 khóa học · 1 bài thi'}];const linkedItemValue=fromSalesCourse?String(selectedSalesLesson.id):isExam||studyOnly?(this.state.selectedContent==='exam-final'?'exam-final':'exam-product'):'all-program';const lessonSelectionLocked=this.state.scheduleStatus==='active'||this.state.scheduleStatus==='ended';const courseSelectionLocked=this.state.courseFixed||lessonSelectionLocked;const detailsLocked=lessonSelectionLocked;
+    const isDemoProject=this.state.currentProject==='ACACY DEMO';const scopedPageTitle=isDemoProject?'Lớp hội nhập dự án Demo':pageTitle;const scopedHeadingTitle=this.state.isCreating?(studyOnly?'Tạo lịch học':'Tạo lịch thi'):scopedPageTitle;const linkedCourseLabel=isExam||studyOnly?'Khóa học *':'Chương trình *';const linkedScopeLabel=studyOnly?'Bài học':fromSalesCourse?'Bài học của lịch thi *':isExam?'Bài học của lịch thi *':'Phạm vi nội dung';const linkedCourseOptions=isDemoProject?[{value:'demo',label:'Khóa học mẫu dự án Demo'}]:isExam||studyOnly?[{value:'sales',label:'Chốt sale hiệu quả trong 5 bước'},{value:'product',label:'Danh mục sản phẩm 2026'}]:[{value:'onboarding',label:'Chương trình Hội nhập nhân viên mới'}];const linkedCourseValue=isDemoProject?'demo':isExam||studyOnly?(fromSalesCourse?'sales':'product'):'onboarding';const linkedItemOptions=isDemoProject?[{value:'demo-intro',label:'Bài 1: Làm quen dự án Demo'}]:fromSalesCourse?salesLessonCatalog.map(l=>({value:String(l.id),label:'Bài '+l.n+': '+l.name})):isExam||studyOnly?[{value:'exam-product',label:'Bài 1: Đánh giá kiến thức sản phẩm'},{value:'exam-final',label:'Bài 2: Kiểm tra hội nhập cuối khóa'}]:[{value:'all-program',label:'Toàn bộ chương trình · 2 khóa học · 1 bài thi'}];const linkedItemValue=isDemoProject?'demo-intro':fromSalesCourse?String(selectedSalesLesson.id):isExam||studyOnly?(this.state.selectedContent==='exam-final'?'exam-final':'exam-product'):'all-program';const lessonSelectionLocked=this.state.scheduleStatus==='active'||this.state.scheduleStatus==='ended';const courseSelectionLocked=this.state.courseFixed||lessonSelectionLocked||this.state.scheduleScope==='path';const detailsLocked=lessonSelectionLocked;const autoLevelDisabled=studyOnly||detailsLocked;const autoLevelEnabled=this.state.autoLevel&&!studyOnly;const autoLevelHelp=studyOnly?'Lịch chỉ học không có kết quả Đạt để nâng Level.':detailsLocked?'Cấu hình đã khóa vì lịch đã phát hành.':'Khi học viên đạt lịch này, hệ thống cập nhật Level trong dự án đến mức đã chọn.';
     const questionInventories={1:{multiple:3,essay:0,audio:0},2:{multiple:2,essay:1,audio:0},3:{multiple:1,essay:1,audio:0},4:{multiple:2,essay:0,audio:0}};const selectedInventory=fromSalesCourse?(questionInventories[selectedSalesLesson.id]||questionInventories[4]):{multiple:25,essay:3,audio:2};const availableMultiple=selectedInventory.multiple;const availableEssay=selectedInventory.essay;const availableAudio=selectedInventory.audio;const availableTotal=availableMultiple+availableEssay+availableAudio;const questionBankLesson=fromSalesCourse?'Bài '+selectedSalesLesson.n+': '+selectedSalesLesson.name:'Bài học / bài thi đã chọn';
     const detailDefs=[['details','01','Thông tin lịch','Nội dung, thời gian và quy định'],['students','02','Học viên tham gia','Người học và quyền truy cập'],['settings','03','Cấu hình','Tự động hóa và kết quả'],['access','04','Link đăng nhập','Link, mã đăng nhập và QR']];const currentStepIndex=Math.max(0,detailDefs.findIndex(d=>d[0]===this.state.tab));const detailTabs=detailDefs.map((d,index)=>({icon:d[1],label:d[2],summary:d[3],className:this.state.tab===d[0]?'is-active':index<currentStepIndex?'is-complete':'',ariaCurrent:this.state.tab===d[0]?'step':'false',stateText:this.state.tab===d[0]?'Đang thực hiện':index<currentStepIndex?'Đã xem':'Chưa thực hiện',open:()=>keepScroll({tab:d[0]})}));
-    const students=[{code:'ADTest1',name:'Avery Dennison Test 1',initials:'AT',department:'Bộ phận 01',level:'Cấp độ 1'},{code:'ADTest2',name:'Avery Dennison Test 2',initials:'AT',department:'Bộ phận 01',level:'Cấp độ 0'},{code:'ADTest3',name:'Avery Dennison Test 3',initials:'AT',department:'Bộ phận 02',level:'Cấp độ 1'},{code:'HVDEMO001',name:'Học viên demo 01',initials:'HV',department:'Bộ phận 01',level:'Cấp độ 1'},{code:'ACACYDEMO01',name:'ACACYDEMO01',initials:'AC',department:'Demo',level:'Cấp độ 0'},{code:'ACACYDEMO_02',name:'ACACYDEMO_02',initials:'AC',department:'Demo',level:'Cấp độ 0'}];const q=(this.state.studentQuery||'').trim().toLowerCase();const studentResult=students.filter(s=>(!q||s.name.toLowerCase().includes(q)||s.code.toLowerCase().includes(q))&&(this.state.studentDepartment==='all'||s.department===this.state.studentDepartment)&&(this.state.studentLevel==='all'||s.level===this.state.studentLevel));const manualStudents=studentResult.map(s=>{const selected=!!this.state.selectedStudents[s.code],locked=!!this.state.lockedStudents[s.code];return Object.assign({},s,{ariaSelected:selected?'true':'false',selectedClass:selected?'is-selected':'',mark:selected?'✓':'',rowClass:locked?'is-locked':'',accessClass:locked?'is-locked':'is-open',accessLabel:locked?'Đang khóa':'Được truy cập',lockAction:locked?'Mở khóa':'Khóa',toggle:()=>{const next=Object.assign({},this.state.selectedStudents);if(next[s.code])delete next[s.code];else next[s.code]=true;this.setState({selectedStudents:next});},toggleLock:()=>{const next=Object.assign({},this.state.lockedStudents);if(next[s.code])delete next[s.code];else next[s.code]=true;this.setState({lockedStudents:next,toast:(locked?'Đã mở khóa ':'Đã khóa ')+s.name+'.'});}});});const selectedCount=students.filter(s=>this.state.selectedStudents[s.code]).length;const visibleSelectedCount=studentResult.filter(s=>this.state.selectedStudents[s.code]).length;const allVisibleSelected=studentResult.length>0&&visibleSelectedCount===studentResult.length;const someVisibleSelected=visibleSelectedCount>0&&!allVisibleSelected;
+    const students=[{code:'ADTest1',name:'Avery Dennison Test 1',initials:'AT',department:'Bộ phận 01',level:'Cấp độ 1',project:'ACACY PRESENTATION'},{code:'ADTest2',name:'Avery Dennison Test 2',initials:'AT',department:'Bộ phận 01',level:'Cấp độ 0',project:'ACACY PRESENTATION'},{code:'ADTest3',name:'Avery Dennison Test 3',initials:'AT',department:'Bộ phận 02',level:'Cấp độ 1',project:'ACACY PRESENTATION'},{code:'HVDEMO001',name:'Học viên demo 01',initials:'HV',department:'Bộ phận 01',level:'Cấp độ 1',project:'ACACY PRESENTATION'},{code:'ACACYDEMO01',name:'ACACYDEMO01',initials:'AC',department:'Demo',level:'Cấp độ 0',project:'ACACY DEMO'},{code:'ACACYDEMO_02',name:'ACACYDEMO_02',initials:'AC',department:'Demo',level:'Cấp độ 0',project:'ACACY DEMO'}];const scopedStudents=students.filter(s=>s.project===this.state.currentProject);const q=(this.state.studentQuery||'').trim().toLowerCase();const studentResult=scopedStudents.filter(s=>(!q||s.name.toLowerCase().includes(q)||s.code.toLowerCase().includes(q))&&(this.state.studentDepartment==='all'||s.department===this.state.studentDepartment)&&(this.state.studentLevel==='all'||s.level===this.state.studentLevel));const manualStudents=studentResult.map(s=>{const selected=!!this.state.selectedStudents[s.code],locked=!!this.state.lockedStudents[s.code];return Object.assign({},s,{ariaSelected:selected?'true':'false',selectedClass:selected?'is-selected':'',mark:selected?'✓':'',rowClass:locked?'is-locked':'',accessClass:locked?'is-locked':'is-open',accessLabel:locked?'Đang khóa':'Được truy cập',lockAction:locked?'Mở khóa':'Khóa',toggle:()=>{const next=Object.assign({},this.state.selectedStudents);if(next[s.code])delete next[s.code];else next[s.code]=true;this.setState({selectedStudents:next});},toggleLock:()=>{const next=Object.assign({},this.state.lockedStudents);if(next[s.code])delete next[s.code];else next[s.code]=true;this.setState({lockedStudents:next,toast:(locked?'Đã mở khóa ':'Đã khóa ')+s.name+'.'});}});});const selectedCount=scopedStudents.filter(s=>this.state.selectedStudents[s.code]).length;const visibleSelectedCount=studentResult.filter(s=>this.state.selectedStudents[s.code]).length;const allVisibleSelected=studentResult.length>0&&visibleSelectedCount===studentResult.length;const someVisibleSelected=visibleSelectedCount>0&&!allVisibleSelected;
+    if(scopedProject==='ACACY DEMO')students.forEach(student=>{student.department='—';});
     const productLessons=[{id:'exam-product',name:'Bài 1: Đánh giá kiến thức sản phẩm',meta:'Bài học · 25 câu hỏi',tag:'Bài học của lịch thi',tone:'course',href:'../courses/course-detail.html'},{id:'exam-final',name:'Bài 2: Kiểm tra hội nhập cuối khóa',meta:'Bài học · 30 câu hỏi',tag:'Bài học của lịch thi',tone:'course',href:'../courses/course-detail.html'}];
     const selectedProductLesson=productLessons.find(v=>v.id===this.state.selectedContent)||productLessons[0];
-    const base=fromSalesCourse?[{id:'lesson-'+selectedSalesLesson.id,name:'Bài '+selectedSalesLesson.n+': '+selectedSalesLesson.name,meta:'Bài học · '+selectedSalesLesson.pages+' trang · '+selectedSalesLesson.qn+' câu hỏi đúng phạm vi',tag:'Bài học của lịch thi',tone:'course',href:'../courses/course-detail.html'}]:isExam?[selectedProductLesson]:[{id:'course-culture',name:'Văn hóa và nội quy công ty',meta:'Khóa học · 3 bài học',tag:'Học trước',tone:'course',href:'../courses/course-detail.html'},{id:'course-safety',name:'An toàn lao động tại cửa hàng',meta:'Khóa học · 2 bài học',tag:'Tuần tự',tone:'course',href:'../courses/course-detail.html'},{id:'exam-final',name:'Kiểm tra hội nhập cuối khóa',meta:'Bài thi · 30 câu · 40 phút',tag:'Bài thi',tone:'exam',href:'../courses/course-detail.html'}];
-    const sourceOptions=fromSalesCourse?salesLessonCatalog.map(l=>({id:'scope-lesson-'+l.id,kind:'Bài học',name:'Bài '+l.n+': '+l.name,meta:l.qn+' câu hỏi thuộc đúng bài học',tag:'Chọn 1 bài',tone:'course',href:'../courses/course-detail.html'})):isExam?productLessons.map(v=>Object.assign({},v,{kind:'Bài học',tag:'Chọn 1 bài'})):[{id:'course-sale',kind:'Khóa học',name:'Chốt sale hiệu quả trong 5 bước',meta:'Kỹ năng bán hàng',tag:'Tự chọn',tone:'course',href:'../courses/course-detail.html'},{id:'course-product',kind:'Khóa học',name:'Danh mục sản phẩm 2026',meta:'5 bài học',tag:'Tự chọn',tone:'course',href:'../courses/course-detail.html'}];
-    const combined=(isExam?base:base.concat(this.state.addedContent)).filter((v,i,a)=>a.findIndex(x=>x.id===v.id)===i&&!this.state.removedContent[v.id]);const contentItems=combined.map((v,i)=>Object.assign({},v,{order:i+1,remove:()=>this.setState({removedContent:Object.assign({},this.state.removedContent,{[v.id]:true}),toast:'Đã gỡ “'+v.name+'” khỏi lịch.'})}));const contentOptions=sourceOptions.map(v=>Object.assign({},v,{selected:this.state.selectedContent===v.id?'active':'idle',mark:this.state.selectedContent===v.id?'✓':'＋',choose:()=>this.setState({selectedContent:v.id})}));const selectedOption=sourceOptions.find(v=>v.id===this.state.selectedContent);
+    const pathCatalog=isDemoProject?[{id:'LP-DEMO-ONBOARD',name:'Lộ trình hội nhập dự án Demo',steps:[{id:'demo-start',name:'Bước 1 · Làm quen dự án',course:'demo',lessons:['demo-intro']}]}]:[{id:'LP-SALES-2026',name:'Lộ trình phát triển năng lực bán hàng',steps:[{id:'sales-foundation',name:'Bước 1 · Nền tảng bán hàng',course:'sales',lessons:['1','2']},{id:'sales-practice',name:'Bước 2 · Tư vấn và xử lý',course:'sales',lessons:['3','4']}]},{id:'LP-ONBOARD-2026',name:'Lộ trình hội nhập nhân viên mới',steps:[{id:'onboard-product',name:'Bước 1 · Kiến thức sản phẩm',course:'product',lessons:['exam-product']},{id:'onboard-final',name:'Bước 2 · Kiểm tra hội nhập',course:'product',lessons:['exam-final']}]}];
+    const pathScope=this.state.scheduleScope==='path';const selectedPathDef=pathCatalog.find(path=>path.id===this.state.selectedPath)||pathCatalog[0];const selectedPathValue=selectedPathDef?selectedPathDef.id:'';const selectedPathStep=selectedPathDef?(selectedPathDef.steps.find(step=>step.id===this.state.selectedPathStep)||selectedPathDef.steps[0]):null;const selectedPathStepValue=selectedPathStep?selectedPathStep.id:'';const pathOptions=pathCatalog.map(path=>({value:path.id,label:path.name}));const pathStepOptions=selectedPathDef?selectedPathDef.steps.map(step=>({value:step.id,label:step.name})):[];
+    const allCourseOptions=isDemoProject?[{value:'demo',label:'Khóa học mẫu dự án Demo'}]:[{value:'sales',label:'Chốt sale hiệu quả trong 5 bước'},{value:'product',label:'Danh mục sản phẩm 2026'}];const selectedCourseValue=pathScope&&selectedPathStep?selectedPathStep.course:(isDemoProject?'demo':fromSalesCourse?'sales':'product');const businessCourseOptions=pathScope?allCourseOptions.filter(course=>course.value===selectedCourseValue):allCourseOptions;const businessCourseValue=selectedCourseValue;
+    const allLessonOptions=selectedCourseValue==='demo'?[{value:'demo-intro',label:'Bài 1: Làm quen dự án Demo'}]:selectedCourseValue==='sales'?salesLessonCatalog.map(l=>({value:String(l.id),label:'Bài '+l.n+': '+l.name})):productLessons.map(v=>({value:v.id,label:v.name}));const businessLessonOptions=pathScope&&selectedPathStep?allLessonOptions.filter(item=>selectedPathStep.lessons.indexOf(String(item.value))!==-1):allLessonOptions;const requestedBusinessLesson=selectedCourseValue==='demo'?'demo-intro':selectedCourseValue==='sales'?String(selectedSalesLesson.id):selectedProductLesson.id;const businessLessonValue=businessLessonOptions.some(item=>String(item.value)===String(requestedBusinessLesson))?requestedBusinessLesson:(businessLessonOptions[0]?businessLessonOptions[0].value:'');
+    const businessTargetLevel=isDemoProject?'':fromSalesCourse?'Cấp độ 1':'Cấp độ 2';
+    const businessAutoLevelDisabled=studyOnly||detailsLocked||!businessTargetLevel;
+    const businessAutoLevelHelp=studyOnly?'Lịch chỉ học không có kết quả Đạt để nâng cấp độ.':!businessTargetLevel?'Khóa học không theo Level nên lịch này không thể nâng cấp độ.':detailsLocked?'Cấu hình đã khóa vì lịch đã phát hành.':'Khi học viên đạt, hệ thống nâng cấp độ trong dự án đến '+businessTargetLevel+' được suy ra từ Level nội dung của khóa học.';
+    const demoLesson={id:'demo-intro',name:'Bài 1: Làm quen dự án Demo',meta:'Bài học · Khóa học mẫu dự án Demo',tag:'Bài học',tone:'course',href:'../courses/course-detail.html'};const base=isDemoProject?[demoLesson]:fromSalesCourse?[{id:'lesson-'+selectedSalesLesson.id,name:'Bài '+selectedSalesLesson.n+': '+selectedSalesLesson.name,meta:'Bài học · '+selectedSalesLesson.pages+' trang · '+selectedSalesLesson.qn+' câu hỏi đúng phạm vi',tag:'Bài học của lịch',tone:'course',href:'../courses/course-detail.html'}]:[selectedProductLesson];
+    const sourceOptions=isDemoProject?[Object.assign({kind:'Bài học'},demoLesson)]:fromSalesCourse?salesLessonCatalog.map(l=>({id:'scope-lesson-'+l.id,kind:'Bài học',name:'Bài '+l.n+': '+l.name,meta:l.qn+' câu hỏi thuộc đúng bài học',tag:'Chọn 1 bài',tone:'course',href:'../courses/course-detail.html'})):productLessons.map(v=>Object.assign({},v,{kind:'Bài học',tag:'Chọn 1 bài'}));
+    const combined=base.filter((v,i,a)=>a.findIndex(x=>x.id===v.id)===i);const contentItems=combined.map((v,i)=>Object.assign({},v,{order:i+1}));const contentOptions=sourceOptions.map(v=>Object.assign({},v,{selected:this.state.selectedContent===v.id?'active':'idle',mark:this.state.selectedContent===v.id?'✓':'＋',choose:()=>this.setState({selectedContent:v.id})}));const selectedOption=sourceOptions.find(v=>v.id===this.state.selectedContent);
     const toggleMap=(key,id)=>{const next=Object.assign({},this.state[key]);next[id]=!next[id];this.setState({[key]:next});};const loginDefs=[['system','Tên đăng nhập và mật khẩu hệ thống','Dùng tài khoản AcaSys hiện có.','Dành cho nhân viên đã có tài khoản'],['project','Tài khoản được cấp theo dự án','Dùng tài khoản riêng của dự án.','Dành cho cộng tác viên hoặc đối tác'],['phone','Mã học viên hoặc số điện thoại','Không cần nhớ tên đăng nhập.','Đối chiếu với hồ sơ học viên'],['employee','Mã nhân viên','Đăng nhập nhanh bằng mã nhân sự.','Dữ liệu đồng bộ từ ERP']];const loginCodes={system:'id3154',project:'id3155',phone:'id3156',employee:'id3157'};const loginMethods=loginDefs.map((m,i)=>{const key=m[0],active=!!this.state.loginMethods[key],record=this.state.generatedLinks[key],generated=active&&!!record;return {key,number:i+1,name:m[1],description:m[2],example:m[3],statusText:active?'Đang bật':'Đang tắt',statusClass:active?'is-on':'',switchClass:active?'is-on':'',selectedClass:this.state.selectedLoginMethod===key&&generated?'is-selected':'',ariaChecked:active?'true':'false',generated,notGenerated:!generated,generateDisabled:!active,loginCode:record?record.code:'',loginLink:record?record.link:'',toggle:()=>toggleMap('loginMethods',key),generate:()=>{if(!active)return;const code=loginCodes[key];const next=Object.assign({},this.state.generatedLinks,{[key]:{code,link:'https://trainee.acacy.vn/'+code}});this.setState({generatedLinks:next,selectedLoginMethod:key,toast:'Đã tạo mã và link riêng cho “'+m[1]+'”.'});},openDetail:()=>this.setState({selectedLoginMethod:key})};});const selectedLoginDetail=loginMethods.find(m=>m.key===this.state.selectedLoginMethod&&m.generated)||null;const resultDefs=[['score','Hiển thị điểm','Điểm số học viên đạt được'],['percent','Hiển thị phần trăm','Tỷ lệ câu trả lời đúng'],['allQuestions','Hiển thị tất cả câu hỏi','Cho phép xem lại toàn bộ đề'],['studentAnswers','Hiển thị câu trả lời (học viên)','Hiển thị lựa chọn đã gửi'],['correctAnswers','Hiển thị câu trả lời đúng','Hiển thị đáp án chuẩn'],['questionResult','Hiển thị kết quả câu hỏi','Đúng hoặc sai trên mỗi câu'],['correctCount','Hiển thị số câu đúng','Tổng số câu trả lời đúng'],['wrongCount','Hiển thị số câu sai','Tổng số câu trả lời sai'],['examResult','Hiển thị kết quả thi','Đạt hoặc chưa đạt'],['correctList','Hiển thị danh sách câu hỏi đúng','Các câu đã trả lời đúng'],['wrongList','Hiển thị danh sách câu hỏi sai','Các câu đã trả lời sai']];const resultOptions=resultDefs.map(o=>{const active=!!this.state.resultOptions[o[0]];return {label:o[1],help:o[2],mark:active?'✓':'',className:active?'is-selected':'',ariaPressed:active?'true':'false',toggle:()=>toggleMap('resultOptions',o[0])};});
     const statusLabels={draft:'Nháp',pending:'Chờ duyệt',approved:'Đã duyệt',active:'Đang hoạt động',ended:'Đã đóng'};const openStep=n=>{if(n===3){if(this.state.workflowStage<3){this.setState({toast:'Hãy gửi duyệt lịch trước.'});return;}this.setState({workflowDialog:3});return;}if(n===4){if(this.state.workflowStage<4){this.setState({toast:'Lịch cần được phê duyệt trước khi phát hành.'});return;}this.setState({workflowDialog:4});return;}if(n===5){if(this.state.scheduleStatus!=='active'&&this.state.scheduleStatus!=='ended'){this.setState({toast:'Chỉ đóng được lịch đang hoạt động.'});return;}this.setState({workflowDialog:5});}};
-    const dialog=this.state.workflowDialog;let workflowDialogTitle='',workflowDialogSubtitle='',workflowDialogItems=[];if(dialog===3){workflowDialogTitle='Phê duyệt lịch';workflowDialogSubtitle='Quản lý xác nhận dữ liệu trước khi phát hành.';workflowDialogItems=[{icon:'✓',label:'Thông tin hợp lệ',help:'Không còn lỗi bắt buộc'},{icon:String(selectedCount),label:'Học viên',help:'Đã xác định phạm vi'},{icon:'80%',label:'Điểm đạt',help:'Áp dụng cho bài thi'}];}if(dialog===4){workflowDialogTitle='Phát hành lịch';workflowDialogSubtitle='Hệ thống sẽ giao nội dung và gửi thông báo.';workflowDialogItems=[{icon:String(selectedCount),label:'Học viên nhận lịch',help:'Theo danh sách đã chọn'},{icon:String(contentItems.length),label:'Nội dung được giao',help:'Liên kết từ khóa học'},{icon:'✉',label:'Thông báo',help:'Email và trong ứng dụng'}];}if(dialog===5){workflowDialogTitle='Đóng lịch';workflowDialogSubtitle='Chốt kết quả và dừng quyền truy cập.';workflowDialogItems=[{icon:'3',label:'Đã hoàn thành',help:'Đã ghi nhận kết quả'},{icon:'1',label:'Chưa đạt',help:'Cần theo dõi'}];}const closeHeaderMenus=()=>this.setState({projectMenu:false,languageMenu:false,accountMenu:false});
+    const dialog=this.state.workflowDialog;let workflowDialogTitle='',workflowDialogSubtitle='',workflowDialogItems=[];if(dialog===3){workflowDialogTitle='Phê duyệt lịch';workflowDialogSubtitle='Quản lý xác nhận dữ liệu trước khi phát hành.';workflowDialogItems=[{icon:'✓',label:'Thông tin hợp lệ',help:'Không còn lỗi bắt buộc'},{icon:String(selectedCount),label:'Học viên',help:'Đã xác định phạm vi'},{icon:'80%',label:'Điểm đạt',help:'Áp dụng cho bài thi'}];}if(dialog===4){workflowDialogTitle='Phát hành lịch';workflowDialogSubtitle='Hệ thống sẽ giao nội dung và gửi thông báo.';workflowDialogItems=[{icon:String(selectedCount),label:'Học viên nhận lịch',help:'Theo danh sách đã chọn'},{icon:String(contentItems.length),label:'Nội dung được giao',help:'Liên kết từ khóa học'},{icon:'✉',label:'Thông báo',help:'Email và trong ứng dụng'}];}if(dialog===5){workflowDialogTitle='Đóng lịch';workflowDialogSubtitle='Chốt kết quả và dừng quyền truy cập.';workflowDialogItems=[{icon:'3',label:'Đã hoàn thành',help:'Đã ghi nhận kết quả'},{icon:'1',label:'Chưa đạt',help:'Cần theo dõi'}];}const closeHeaderMenus=()=>this.setState({projectMenu:false,languageMenu:false,accountMenu:false});const lessonStateForStep=step=>{if(!step)return{};const firstLesson=String(step.lessons[0]||'');if(step.course==='sales'){const id=Number(firstLesson)||1;return{sourceCourse:'sales',selectedLessonIds:[id],selectedContent:'scope-lesson-'+id,addedContent:[],removedContent:{}};}return{sourceCourse:'',selectedContent:firstLesson||'exam-product',addedContent:[],removedContent:{}};};
     return {nav,detailTabs,courseContext:this.state.origin==='course',scheduleContext:this.state.origin!=='course',currentStepNumber:currentStepIndex+1,currentStepLabel:detailDefs[currentStepIndex][2],hasPreviousStep:currentStepIndex>0,hasNextStep:currentStepIndex<detailDefs.length-1,firstStep:currentStepIndex===0,lastStep:currentStepIndex===detailDefs.length-1,previousStep:()=>keepScroll({tab:detailDefs[Math.max(0,currentStepIndex-1)][0]}),nextStep:()=>keepScroll({tab:detailDefs[Math.min(detailDefs.length-1,currentStepIndex+1)][0]}),pageTitle,headingTitle,saveActionLabel,operationLabel,operationValue,detailsHeadingTitle:studyOnly?'Thông tin lịch học':'Thông tin, thời gian và quy định thi',studyOnlyMode:studyOnly,notStudyOnlyMode:!studyOnly,otherSectionTitle:studyOnly?'Thông tin khác':'Phạm vi và điều kiện áp dụng',defaultDescription,scheduleStart,scheduleEnd,scheduleTimeText,maxAttempts,scheduleCode:this.state.scheduleCode,examMode:this.state.scheduleType!=='class',examConfigMode:this.state.scheduleType!=='class',otherSectionNumber:studyOnly?'3':'4',examQuestionCount:fromSalesCourse?salesQuestionCount:30,linkedCourseOptions,linkedCourseValue,linkedItemOptions,linkedItemValue,courseSelectionLocked,courseSelectionLockedAria:String(courseSelectionLocked),lessonSelectionLocked,lessonSelectionLockedAria:String(lessonSelectionLocked),linkedCourseName:fromSalesCourse?'Chốt sale hiệu quả trong 5 bước':isExam?'Danh mục sản phẩm 2026':'Văn hóa và nội quy công ty',linkedAlternateCourseName:fromSalesCourse?'Chọn khóa học khác':isExam?'Danh mục sản phẩm 2026':'Danh mục sản phẩm 2026',linkedItemLabel:fromSalesCourse?'Bài học của lịch thi *':isExam?'Bài thi *':'Bài học / bài thi',linkedItemName:fromSalesCourse?salesScopeName:isExam?'Đánh giá kiến thức sản phẩm 2026':'Kiểm tra hội nhập cuối khóa',linkedAlternateItemName:fromSalesCourse?'Chọn đúng một bài học':isExam?'Kiểm tra hội nhập cuối khóa':'Kiểm tra hội nhập cuối khóa',questionScopeLabel:fromSalesCourse?salesScopeLabel:'Chỉ nội dung đã gắn vào lịch',questionScopeHelp:fromSalesCourse?'Không lấy câu hỏi từ bài học hoặc khóa học khác.':'Hệ thống không lấy câu hỏi ngoài nội dung đã chọn.',addContentLabel:fromSalesCourse?'Đổi bài học':isExam?'Thêm bài thi':'Thêm nội dung',contentItems,contentOptions,contentCount:contentItems.length,manualStudents,manualEmpty:studentResult.length===0,studentQueryInput:this.state.studentQueryInput,studentDepartment:this.state.studentDepartment,studentLevel:this.state.studentLevel,filteredStudentCount:studentResult.length,selectVisibleMark:allVisibleSelected?'✓':someVisibleSelected?'−':'',selectVisibleClass:allVisibleSelected||someVisibleSelected?'is-selected':'',selectVisibleAria:String(allVisibleSelected),audienceCount:selectedCount,studentTotal:students.length,loginMethods,resultOptions,resultDisplayMode:this.state.resultDisplayMode,captureInterval:this.state.captureInterval,proctoringEnabled:this.state.proctoring,remindersEnabled:this.state.reminders,tabDetails:this.state.tab==='details',tabStudents:this.state.tab==='students',tabAccess:this.state.tab==='access',tabSettings:this.state.tab==='settings',scheduleStatus:this.state.scheduleStatus,scheduleStatusLabel:statusLabels[this.state.scheduleStatus],updatedText:this.state.updatedText,readOnly:false,readOnlyClass:'',editable:!lessonSelectionLocked,canSubmit:this.state.scheduleStatus==='draft',submitted:this.state.scheduleStatus==='pending',canPublish:this.state.scheduleStatus==='approved',canCloseSchedule:this.state.scheduleStatus==='active',submitOpen:this.state.submitOpen,previewOpen:this.state.previewOpen,addContentOpen:this.state.addContentOpen&&!lessonSelectionLocked,workflowDialogOpen:dialog>0,workflowDialogNumber:dialog,workflowDialogTitle,workflowDialogSubtitle,workflowDialogItems,showRejectAction:dialog===3&&this.state.scheduleStatus==='pending',showApproveAction:dialog===3&&this.state.scheduleStatus==='pending',showPublishAction:dialog===4&&this.state.scheduleStatus==='approved',showCloseAction:dialog===5&&this.state.scheduleStatus==='active',toast:this.state.toast,toastOpen:!!this.state.toast,currentProject:this.state.currentProject,language:this.state.language,projectMenuOpen:this.state.projectMenu,languageMenuOpen:this.state.languageMenu,accountMenuOpen:this.state.accountMenu,
-    linkedCourseLabel,linkedItemLabel:linkedScopeLabel,detailsLocked,detailsLockedClass:detailsLocked?'is-locked':'',contentRemovable:!isExam&&!lessonSelectionLocked,addContentLabel:isExam?'Đổi bài học':(fromSalesCourse?'Đổi bài học':'Thêm nội dung'),loginLayoutClass:selectedLoginDetail?'has-detail':'',loginDetailOpen:!!selectedLoginDetail,loginDetailName:selectedLoginDetail?selectedLoginDetail.name:'',loginDetailCode:selectedLoginDetail?selectedLoginDetail.loginCode:'',loginDetailLink:selectedLoginDetail?selectedLoginDetail.loginLink:'',closeLoginDetail:()=>this.setState({selectedLoginMethod:''}),copyLoginDetail:()=>this.setState({toast:'Đã sao chép link '+(selectedLoginDetail?selectedLoginDetail.loginLink:'')+'.'}),
+    pageTitle:scopedPageTitle,headingTitle:scopedHeadingTitle,studentTotal:scopedStudents.length,linkedCourseLabel,linkedItemLabel:linkedScopeLabel,detailsLocked,detailsLockedClass:detailsLocked?'is-locked':'',autoLevelEnabled,autoLevelDisabled,autoLevelDisabledAria:String(autoLevelDisabled),autoLevelDisabledClass:autoLevelDisabled?'is-disabled':'',autoLevelHelp,targetLevel:this.state.targetLevel,contentRemovable:!isExam&&!lessonSelectionLocked,addContentLabel:isExam?'Đổi bài học':(fromSalesCourse?'Đổi bài học':'Thêm nội dung'),loginLayoutClass:selectedLoginDetail?'has-detail':'',loginDetailOpen:!!selectedLoginDetail,loginDetailName:selectedLoginDetail?selectedLoginDetail.name:'',loginDetailCode:selectedLoginDetail?selectedLoginDetail.loginCode:'',loginDetailLink:selectedLoginDetail?selectedLoginDetail.loginLink:'',closeLoginDetail:()=>this.setState({selectedLoginMethod:''}),copyLoginDetail:()=>this.setState({toast:'Đã sao chép link '+(selectedLoginDetail?selectedLoginDetail.loginLink:'')+'.'}),
+    departmentOptions:projectCatalog.departments,criteriaOptions:projectCatalog.criteria,tagOptions:projectCatalog.tags,managementLabelOptions,managementLabelValue,managementLabelLocked:detailsLocked||managementLabelOptions.length===0,
+    scheduleScope:this.state.scheduleScope,scheduleScopeLabel:pathScope?'Thuộc lộ trình':'Khóa lẻ',scheduleScopeHelp:pathScope?'Lịch xuất hiện trong đúng bước của lộ trình đã chọn.':'Lịch thuộc khóa học độc lập, không tính tiến độ lộ trình.',pathScope,standaloneScope:!pathScope,pathOptions,pathValue:selectedPathValue,pathStepOptions,pathStepValue:selectedPathStepValue,scopeSelectionLocked:this.state.courseFixed||detailsLocked,scopeSelectionLockedAria:String(this.state.courseFixed||detailsLocked),pathSelectionLocked:detailsLocked,linkedCourseHelp:pathScope?'Khóa học được lấy tự động từ bước trong lộ trình.':'Chọn khóa học chứa bài học cần giao.',
+    linkedCourseOptions:businessCourseOptions,linkedCourseValue:businessCourseValue,linkedItemOptions:businessLessonOptions,linkedItemValue:businessLessonValue,linkedCourseLabel:'Khóa học *',linkedItemLabel:studyOnly?'Bài học *':'Bài học của lịch thi *',addContentLabel:'Đổi bài học',contentRemovable:false,
+    targetLevel:businessTargetLevel,autoLevelDisabled:businessAutoLevelDisabled,autoLevelDisabledAria:String(businessAutoLevelDisabled),autoLevelDisabledClass:businessAutoLevelDisabled?'is-disabled':'',autoLevelEnabled:this.state.autoLevel&&!businessAutoLevelDisabled,autoLevelClass:this.state.autoLevel&&!businessAutoLevelDisabled?'is-on':'',autoLevelAria:String(this.state.autoLevel&&!businessAutoLevelDisabled),autoLevelHelp:businessAutoLevelHelp,
     availableMultiple,availableEssay,availableAudio,availableTotal,questionBankLesson,
-    designatedOnlyClass:this.state.designatedOnly?'is-on':'',designatedOnlyAria:String(this.state.designatedOnly),countScoreClass:this.state.countScore?'is-on':'',countScoreAria:String(this.state.countScore),individualTimeClass:this.state.individualTime?'is-on':'',individualTimeAria:String(this.state.individualTime),postEvaluationClass:this.state.postEvaluation?'is-on':'',postEvaluationAria:String(this.state.postEvaluation),coachingClass:this.state.coaching?'is-on':'',coachingAria:String(this.state.coaching),certificateClass:this.state.certificate?'is-on':'',certificateAria:String(this.state.certificate),kpiClass:this.state.kpi?'is-on':'',kpiAria:String(this.state.kpi),autoLevelClass:this.state.autoLevel?'is-on':'',autoLevelAria:String(this.state.autoLevel),remindersClass:this.state.reminders?'is-on':'',remindersAria:String(this.state.reminders),proctoringClass:this.state.proctoring?'is-on':'',proctoringAria:String(this.state.proctoring),
-    onOperationChange:e=>{const value=e.target.value;this.setState({scheduleType:value==='exam'?'exam':value==='study'?'class':'learning'});},onLinkedCourseChange:e=>{if(courseSelectionLocked){this.setState({toast:this.state.courseFixed?'Khóa học được cố định khi tạo lịch từ khóa học.':'Lịch đã phát hành, không thể sửa bài thi.'});return;}const nextCourse=e.target.value;this.setState({sourceCourse:nextCourse==='sales'?'sales':'',selectedLessonIds:nextCourse==='sales'?[4]:this.state.selectedLessonIds,selectedContent:nextCourse==='sales'?'scope-lesson-4':'exam-product',addedContent:[],removedContent:{}});},onLinkedItemChange:e=>{if(lessonSelectionLocked){this.setState({toast:'Lịch đã phát hành, không thể sửa bài thi.'});return;}if(fromSalesCourse){const lessonId=Number(e.target.value)||1;this.setState({selectedLessonIds:[lessonId],selectedContent:'scope-lesson-'+lessonId,addedContent:[],removedContent:{}});return;}this.setState({selectedContent:e.target.value});},
+    designatedOnlyClass:this.state.designatedOnly?'is-on':'',designatedOnlyAria:String(this.state.designatedOnly),countScoreClass:this.state.countScore?'is-on':'',countScoreAria:String(this.state.countScore),individualTimeClass:this.state.individualTime?'is-on':'',individualTimeAria:String(this.state.individualTime),postEvaluationClass:this.state.postEvaluation?'is-on':'',postEvaluationAria:String(this.state.postEvaluation),coachingClass:this.state.coaching?'is-on':'',coachingAria:String(this.state.coaching),certificateClass:this.state.certificate?'is-on':'',certificateAria:String(this.state.certificate),kpiClass:this.state.kpi?'is-on':'',kpiAria:String(this.state.kpi),autoLevelClass:autoLevelEnabled?'is-on':'',autoLevelAria:String(autoLevelEnabled),remindersClass:this.state.reminders?'is-on':'',remindersAria:String(this.state.reminders),proctoringClass:this.state.proctoring?'is-on':'',proctoringAria:String(this.state.proctoring),
+    onManagementLabelChange:e=>this.setState({selectedManagementLabel:e.target.value}),onOperationChange:e=>{const value=e.target.value;const nextType=value==='exam'?'exam':value==='study'?'class':'learning';this.setState({scheduleType:nextType,autoLevel:nextType==='class'?false:this.state.autoLevel});},onLinkedCourseChange:e=>{if(courseSelectionLocked){this.setState({toast:this.state.courseFixed?'Khóa học được cố định khi tạo lịch từ khóa học.':'Lịch đã phát hành, không thể sửa bài thi.'});return;}const nextCourse=e.target.value;this.setState({sourceCourse:nextCourse==='sales'?'sales':'',selectedLessonIds:nextCourse==='sales'?[4]:this.state.selectedLessonIds,selectedContent:nextCourse==='sales'?'scope-lesson-4':'exam-product',addedContent:[],removedContent:{}});},onLinkedItemChange:e=>{if(lessonSelectionLocked){this.setState({toast:'Lịch đã phát hành, không thể sửa bài thi.'});return;}if(fromSalesCourse){const lessonId=Number(e.target.value)||1;this.setState({selectedLessonIds:[lessonId],selectedContent:'scope-lesson-'+lessonId,addedContent:[],removedContent:{}});return;}this.setState({selectedContent:e.target.value});},
     onStudentQuery:e=>this.setState({studentQueryInput:e.target.value}),applyStudentSearch:()=>this.setState({studentQuery:this.state.studentQueryInput}),onStudentDepartment:e=>this.setState({studentDepartment:e.target.value}),onStudentLevel:e=>this.setState({studentLevel:e.target.value}),clearStudentSearch:()=>this.setState({studentQueryInput:'',studentQuery:'',studentDepartment:'all',studentLevel:'all'}),toggleVisibleStudents:()=>{const next=Object.assign({},this.state.selectedStudents);studentResult.forEach(s=>{if(allVisibleSelected)delete next[s.code];else next[s.code]=true;});this.setState({selectedStudents:next,toast:(allVisibleSelected?'Đã bỏ chọn ':'Đã chọn ')+studentResult.length+' học viên trong kết quả lọc.'});},copyScheduleLink:()=>this.setState({toast:'Đã sao chép link đăng nhập theo lịch.'}),
-    toggleDesignatedOnly:()=>this.setState({designatedOnly:!this.state.designatedOnly}),toggleCountScore:()=>this.setState({countScore:!this.state.countScore}),toggleIndividualTime:()=>this.setState({individualTime:!this.state.individualTime}),togglePostEvaluation:()=>this.setState({postEvaluation:!this.state.postEvaluation}),toggleCoaching:()=>this.setState({coaching:!this.state.coaching}),toggleCertificate:()=>this.setState({certificate:!this.state.certificate}),toggleKpi:()=>this.setState({kpi:!this.state.kpi}),toggleAutoLevel:()=>this.setState({autoLevel:!this.state.autoLevel}),toggleReminders:()=>this.setState({reminders:!this.state.reminders}),toggleProctoring:()=>this.setState({proctoring:!this.state.proctoring}),onCaptureInterval:e=>this.setState({captureInterval:e.target.value}),onResultDisplayMode:e=>this.setState({resultDisplayMode:e.target.value}),resetSettings:()=>this.setState({autoLevel:false,reminders:true,proctoring:true,captureInterval:3,resultDisplayMode:'schedule',resultOptions:{score:false,percent:true,allQuestions:false,studentAnswers:false,correctAnswers:false,questionResult:false,correctCount:false,wrongCount:false,examResult:true,correctList:false,wrongList:true},toast:'Đã khôi phục cấu hình mặc định.'}),
+    toggleDesignatedOnly:()=>this.setState({designatedOnly:!this.state.designatedOnly}),toggleCountScore:()=>this.setState({countScore:!this.state.countScore}),toggleIndividualTime:()=>this.setState({individualTime:!this.state.individualTime}),togglePostEvaluation:()=>this.setState({postEvaluation:!this.state.postEvaluation}),toggleCoaching:()=>this.setState({coaching:!this.state.coaching}),toggleCertificate:()=>this.setState({certificate:!this.state.certificate}),toggleKpi:()=>this.setState({kpi:!this.state.kpi}),toggleAutoLevel:()=>{if(studyOnly){this.setState({toast:'Lịch chỉ học không có kết quả Đạt nên không thể tự động nâng Level.'});return;}if(detailsLocked){this.setState({toast:'Lịch đã phát hành, không thể đổi cấu hình nâng Level.'});return;}this.setState({autoLevel:!this.state.autoLevel});},onTargetLevel:e=>{if(detailsLocked){this.setState({toast:'Lịch đã phát hành, không thể đổi Level mục tiêu.'});return;}this.setState({targetLevel:e.target.value});},toggleReminders:()=>this.setState({reminders:!this.state.reminders}),toggleProctoring:()=>this.setState({proctoring:!this.state.proctoring}),onCaptureInterval:e=>this.setState({captureInterval:e.target.value}),onResultDisplayMode:e=>this.setState({resultDisplayMode:e.target.value}),resetSettings:()=>{if(detailsLocked){this.setState({toast:'Lịch đã phát hành, không thể khôi phục các cấu hình ảnh hưởng kết quả.'});return;}this.setState({autoLevel:false,targetLevel:'Cấp độ 2',reminders:true,proctoring:true,captureInterval:3,resultDisplayMode:'schedule',resultOptions:{score:false,percent:true,allQuestions:false,studentAnswers:false,correctAnswers:false,questionResult:false,correctCount:false,wrongCount:false,examResult:true,correctList:false,wrongList:true},toast:'Đã khôi phục cấu hình mặc định.'});},
     openAddContent:()=>lessonSelectionLocked?this.setState({toast:'Lịch đã phát hành, không thể sửa bài thi.'}):this.setState({addContentOpen:true}),closeAddContent:()=>this.setState({addContentOpen:false}),confirmAddContent:()=>{if(lessonSelectionLocked){this.setState({addContentOpen:false,toast:'Lịch đã phát hành, không thể sửa bài thi.'});return;}if(!selectedOption)return;if(fromSalesCourse){const lessonId=Number(selectedOption.id.replace('scope-lesson-',''));this.setState({selectedLessonIds:[lessonId],selectedContent:selectedOption.id,addedContent:[],removedContent:{},addContentOpen:false,toast:'Đã chọn “'+selectedOption.name+'” cho lịch thi.'});return;}if(isExam){this.setState({selectedContent:selectedOption.id,addedContent:[],removedContent:{},addContentOpen:false,toast:'Đã chọn “'+selectedOption.name+'” làm bài thi duy nhất của lịch.'});return;}const exists=contentItems.some(v=>v.id===selectedOption.id);this.setState({addedContent:exists?this.state.addedContent:this.state.addedContent.concat([selectedOption]),addContentOpen:false,toast:exists?'Nội dung này đã có trong lịch.':'Đã thêm “'+selectedOption.name+'” vào lịch.'});},openPreview:()=>this.setState({previewOpen:true}),closePreview:()=>this.setState({previewOpen:false}),saveDraft:()=>this.setState({isCreating:false,updatedText:'Đã lưu vừa xong',toast:this.state.isCreating?'Đã tạo lịch thi và lưu toàn bộ cấu hình.':'Đã lưu cấu hình lịch.'}),openSubmit:()=>this.setState({submitOpen:true,workflowStage:2}),closeSubmit:()=>this.setState({submitOpen:false}),confirmSubmit:()=>this.setState({submitOpen:false,scheduleStatus:'pending',workflowStage:3,toast:'Đã gửi lịch đến Nguyễn Thị Lan phê duyệt.'}),openApprovalStep:()=>openStep(3),openPublishStep:()=>openStep(4),openCloseStep:()=>openStep(5),closeWorkflowDialog:()=>this.setState({workflowDialog:0}),approveSchedule:()=>this.setState({workflowDialog:0,workflowStage:4,scheduleStatus:'approved',toast:'Lịch đã được phê duyệt.'}),rejectSchedule:()=>this.setState({workflowDialog:0,workflowStage:1,scheduleStatus:'draft',tab:'details',toast:'Lịch đã được trả về để chỉnh sửa.'}),publishSchedule:()=>this.setState({workflowDialog:0,workflowStage:4,scheduleStatus:'active',addContentOpen:false,toast:'Đã phát hành lịch đến '+selectedCount+' học viên.'}),closeSchedule:()=>this.setState({workflowDialog:0,workflowStage:5,scheduleStatus:'ended',toast:'Đã đóng lịch và chốt kết quả.'}),closeToast:()=>this.setState({toast:''}),
-    linkNeedsSave:this.state.isCreating,linkCanGenerate:!this.state.isCreating,openDetails:()=>this.setState({tab:'details'}),toggleProjectMenu:()=>this.setState({projectMenu:!this.state.projectMenu,languageMenu:false,accountMenu:false}),toggleLanguageMenu:()=>this.setState({languageMenu:!this.state.languageMenu,projectMenu:false,accountMenu:false}),toggleAccountMenu:()=>this.setState({accountMenu:!this.state.accountMenu,projectMenu:false,languageMenu:false}),closeHeaderMenus,chooseAcacy:()=>this.setState({currentProject:'ACACY PRESENTATION',projectMenu:false}),chooseInternal:()=>this.setState({currentProject:'Đào tạo nội bộ 2026',projectMenu:false}),chooseVietnamese:()=>this.setState({language:'Tiếng Việt',languageMenu:false}),chooseEnglish:()=>this.setState({language:'English',languageMenu:false}),chooseJapanese:()=>this.setState({language:'日本語',languageMenu:false})};
+    onScheduleScopeChange:e=>{if(this.state.courseFixed||detailsLocked){this.setState({toast:this.state.courseFixed?'Lịch tạo từ khóa học được giữ ở phạm vi Khóa lẻ.':'Lịch đã phát hành, không thể đổi phạm vi.'});return;}const scope=e.target.value==='path'?'path':'standalone';if(scope==='standalone'){this.setState({scheduleScope:'standalone',selectedPath:'',selectedPathStep:'',toast:'Đã chuyển sang lịch Khóa lẻ.'});return;}const path=pathCatalog[0],step=path&&path.steps[0];this.setState(Object.assign({scheduleScope:'path',selectedPath:path?path.id:'',selectedPathStep:step?step.id:'',toast:'Đã liên kết lịch với lộ trình.'},lessonStateForStep(step)));},onPathChange:e=>{if(detailsLocked){this.setState({toast:'Lịch đã phát hành, không thể đổi lộ trình.'});return;}const path=pathCatalog.find(item=>item.id===e.target.value)||pathCatalog[0],step=path&&path.steps[0];this.setState(Object.assign({selectedPath:path?path.id:'',selectedPathStep:step?step.id:''},lessonStateForStep(step)));},onPathStepChange:e=>{if(detailsLocked){this.setState({toast:'Lịch đã phát hành, không thể đổi bước trong lộ trình.'});return;}const step=selectedPathDef&&selectedPathDef.steps.find(item=>item.id===e.target.value);this.setState(Object.assign({selectedPath:selectedPathValue,selectedPathStep:step?step.id:''},lessonStateForStep(step)));},
+    onLinkedCourseChange:e=>{if(courseSelectionLocked){this.setState({toast:pathScope?'Khóa học được xác định tự động bởi bước trong lộ trình.':this.state.courseFixed?'Khóa học được cố định khi tạo lịch từ khóa học.':'Lịch đã phát hành, không thể sửa khóa học hoặc bài học.'});return;}const next=e.target.value;this.setState({sourceCourse:next==='sales'?'sales':'',selectedLessonIds:next==='sales'?[1]:this.state.selectedLessonIds,selectedContent:next==='sales'?'scope-lesson-1':next==='demo'?'demo-intro':'exam-product',addedContent:[],removedContent:{}});},
+    onLinkedItemChange:e=>{if(lessonSelectionLocked){this.setState({toast:'Lịch đã phát hành, không thể sửa bài học.'});return;}if(fromSalesCourse){const id=Number(e.target.value)||1;this.setState({selectedLessonIds:[id],selectedContent:'scope-lesson-'+id,addedContent:[],removedContent:{}});return;}this.setState({selectedContent:e.target.value,addedContent:[],removedContent:{}});},
+    confirmAddContent:()=>{if(lessonSelectionLocked){this.setState({addContentOpen:false,toast:'Lịch đã phát hành, không thể sửa bài học.'});return;}const option=businessLessonOptions.find(item=>String(item.value)===String(businessLessonValue));if(!option)return;this.setState({addedContent:[],removedContent:{},addContentOpen:false,toast:'Đã chọn một bài học duy nhất cho lịch.'});},
+    toggleAutoLevel:()=>{if(businessAutoLevelDisabled){this.setState({toast:businessAutoLevelHelp});return;}this.setState({autoLevel:!this.state.autoLevel});},onTargetLevel:()=>this.setState({toast:'Level sau khi đạt được suy ra từ Level của khóa học, không chỉnh trực tiếp tại lịch.'}),
+    linkNeedsSave:this.state.isCreating,linkCanGenerate:!this.state.isCreating,openDetails:()=>this.setState({tab:'details'}),toggleProjectMenu:()=>{},toggleLanguageMenu:()=>this.setState({languageMenu:!this.state.languageMenu,accountMenu:false}),toggleAccountMenu:()=>this.setState({accountMenu:!this.state.accountMenu,languageMenu:false}),closeHeaderMenus,chooseVietnamese:()=>this.setState({language:'Tiếng Việt',languageMenu:false}),chooseEnglish:()=>this.setState({language:'English',languageMenu:false}),chooseJapanese:()=>this.setState({language:'日本語',languageMenu:false})};
   }
 }
-</script></body></html>
+</script>
+</body>
+
+</html>

@@ -3,6 +3,7 @@
 <html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script src="../../shared/js/project-data.js"></script>
 <script defer src="../../shared/js/navigation.js"></script>
 <title>Khóa học – danh sách</title>
 <script src="js/courses-c1d4e2a3.js"></script>
@@ -10,8 +11,8 @@
 <body>
 <x-dc>
 <helmet>
-<link href="../../shared/css/base.css" rel="stylesheet"/>
-<link href="css/courses.css" rel="stylesheet"/>
+<link href="../../shared/css/base.css?v=20261104-flex3" rel="stylesheet"/>
+<link href="css/courses.css?v=20261105-question-attachment" rel="stylesheet"/>
 </helmet>
 <div class="app-shell">
 <nav aria-label="Menu chính" class="app-sidebar">
@@ -59,7 +60,7 @@
 <div class="ui-panel-b02d809">
 <div class="ui-panel-d08feb7">
 <h1 class="ui-title-fbb879b">Khóa học</h1>
-<p class="muted-text">{{ total }} khóa học trong dự án {{ currentProject }}. Mở một khóa học để thêm bài học, câu hỏi và tài liệu.</p>
+<p class="muted-text">{{ total }} khóa học trong dự án {{ currentProject }}. Mỗi khóa học thuộc một chương trình và có thể không tham gia cơ chế Level.</p>
 </div>
 <button sc-camel-on-click="{{ openAdd }}" type="button" class="ui-button-53d3bfd">
 <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" width="18"><path d="M12 5v14M5 12h14"></path></svg>Thêm khóa học</button>
@@ -84,6 +85,7 @@
 <sc-raw-th class="ui-sc-raw-th-8fadfc2">Khóa học</sc-raw-th>
 <sc-raw-th class="ui-sc-raw-th-0fd0be9">Chương trình</sc-raw-th>
 <sc-raw-th class="ui-sc-raw-th-0fd0be9">Ngành hàng</sc-raw-th>
+<sc-raw-th class="ui-sc-raw-th-0fd0be9">Quản lý Level</sc-raw-th>
 <sc-raw-th class="ui-sc-raw-th-0fd0be9">Bài học</sc-raw-th>
 <sc-raw-th class="ui-sc-raw-th-0fd0be9">Câu hỏi</sc-raw-th>
 <sc-raw-th class="ui-sc-raw-th-b2738ba"><span class="visually-hidden">Thao tác</span></sc-raw-th>
@@ -100,6 +102,7 @@
 </sc-raw-td>
 <sc-raw-td class="ui-sc-raw-td-e148056">{{ r.prog }}</sc-raw-td>
 <sc-raw-td class="ui-sc-raw-td-adaa0cc"><span class="courses-label-97440fa">{{ r.industry }}</span></sc-raw-td>
+<sc-raw-td class="ui-sc-raw-td-adaa0cc"><span class="course-level-status {{ r.levelClass }}">{{ r.levelLabel }}</span></sc-raw-td>
 <sc-raw-td class="ui-sc-raw-td-e148056">{{ r.lessons }}</sc-raw-td>
 <sc-raw-td class="ui-sc-raw-td-adaa0cc">
 <sc-if hint-placeholder-val="{{ true }}" value="{{ r.hasQ }}"><span class="courses-label-144469c">{{ r.questions }}</span></sc-if>
@@ -110,9 +113,9 @@
 <sc-if hint-placeholder-val="{{ false }}" value="{{ r.menuOpen }}">
 <div role="menu" class="ui-panel-5b45285">
 <a href="course-detail.html" role="menuitem" class="ui-link-07ef58a">Mở khóa học</a>
-<button role="menuitem" type="button" class="ui-button-aa9210c">Sửa thông tin</button>
+<button role="menuitem" sc-camel-on-click="{{ r.edit }}" type="button" class="ui-button-aa9210c">Sửa thông tin</button>
 <div class="ui-panel-5032cf7"></div>
-<button role="menuitem" type="button" class="ui-button-b9d201c">Xóa khóa học</button>
+<button role="menuitem" sc-camel-on-click="{{ r.remove }}" type="button" class="ui-button-b9d201c">Xóa khóa học</button>
 </div>
 </sc-if>
 </sc-raw-td>
@@ -134,15 +137,19 @@
 <div class="modal-backdrop">
 <section aria-label="Thêm khóa học" role="dialog" class="ui-section-fc408b0">
 <h2 class="ui-heading-ae46a5c">Thêm khóa học</h2>
-<label class="form-field">Tên khóa học <span class="danger-text">*</span><input placeholder="VD: Chăm sóc khách hàng sau bán" type="text" class="form-control"/></label>
+<label class="form-field"><span class="course-field-label">Dự án <span class="danger-text">*</span></span><input disabled="disabled" type="text" value="{{ currentProject }}" class="form-control"/></label>
+<label class="form-field"><span class="course-field-label">Tên khóa học <span class="danger-text">*</span></span><input placeholder="VD: Chăm sóc khách hàng sau bán" sc-camel-on-input="{{ onAddName }}" type="text" value="{{ addName }}" class="form-control"/></label>
 <div class="ui-panel-ba0ec76">
-<label class="form-field">Chương trình <span class="danger-text">*</span><sc-raw-select class="ui-sc-raw-select-89f8d6a"><option>Kỹ năng bán hàng</option><option>Hội nhập nhân viên mới</option><option>Trưng bày sản phẩm</option><option>Kiến thức sản phẩm</option><option>Quản lý cửa hàng</option></sc-raw-select></label>
-<label class="form-field">Ngành hàng<sc-raw-select class="ui-sc-raw-select-89f8d6a"><option>Bán hàng</option><option>Hội nhập</option><option>Trưng bày</option><option>Sản phẩm</option><option>Quản lý</option></sc-raw-select></label>
+<label class="form-field"><span class="course-field-label">Chương trình <span class="danger-text">*</span></span><sc-raw-select class="ui-sc-raw-select-89f8d6a"><option>Kỹ năng bán hàng</option><option>Hội nhập nhân viên mới</option><option>Trưng bày sản phẩm</option><option>Kiến thức sản phẩm</option><option>Quản lý cửa hàng</option></sc-raw-select></label>
+<label class="form-field">Ngành hàng<sc-raw-select class="ui-sc-raw-select-89f8d6a"><sc-for as="industryOption" hint-placeholder-count="5" list="{{ industryOptions }}"><option value="{{ industryOption.code }}">{{ industryOption.code }} · {{ industryOption.name }}</option></sc-for></sc-raw-select></label>
 </div>
+<label class="form-field">Kênh phân phối<sc-raw-select sc-camel-on-change="{{ onAddChannel }}" value="{{ addChannel }}" class="ui-sc-raw-select-89f8d6a"><option value="">Chọn kênh phân phối...</option><sc-for as="channelOption" hint-placeholder-count="2" list="{{ channelOptions }}"><option value="{{ channelOption.code }}">{{ channelOption.code }} · {{ channelOption.name }}</option></sc-for></sc-raw-select></label>
+<label class="course-level-toggle"><input checked="{{ addNoLevel }}" sc-camel-on-click="{{ toggleAddNoLevel }}" type="checkbox"/><span><strong>Không theo Level</strong><small>Bật nếu khóa học chỉ cung cấp nội dung và không tham gia nâng Level học viên.</small></span></label>
+<sc-if hint-placeholder-val="true" value="{{ addLeveled }}"><label class="form-field"><span class="course-field-label">Level của khóa học <span class="danger-text">*</span></span><sc-raw-select sc-camel-on-change="{{ onAddLevel }}" value="{{ addLevel }}" class="ui-sc-raw-select-89f8d6a"><option value="0">Level 0</option><option value="1">Level 1</option><option value="2">Level 2</option><option value="3">Level 3</option><option value="4">Level 4</option></sc-raw-select><small>Mỗi khóa học chỉ thuộc một Level. Lộ trình sẽ tự suy ra Level từ các khóa học đã chọn.</small></label></sc-if>
 <p class="courses-text-f9cb7b0">Tạo xong, hệ thống mở khóa học để bạn thêm bài học.</p>
 <div class="actions-row">
 <button sc-camel-on-click="{{ closeAdd }}" type="button" class="ui-button-7ee8f8c">Hủy</button>
-<a href="course-detail.html" class="courses-link-fde5cb4">Tạo khóa học</a>
+<button sc-camel-on-click="{{ createCourse }}" type="button" class="courses-link-fde5cb4">Tạo khóa học</button>
 </div>
 </section>
 </div>
@@ -153,7 +160,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { q: '', prog: 'all', menu: null, add: false };
+    this.state = { q: '', prog: 'all', menu: null, add: false, addName:'', addChannel:'', addNoLevel: false, addLevel:'1', deleted: {} };
   }
   renderVals() {
     const P = {
@@ -179,39 +186,47 @@ class Component extends DCLogic {
       ql: { name: 'Quản lý cửa hàng' }
     };
     const data = [
-      ['bh', 'Chốt sale hiệu quả trong 5 bước', 'Bán hàng', 4, 10, 'ACACY PRESENTATION'],
-      ['bh', 'Tư vấn sản phẩm theo nhu cầu', 'Bán hàng', 3, 8, 'ACACY PRESENTATION'],
-      ['bh', 'Xử lý từ chối của khách hàng', 'Bán hàng', 2, 6, 'ACACY PRESENTATION'],
-      ['hn', 'Văn hóa và nội quy công ty', 'Hội nhập', 3, 8, 'ACACY PRESENTATION'],
-      ['hn', 'An toàn lao động tại cửa hàng', 'Hội nhập', 2, 6, 'ACACY PRESENTATION'],
-      ['hn', 'Làm quen ứng dụng đào tạo', 'Hội nhập', 1, 0, 'ACACY PRESENTATION'],
-      ['tb', 'Nguyên tắc trưng bày kệ hàng', 'Trưng bày', 3, 8, 'ACACY PRESENTATION'],
-      ['tb', 'Trưng bày mùa lễ hội', 'Trưng bày', 2, 5, 'ACACY PRESENTATION'],
-      ['sp', 'Danh mục sản phẩm 2026', 'Sản phẩm', 5, 15, 'ACACY PRESENTATION'],
-      ['sp', 'Sản phẩm mới quý 4', 'Sản phẩm', 2, 6, 'ACACY PRESENTATION'],
-      ['ql', 'Lập kế hoạch ca làm việc', 'Quản lý', 3, 8, 'ACACY PRESENTATION'],
-      ['ql', 'Kèm cặp nhân viên mới', 'Quản lý', 2, 5, 'ACACY PRESENTATION'],
-      ['hn', 'Khóa học mẫu dự án Demo', 'Hội nhập', 1, 2, 'ACACY DEMO']
+      ['bh', 'Chốt sale hiệu quả trong 5 bước', 'Bán hàng', 4, 10, 'ACACY PRESENTATION', '1'],
+      ['bh', 'Tư vấn sản phẩm theo nhu cầu', 'Bán hàng', 3, 8, 'ACACY PRESENTATION', '2'],
+      ['bh', 'Xử lý từ chối của khách hàng', 'Bán hàng', 2, 6, 'ACACY PRESENTATION', '3'],
+      ['hn', 'Văn hóa và nội quy công ty', 'Hội nhập', 3, 8, 'ACACY PRESENTATION', '1'],
+      ['hn', 'An toàn lao động tại cửa hàng', 'Hội nhập', 2, 6, 'ACACY PRESENTATION', '2'],
+      ['hn', 'Làm quen ứng dụng đào tạo', 'Hội nhập', 1, 0, 'ACACY PRESENTATION', ''],
+      ['tb', 'Nguyên tắc trưng bày kệ hàng', 'Trưng bày', 3, 8, 'ACACY PRESENTATION', '1'],
+      ['tb', 'Trưng bày mùa lễ hội', 'Trưng bày', 2, 5, 'ACACY PRESENTATION', ''],
+      ['sp', 'Danh mục sản phẩm 2026', 'Sản phẩm', 5, 15, 'ACACY PRESENTATION', '2'],
+      ['sp', 'Sản phẩm mới quý 4', 'Sản phẩm', 2, 6, 'ACACY PRESENTATION', ''],
+      ['ql', 'Lập kế hoạch ca làm việc', 'Quản lý', 3, 8, 'ACACY PRESENTATION', '3'],
+      ['ql', 'Kèm cặp nhân viên mới', 'Quản lý', 2, 5, 'ACACY PRESENTATION', '4'],
+      ['hn', 'Khóa học mẫu dự án Demo', 'Ngành mẫu', 1, 2, 'ACACY DEMO', '']
     ];
     const s = this.state;
     const currentProject = (typeof window !== 'undefined' && window.AcaProjectScope) ? window.AcaProjectScope.get() : 'ACACY PRESENTATION';
+    const projectCatalog = window.AcaProjectData ? window.AcaProjectData.get(currentProject) : { industries: [], channels: [] };
     const q = (s.q || '').trim().toLowerCase();
-    const projectData = data.filter((r) => r[5] === currentProject);
+    const projectData = data.filter((r) => r[5] === currentProject && !s.deleted[r[1]]);
     const filtered = projectData.filter((r) => (s.prog === 'all' || r[0] === s.prog) && (!q || r[1].toLowerCase().includes(q)));
     const rows = filtered.map((r, i) => ({
-      name: r[1], prog: PROG[r[0]].name, industry: r[2], lessons: r[3] + ' bài', questions: r[4] + ' câu', hasQ: r[4] > 0, noQ: r[4] === 0,
+      name: r[1], prog: PROG[r[0]].name, industry: r[2], lessons: r[3] + ' bài', questions: r[4] + ' câu', hasQ: r[4] > 0, noQ: r[4] === 0, levelLabel: r[6] ? 'Level ' + r[6] : 'Không theo Level', levelClass: r[6] ? 'is-leveled' : 'is-independent',
       tone: r[0], menuOpen: s.menu === r[1],
-      menu: () => this.setState({ menu: this.state.menu === r[1] ? null : r[1] })
+      menu: () => this.setState({ menu: this.state.menu === r[1] ? null : r[1] }),
+      edit: () => { window.location.href = 'course-detail.html'; },
+      remove: () => { if (r[3] > 0) { window.alert('Không thể xóa khóa học “' + r[1] + '” vì vẫn còn ' + r[3] + ' bài học. Hãy xóa hoặc chuyển các bài học trước.'); this.setState({ menu:null }); return; } if (!window.confirm('Xóa khóa học “' + r[1] + '”? Thao tác này không thể hoàn tác.')) return; this.setState({ menu:null, deleted:Object.assign({}, this.state.deleted, { [r[1]]:true }) }); }
     }));
     const chips = [['all', 'Tất cả']].concat(Object.keys(PROG).map((k) => [k, PROG[k].name])).map(([k, label]) => ({
       label, on: s.prog === k, off: s.prog !== k, pick: () => this.setState({ prog: k, menu: null })
     }));
     return {
-      nav, rows, chips, q: s.q, currentProject, total: projectData.length, shown: filtered.length, empty: filtered.length === 0,
-      addOpen: s.add,
+      nav, rows, chips, q: s.q, currentProject, industryOptions: projectCatalog.industries, channelOptions: projectCatalog.channels, total: projectData.length, shown: filtered.length, empty: filtered.length === 0,
+      addOpen: s.add, addName:s.addName, addChannel:s.addChannel, addNoLevel: s.addNoLevel, addLeveled: !s.addNoLevel, addLevel:s.addLevel,
       onSearch: (e) => this.setState({ q: e.target.value }),
-      openAdd: () => this.setState({ add: true }),
-      closeAdd: () => this.setState({ add: false })
+      openAdd: () => this.setState({ add: true, addName:'', addChannel:'', addNoLevel: false, addLevel:'1' }),
+      closeAdd: () => this.setState({ add: false, addName:'', addChannel:'' }),
+      onAddName: (e) => this.setState({ addName:e.target.value }),
+      onAddChannel: (e) => this.setState({ addChannel:e.target.value }),
+      toggleAddNoLevel: () => this.setState({ addNoLevel: !this.state.addNoLevel }),
+      onAddLevel: (e) => this.setState({ addLevel:e.target.value }),
+      createCourse: () => { const name=this.state.addName.trim(); if(!name){ window.alert('Vui lòng nhập tên khóa học.'); return; } window.location.href='course-detail.html?mode=create&name='+encodeURIComponent(name)+'&channel='+encodeURIComponent(this.state.addChannel)+'&noLevel='+(this.state.addNoLevel?'1':'0')+'&level='+encodeURIComponent(this.state.addLevel); }
     };
   }
 }

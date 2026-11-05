@@ -5,6 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="../../shared/js/project-data.js"></script>
   <script defer src="../../shared/js/navigation.js"></script>
   <title>Dự án đào tạo – chi tiết</title>
   <script src="js/training-project-detail-efd98df5.js"></script>
@@ -15,20 +16,15 @@
 <body>
   <x-dc>
     <helmet>
-<link href="../../shared/css/base.css" rel="stylesheet"/>
-<link href="css/training-projects.css" rel="stylesheet"/>
+      <link href="../../shared/css/base.css?v=20261104-flex3" rel="stylesheet" />
+      <link href="css/training-projects.css?v=20261105-position-permissions" rel="stylesheet" />
     </helmet>
-    <div
-      class="app-shell">
-      <nav aria-label="Menu chính"
-        class="app-sidebar">
+    <div class="app-shell">
+      <nav aria-label="Menu chính" class="app-sidebar">
         <div class="brand-row">
-          <div
-            class="brand-logo">
+          <div class="brand-logo">
             A</div>
-          <div class="stack-xs"><span
-              class="brand-name">AcaSys</span><span
-              class="brand-subtitle">Đào tạo</span></div>
+          <div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div>
         </div>
         <sc-for as="item" hint-placeholder-count="12" list="{{ nav }}">
           <sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}">
@@ -36,8 +32,7 @@
               {{ item.label }}</p>
           </sc-if>
           <sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}">
-            <a aria-current="page" href="{{ item.href }}"
-              class="ui-link-b975ab7">
+            <a aria-current="page" href="{{ item.href }}" class="ui-link-b975ab7">
               <svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor"
                 stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20">
                 <path d="{{ item.d }}"></path>
@@ -46,8 +41,7 @@
             </a>
           </sc-if>
           <sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}">
-            <a href="{{ item.href }}"
-              class="ui-link-dbb06b9">
+            <a href="{{ item.href }}" class="ui-link-dbb06b9">
               <svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor"
                 stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20">
                 <path d="{{ item.d }}"></path>
@@ -58,362 +52,479 @@
         </sc-for>
       </nav>
       <div class="app-content">
-        <header
-          class="ui-header-fc3ec06">
-          <button aria-label="Đổi dự án"
-           
-            type="button" class="ui-button-1cba726">
+        <header class="ui-header-fc3ec06">
+          <button aria-label="Đổi dự án" type="button" class="ui-button-1cba726">
             <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#2456B8"
               stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="18">
               <path d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
             </svg>
-            <span class="ui-label-69babcb"><span
-                class="meta-text">Dự án</span><span class="strong-text">ACACY
+            <span class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">ACACY
                 PRESENTATION</span></span>
             <svg aria-hidden="true" fill="none" height="16" sc-camel-view-box="0 0 24 24" stroke="#5E6B85"
               stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="16">
               <path d="m6 9 6 6 6-6"></path>
             </svg>
           </button>
-          <label
-            class="ui-field-0b7aaec">
+          <label class="ui-field-0b7aaec">
             <svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24" stroke="#5E6B85"
               stroke-linecap="round" stroke-width="2" width="18">
               <path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16zM21 21l-4.3-4.3"></path>
             </svg>
             <span class="visually-hidden">Tìm trong
               hệ thống</span>
-            <input placeholder="Tìm học viên, khóa học, lịch học/thi…"
-             
-              type="search" class="ui-input-956a9ed" />
+            <input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search" class="ui-input-956a9ed" />
           </label>
-          <button
-           
-            type="button" class="ui-button-e0d1029">Tiếng Việt</button>
-          <button aria-label="Tài khoản"
-           
-            type="button" class="ui-button-0798c7a">
-            <span
-              class="ui-label-fcfeba1">T</span>
-            <span class="ui-label-69babcb"><span
-                class="strong-text">Trainer</span><span
-                class="meta-text">Quản trị đào tạo</span></span>
+          <button type="button" class="ui-button-e0d1029">Tiếng Việt</button>
+          <button aria-label="Tài khoản" type="button" class="ui-button-0798c7a">
+            <span class="ui-label-fcfeba1">T</span>
+            <span class="ui-label-69babcb"><span class="strong-text">Trainer</span><span class="meta-text">Quản trị đào
+                tạo</span></span>
           </button>
         </header>
-        <main
-          class="ui-content-196256b">
-          <nav aria-label="Đường dẫn"
-            class="ui-sidebar-4d31d5b">
+        <main class="ui-content-196256b">
+          <nav aria-label="Đường dẫn" class="ui-sidebar-4d31d5b">
             <a href="training-projects.html" class="ui-element-21a1be8">Dự án đào tạo</a>
             <svg aria-hidden="true" fill="none" height="14" sc-camel-view-box="0 0 24 24" stroke="currentColor"
               stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="14">
               <path d="m9 18 6-6-6-6"></path>
             </svg>
-            <span>ACACY PRESENTATION</span>
+            <span>{{ currentProject }}</span>
           </nav>
-          <section
-            class="ui-section-904a9e8">
-            <div
-              class="ui-panel-5bf5135">
-              <svg aria-hidden="true" fill="none" height="34" sc-camel-view-box="0 0 24 24" stroke="currentColor"
-                stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" width="34">
-                <path d="M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              </svg>
-            </div>
-            <div class="ui-panel-ed81d1d">
-              <div class="toolbar-row">
-                <h1 class="ui-title-d025eb7">ACACY PRESENTATION</h1>
-                <span
-                  class="ui-label-6cec209"><span
-                    class="ui-label-1ffc1ad"></span>Đang sử dụng</span>
-              </div>
-              <p class="muted-text">Mã dự án: ACACY_PRESENTATION · Khách hàng: ACA Office Văn Phòng</p>
-            </div>
-            <div class="ui-panel-dab9924">
-              <button
-               
-                type="button" class="ui-button-2491151"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24"
-                  stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path>
-                </svg>Xuất link đăng nhập</button>
-              <button sc-camel-on-click="{{ openEdit }}"
-               
-                type="button" class="ui-button-53d3bfd"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24"
-                  stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="18">
-                  <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path>
-                </svg>Sửa thông tin</button>
-              <button aria-label="Thao tác khác" sc-camel-on-click="{{ toggleMore }}"
-               
-                type="button" class="ui-button-040b25c"><svg aria-hidden="true" fill="currentColor" height="20" sc-camel-view-box="0 0 24 24"
-                  width="20">
-                  <circle cx="5" cy="12" r="1.8"></circle>
-                  <circle cx="12" cy="12" r="1.8"></circle>
-                  <circle cx="19" cy="12" r="1.8"></circle>
-                </svg></button>
-              <sc-if hint-placeholder-val="{{ false }}" value="{{ moreOpen }}">
-                <div role="menu"
-                  class="ui-panel-156c915">
-                  <button role="menuitem"
-                   
-                    type="button" class="ui-button-aa9210c">Ngưng sử dụng</button>
-                  <div class="ui-panel-5032cf7"></div>
-                  <button role="menuitem"
-                   
-                    type="button" class="ui-button-b9d201c">Xóa dự án</button>
+          <div class="ui-panel-b1f86f8 project-settings-card">
+            <div class="project-settings-layout">
+              <nav class="project-settings-nav" aria-label="Nhóm thiết lập dự án">
+                <div class="project-settings-nav-heading">
+                  <div><span>QUẢN LÝ DỰ ÁN</span><strong>Thiết lập dự án</strong></div><small>Chọn nhóm rồi chọn thuộc
+                    tính cần quản lý.</small>
                 </div>
-              </sc-if>
-            </div>
-          </section>
-          <div
-            class="ui-panel-b1f86f8">
-            <div aria-label="Thiết lập dự án" role="tablist"
-              class="ui-panel-5b0db9d">
-              <sc-for as="t" hint-placeholder-count="4" list="{{ tabs }}">
-                <sc-if hint-placeholder-val="{{ false }}" value="{{ t.active }}">
-                  <button aria-selected="true" role="tab" sc-camel-on-click="{{ t.go }}"
-                   
-                    type="button" class="ui-button-dd5bb86">{{ t.label }}<span
-                      class="ui-label-ba3285b">{{
-                      t.count }}</span></button>
+                <div class="project-settings-groups" role="tablist" aria-label="Nhóm thuộc tính">
+                  <sc-for as="g" hint-placeholder-count="4" list="{{ tabGroups }}"><button
+                      aria-selected="{{ g.ariaSelected }}" sc-camel-on-click="{{ g.go }}" type="button"
+                      class="{{ g.className }}"><span>{{ g.label }}</span><b>{{ g.count }}</b></button></sc-for>
+                </div>
+                <div aria-label="Thuộc tính trong nhóm" role="tablist" class="ui-panel-5b0db9d project-settings-tabs">
+                  <sc-for as="t" hint-placeholder-count="8" list="{{ visibleTabs }}">
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ t.active }}">
+                      <button aria-selected="true" role="tab" sc-camel-on-click="{{ t.go }}" type="button"
+                        class="ui-button-dd5bb86 project-settings-tab"><span class="project-settings-tab-copy">{{
+                          t.label }}</span><span class="ui-label-ba3285b">{{
+                          t.count }}</span></button>
+                    </sc-if>
+                    <sc-if hint-placeholder-val="{{ true }}" value="{{ t.inactive }}">
+                      <button aria-selected="false" role="tab" sc-camel-on-click="{{ t.go }}" type="button"
+                        class="ui-button-3c3cead project-settings-tab"><span class="project-settings-tab-copy">{{
+                          t.label }}</span><span class="ui-label-51d9daf">{{
+                          t.count }}</span></button>
+                    </sc-if>
+                  </sc-for>
+                </div>
+              </nav>
+              <div class="project-settings-content">
+                <sc-if hint-placeholder-val="{{ true }}" value="{{ tabInfo }}">
+                  <div role="tabpanel" class="ui-panel-09f4a2f project-info-panel">
+                    <div class="project-info-heading"><strong>Thông tin dự án</strong><span>Thông tin nền và cách học
+                        viên đăng nhập trong phạm vi dự án.</span></div>
+                    <div class="project-info-grid">
+                      <label class="form-field">Mã<input readonly="readonly" type="text"
+                          value="{{ currentProjectCode }}" class="form-control" /></label>
+                      <label class="form-field"><span class="project-field-label">Tên <span
+                            class="danger-text">*</span></span><input type="text" value="{{ currentProject }}"
+                          class="form-control" /></label>
+                      <label class="form-field">Khách hàng<select class="form-control">
+                          <option>ACA Office Văn Phòng</option>
+                          <option>Goviet</option>
+                          <option>Heineken PCSP</option>
+                          <option>Masan Activation</option>
+                          <option>Merchandiser Unilever Vietnam</option>
+                          <option>Ocean Project</option>
+                          <option>Tiên Phong Bank</option>
+                          <option>Wrigley Việt Nam</option>
+                          <option>ABBOTT Việt Nam</option>
+                          <option>Belly</option>
+                          <option>CÔNG TY CP ELOVI VIỆT NAM</option>
+                        </select></label>
+                      <label class="form-field">Hệ thống liên quan<select class="form-control">
+                          <option>EWO</option>
+                          <option>Umer</option>
+                          <option>Tefal</option>
+                        </select></label>
+                      <label class="form-field">Mã PO<input type="text" class="form-control" /></label>
+                      <label class="form-field">Hiển thị trang học viên<select class="form-control">
+                          <option>Webview</option>
+                          <option>App</option>
+                        </select></label>
+                      <label class="form-field">Phiên bản trang học viên<select class="form-control">
+                          <option>Mới</option>
+                          <option>Cũ</option>
+                        </select></label>
+                      <label class="form-field">Tiếp đầu ngữ tài khoản<input type="text" class="form-control" /></label>
+                      <label class="form-field project-info-check project-info-wide"><input type="checkbox" /> Lấy nhân viên từ dự án thị
+                        trường</label>
+                      <label class="form-field project-info-wide">Ghi chú<textarea
+                          class="form-control"></textarea></label>
+                    </div>
+                    <div class="project-info-heading project-login-heading"><strong>Thông tin đăng
+                        nhập</strong><span>Loại đăng nhập được phép sử dụng trong dự án.</span></div>
+                    <div class="ui-panel-d4c57f3">
+                      <sc-for as="lg" hint-placeholder-count="4" list="{{ logins }}">
+                        <div class="training-project-detail-panel-3634bbe">
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ lg.on }}"><button aria-checked="true"
+                              aria-label="{{ lg.title }}" role="switch" sc-camel-on-click="{{ lg.toggle }}"
+                              type="button" class="training-project-detail-button-4eaa18f"><span
+                                class="training-projects-label-7eb8aaa"></span></button></sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ lg.off }}"><button aria-checked="false"
+                              aria-label="{{ lg.title }}" role="switch" sc-camel-on-click="{{ lg.toggle }}"
+                              type="button" class="training-project-detail-button-544f087"><span
+                                class="training-projects-label-7eb8aaa"></span></button></sc-if>
+                          <div class="training-project-detail-panel-dd21098"><span class="strong-text">{{ lg.title
+                              }}</span></div>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
                 </sc-if>
-                <sc-if hint-placeholder-val="{{ true }}" value="{{ t.inactive }}">
-                  <button aria-selected="false" role="tab" sc-camel-on-click="{{ t.go }}"
-                   
-                    type="button" class="ui-button-3c3cead">{{ t.label }}<span
-                      class="ui-label-51d9daf">{{
-                      t.count }}</span></button>
+                <sc-if hint-placeholder-val="{{ true }}" value="{{ tabLogin }}">
+                  <div role="tabpanel" class="ui-panel-09f4a2f">
+                    <p class="training-project-detail-text-97a2c59">Cách học viên vào ứng dụng.
+                      Mỗi cách có một đường dẫn và mã QR để gửi cho học viên; tắt đi thì cách đó không dùng được nữa.
+                    </p>
+                    <div class="ui-panel-d4c57f3">
+                      <sc-for as="lg" hint-placeholder-count="4" list="{{ logins }}">
+                        <div class="training-project-detail-panel-3634bbe">
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ lg.on }}"><button aria-checked="true"
+                              aria-label="{{ lg.title }}" role="switch" sc-camel-on-click="{{ lg.toggle }}"
+                              type="button" class="training-project-detail-button-4eaa18f"><span
+                                class="training-projects-label-7eb8aaa"></span></button></sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ lg.off }}"><button aria-checked="false"
+                              aria-label="{{ lg.title }}" role="switch" sc-camel-on-click="{{ lg.toggle }}"
+                              type="button" class="training-project-detail-button-544f087"><span
+                                class="training-projects-label-7eb8aaa"></span></button></sc-if>
+                          <div class="training-project-detail-panel-dd21098"><span class="strong-text">{{ lg.title
+                              }}</span><span class="training-project-detail-label-9ebd423">trainee.acacy.com.vn/[mã đăng
+                              nhập]</span></div>
+                          <button type="button" class="ui-button-5cf3c76">Sao chép đường dẫn</button>
+                          <button type="button" class="ui-button-5cf3c76">Tải mã QR</button>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </div>
                 </sc-if>
-              </sc-for>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ tabCriteria }}">
+                  <div role="tabpanel" class="ui-panel-09f4a2f project-criteria-panel">
+                    <div class="project-criteria-heading">
+                      <div><strong>Tiêu chí đào tạo của dự án</strong><span>{{ criteriaCount }} tiêu chí</span></div>
+                      <div class="project-criteria-heading-actions">
+                        <button sc-camel-on-click="{{ openCriteriaCreate }}" type="button">＋ Thêm tiêu chí</button>
+                      </div>
+                    </div>
+                    <div class="project-criteria-list">
+                      <sc-for as="criterion" hint-placeholder-count="2" list="{{ assignedCriteria }}">
+                        <article class="project-criterion-row {{ criterion.rowClass }}">
+                          <div><strong>{{ criterion.code }} · {{ criterion.name }}</strong></div>
+                          <button sc-camel-on-click="{{ criterion.remove }}" type="button">Xóa</button>
+                        </article>
+                      </sc-for>
+                      <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaEmpty }}">
+                        <p class="criteria-empty">Dự án chưa có tiêu chí đào tạo.</p>
+                      </sc-if>
+                    </div>
+                  </div>
+                </sc-if>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ tabManagementLabels }}">
+                  <div role="tabpanel" class="ui-panel-09f4a2f project-management-panel">
+                    <div class="project-management-heading">
+                      <div><strong>Nhãn quản lý</strong><span>Thuộc dự án {{ currentProject }} · Dùng để phân loại và
+                          đánh giá học viên.</span></div>
+                      <button sc-camel-on-click="{{ startManagementAdd }}" type="button">＋ Thêm nhãn quản lý</button>
+                    </div>
+                    <div class="project-management-table">
+                      <div class="project-management-row project-management-head"><span>Dự án</span><span>Tên thuộc
+                          tính</span><span>Là kỳ thi năng lực</span><span>Ghi chú</span><span>Thao tác</span></div>
+                      <sc-for as="m" hint-placeholder-count="2" list="{{ managementRows }}">
+                        <div class="project-management-row">
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ m.viewing }}"><span
+                              class="project-management-project">{{ currentProject }}</span><strong>{{ m.name
+                              }}</strong>
+                            <div><button aria-checked="{{ m.examAria }}"
+                                class="project-management-switch {{ m.examClass }}" role="switch"
+                                sc-camel-on-click="{{ m.toggleExam }}" type="button"><i></i></button><span>{{
+                                m.examLabel }}</span></div><span>{{ m.note }}</span>
+                            <div class="project-management-actions"><sc-if hint-placeholder-val="{{ true }}"
+                                value="{{ m.asking }}"><span class="project-management-delete-copy">Xóa nhãn
+                                  này?</span><button sc-camel-on-click="{{ m.cancelDelete }}"
+                                  type="button">Không</button><button class="is-delete"
+                                  sc-camel-on-click="{{ m.remove }}" type="button">Xóa</button></sc-if><sc-if
+                                hint-placeholder-val="{{ false }}" value="{{ m.asking }}"><button
+                                  sc-camel-on-click="{{ m.edit }}" type="button">Sửa</button><button class="is-delete"
+                                  sc-camel-on-click="{{ m.ask }}" type="button">Xóa</button></sc-if></div>
+                          </sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ m.editing }}"><span
+                              class="project-management-project">{{ currentProject }}</span><input
+                              sc-camel-on-input="{{ onManagementDraftName }}" type="text"
+                              value="{{ managementDraftName }}" />
+                            <div><button aria-checked="{{ managementDraftExamAria }}"
+                                class="project-management-switch {{ managementDraftExamClass }}" role="switch"
+                                sc-camel-on-click="{{ toggleManagementDraftExam }}" type="button"><i></i></button></div>
+                            <input sc-camel-on-input="{{ onManagementDraftNote }}" type="text"
+                              value="{{ managementDraftNote }}" />
+                            <div class="project-management-actions"><button
+                                sc-camel-on-click="{{ cancelManagementEdit }}" type="button">Hủy</button><button
+                                class="is-primary" sc-camel-on-click="{{ m.save }}" type="button">Lưu</button></div>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                      <sc-if hint-placeholder-val="{{ false }}" value="{{ managementAdding }}">
+                        <div class="project-management-row is-editing"><span class="project-management-project">{{
+                            currentProject }}</span><input placeholder="Nhập tên thuộc tính"
+                            sc-camel-on-input="{{ onManagementNewName }}" type="text" value="{{ managementNewName }}" />
+                          <div><button aria-checked="{{ managementNewExamAria }}"
+                              class="project-management-switch {{ managementNewExamClass }}" role="switch"
+                              sc-camel-on-click="{{ toggleManagementNewExam }}" type="button"><i></i></button></div>
+                          <input placeholder="Nhập ghi chú" sc-camel-on-input="{{ onManagementNewNote }}" type="text"
+                            value="{{ managementNewNote }}" />
+                          <div class="project-management-actions"><button sc-camel-on-click="{{ cancelManagementEdit }}"
+                              type="button">Hủy</button><button class="is-primary"
+                              sc-camel-on-click="{{ saveManagementAdd }}" type="button">Thêm</button></div>
+                        </div>
+                      </sc-if>
+                    </div>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ managementErrorOpen }}">
+                      <p class="project-management-error">{{ managementError }}</p>
+                    </sc-if>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ managementEmpty }}">
+                      <p class="project-management-empty">Dự án chưa có nhãn quản lý.</p>
+                    </sc-if>
+                  </div>
+                </sc-if>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ tabPositions }}">
+                  <div role="tabpanel" class="ui-panel-09f4a2f project-position-panel">
+                    <div class="project-position-heading">
+                      <div><strong>Vị trí trong dự án</strong><span>Vị trí xác định loại người dùng và các nhóm quyền
+                          được áp dụng trong phạm vi dự án.</span></div>
+                      <button sc-camel-on-click="{{ startPositionAdd }}" type="button">＋ Thêm vị trí</button>
+                    </div>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ positionFormOpen }}">
+                      <section class="project-position-form">
+                        <div class="project-position-form-grid">
+                          <label><span>Mã <b>*</b></span><input placeholder="VD: SALE_SUP"
+                              sc-camel-on-input="{{ onPositionCode }}" type="text" value="{{ positionCode }}" /></label>
+                          <label><span>Tên <b>*</b></span><input placeholder="VD: Giám sát bán hàng"
+                              sc-camel-on-input="{{ onPositionName }}" type="text" value="{{ positionName }}" /></label>
+                          <label><span>Phân loại user <b>*</b></span><select sc-camel-on-change="{{ onPositionUserType }}"
+                              value="{{ positionUserType }}"><option value="Trainee">Trainee · Học viên</option><option
+                                value="Sup">Sup · Quản lý/giám sát</option><option value="Trainer">Trainer · Giảng
+                                viên</option></select></label>
+                          <label class="project-position-note"><span>Ghi chú</span><input placeholder="Nhập ghi chú"
+                              sc-camel-on-input="{{ onPositionNote }}" type="text" value="{{ positionNote }}" /></label>
+                        </div>
+                        <fieldset class="project-position-permissions">
+                          <legend>Nhóm quyền</legend>
+                          <p>Chọn nhiều quyền nếu vị trí này cần truy cập chức năng quản trị. Trainee có thể để trống.</p>
+                          <div><sc-for as="permission" hint-placeholder-count="8"
+                              list="{{ positionPermissionOptions }}"><button
+                                aria-pressed="{{ permission.ariaSelected }}" sc-camel-on-click="{{ permission.toggle }}"
+                                type="button" class="{{ permission.className }}"><i>{{ permission.mark }}</i><span>{{
+                                  permission.label }}</span></button></sc-for></div>
+                        </fieldset>
+                        <sc-if hint-placeholder-val="{{ false }}" value="{{ positionErrorOpen }}"><p
+                            class="project-position-error">{{ positionError }}</p></sc-if>
+                        <div class="project-position-form-actions"><button sc-camel-on-click="{{ cancelPositionForm }}"
+                            type="button">Hủy</button><button class="is-primary" sc-camel-on-click="{{ savePosition }}"
+                            type="button">{{ positionSaveLabel }}</button></div>
+                      </section>
+                    </sc-if>
+                    <div class="project-position-table">
+                      <div class="project-position-row project-position-head"><span>Mã</span><span>Tên</span><span>Phân
+                          loại user</span><span>Nhóm quyền</span><span>Ghi chú</span><span>Thao tác</span></div>
+                      <sc-for as="position" hint-placeholder-count="4" list="{{ positionRows }}">
+                        <div class="project-position-row"><strong>{{ position.code }}</strong><span>{{ position.name
+                            }}</span><span class="project-position-type {{ position.typeClass }}">{{ position.userType
+                            }}</span><span class="project-position-permission-summary">{{ position.permissionSummary
+                            }}</span><span>{{ position.noteText }}</span><div class="project-position-actions"><sc-if
+                              hint-placeholder-val="{{ true }}" value="{{ position.notAsking }}"><button
+                                sc-camel-on-click="{{ position.edit }}" type="button">Chỉnh sửa</button><button
+                                class="is-delete" sc-camel-on-click="{{ position.askDelete }}"
+                                type="button">Xóa</button></sc-if><sc-if hint-placeholder-val="{{ true }}"
+                              value="{{ position.asking }}"><span>Xóa vị trí này?</span><button
+                                sc-camel-on-click="{{ position.cancelDelete }}" type="button">Không</button><button
+                                class="is-delete" sc-camel-on-click="{{ position.remove }}"
+                                type="button">Xóa</button></sc-if></div></div>
+                      </sc-for>
+                    </div>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ positionEmpty }}"><p
+                        class="project-position-empty">Dự án chưa có vị trí.</p></sc-if>
+                  </div>
+                </sc-if>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ tabList }}">
+                  <div role="tabpanel" class="ui-panel-09f4a2f">
+                    <div class="ui-panel-d78b093">
+                      <p class="training-project-detail-text-c552fb4">{{ listHint }}</p>
+                      <div class="training-projects-panel-fa70adc">
+                        <button type="button" class="training-project-detail-button-b61ba3f">Nhập từ Excel</button>
+                        <button sc-camel-on-click="{{ startAdd }}" type="button" class="ui-button-a3befd3"><svg
+                            aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24"
+                            stroke="currentColor" stroke-linecap="round" stroke-width="2.2" width="18">
+                            <path d="M12 5v14M5 12h14"></path>
+                          </svg>{{ addLabel }}</button>
+                      </div>
+                    </div>
+                    <div class="ui-panel-d4c57f3">
+                      <sc-for as="v" hint-placeholder-count="3" list="{{ values }}">
+                        <div class="training-project-detail-panel-6472a33">
+                          <sc-if hint-placeholder-val="{{ true }}" value="{{ v.viewing }}">
+                            <span class="training-project-detail-label-f4cf5e1">{{ v.name }}</span>
+                            <button aria-label="Sửa {{ v.name }}" sc-camel-on-click="{{ v.edit }}" type="button"
+                              class="ui-button-10e2633"><svg aria-hidden="true" fill="none" height="18"
+                                sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="2" width="18">
+                                <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path>
+                              </svg></button>
+                            <button aria-label="Xóa {{ v.name }}" sc-camel-on-click="{{ v.ask }}" type="button"
+                              class="ui-button-feffd1a"><svg aria-hidden="true" fill="none" height="18"
+                                sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-linecap="round"
+                                stroke-linejoin="round" stroke-width="2" width="18">
+                                <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"></path>
+                              </svg></button>
+                          </sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ v.editing }}">
+                            <label class="training-project-detail-field-3b2f7f0"><span
+                                class="visually-hidden">Tên</span><input sc-camel-on-input="{{ v.onInput }}" type="text"
+                                value="{{ v.draft }}" class="ui-input-ea6e4b9" /></label>
+                            <button sc-camel-on-click="{{ cancelRow }}" type="button"
+                              class="ui-button-5121f09">Hủy</button>
+                            <button sc-camel-on-click="{{ v.save }}" type="button"
+                              class="ui-button-4baa76b">Lưu</button>
+                          </sc-if>
+                          <sc-if hint-placeholder-val="{{ false }}" value="{{ v.asking }}">
+                            <span class="ui-label-7396092">Xóa “{{ v.name }}”?</span>
+                            <button sc-camel-on-click="{{ cancelRow }}" type="button"
+                              class="ui-button-5121f09">Hủy</button>
+                            <button sc-camel-on-click="{{ v.remove }}" type="button"
+                              class="ui-button-10e0882">Xóa</button>
+                          </sc-if>
+                        </div>
+                      </sc-for>
+                      <sc-if hint-placeholder-val="{{ false }}" value="{{ adding }}">
+                        <div class="training-project-detail-panel-ef639f2">
+                          <label class="training-project-detail-field-3b2f7f0"><span class="visually-hidden">Tên
+                              mới</span><input placeholder="Nhập tên" sc-camel-on-input="{{ onAddName }}" type="text"
+                              value="{{ addName }}" class="ui-input-2252d5d" /></label>
+                          <button sc-camel-on-click="{{ cancelRow }}" type="button"
+                            class="ui-button-5121f09">Hủy</button>
+                          <button sc-camel-on-click="{{ saveListItem }}" type="button"
+                            class="ui-button-4baa76b">Thêm</button>
+                        </div>
+                        <sc-if hint-placeholder-val="{{ false }}" value="{{ listErrorOpen }}">
+                          <p class="project-list-error">{{ listError }}</p>
+                        </sc-if>
+                      </sc-if>
+                      <sc-if hint-placeholder-val="{{ false }}" value="{{ emptyList }}">
+                        <p class="training-project-detail-text-ce7ef1b">Chưa có mục nào. Bấm {{
+                          addLabel }} hoặc nhập từ Excel.</p>
+                      </sc-if>
+                    </div>
+                  </div>
+                </sc-if>
+              </div>
             </div>
-            <sc-if hint-placeholder-val="{{ true }}" value="{{ tabPrograms }}">
-              <div role="tabpanel" class="ui-panel-09f4a2f project-program-panel">
-                <div class="project-program-summary">
-                  <div><strong>Chương trình thuộc dự án</strong><span>Khóa học được tổ chức bên trong từng chương trình, không gắn trực tiếp vào dự án.</span></div>
-                  <div class="project-program-actions"><a href="../programs/programs.html">Mở module Chương trình</a><button sc-camel-on-click="{{ openProgramAdd }}" type="button">＋ Thêm chương trình</button></div>
-                </div>
-                <div class="project-program-table" role="table" aria-label="Chương trình thuộc dự án ACACY PRESENTATION">
-                  <div class="project-program-row project-program-head" role="row">
-                    <span>Chương trình</span><span>Số khóa học</span><span>Lộ trình sử dụng</span><span></span>
-                  </div>
-                  <sc-for as="p" hint-placeholder-count="5" list="{{ projectPrograms }}">
-                    <div class="project-program-row" role="row">
-                      <div><strong>{{ p.name }}</strong><small>{{ p.code }} · Thuộc ACACY PRESENTATION</small></div>
-                      <span>{{ p.courses }} khóa học</span>
-                      <span>{{ p.paths }}</span>
-                      <a href="{{ p.href }}">Mở chương trình</a>
-                    </div>
-                  </sc-for>
-                </div>
-              </div>
-            </sc-if>
-            <sc-if hint-placeholder-val="{{ true }}" value="{{ tabLogin }}">
-              <div role="tabpanel" class="ui-panel-09f4a2f">
-                <p class="training-project-detail-text-97a2c59">Cách học viên vào ứng dụng.
-                  Mỗi cách có một đường dẫn và mã QR để gửi cho học viên; tắt đi thì cách đó không dùng được nữa.</p>
-                <div class="ui-panel-d4c57f3">
-                  <sc-for as="lg" hint-placeholder-count="4" list="{{ logins }}">
-                    <div
-                      class="training-project-detail-panel-3634bbe">
-                      <sc-if hint-placeholder-val="{{ true }}" value="{{ lg.on }}"><button aria-checked="true"
-                          aria-label="{{ lg.title }}" role="switch" sc-camel-on-click="{{ lg.toggle }}"
-                         
-                          type="button" class="training-project-detail-button-4eaa18f"><span
-                            class="training-projects-label-7eb8aaa"></span></button></sc-if>
-                      <sc-if hint-placeholder-val="{{ false }}" value="{{ lg.off }}"><button aria-checked="false"
-                          aria-label="{{ lg.title }}" role="switch" sc-camel-on-click="{{ lg.toggle }}"
-                         
-                          type="button" class="training-project-detail-button-544f087"><span
-                            class="training-projects-label-7eb8aaa"></span></button></sc-if>
-                      <div class="training-project-detail-panel-dd21098"><span
-                          class="strong-text">{{ lg.title }}</span><span
-                          class="training-project-detail-label-9ebd423">trainee.acacy.com.vn/[mã đăng
-                          nhập]</span></div>
-                      <button
-                       
-                        type="button" class="ui-button-5cf3c76">Sao chép đường dẫn</button>
-                      <button
-                       
-                        type="button" class="ui-button-5cf3c76">Tải mã QR</button>
-                    </div>
-                  </sc-for>
-                </div>
-              </div>
-            </sc-if>
-            <sc-if hint-placeholder-val="{{ false }}" value="{{ tabCriteria }}">
-              <div role="tabpanel" class="ui-panel-09f4a2f project-criteria-panel">
-                <div class="project-criteria-heading">
-                  <div><strong>Tiêu chí đào tạo của dự án</strong><span>{{ criteriaCount }} tiêu chí</span></div>
-                  <div class="project-criteria-heading-actions">
-                    <button sc-camel-on-click="{{ openCriteriaCreate }}" type="button">＋ Thêm tiêu chí</button>
-                  </div>
-                </div>
-                <div class="project-criteria-list">
-                  <sc-for as="criterion" hint-placeholder-count="2" list="{{ assignedCriteria }}">
-                    <article class="project-criterion-row {{ criterion.rowClass }}">
-                      <div><strong>{{ criterion.code }} · {{ criterion.name }}</strong></div>
-                      <button sc-camel-on-click="{{ criterion.remove }}" type="button">Xóa</button>
-                    </article>
-                  </sc-for>
-                  <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaEmpty }}"><p class="criteria-empty">Dự án chưa có tiêu chí đào tạo.</p></sc-if>
-                </div>
-              </div>
-            </sc-if>
-            <sc-if hint-placeholder-val="{{ false }}" value="{{ tabList }}">
-              <div role="tabpanel" class="ui-panel-09f4a2f">
-                <div
-                  class="ui-panel-d78b093">
-                  <p class="training-project-detail-text-c552fb4">{{ listHint }}</p>
-                  <div class="training-projects-panel-fa70adc">
-                    <button
-                     
-                      type="button" class="training-project-detail-button-b61ba3f">Nhập từ Excel</button>
-                    <button sc-camel-on-click="{{ startAdd }}"
-                     
-                      type="button" class="ui-button-a3befd3"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24"
-                        stroke="currentColor" stroke-linecap="round" stroke-width="2.2" width="18">
-                        <path d="M12 5v14M5 12h14"></path>
-                      </svg>{{ addLabel }}</button>
-                  </div>
-                </div>
-                <div class="ui-panel-d4c57f3">
-                  <sc-for as="v" hint-placeholder-count="3" list="{{ values }}">
-                    <div
-                      class="training-project-detail-panel-6472a33">
-                      <sc-if hint-placeholder-val="{{ true }}" value="{{ v.viewing }}">
-                        <span class="training-project-detail-label-f4cf5e1">{{ v.name }}</span>
-                        <button aria-label="Sửa {{ v.name }}" sc-camel-on-click="{{ v.edit }}"
-                         
-                          type="button" class="ui-button-10e2633"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24"
-                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            width="18">
-                            <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path>
-                          </svg></button>
-                        <button aria-label="Xóa {{ v.name }}" sc-camel-on-click="{{ v.ask }}"
-                         
-                          type="button" class="ui-button-feffd1a"><svg aria-hidden="true" fill="none" height="18" sc-camel-view-box="0 0 24 24"
-                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            width="18">
-                            <path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14"></path>
-                          </svg></button>
-                      </sc-if>
-                      <sc-if hint-placeholder-val="{{ false }}" value="{{ v.editing }}">
-                        <label class="training-project-detail-field-3b2f7f0"><span
-                            class="visually-hidden">Tên</span><input
-                           
-                            type="text" value="{{ v.name }}" class="ui-input-ea6e4b9" /></label>
-                        <button sc-camel-on-click="{{ cancelRow }}"
-                         
-                          type="button" class="ui-button-5121f09">Hủy</button>
-                        <button sc-camel-on-click="{{ cancelRow }}"
-                         
-                          type="button" class="ui-button-4baa76b">Lưu</button>
-                      </sc-if>
-                      <sc-if hint-placeholder-val="{{ false }}" value="{{ v.asking }}">
-                        <span class="ui-label-7396092">Xóa “{{ v.name }}”?</span>
-                        <button sc-camel-on-click="{{ cancelRow }}"
-                         
-                          type="button" class="ui-button-5121f09">Hủy</button>
-                        <button sc-camel-on-click="{{ v.remove }}"
-                         
-                          type="button" class="ui-button-10e0882">Xóa</button>
-                      </sc-if>
-                    </div>
-                  </sc-for>
-                  <sc-if hint-placeholder-val="{{ false }}" value="{{ adding }}">
-                    <div
-                      class="training-project-detail-panel-ef639f2">
-                      <label class="training-project-detail-field-3b2f7f0"><span
-                          class="visually-hidden">Tên
-                          mới</span><input placeholder="Nhập tên"
-                         
-                          type="text" class="ui-input-2252d5d" /></label>
-                      <button sc-camel-on-click="{{ cancelRow }}"
-                       
-                        type="button" class="ui-button-5121f09">Hủy</button>
-                      <button sc-camel-on-click="{{ cancelRow }}"
-                       
-                        type="button" class="ui-button-4baa76b">Thêm</button>
-                    </div>
-                  </sc-if>
-                  <sc-if hint-placeholder-val="{{ false }}" value="{{ emptyList }}">
-                    <p class="training-project-detail-text-ce7ef1b">Chưa có mục nào. Bấm {{
-                      addLabel }} hoặc nhập từ Excel.</p>
-                  </sc-if>
-                </div>
-              </div>
-            </sc-if>
           </div>
         </main>
       </div>
       <sc-if hint-placeholder-val="{{ false }}" value="{{ editOpen }}">
-        <div
-          class="modal-backdrop">
-          <section aria-label="Sửa thông tin dự án" role="dialog"
-            class="training-project-detail-section-47380eb">
+        <div class="modal-backdrop">
+          <section aria-label="Sửa thông tin dự án" role="dialog" class="training-project-detail-section-47380eb">
             <h2 class="ui-heading-ae46a5c">Sửa thông tin dự án</h2>
-            <label
-              class="form-field">Tên
-              dự án <span class="danger-text">*</span><input
-               
-                type="text" value="ACACY PRESENTATION" class="form-control" /></label>
+            <label class="form-field">Tên
+              dự án <span class="danger-text">*</span><input type="text" value="{{ currentProject }}"
+                class="form-control" /></label>
             <div class="ui-panel-ba0ec76">
-              <label
-                class="form-field">Mã
-                dự án<input disabled=""
-                 
-                  type="text" value="ACACY_PRESENTATION" class="training-project-detail-input-e5e59e7" /></label>
-              <label
-                class="form-field">Khách
-                hàng<sc-raw-select
-                  class="ui-sc-raw-select-89f8d6a">
+              <label class="form-field">Mã
+                dự án<input disabled="" type="text" value="{{ currentProjectCode }}"
+                  class="training-project-detail-input-e5e59e7" /></label>
+              <label class="form-field">Khách
+                hàng<sc-raw-select class="ui-sc-raw-select-89f8d6a">
                   <option>ACA Office Văn Phòng</option>
                 </sc-raw-select></label>
             </div>
             <div class="actions-row">
-              <button sc-camel-on-click="{{ closeEdit }}"
-               
-                type="button" class="ui-button-7ee8f8c">Hủy</button>
-              <button sc-camel-on-click="{{ closeEdit }}"
-               
-                type="button" class="ui-button-6998386">Lưu thay đổi</button>
+              <button sc-camel-on-click="{{ closeEdit }}" type="button" class="ui-button-7ee8f8c">Hủy</button>
+              <button sc-camel-on-click="{{ closeEdit }}" type="button" class="ui-button-6998386">Lưu thay đổi</button>
             </div>
           </section>
         </div>
       </sc-if>
       <sc-if hint-placeholder-val="{{ false }}" value="{{ programAddOpen }}">
         <div class="modal-backdrop">
-          <section aria-label="Thêm chương trình vào dự án" aria-modal="true" role="dialog" class="training-project-detail-section-47380eb project-program-dialog">
-            <div class="project-program-dialog-heading"><div><h2 class="ui-heading-ae46a5c">Thêm chương trình</h2><p>Chương trình mới sẽ thuộc dự án ACACY PRESENTATION.</p></div><button aria-label="Đóng" sc-camel-on-click="{{ closeProgramAdd }}" type="button">×</button></div>
-            <label class="form-field">Dự án đào tạo<input disabled="disabled" type="text" value="ACACY PRESENTATION" class="form-control"/></label>
-            <div class="ui-panel-ba0ec76">
-              <label class="form-field">Tên chương trình <span class="danger-text">*</span><input placeholder="VD: Chăm sóc khách hàng" sc-camel-on-input="{{ onProgramName }}" type="text" value="{{ programName }}" class="form-control"/></label>
-              <label class="form-field">Mã chương trình <span class="danger-text">*</span><input placeholder="VD: CSKH" sc-camel-on-input="{{ onProgramCode }}" type="text" value="{{ programCode }}" class="form-control"/><span class="ui-label-b98d342">Không sửa được sau khi tạo</span></label>
+          <section aria-label="Thêm chương trình vào dự án" aria-modal="true" role="dialog"
+            class="training-project-detail-section-47380eb project-program-dialog">
+            <div class="project-program-dialog-heading">
+              <div>
+                <h2 class="ui-heading-ae46a5c">Thêm chương trình</h2>
+                <p>Chương trình mới sẽ thuộc dự án {{ currentProject }}.</p>
+              </div><button aria-label="Đóng" sc-camel-on-click="{{ closeProgramAdd }}" type="button">×</button>
             </div>
-            <label class="form-field">Mô tả<textarea placeholder="Mục tiêu và phạm vi của chương trình" rows="3" sc-camel-on-input="{{ onProgramDescription }}" value="{{ programDescription }}" class="form-control"></textarea></label>
-            <sc-if hint-placeholder-val="{{ false }}" value="{{ programErrorOpen }}"><p class="project-program-error">{{ programError }}</p></sc-if>
-            <div class="actions-row"><button sc-camel-on-click="{{ closeProgramAdd }}" type="button" class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ saveProgram }}" type="button" class="ui-button-6998386">Tạo chương trình</button></div>
+            <label class="form-field">Dự án đào tạo<input disabled="disabled" type="text" value="{{ currentProject }}"
+                class="form-control" /></label>
+            <div class="ui-panel-ba0ec76">
+              <label class="form-field">Tên chương trình <span class="danger-text">*</span><input
+                  placeholder="VD: Chăm sóc khách hàng" sc-camel-on-input="{{ onProgramName }}" type="text"
+                  value="{{ programName }}" class="form-control" /></label>
+              <label class="form-field">Mã chương trình <span class="danger-text">*</span><input placeholder="VD: CSKH"
+                  sc-camel-on-input="{{ onProgramCode }}" type="text" value="{{ programCode }}"
+                  class="form-control" /><span class="ui-label-b98d342">Không sửa được sau khi tạo</span></label>
+            </div>
+            <label class="form-field">Mô tả<textarea placeholder="Mục tiêu và phạm vi của chương trình" rows="3"
+                sc-camel-on-input="{{ onProgramDescription }}" value="{{ programDescription }}"
+                class="form-control"></textarea></label>
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ programErrorOpen }}">
+              <p class="project-program-error">{{ programError }}</p>
+            </sc-if>
+            <div class="actions-row"><button sc-camel-on-click="{{ closeProgramAdd }}" type="button"
+                class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ saveProgram }}" type="button"
+                class="ui-button-6998386">Tạo chương trình</button></div>
           </section>
         </div>
       </sc-if>
       <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaCreateOpen }}">
         <div class="modal-backdrop">
-          <section aria-label="Thêm tiêu chí đào tạo" aria-modal="true" role="dialog" class="training-project-detail-section-47380eb project-program-dialog project-criteria-dialog">
-            <div class="project-program-dialog-heading"><div><h2 class="ui-heading-ae46a5c">Thêm tiêu chí đào tạo</h2></div><button aria-label="Đóng" sc-camel-on-click="{{ closeCriteriaCreate }}" type="button">×</button></div>
-            <div class="ui-panel-ba0ec76">
-              <label class="form-field">Mã tiêu chí <span class="danger-text">*</span><input placeholder="VD: TC04" sc-camel-on-input="{{ onCriterionCode }}" type="text" value="{{ criterionCode }}" class="form-control"/></label>
-              <label class="form-field">Tên tiêu chí <span class="danger-text">*</span><input placeholder="VD: Kỹ năng xử lý phản đối" sc-camel-on-input="{{ onCriterionName }}" type="text" value="{{ criterionName }}" class="form-control"/></label>
+          <section aria-label="Thêm tiêu chí đào tạo" aria-modal="true" role="dialog"
+            class="training-project-detail-section-47380eb project-program-dialog project-criteria-dialog">
+            <div class="project-program-dialog-heading">
+              <div>
+                <h2 class="ui-heading-ae46a5c">Thêm tiêu chí đào tạo</h2>
+              </div><button aria-label="Đóng" sc-camel-on-click="{{ closeCriteriaCreate }}" type="button">×</button>
             </div>
-            <sc-if hint-placeholder-val="{{ false }}" value="{{ criterionErrorOpen }}"><p class="project-program-error">{{ criterionError }}</p></sc-if>
-            <div class="actions-row"><button sc-camel-on-click="{{ closeCriteriaCreate }}" type="button" class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ saveCriteriaCreate }}" type="button" class="ui-button-6998386">Thêm tiêu chí</button></div>
+            <div class="ui-panel-ba0ec76">
+              <label class="form-field">Mã tiêu chí <span class="danger-text">*</span><input placeholder="VD: TC04"
+                  sc-camel-on-input="{{ onCriterionCode }}" type="text" value="{{ criterionCode }}"
+                  class="form-control" /></label>
+              <label class="form-field">Tên tiêu chí <span class="danger-text">*</span><input
+                  placeholder="VD: Kỹ năng xử lý phản đối" sc-camel-on-input="{{ onCriterionName }}" type="text"
+                  value="{{ criterionName }}" class="form-control" /></label>
+            </div>
+            <sc-if hint-placeholder-val="{{ false }}" value="{{ criterionErrorOpen }}">
+              <p class="project-program-error">{{ criterionError }}</p>
+            </sc-if>
+            <div class="actions-row"><button sc-camel-on-click="{{ closeCriteriaCreate }}" type="button"
+                class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ saveCriteriaCreate }}" type="button"
+                class="ui-button-6998386">Thêm tiêu chí</button></div>
           </section>
         </div>
       </sc-if>
       <sc-if hint-placeholder-val="{{ false }}" value="{{ criteriaDeleteOpen }}">
         <div class="modal-backdrop">
-          <section aria-label="Xác nhận xóa tiêu chí đào tạo" aria-modal="true" role="dialog" class="training-project-detail-section-47380eb project-program-dialog project-criteria-dialog">
-            <div class="project-program-dialog-heading"><div><h2 class="ui-heading-ae46a5c">Xóa tiêu chí đào tạo?</h2></div><button aria-label="Đóng" sc-camel-on-click="{{ cancelCriteriaDelete }}" type="button">×</button></div>
-            <p class="project-criteria-delete-message">Tiêu chí <strong>{{ criteriaDeleteLabel }}</strong> sẽ bị xóa khỏi dự án. Bạn có muốn tiếp tục?</p>
-            <div class="actions-row"><button sc-camel-on-click="{{ cancelCriteriaDelete }}" type="button" class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ confirmCriteriaDelete }}" type="button" class="ui-button-10e0882">Xóa tiêu chí</button></div>
+          <section aria-label="Xác nhận xóa tiêu chí đào tạo" aria-modal="true" role="dialog"
+            class="training-project-detail-section-47380eb project-program-dialog project-criteria-dialog">
+            <div class="project-program-dialog-heading">
+              <div>
+                <h2 class="ui-heading-ae46a5c">Xóa tiêu chí đào tạo?</h2>
+              </div><button aria-label="Đóng" sc-camel-on-click="{{ cancelCriteriaDelete }}" type="button">×</button>
+            </div>
+            <p class="project-criteria-delete-message">Tiêu chí <strong>{{ criteriaDeleteLabel }}</strong> sẽ bị xóa
+              khỏi dự án. Bạn có muốn tiếp tục?</p>
+            <div class="actions-row"><button sc-camel-on-click="{{ cancelCriteriaDelete }}" type="button"
+                class="ui-button-7ee8f8c">Hủy</button><button sc-camel-on-click="{{ confirmCriteriaDelete }}"
+                type="button" class="ui-button-10e0882">Xóa tiêu chí</button></div>
           </section>
         </div>
       </sc-if>
@@ -424,14 +535,34 @@ class Component extends DCLogic {
   constructor(props) {
     super(props);
     const requestedTab = new URLSearchParams(window.location.search).get('tab');
+    const currentProject = (typeof window !== 'undefined' && window.AcaProjectScope) ? window.AcaProjectScope.get() : 'ACACY PRESENTATION';
+    const projectCatalog = window.AcaProjectData ? window.AcaProjectData.get(currentProject) : null;
+    const isDemoProject = currentProject === 'ACACY DEMO';
     this.state = {
-      tab: ['programs', 'tieuchi', 'bophan', 'login'].includes(requestedTab) ? requestedTab : 'programs', more: false, edit: false, loginOff: {},
-      vals: { bophan: ['Bộ phận 01', 'Bộ phận 02'] },
-      criteria: [
-        { id: 'tc01', code: 'TC01', name: 'Kỹ năng giao tiếp với khách hàng' },
-        { id: 'tc02', code: 'TC02', name: 'Kỹ năng bán hàng' }
-      ],
-      rowEdit: null, rowAsk: null, adding: false, programAdd: false, programName: '', programCode: '', programDescription: '', programError: '', addedPrograms: [], criteriaCreate: false, criterionCode: '', criterionName: '', criterionError: '', criteriaDelete: null
+      tab: ['thongtin', 'nganhhang', 'kenh', 'thongtinhocvien', 'nhanquanly', 'vitri', 'vung', 'khuvuc', 'capbac', 'cuahang', 'bophan', 'trainer', 'tag', 'danhmuckhac', 'trangthailamviec', 'cauhinh', 'tieuchi'].includes(requestedTab) ? requestedTab : 'thongtin', more: false, edit: false, loginOff: {},
+      vals: {
+        nganhhang: projectCatalog ? projectCatalog.industries.map((item) => item.code + ' · ' + item.name) : [],
+        kenh: projectCatalog ? projectCatalog.channels.map((item) => item.name) : [],
+        thongtinhocvien: projectCatalog ? (projectCatalog.learnerAttributes || []).map((item) => item.code + ' · ' + item.name) : [],
+        nhanquanly: projectCatalog ? (projectCatalog.managementLabels || []).map((item) => item.code + ' · ' + item.name) : [],
+        vitri: projectCatalog ? projectCatalog.positions.map((item) => item.name) : [],
+        vung: projectCatalog ? (projectCatalog.regions || []).map((item) => item.name) : [],
+        khuvuc: projectCatalog ? projectCatalog.areas.map((item) => item.name) : [],
+        capbac: projectCatalog ? projectCatalog.ranks.map((item) => item.name) : [],
+        cuahang: projectCatalog ? (projectCatalog.stores || []).map((item) => item.name) : [],
+        bophan: projectCatalog ? projectCatalog.departments.map((item) => item.name) : [],
+        trainer: projectCatalog ? (projectCatalog.trainers || []).map((item) => item.name) : [],
+        tag: projectCatalog ? (projectCatalog.tags || []).map((item) => item.code + ' · ' + item.name) : [],
+        danhmuckhac: projectCatalog ? (projectCatalog.otherCategories || []).map((item) => item.code + ' · ' + item.name) : [],
+        trangthailamviec: projectCatalog ? (projectCatalog.workStatuses || []).map((item) => item.code + ' · ' + item.name) : [],
+        cauhinh: projectCatalog ? (projectCatalog.configurations || []).map((item) => item.name) : []
+      },
+      criteria: (projectCatalog ? projectCatalog.criteria : []).map((item) => ({ id: item.code.toLowerCase(), code: item.code, name: item.name })),
+      managementLabels: (projectCatalog ? (projectCatalog.managementLabels || []) : []).map((item, index) => ({ id: item.code || 'QL' + (index + 1), name: item.name, competencyExam: !!item.competencyExam, note: item.note || '' })),
+      positions: (projectCatalog ? (projectCatalog.positions || []) : []).map((item, index) => ({ id: item.code || 'VT' + (index + 1), code: item.code || 'VT' + (index + 1), name: item.name, userType: item.userType || 'Trainee', permissionGroups: item.permissionGroups || [], note: item.note || '' })),
+      positionAdding: false, positionEdit: '', positionDelete: '', positionCode: '', positionName: '', positionUserType: 'Trainee', positionPermissions: [], positionNote: '', positionError: '',
+      managementEdit: '', managementDelete: '', managementDraftName: '', managementDraftNote: '', managementDraftExam: false, managementAdding: false, managementNewName: '', managementNewNote: '', managementNewExam: false, managementError: '',
+      rowEdit: null, rowDraft: '', rowAsk: null, adding: false, addName: '', listError: '', programAdd: false, programName: '', programCode: '', programDescription: '', programError: '', addedPrograms: [], criteriaCreate: false, criterionCode: '', criterionName: '', criterionError: '', criteriaDelete: null
     };
   }
   renderVals() {
@@ -455,30 +586,120 @@ class Component extends DCLogic {
       head('THIẾT LẬP'), link('Dự án đào tạo', P.folder, 'training-projects.html', true)
     ];
     const s = this.state;
-    const loginDefs = ['Mã hoặc số điện thoại học viên', 'Tên đăng nhập và mật khẩu của dự án', 'Tên đăng nhập và mật khẩu hệ thống', 'Mã nhân viên'];
+    const keepScroll = (next) => {
+      if (typeof window === 'undefined') { this.setState(next); return; }
+      const x = window.pageXOffset || 0;
+      const y = window.pageYOffset || 0;
+      const restore = () => {
+        window.scrollTo(x, y);
+        if (typeof document !== 'undefined') {
+          const content = document.querySelector('.project-settings-content');
+          if (content) content.scrollTop = 0;
+        }
+      };
+      this.setState(next);
+      restore();
+      if (window.requestAnimationFrame) window.requestAnimationFrame(() => window.requestAnimationFrame(restore));
+    };
+    const currentProject = (typeof window !== 'undefined' && window.AcaProjectScope) ? window.AcaProjectScope.get() : 'ACACY PRESENTATION';
+    const projectCatalog = window.AcaProjectData ? window.AcaProjectData.get(currentProject) : null;
+    const currentProjectCode = projectCatalog ? projectCatalog.code : currentProject.toUpperCase().replace(/[^A-Z0-9]+/g, '_');
+    const currentCustomer = projectCatalog && projectCatalog.customer ? projectCatalog.customer : '—';
+    const loginDefs = projectCatalog && projectCatalog.loginTypes && projectCatalog.loginTypes.length ? projectCatalog.loginTypes : ['Mã hoặc số điện thoại học viên', 'Tên đăng nhập và mật khẩu của dự án', 'Tên đăng nhập và mật khẩu hệ thống', 'Mã nhân viên'];
     const logins = loginDefs.map((title, i) => ({
       title, on: !s.loginOff[i], off: !!s.loginOff[i],
       toggle: () => this.setState({ loginOff: Object.assign({}, this.state.loginOff, { [i]: !this.state.loginOff[i] }) })
     }));
     const loginOn = logins.filter((l) => l.on).length;
-    const projectPrograms = [
+    const basePrograms = currentProject === 'ACACY DEMO' ? [
+      ['DEMO-ONBOARD', 'Hội nhập dự án Demo', 1, 'Lộ trình hội nhập dự án Demo', '../programs/program-detail.html']
+    ] : [
       ['HN', 'Hội nhập nhân viên mới', 3, 'Lộ trình hội nhập nhân viên mới', '../programs/programs.html'],
       ['SALES', 'Kỹ năng bán hàng', 3, 'Lộ trình phát triển năng lực bán hàng', '../programs/program-detail.html'],
       ['DISPLAY', 'Trưng bày sản phẩm', 2, 'Lộ trình phát triển năng lực bán hàng', '../programs/programs.html'],
       ['PRODUCT', 'Kiến thức sản phẩm', 2, '2 lộ trình đang sử dụng', '../programs/programs.html'],
       ['MANAGER', 'Quản lý cửa hàng', 2, 'Lộ trình quản lý cửa hàng', '../programs/programs.html']
-    ].map((p) => ({ code:p[0], name:p[1], courses:p[2], paths:p[3], href:p[4] })).concat(s.addedPrograms);
+    ];
+    const projectPrograms = basePrograms.map((p) => ({ code:p[0], name:p[1], courses:p[2], paths:p[3], href:p[4] })).concat(s.addedPrograms);
     const assignedCriteria = s.criteria.map((criterion) => Object.assign({}, criterion, {
       rowClass: 'is-assigned',
       remove: () => this.setState({ criteriaDelete: criterion })
     }));
     const criteriaCount = assignedCriteria.length;
-    const listKey = 'bophan';
+    const moduleViews = {
+      courses: {
+        title: 'Khóa học', description: 'Khóa học thuộc các chương trình của dự án và quản lý phạm vi Level.', href: '../courses/courses.html', count: 12, unit: 'khóa học',
+        items: [['Chốt sale hiệu quả trong 5 bước', 'Chương trình Kỹ năng bán hàng · Theo Level'], ['An toàn lao động tại cửa hàng', 'Chương trình Hội nhập nhân viên mới · Theo Level'], ['Danh mục sản phẩm 2026', 'Chương trình Kiến thức sản phẩm · Không theo Level']]
+      },
+      students: {
+        title: 'Học viên', description: 'Học viên, ngày tham gia và Level được quản lý trong phạm vi dự án.', href: '../students/students-list.html', count: 4, unit: 'học viên',
+        items: [['Avery Dennison Test 1', 'Bộ phận 01 · Cấp độ 1'], ['Avery Dennison Test 2', 'Bộ phận 01 · Cấp độ 1'], ['Avery Dennison Test 3', 'Bộ phận 02 · Cấp độ 0'], ['Học viên demo 01', 'Bộ phận 01 · Cấp độ 1']]
+      },
+      schedules: {
+        title: 'Lịch học/thi', description: 'Lịch học, lịch thi và điều kiện nâng Level chỉ lấy dữ liệu của dự án.', href: '../schedules/schedules.html', count: 4, unit: 'lịch',
+        items: [['Đánh giá chào hỏi và tìm hiểu nhu cầu', 'Chỉ thi · Đang hoạt động'], ['Đánh giá giới thiệu sản phẩm', 'Chỉ thi · Đang hoạt động'], ['Đánh giá xử lý băn khoăn', 'Học và thi · Bản nháp']]
+      },
+      paths: {
+        title: 'Lộ trình đào tạo', description: 'Lộ trình sắp xếp nội dung học theo vị trí và phạm vi Level của dự án.', href: '../learning-paths/learning-paths.html', count: 2, unit: 'lộ trình',
+        items: [['Lộ trình phát triển năng lực bán hàng', '4 bước · Áp dụng 4 vị trí'], ['Lộ trình hội nhập nhân viên mới', '3 bước · Áp dụng Nhân viên mới']]
+      }
+    };
+    if (currentProject === 'ACACY DEMO') {
+      moduleViews.courses = { title:'Khóa học', description:'Khóa học thuộc chương trình của dự án Demo.', href:'../courses/courses.html', count:1, unit:'khóa học', items:[['Khóa học mẫu dự án Demo', 'Chương trình Hội nhập dự án Demo · Không theo Level']] };
+      moduleViews.students = { title:'Học viên', description:'Học viên và Level được quản lý trong phạm vi dự án Demo.', href:'../students/students-list.html', count:2, unit:'học viên', items:[['ACACYDEMO01', 'Chưa có bộ phận · Cấp độ 0'], ['ACACYDEMO_02', 'Chưa có bộ phận · Cấp độ 0']] };
+      moduleViews.schedules = { title:'Lịch học/thi', description:'Lịch chỉ lấy khóa học và học viên thuộc dự án Demo.', href:'../schedules/schedules.html', count:1, unit:'lịch', items:[['Lớp hội nhập dự án Demo', 'Chỉ học · Chờ duyệt']] };
+      moduleViews.paths = { title:'Lộ trình đào tạo', description:'Lộ trình chỉ sử dụng nội dung thuộc dự án Demo.', href:'../learning-paths/learning-paths.html', count:1, unit:'lộ trình', items:[['Lộ trình hội nhập dự án Demo', '2 bước · Không theo Level']] };
+    }
+    const activeModule = moduleViews[s.tab] || { title: '', description: '', href: '#', count: 0, unit: '', items: [] };
+    const moduleItems = activeModule.items.map((item, index) => ({ order: String(index + 1).padStart(2, '0'), name: item[0], meta: item[1] }));
+    const managementLabels = s.managementLabels || [];
+    const managementRows = managementLabels.map((item) => {
+      const editing = s.managementEdit === item.id;
+      const asking = s.managementDelete === item.id;
+      return Object.assign({}, item, {
+        editing, viewing: !editing, asking,
+        examClass: item.competencyExam ? 'is-on' : '', examAria: String(item.competencyExam), examLabel: item.competencyExam ? 'Có' : 'Không',
+        edit: () => this.setState({ managementEdit: item.id, managementDelete: '', managementDraftName: item.name, managementDraftNote: item.note, managementDraftExam: item.competencyExam, managementAdding: false, managementError: '' }),
+        ask: () => this.setState({ managementDelete: item.id, managementEdit: '', managementError: '' }),
+        cancelDelete: () => this.setState({ managementDelete: '' }),
+        remove: () => this.setState({ managementLabels: this.state.managementLabels.filter((label) => label.id !== item.id), managementDelete: '', managementError: '' }),
+        toggleExam: () => this.setState({ managementLabels: this.state.managementLabels.map((label) => label.id === item.id ? Object.assign({}, label, { competencyExam: !label.competencyExam }) : label) }),
+        save: () => { const name = this.state.managementDraftName.trim(); if (!name) { this.setState({ managementError: 'Vui lòng nhập tên thuộc tính.' }); return; } this.setState({ managementLabels: this.state.managementLabels.map((label) => label.id === item.id ? Object.assign({}, label, { name, note: this.state.managementDraftNote.trim(), competencyExam: !!this.state.managementDraftExam }) : label), managementEdit: '', managementError: '' }); }
+      });
+    });
+    const permissionDefs = ['Nghiệp vụ > Bàn làm việc', 'Nghiệp vụ > Hồ sơ nhân viên', 'Nghiệp vụ > Chấm công', 'Nghiệp vụ > Tiền lương', 'Danh mục > Quốc gia', 'Danh mục > Văn phòng', 'Danh mục > Hồ sơ', 'Đào tạo > Báo cáo năng lực'];
+    const positions = s.positions || [];
+    const positionRows = positions.map((position) => ({
+      ...position,
+      typeClass: 'is-' + position.userType.toLowerCase(),
+      permissionSummary: position.permissionGroups.length ? position.permissionGroups.join(' · ') : 'Không cấp quyền quản trị',
+      noteText: position.note || '—', asking: s.positionDelete === position.id, notAsking: s.positionDelete !== position.id,
+      edit: () => this.setState({ positionAdding: false, positionEdit: position.id, positionDelete: '', positionCode: position.code, positionName: position.name, positionUserType: position.userType, positionPermissions: position.permissionGroups.slice(), positionNote: position.note, positionError: '' }),
+      askDelete: () => this.setState({ positionDelete: position.id }),
+      cancelDelete: () => this.setState({ positionDelete: '' }),
+      remove: () => this.setState({ positions: this.state.positions.filter((item) => item.id !== position.id), positionDelete: '' })
+    }));
+    const positionPermissionOptions = permissionDefs.map((label) => {
+      const selected = s.positionPermissions.includes(label);
+      return { label, mark: selected ? '✓' : '', className: selected ? 'is-selected' : '', ariaSelected: String(selected), toggle: () => this.setState({ positionPermissions: selected ? this.state.positionPermissions.filter((item) => item !== label) : this.state.positionPermissions.concat([label]) }) };
+    });
+    const listTabs = ['nganhhang', 'kenh', 'thongtinhocvien', 'vung', 'khuvuc', 'capbac', 'cuahang', 'bophan', 'trainer', 'tag', 'danhmuckhac', 'trangthailamviec', 'cauhinh'];
+    const listKey = listTabs.includes(s.tab) ? s.tab : 'nganhhang';
     const list = s.vals[listKey] || [];
-    const cancelRow = () => this.setState({ rowEdit: null, rowAsk: null, adding: false });
+    const cancelRow = () => this.setState({ rowEdit: null, rowDraft: '', rowAsk: null, adding: false, addName: '', listError: '' });
     const values = list.map((name, i) => ({
       name, viewing: s.rowEdit !== i && s.rowAsk !== i, editing: s.rowEdit === i, asking: s.rowAsk === i,
-      edit: () => this.setState({ rowEdit: i, rowAsk: null, adding: false }),
+      draft: s.rowEdit === i ? s.rowDraft : name,
+      edit: () => this.setState({ rowEdit: i, rowDraft: name, rowAsk: null, adding: false, listError: '' }),
+      onInput: (e) => this.setState({ rowDraft: e.target.value, listError: '' }),
+      save: () => {
+        const nextName = this.state.rowDraft.trim();
+        if (!nextName) { this.setState({ listError: 'Vui lòng nhập tên.' }); return; }
+        if (list.some((item, j) => j !== i && item.toLowerCase() === nextName.toLowerCase())) { this.setState({ listError: 'Tên này đã tồn tại trong dự án.' }); return; }
+        const next = Object.assign({}, this.state.vals);
+        next[listKey] = list.map((item, j) => j === i ? nextName : item);
+        this.setState({ vals: next, rowEdit: null, rowDraft: '', listError: '' });
+      },
       ask: () => this.setState({ rowAsk: i, rowEdit: null, adding: false }),
       remove: () => {
         const next = Object.assign({}, this.state.vals);
@@ -486,14 +707,61 @@ class Component extends DCLogic {
         this.setState({ vals: next, rowAsk: null });
       }
     }));
-    const tabDefs = [['programs', 'Chương trình', projectPrograms.length], ['tieuchi', 'Tiêu chí đào tạo', criteriaCount], ['bophan', 'Bộ phận', (s.vals.bophan || []).length], ['login', 'Đăng nhập', loginOn]];
-    const tabs = tabDefs.map(([id, label, count]) => ({ label, count, active: s.tab === id, inactive: s.tab !== id, go: () => this.setState({ tab: id, more: false, rowEdit: null, rowAsk: null, adding: false }) }));
-    const hints = { bophan: 'Bộ phận dùng để lọc học viên và gán lịch học/thi cho cả nhóm.' };
+    const tabDefs = [
+      ['thongtin', 'Dự án đào tạo', '', 'Tổng quan'],
+      ['nganhhang', 'Ngành hàng', (s.vals.nganhhang || []).length, 'Phạm vi kinh doanh'],
+      ['kenh', 'Kênh phân phối', (s.vals.kenh || []).length, 'Phạm vi kinh doanh'],
+      ['vitri', 'Vị trí', positions.length, 'Phạm vi kinh doanh'],
+      ['vung', 'Vùng', (s.vals.vung || []).length, 'Phạm vi kinh doanh'],
+      ['khuvuc', 'Khu vực', (s.vals.khuvuc || []).length, 'Phạm vi kinh doanh'],
+      ['capbac', 'Cấp bậc', (s.vals.capbac || []).length, 'Phạm vi kinh doanh'],
+      ['cuahang', 'Cửa hàng', (s.vals.cuahang || []).length, 'Phạm vi kinh doanh'],
+      ['bophan', 'Bộ phận', (s.vals.bophan || []).length, 'Phạm vi kinh doanh'],
+      ['thongtinhocvien', 'Thông tin học viên', (s.vals.thongtinhocvien || []).length, 'Dữ liệu học viên'],
+      ['nhanquanly', 'Nhãn quản lý', managementLabels.length, 'Dữ liệu học viên'],
+      ['trangthailamviec', 'Trạng thái làm việc', (s.vals.trangthailamviec || []).length, 'Dữ liệu học viên'],
+      ['trainer', 'Trainer', (s.vals.trainer || []).length, 'Đào tạo & vận hành'],
+      ['tag', 'Danh mục Tag', (s.vals.tag || []).length, 'Đào tạo & vận hành'],
+      ['tieuchi', 'Tiêu chí đào tạo', criteriaCount, 'Đào tạo & vận hành'],
+      ['danhmuckhac', 'Danh mục khác', (s.vals.danhmuckhac || []).length, 'Đào tạo & vận hành'],
+      ['cauhinh', 'Cấu hình', (s.vals.cauhinh || []).length, 'Đào tạo & vận hành']
+    ];
+    const tabs = tabDefs.map(([id, label, count, group]) => ({ id, label, count, group, active: s.tab === id, inactive: s.tab !== id, go: () => keepScroll({ tab: id, more: false, rowEdit: null, rowAsk: null, adding: false }) }));
+    const activeTab = tabs.find((tab) => tab.active) || tabs[0];
+    const activeGroup = activeTab.group;
+    const groupOrder = ['Tổng quan', 'Phạm vi kinh doanh', 'Dữ liệu học viên', 'Đào tạo & vận hành'];
+    const tabGroups = groupOrder.map((group) => {
+      const groupTabs = tabs.filter((tab) => tab.group === group);
+      const active = group === activeGroup;
+      return { label: group, count: groupTabs.length, ariaSelected: String(active), className: active ? 'is-active' : '', go: () => { const first = groupTabs[0]; if (first) keepScroll({ tab: first.id, more: false, rowEdit: null, rowAsk: null, adding: false }); } };
+    });
+    const visibleTabs = tabs.filter((tab) => tab.group === activeGroup);
+    const hints = {
+      nganhhang: 'Ngành hàng dùng để phân nhóm nội dung, học viên và link đăng nhập trong dự án.',
+      kenh: 'Kênh phân phối thuộc phạm vi quản lý riêng của dự án.',
+      thongtinhocvien: 'Khai báo các thuộc tính bổ sung dùng trong hồ sơ học viên của dự án.',
+      nhanquanly: 'Nhãn quản lý phục vụ phân loại và báo cáo học viên trong dự án.',
+      vitri: 'Vị trí dùng để xác định đối tượng áp dụng của lộ trình và nội dung đào tạo trong dự án.',
+      vung: 'Vùng là danh mục tổ chức thuộc phạm vi dự án.',
+      khuvuc: 'Khu vực dùng để phân loại học viên và phạm vi triển khai đào tạo.',
+      capbac: 'Cấp bậc là danh mục tổ chức của dự án, không phải Level năng lực của học viên.',
+      cuahang: 'Cửa hàng là đơn vị triển khai thuộc dự án.',
+      bophan: 'Bộ phận dùng để lọc học viên và gán lịch học/thi cho cả nhóm.',
+      trainer: 'Danh sách giảng viên hoặc người phụ trách đào tạo của dự án.',
+      tag: 'Tag dùng để phân loại lịch học/thi và nội dung trong dự án.',
+      danhmuckhac: 'Các danh mục mở rộng được khai báo trong phạm vi dự án.',
+      trangthailamviec: 'Danh mục trạng thái làm việc của học viên trong dự án.',
+      cauhinh: 'Các cấu hình mở rộng áp dụng riêng cho dự án.'
+    };
+    const addLabels = { nganhhang:'Thêm ngành hàng', kenh:'Thêm kênh phân phối', thongtinhocvien:'Thêm thuộc tính học viên', nhanquanly:'Thêm nhãn quản lý', vitri:'Thêm vị trí', vung:'Thêm vùng', khuvuc:'Thêm khu vực', capbac:'Thêm cấp bậc', cuahang:'Thêm cửa hàng', bophan:'Thêm bộ phận', trainer:'Thêm Trainer', tag:'Thêm Tag', danhmuckhac:'Thêm danh mục', trangthailamviec:'Thêm trạng thái', cauhinh:'Thêm cấu hình' };
     return {
-      nav, tabs, logins, values, projectPrograms, assignedCriteria, criteriaCount, criteriaEmpty: assignedCriteria.length === 0,
-      tabPrograms: s.tab === 'programs', tabLogin: s.tab === 'login', tabCriteria: s.tab === 'tieuchi', tabList: s.tab === 'bophan',
-      listHint: hints[listKey], addLabel: 'Thêm bộ phận',
-      adding: s.adding, emptyList: list.length === 0 && !s.adding,
+      nav, tabs, tabGroups, visibleTabs, logins, values, managementRows, projectPrograms, assignedCriteria, criteriaCount, criteriaEmpty: assignedCriteria.length === 0, currentProject, currentProjectCode, currentCustomer,
+      tabInfo: s.tab === 'thongtin', tabLogin: false, tabPrograms: false, tabCriteria: s.tab === 'tieuchi', tabManagementLabels: s.tab === 'nhanquanly', tabPositions: s.tab === 'vitri', tabList: listTabs.includes(s.tab), tabModule: false,
+      moduleTitle: activeModule.title, moduleDescription: activeModule.description, moduleHref: activeModule.href, moduleCount: activeModule.count, moduleUnit: activeModule.unit, moduleItems,
+      listHint: hints[listKey], addLabel: addLabels[listKey],
+      adding: s.adding, addName: s.addName, listError: s.listError, listErrorOpen: !!s.listError, emptyList: list.length === 0 && !s.adding,
+      positionRows, positionPermissionOptions, positionEmpty: positions.length === 0, positionFormOpen: s.positionAdding || !!s.positionEdit, positionCode: s.positionCode, positionName: s.positionName, positionUserType: s.positionUserType, positionNote: s.positionNote, positionError: s.positionError, positionErrorOpen: !!s.positionError, positionSaveLabel: s.positionEdit ? 'Lưu thay đổi' : 'Thêm vị trí',
+      managementEmpty: managementLabels.length === 0 && !s.managementAdding, managementAdding: s.managementAdding, managementNewName: s.managementNewName, managementNewNote: s.managementNewNote, managementNewExamClass: s.managementNewExam ? 'is-on' : '', managementNewExamAria: String(s.managementNewExam), managementDraftName: s.managementDraftName, managementDraftNote: s.managementDraftNote, managementDraftExamClass: s.managementDraftExam ? 'is-on' : '', managementDraftExamAria: String(s.managementDraftExam), managementError: s.managementError, managementErrorOpen: !!s.managementError,
       moreOpen: s.more, editOpen: s.edit, programAddOpen: s.programAdd, criteriaCreateOpen: s.criteriaCreate, criteriaDeleteOpen: !!s.criteriaDelete, criteriaDeleteLabel: s.criteriaDelete ? s.criteriaDelete.code + ' · ' + s.criteriaDelete.name : '', programName: s.programName, programCode: s.programCode, programDescription: s.programDescription, programError: s.programError, programErrorOpen: !!s.programError, criterionCode: s.criterionCode, criterionName: s.criterionName, criterionError: s.criterionError, criterionErrorOpen: !!s.criterionError,
       toggleMore: () => this.setState({ more: !this.state.more }),
       openEdit: () => this.setState({ edit: true, more: false }),
@@ -502,6 +770,28 @@ class Component extends DCLogic {
       closeProgramAdd: () => this.setState({ programAdd: false, programError: '' }),
       openCriteriaCreate: () => this.setState({ criteriaCreate: true, criterionCode: '', criterionName: '', criterionError: '' }),
       closeCriteriaCreate: () => this.setState({ criteriaCreate: false, criterionError: '' }),
+      startPositionAdd: () => this.setState({ positionAdding: true, positionEdit: '', positionDelete: '', positionCode: '', positionName: '', positionUserType: 'Trainee', positionPermissions: [], positionNote: '', positionError: '' }),
+      cancelPositionForm: () => this.setState({ positionAdding: false, positionEdit: '', positionError: '' }),
+      onPositionCode: (e) => this.setState({ positionCode: e.target.value.toUpperCase().replace(/[^A-Z0-9_-]/g, ''), positionError: '' }),
+      onPositionName: (e) => this.setState({ positionName: e.target.value, positionError: '' }),
+      onPositionUserType: (e) => this.setState({ positionUserType: e.target.value }),
+      onPositionNote: (e) => this.setState({ positionNote: e.target.value }),
+      savePosition: () => {
+        const code = this.state.positionCode.trim(); const name = this.state.positionName.trim(); const editId = this.state.positionEdit;
+        if (!code || !name) { this.setState({ positionError: 'Vui lòng nhập mã và tên vị trí.' }); return; }
+        if (this.state.positions.some((item) => item.id !== editId && item.code.toLowerCase() === code.toLowerCase())) { this.setState({ positionError: 'Mã vị trí đã tồn tại trong dự án.' }); return; }
+        const record = { id: editId || code, code, name, userType: this.state.positionUserType, permissionGroups: this.state.positionPermissions.slice(), note: this.state.positionNote.trim() };
+        this.setState({ positions: editId ? this.state.positions.map((item) => item.id === editId ? record : item) : this.state.positions.concat([record]), positionAdding: false, positionEdit: '', positionCode: '', positionName: '', positionUserType: 'Trainee', positionPermissions: [], positionNote: '', positionError: '' });
+      },
+      startManagementAdd: () => this.setState({ managementAdding: true, managementEdit: '', managementDelete: '', managementNewName: '', managementNewNote: '', managementNewExam: false, managementError: '' }),
+      cancelManagementEdit: () => this.setState({ managementAdding: false, managementEdit: '', managementDelete: '', managementError: '' }),
+      onManagementNewName: (e) => this.setState({ managementNewName: e.target.value, managementError: '' }),
+      onManagementNewNote: (e) => this.setState({ managementNewNote: e.target.value }),
+      toggleManagementNewExam: () => this.setState({ managementNewExam: !this.state.managementNewExam }),
+      onManagementDraftName: (e) => this.setState({ managementDraftName: e.target.value, managementError: '' }),
+      onManagementDraftNote: (e) => this.setState({ managementDraftNote: e.target.value }),
+      toggleManagementDraftExam: () => this.setState({ managementDraftExam: !this.state.managementDraftExam }),
+      saveManagementAdd: () => { const name = this.state.managementNewName.trim(); if (!name) { this.setState({ managementError: 'Vui lòng nhập tên thuộc tính.' }); return; } this.setState({ managementLabels: this.state.managementLabels.concat([{ id: 'QL-CUSTOM-' + Date.now(), name, competencyExam: !!this.state.managementNewExam, note: this.state.managementNewNote.trim() }]), managementAdding: false, managementNewName: '', managementNewNote: '', managementNewExam: false, managementError: '' }); },
       cancelCriteriaDelete: () => this.setState({ criteriaDelete: null }),
       confirmCriteriaDelete: () => {
         const target = this.state.criteriaDelete;
@@ -529,7 +819,16 @@ class Component extends DCLogic {
         if (projectPrograms.some((p) => p.code === code)) { this.setState({ programError: 'Mã chương trình đã tồn tại trong dự án.' }); return; }
         this.setState({ addedPrograms: this.state.addedPrograms.concat([{ code, name, courses: 0, paths: 'Chưa sử dụng trong lộ trình', href: '../programs/programs.html' }]), programAdd: false, programName: '', programCode: '', programDescription: '', programError: '' });
       },
-      startAdd: () => this.setState({ adding: true, rowEdit: null, rowAsk: null }),
+      startAdd: () => this.setState({ adding: true, addName: '', listError: '', rowEdit: null, rowAsk: null }),
+      onAddName: (e) => this.setState({ addName: e.target.value, listError: '' }),
+      saveListItem: () => {
+        const name = this.state.addName.trim();
+        if (!name) { this.setState({ listError: 'Vui lòng nhập tên.' }); return; }
+        if (list.some((item) => item.toLowerCase() === name.toLowerCase())) { this.setState({ listError: 'Tên này đã tồn tại trong dự án.' }); return; }
+        const next = Object.assign({}, this.state.vals);
+        next[listKey] = list.concat([name]);
+        this.setState({ vals: next, adding: false, addName: '', listError: '' });
+      },
       cancelRow
     };
   }

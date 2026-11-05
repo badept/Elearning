@@ -191,3 +191,28 @@
   font-weight: 700;
   color: #13234B;
 }
+
+@media (max-width: 760px) {
+  #dc-root .scope-overview-panel-5c33568 {
+    padding: 22px 14px 36px;
+  }
+
+  #dc-root .scope-overview-panel-5aed4a0,
+  #dc-root .scope-overview-panel-82b8371,
+  #dc-root .scope-overview-panel-b38edc0 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #dc-root .scope-overview-panel-865b7b1 {
+    grid-column: auto;
+  }
+
+  #dc-root .scope-overview-panel-62db06f {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  #dc-root .scope-overview-title-b478187 {
+    font-size: clamp(26px, 8vw, 34px);
+  }
+}

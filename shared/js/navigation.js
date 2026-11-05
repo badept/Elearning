@@ -3,7 +3,7 @@
 
   var storageKey = 'acasys.sidebar.collapsed';
   var projectStorageKey = 'acasys.currentProject';
-  var projects = ['ACACY PRESENTATION', 'ACACY DEMO'];
+  var projects = window.AcaProjectData ? window.AcaProjectData.all() : ['ACACY PRESENTATION', 'ACACY DEMO'];
   var sidebarSelector = '.app-sidebar, .ui-sidebar-a50515f';
   var icons = {
     'Học viên': 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
@@ -67,7 +67,9 @@
     menu = document.createElement('div');
     menu.className = 'global-project-menu';
     menu.hidden = true;
-    menu.innerHTML = '<strong>Chọn dự án làm việc</strong><button type="button" data-project="ACACY PRESENTATION">ACACY PRESENTATION</button><button type="button" data-project="ACACY DEMO">ACACY DEMO</button><small>Tất cả module sẽ hiển thị dữ liệu thuộc dự án đã chọn.</small>';
+    menu.innerHTML = '<strong>Chọn dự án làm việc</strong>' + projects.map(function (project) {
+      return '<button type="button" data-project="' + project.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '">' + project.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</button>';
+    }).join('') + '<small>Tất cả module sẽ hiển thị dữ liệu thuộc dự án đã chọn.</small>';
     document.body.appendChild(menu);
     return menu;
   }
@@ -86,8 +88,15 @@
     document.querySelectorAll('label').forEach(function (label) {
       var select = label.querySelector('select');
       if (!select) return;
-      var labelText = label.textContent.replace(/\s+/g, ' ').trim();
-      if (labelText.indexOf('Dự án đào tạo') !== 0 && labelText.indexOf('Dự án ') !== 0) return;
+      var labelText = '';
+      for (var index = 0; index < label.childNodes.length; index += 1) {
+        if (label.childNodes[index].nodeType === 3 && label.childNodes[index].textContent.trim()) {
+          labelText = label.childNodes[index].textContent.replace(/\s+/g, ' ').trim();
+          break;
+        }
+      }
+      labelText = labelText.replace(/\s*\*$/, '');
+      if (labelText !== 'Dự án' && labelText !== 'Dự án đào tạo') return;
       if (select.options.length !== 1 || select.options[0].textContent !== current) {
         select.innerHTML = '';
         var option = document.createElement('option');

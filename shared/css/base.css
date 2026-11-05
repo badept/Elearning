@@ -2,6 +2,17 @@
 
 :root {
   color-scheme: light;
+  /* Shared flexibility variables: one responsive rhythm for every module. */
+  --flex-content-max: 100%;
+  --flex-page-inline: clamp(14px, 2.4vw, 36px);
+  --flex-page-block: clamp(18px, 2vw, 30px);
+  --flex-section-gap: clamp(14px, 1.6vw, 22px);
+  --flex-card-padding: clamp(14px, 1.8vw, 24px);
+  --flex-field-min: 220px;
+  --flex-control-height: 44px;
+  --flex-modal-width: min(680px, calc(100vw - 32px));
+  --flex-drawer-width: min(560px, 100vw);
+  --flex-sidebar-width: clamp(220px, 16vw, 280px);
 }
 
 html, body {
@@ -12,10 +23,31 @@ html, body {
 body {
   margin: 0;
   background: #F4F6FA;
+  overflow-x: hidden;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html,
+body,
+#dc-root {
+  width: 100%;
+  max-width: 100%;
+}
+
+#dc-root {
+  overflow-x: clip;
+}
+
+#dc-root main,
+#dc-root section,
+#dc-root article,
+#dc-root form,
+#dc-root label,
+#dc-root div {
+  min-width: 0;
 }
 
 img,
@@ -26,6 +58,19 @@ svg {
 button, input, select, textarea {
   font: inherit;
   color: inherit;
+}
+
+#dc-root input:not([type="checkbox"]):not([type="radio"]),
+#dc-root select,
+#dc-root textarea,
+#dc-root sc-raw-select {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+#dc-root textarea {
+  resize: vertical;
 }
 
 button {
@@ -73,7 +118,7 @@ a:hover {
 }
 
 #dc-root .app-sidebar {
-  flex: 0 0 clamp(220px, 16vw, 280px);
+  flex: 0 0 var(--flex-sidebar-width);
   background: #12285A;
   color: #D3DDF0;
   display: flex;
@@ -214,7 +259,9 @@ a:hover {
 }
 
 #dc-root .form-control {
-  min-height: 44px;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--flex-control-height);
   padding: 0 12px;
   border: 1px solid #CBD5E6;
   border-radius: 10px;
@@ -236,14 +283,24 @@ a:hover {
 }
 
 #dc-root .modal-backdrop {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: clamp(12px, 2vw, 24px);
   background: rgba(13,24,52,0.45);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+#dc-root .modal-backdrop > section,
+#dc-root .modal-backdrop > div[role="dialog"] {
+  width: var(--flex-modal-width);
+  max-width: 100%;
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
 }
 
 #dc-root .muted-text {
@@ -584,20 +641,20 @@ a:hover {
 }
 
 #dc-root .ui-content-196256b {
-  padding: clamp(18px, 2vw, 28px) clamp(16px, 2.4vw, 36px) clamp(32px, 4vw, 52px);
+  padding: var(--flex-page-block) var(--flex-page-inline) clamp(32px, 4vw, 52px);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: none;
+  max-width: var(--flex-content-max);
   width: 100%;
 }
 
 #dc-root .ui-content-d1b7109 {
-  padding: clamp(18px, 2vw, 30px) clamp(16px, 2.4vw, 36px) clamp(30px, 3.5vw, 44px);
+  padding: var(--flex-page-block) var(--flex-page-inline) clamp(30px, 3.5vw, 44px);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  max-width: none;
+  max-width: var(--flex-content-max);
   width: 100%;
 }
 
@@ -659,7 +716,7 @@ a:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
-  padding: 14px clamp(16px, 2.4vw, 36px);
+  padding: 14px var(--flex-page-inline);
   background: #ffffff;
   border-bottom: 1px solid #e2e7f0;
 }
@@ -669,7 +726,7 @@ a:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 16px;
-  padding: 14px clamp(16px, 2.4vw, 36px);
+  padding: 14px var(--flex-page-inline);
   background: #FFFFFF;
   border-bottom: 1px solid #E2E7F0;
 }
@@ -923,7 +980,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 14px;
-  padding: 18px 20px 24px;
+  padding: var(--flex-card-padding);
 }
 
 #dc-root .ui-panel-1047b6e {
@@ -953,12 +1010,14 @@ a:hover {
 }
 
 #dc-root .ui-panel-180200f {
+  flex: 0 0 auto;
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   padding: 16px 24px;
   border-top: 1px solid #e2e7f0;
   background: #f7f9fc;
+  box-shadow: 0 -8px 20px rgba(19, 35, 75, 0.05);
 }
 
 #dc-root .ui-panel-192902f {
@@ -968,6 +1027,7 @@ a:hover {
 }
 
 #dc-root .ui-panel-4ee43c1 {
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -984,10 +1044,20 @@ a:hover {
 
 #dc-root .ui-panel-5b0db9d {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 4px;
   padding: 0 16px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
   border-bottom: 1px solid #E2E7F0;
+}
+
+#dc-root .ui-panel-5b0db9d > button {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 #dc-root .ui-panel-5b45285 {
@@ -1071,35 +1141,43 @@ a:hover {
 }
 
 #dc-root .ui-panel-b7c6c15 {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 10;
   display: flex;
   justify-content: flex-end;
   background: rgba(13, 24, 52, 0.45);
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 #dc-root .ui-panel-ba0ec76 {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--flex-field-min)), 1fr));
   gap: 12px;
 }
 
 #dc-root .ui-panel-c56d050 {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 10;
   display: flex;
   justify-content: flex-end;
   background: rgba(13,24,52,0.45);
+  overflow: hidden;
+  overscroll-behavior: contain;
 }
 
 #dc-root .ui-panel-c9e72b6 {
-  flex: 1;
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 20px 24px;
   display: flex;
   flex-direction: column;
   gap: 22px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
 }
 
 #dc-root .ui-panel-d08feb7 {
@@ -1242,8 +1320,11 @@ a:hover {
 
 #dc-root .ui-section-3d964db {
   width: 100%;
-  max-width: 560px;
-  min-height: 100%;
+  max-width: var(--flex-drawer-width);
+  height: 100dvh;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
   background: #FFFFFF;
   display: flex;
   flex-direction: column;
@@ -1255,7 +1336,7 @@ a:hover {
   flex-wrap: wrap;
   align-items: center;
   gap: 20px;
-  padding: 24px;
+  padding: var(--flex-card-padding);
   background: #FFFFFF;
   border: 1px solid #E2E7F0;
   border-radius: 16px;
@@ -1263,8 +1344,11 @@ a:hover {
 
 #dc-root .ui-section-f37a56d {
   width: 100%;
-  max-width: 560px;
-  min-height: 100%;
+  max-width: var(--flex-drawer-width);
+  height: 100dvh;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
   background: #ffffff;
   display: flex;
   flex-direction: column;
@@ -1291,7 +1375,7 @@ a:hover {
 }
 
 #dc-root .ui-sidebar-a50515f {
-  flex: 0 0 clamp(220px, 16vw, 280px);
+  flex: 0 0 var(--flex-sidebar-width);
   background: #12285a;
   color: #d3ddf0;
   display: flex;
@@ -1361,8 +1445,110 @@ a:hover {
   clip: rect(0 0 0 0);
 }
 
+/* Flexible form contract shared by every feature. */
+#dc-root :where(
+  .path-form-grid,
+  .schedule-filter-grid,
+  .schedule-form-grid,
+  .schedule-exam-rules-grid,
+  .schedule-setting-grid,
+  .schedule-settings-columns,
+  .schedule-assignment-types,
+  .schedule-metric-grid,
+  .schedule-option-grid,
+  .schedule-result-options,
+  .schedule-result-grid,
+  .schedule-criteria-options,
+  .student-filter-grid,
+  .student-profile-grid,
+  .student-account-grid,
+  .student-project-membership-grid,
+  .course-detail-assign-grid,
+  .course-detail-question-grid,
+  .course-detail-question-answer-grid,
+  .project-create-criteria-grid
+) {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--flex-field-min)), 1fr)) !important;
+}
+
+#dc-root :where(
+  .path-form-field,
+  .schedule-field,
+  .student-info-field,
+  .form-field,
+  .ui-field-4ee83e9
+) {
+  min-width: 0;
+}
+
+#dc-root :where(
+  .actions-row,
+  .ui-panel-180200f,
+  .ui-panel-ec3e4d0,
+  .schedule-step-footer,
+  .course-detail-actions
+) {
+  max-width: 100%;
+}
+
+#dc-root :where(
+  .ui-panel-d6fda1a,
+  .schedule-table-wrap,
+  .student-detail-panel-2303ff4,
+  .student-level-exam-section,
+  .path-level-table-wrap,
+  .course-detail-table-wrap,
+  .project-program-table,
+  .criteria-table
+) {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+#dc-root :where(sc-raw-table, table) {
+  border-collapse: collapse;
+}
+
+#dc-root :where(.app-content, .course-detail-panel-d8e198a, .students-list-panel-4e551fd) {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+#dc-root :where(.ui-section-904a9e8, .ui-panel-b1f86f8, .path-panel, .schedule-card) {
+  max-width: 100%;
+}
+
+#dc-root :where(h1, h2, h3, h4, p, .strong-text, .muted-text) {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1200px) {
+  :root {
+    --flex-field-min: 200px;
+  }
+
+  #dc-root .ui-section-904a9e8 {
+    gap: 14px;
+  }
+
+  #dc-root .ui-section-904a9e8 > .ui-panel-dab9924 {
+    flex: 1 1 100%;
+    justify-content: flex-end;
+  }
+}
+
 /* Flexible application layout */
 @media (max-width: 899px) {
+  :root {
+    --flex-page-inline: clamp(14px, 3vw, 20px);
+    --flex-page-block: clamp(16px, 2.6vw, 22px);
+    --flex-card-padding: clamp(14px, 2.6vw, 20px);
+    --flex-field-min: 190px;
+  }
+
   #dc-root .app-shell,
   #dc-root .course-detail-panel-d8e198a,
   #dc-root .students-list-panel-4e551fd {
@@ -1371,7 +1557,9 @@ a:hover {
 
   #dc-root .app-sidebar,
   #dc-root .ui-sidebar-a50515f {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 30;
     flex: 1 0 100%;
     width: 100%;
     height: auto;
@@ -1441,12 +1629,28 @@ a:hover {
     overflow-y: auto;
   }
 
+  #dc-root .ui-section-904a9e8 {
+    align-items: flex-start;
+  }
+
+  #dc-root :where(.ui-panel-4ee43c1, .ui-panel-180200f) {
+    padding-right: var(--flex-card-padding);
+    padding-left: var(--flex-card-padding);
+  }
+
   #dc-root .ui-panel-ba0ec76 {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--flex-field-min)), 1fr));
   }
 }
 
 @media (max-width: 640px) {
+  :root {
+    --flex-page-inline: 14px;
+    --flex-page-block: 18px;
+    --flex-card-padding: 14px;
+    --flex-field-min: 100%;
+  }
+
   #dc-root .ui-header-34f1474,
   #dc-root .ui-header-fc3ec06 {
     gap: 8px;
@@ -1494,9 +1698,63 @@ a:hover {
     flex: 1 1 150px;
   }
 
+  #dc-root :where(
+    .path-form-grid,
+    .schedule-filter-grid,
+    .schedule-form-grid,
+    .schedule-exam-rules-grid,
+    .schedule-setting-grid,
+    .schedule-settings-columns,
+    .schedule-assignment-types,
+    .schedule-metric-grid,
+    .schedule-option-grid,
+    .schedule-result-options,
+    .schedule-result-grid,
+    .schedule-criteria-options,
+    .student-filter-grid,
+    .student-profile-grid,
+    .student-account-grid,
+    .student-project-membership-grid,
+    .course-detail-assign-grid,
+    .course-detail-question-grid,
+    .course-detail-question-answer-grid,
+    .project-create-criteria-grid
+  ) {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  #dc-root .ui-section-904a9e8 > .ui-panel-dab9924 > button,
+  #dc-root .ui-section-904a9e8 > .ui-panel-dab9924 > a {
+    flex: 1 1 150px;
+  }
+
   #dc-root .modal-backdrop {
     align-items: flex-start;
     padding: 12px;
+  }
+
+  #dc-root .ui-panel-b7c6c15,
+  #dc-root .ui-panel-c56d050 {
+    justify-content: stretch;
+  }
+
+  #dc-root .ui-section-f37a56d,
+  #dc-root .ui-panel-d4c57f3 {
+    width: 100%;
+    max-width: none;
+  }
+
+  #dc-root :where(.ui-panel-4ee43c1, .ui-panel-180200f) {
+    padding: 12px 14px;
+  }
+
+  #dc-root .ui-panel-c9e72b6 {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  #dc-root :where(.ui-button-15e35d6, .ui-button-454d92a) {
+    min-width: 0;
   }
 
   #dc-root .ui-title-d025eb7,

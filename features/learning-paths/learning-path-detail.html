@@ -1,90 +1,331 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="../../shared/js/project-data.js"></script>
   <script defer src="../../shared/js/navigation.js"></script>
   <title>Chi tiết lộ trình – AcaSys</title>
   <script src="../schedules/js/schedules-runtime.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&amp;display=swap"
+    rel="stylesheet" />
 </head>
+
 <body>
-<x-dc>
-  <helmet><link href="../../shared/css/base.css" rel="stylesheet"/><link href="css/learning-paths.css?v=20261029-3" rel="stylesheet"/></helmet>
-  <div class="app-shell">
-    <nav aria-label="Menu chính" class="app-sidebar"><div class="brand-row"><div class="brand-logo">A</div><div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div></div><sc-for as="item" hint-placeholder-count="10" list="{{ nav }}"><sc-if hint-placeholder-val="{{ false }}" value="{{ item.isHeader }}"><p class="sidebar-section-title">{{ item.label }}</p></sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}"><a aria-current="page" href="{{ item.href }}" class="ui-link-b975ab7"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if><sc-if hint-placeholder-val="{{ true }}" value="{{ item.isLink }}"><a href="{{ item.href }}" class="ui-link-dbb06b9"><svg aria-hidden="true" fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-width="1.8" width="20"><path d="{{ item.d }}"></path></svg><span>{{ item.label }}</span></a></sc-if></sc-for></nav>
-    <div class="app-content">
-      <header class="ui-header-fc3ec06"><button type="button" class="ui-button-1cba726"><span class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">ACACY PRESENTATION</span></span></button><label class="ui-field-0b7aaec"><span class="visually-hidden">Tìm trong hệ thống</span><input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search" class="ui-input-956a9ed"/></label><button type="button" class="ui-button-e0d1029">Tiếng Việt</button><button aria-label="Tài khoản" type="button" class="ui-button-0798c7a"><span class="ui-label-fcfeba1">T</span><span class="ui-label-69babcb"><span class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span></button></header>
-      <main class="path-main">
-        <nav aria-label="Đường dẫn" class="path-breadcrumb"><a href="learning-paths.html">Lộ trình đào tạo</a><span>›</span><span>Lộ trình phát triển năng lực bán hàng</span></nav>
-        <section class="path-detail-heading"><div><p class="path-eyebrow">LP-SALES-2026</p><h1>Lộ trình phát triển năng lực bán hàng</h1><p>ACACY PRESENTATION · {{ levelCount }} Level · {{ assignedCount }} học viên</p></div><div><button sc-camel-on-click="{{ saveDraft }}" type="button" class="path-secondary">Lưu nháp</button><button sc-camel-on-click="{{ publishPath }}" type="button" class="path-primary">Phát hành</button></div></section>
-        <div class="path-detail-layout">
-          <nav aria-label="Các bước thiết lập" class="path-step-nav"><header><span>THIẾT LẬP LỘ TRÌNH</span><div class="path-step-progress">{{ stepProgress }}</div><small>{{ stepLabel }}</small></header><sc-for as="step" hint-placeholder-count="3" list="{{ steps }}"><button aria-current="{{ step.current }}" sc-camel-on-click="{{ step.open }}" type="button" class="{{ step.className }}"><span>{{ step.number }}</span><span><strong>{{ step.label }}</strong><small>{{ step.help }}</small></span></button></sc-for></nav>
-          <section class="path-workspace">
-            <sc-if hint-placeholder-val="{{ true }}" value="{{ infoStep }}"><div class="path-panel"><header><h2>Thông tin lộ trình</h2><p>Xác định mục tiêu và phạm vi quản lý của lộ trình.</p></header><div class="path-form-grid"><label class="path-form-field is-wide">Tên lộ trình <input value="Lộ trình phát triển năng lực bán hàng" type="text"/></label><label class="path-form-field">Mã lộ trình <input readonly="readonly" value="LP-SALES-2026" type="text"/></label><label class="path-form-field">Dự án <select><option>ACACY PRESENTATION</option></select></label><label class="path-form-field is-wide">Mô tả <textarea rows="4">Phát triển năng lực bán hàng theo từng bậc, theo dõi Level riêng cho mỗi học viên.</textarea></label></div></div></sc-if>
-            <sc-if hint-placeholder-val="{{ false }}" value="{{ structureStep }}"><div class="path-panel"><header><h2>Khóa học theo Level</h2></header><div class="path-level-list"><sc-for as="level" hint-placeholder-count="4" list="{{ levels }}"><article class="path-level-card"><span>{{ level.number }}</span><span><strong>{{ level.name }}</strong><small>Khóa học: {{ level.courseName }}</small><small class="path-level-rule">Điều kiện lên Level: {{ level.rule }}</small></span><button sc-camel-on-click="{{ level.edit }}" type="button" class="path-secondary">Chỉnh khóa học &amp; điều kiện</button></article></sc-for></div></div></sc-if>
-            <sc-if hint-placeholder-val="{{ false }}" value="{{ learnersStep }}"><div class="path-panel"><header><div><h2>Phân bổ học viên</h2><p>Chọn học viên tham gia và Level bắt đầu.</p></div><strong>{{ assignedCount }} / {{ learnerTotal }} học viên đã phân bổ</strong></header><div class="path-learner-toolbar"><input placeholder="Tìm theo tên hoặc mã học viên" sc-camel-on-input="{{ onLearnerQuery }}" type="search" value="{{ learnerQuery }}"/><label><span>Bộ phận</span><select sc-camel-on-change="{{ onLearnerDepartment }}" value="{{ learnerDepartment }}"><option value="all">Tất cả bộ phận</option><option value="Bộ phận 01">Bộ phận 01</option><option value="Bộ phận 02">Bộ phận 02</option><option value="Demo">Demo</option></select></label><button sc-camel-on-click="{{ clearLearnerFilters }}" type="button" class="path-secondary">Làm mới</button></div><div class="path-learner-table"><div class="path-learner-head"><button aria-label="Chọn tất cả kết quả lọc" aria-pressed="{{ allLearnersSelected }}" sc-camel-on-click="{{ toggleAllLearners }}" type="button" class="path-check {{ allLearnersClass }}">{{ allLearnersMark }}</button><span>Học viên</span><span>Bộ phận</span><span>Level bắt đầu / hiện tại</span></div><sc-for as="learner" hint-placeholder-count="6" list="{{ learners }}"><article class="path-learner-row"><button aria-label="Chọn {{ learner.name }}" aria-pressed="{{ learner.ariaSelected }}" sc-camel-on-click="{{ learner.toggle }}" type="button" class="path-check {{ learner.selectedClass }}">{{ learner.mark }}</button><span class="path-avatar">{{ learner.initials }}</span><span><strong>{{ learner.name }}</strong><small>{{ learner.code }}</small></span><span>{{ learner.department }}</span><sc-if hint-placeholder-val="{{ false }}" value="{{ learner.assigned }}"><select sc-camel-on-change="{{ learner.changeLevel }}" value="{{ learner.levelValue }}"><sc-for as="levelChoice" hint-placeholder-count="4" list="{{ levelChoices }}"><option value="{{ levelChoice.value }}">{{ levelChoice.label }}</option></sc-for></select></sc-if><sc-if hint-placeholder-val="{{ true }}" value="{{ learner.notAssigned }}"><span class="path-not-assigned">Chưa thêm</span></sc-if></article></sc-for></div></div></sc-if>
-            <footer class="path-step-footer"><button sc-camel-on-click="{{ previous }}" type="button" class="path-secondary">← Quay lại</button><div><button sc-camel-on-click="{{ next }}" type="button" class="path-primary">{{ nextLabel }}</button></div></footer>
+  <x-dc>
+    <helmet>
+      <link href="../../shared/css/base.css?v=20261104-flex3" rel="stylesheet" />
+      <link href="css/learning-paths.css?v=20261103-2" rel="stylesheet" />
+    </helmet>
+    <div class="app-shell">
+      <nav aria-label="Menu chính" class="app-sidebar">
+        <div class="brand-row">
+          <div class="brand-logo">A</div>
+          <div class="stack-xs"><span class="brand-name">AcaSys</span><span class="brand-subtitle">Đào tạo</span></div>
+        </div><sc-for as="item" hint-placeholder-count="10" list="{{ nav }}"><sc-if hint-placeholder-val="{{ false }}"
+            value="{{ item.isHeader }}">
+            <p class="sidebar-section-title">{{ item.label }}</p>
+          </sc-if><sc-if hint-placeholder-val="{{ false }}" value="{{ item.isActive }}"><a aria-current="page"
+              href="{{ item.href }}" class="ui-link-b975ab7"><svg aria-hidden="true" fill="none" height="20"
+                sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-width="1.8" width="20">
+                <path d="{{ item.d }}"></path>
+              </svg><span>{{ item.label }}</span></a></sc-if><sc-if hint-placeholder-val="{{ true }}"
+            value="{{ item.isLink }}"><a href="{{ item.href }}" class="ui-link-dbb06b9"><svg aria-hidden="true"
+                fill="none" height="20" sc-camel-view-box="0 0 24 24" stroke="currentColor" stroke-width="1.8"
+                width="20">
+                <path d="{{ item.d }}"></path>
+              </svg><span>{{ item.label }}</span></a></sc-if></sc-for>
+      </nav>
+      <div class="app-content">
+        <header class="ui-header-fc3ec06"><button type="button" class="ui-button-1cba726"><span
+              class="ui-label-69babcb"><span class="meta-text">Dự án</span><span class="strong-text">{{ currentProject
+                }}</span></span></button><label class="ui-field-0b7aaec"><span class="visually-hidden">Tìm trong hệ
+              thống</span><input placeholder="Tìm học viên, khóa học, lịch học/thi…" type="search"
+              class="ui-input-956a9ed" /></label><button type="button" class="ui-button-e0d1029">Tiếng
+            Việt</button><button aria-label="Tài khoản" type="button" class="ui-button-0798c7a"><span
+              class="ui-label-fcfeba1">T</span><span class="ui-label-69babcb"><span
+                class="strong-text">Trainer</span><span class="meta-text">Quản trị đào tạo</span></span></button>
+        </header>
+        <main class="path-main">
+          <nav aria-label="Đường dẫn" class="path-breadcrumb"><a href="learning-paths.html">Lộ trình đào
+              tạo</a><span>›</span><span>{{ pathName }}</span></nav>
+          <section class="path-detail-heading">
+            <div>
+              <p class="path-eyebrow">{{ pathCode }}</p>
+              <h1>{{ pathName }}</h1>
+              <p>{{ currentProject }} · {{ positionSummary }} · {{ levelSummary }} · {{ detailCount }} bước</p>
+            </div>
+            <div class="path-heading-actions"><button sc-camel-on-click="{{ openCancel }}" type="button"
+                class="path-secondary path-cancel-button">Hủy thiết lập</button><button
+                sc-camel-on-click="{{ saveDraft }}" type="button" class="path-secondary">Lưu nháp</button><button
+                sc-camel-on-click="{{ publishPath }}" type="button" class="path-primary">Phát hành</button></div>
           </section>
-        </div>
-      </main>
+          <div class="path-detail-layout">
+            <nav aria-label="Các bước thiết lập" class="path-step-nav">
+              <header><span>THIẾT LẬP LỘ TRÌNH</span>
+                <div class="path-step-progress">{{ stepProgress }}</div><small>{{ stepLabel }}</small>
+              </header><sc-for as="step" hint-placeholder-count="3" list="{{ steps }}"><button
+                  aria-current="{{ step.current }}" sc-camel-on-click="{{ step.open }}" type="button"
+                  class="{{ step.className }}"><span>{{ step.number }}</span><span><strong>{{ step.label
+                      }}</strong><small>{{ step.help }}</small></span></button></sc-for>
+            </nav>
+            <section class="path-workspace">
+              <sc-if hint-placeholder-val="{{ true }}" value="{{ infoStep }}">
+                <div class="path-panel">
+                  <header>
+                    <div>
+                      <h2>Thông tin lộ trình</h2>
+                      <p>Xác định dự án và vị trí được áp dụng.</p>
+                    </div>
+                  </header>
+                  <div class="path-form-grid"><label class="path-form-field is-wide">Tên lộ trình *<input
+                        sc-camel-on-input="{{ onNameChange }}" value="{{ pathName }}" type="text" /></label><label
+                      class="path-form-field">Mã lộ trình *<input readonly="readonly" value="{{ pathCode }}"
+                        type="text" /></label><label class="path-form-field">Dự án *<select disabled="disabled">
+                        <option>{{ currentProject }}</option>
+                      </select></label>
+                    <div class="path-form-field is-wide"><span>Vị trí áp dụng</span>
+                      <div class="path-choice-grid"><sc-for as="position" hint-placeholder-count="4"
+                          list="{{ positionOptions }}"><button aria-pressed="{{ position.ariaSelected }}"
+                            sc-camel-on-click="{{ position.toggle }}" type="button"
+                            class="path-choice {{ position.selectedClass }}"><b>{{ position.mark }}</b>{{ position.label
+                            }}</button></sc-for></div><small>Không bắt buộc. Học viên phù hợp được xác định theo vị trí
+                        trong dự án.</small>
+                    </div>
+                    <div class="path-form-field is-wide"><span>Level nội dung của lộ trình</span>
+                      <div class="path-choice-grid path-choice-grid-levels"><sc-for as="level"
+                          hint-placeholder-count="5" list="{{ levelOptions }}"><button
+                            aria-pressed="{{ level.ariaSelected }}" disabled="disabled" type="button"
+                            class="path-choice {{ level.selectedClass }}"><b>{{ level.mark }}</b>{{ level.label
+                            }}</button></sc-for></div><small>Đây không phải Level được gán cho học viên. Hệ thống tự
+                        tổng hợp từ Level của các khóa học đã chọn ở bước 2.</small>
+                    </div><label class="path-form-field is-wide">Ghi chú <textarea rows="4"
+                        sc-camel-on-input="{{ onNoteChange }}" value="{{ pathNote }}"></textarea></label>
+                  </div>
+                </div>
+              </sc-if>
+              <sc-if hint-placeholder-val="{{ false }}" value="{{ structureStep }}">
+                <div class="path-panel">
+                  <header>
+                    <div>
+                      <h2>Chi tiết lộ trình</h2>
+                      <p>Sắp xếp các bước và chọn bài học cho từng bước.</p>
+                    </div><button sc-camel-on-click="{{ openAddDetail }}" type="button" class="path-primary">+ Thêm
+                      bước</button>
+                  </header><sc-if hint-placeholder-val="{{ false }}" value="{{ detailEmpty }}">
+                    <div class="path-detail-empty"><strong>Chưa có bước nội dung</strong>
+                      <p>Thêm bước đầu tiên, sau đó chọn các bài học thuộc dự án hiện tại.</p><button
+                        sc-camel-on-click="{{ openAddDetail }}" type="button" class="path-secondary">+ Thêm bước đầu
+                        tiên</button>
+                    </div>
+                  </sc-if>
+                  <div class="path-detail-list"><sc-for as="detail" hint-placeholder-count="3" list="{{ details }}">
+                      <article class="path-detail-card"><span class="path-order-badge">{{ detail.order }}</span>
+                        <div class="path-detail-card-copy"><strong>{{ detail.name }}</strong><small>{{ detail.code }} ·
+                            {{ detail.lessonCount }} bài học</small>
+                          <p>{{ detail.lessonNames }}</p><sc-if hint-placeholder-val="{{ false }}"
+                            value="{{ detail.hasImage }}"><small>Hình ảnh: {{ detail.image }}</small></sc-if>
+                        </div>
+                        <div class="path-detail-card-actions"><button aria-label="Đưa bước lên trên"
+                            disabled="{{ detail.cannotMoveUp }}" sc-camel-on-click="{{ detail.moveUp }}"
+                            title="Lên trên" type="button">↑</button><button aria-label="Đưa bước xuống dưới"
+                            disabled="{{ detail.cannotMoveDown }}" sc-camel-on-click="{{ detail.moveDown }}"
+                            title="Xuống dưới" type="button">↓</button><button sc-camel-on-click="{{ detail.edit }}"
+                            type="button">Sửa</button><button class="is-danger" sc-camel-on-click="{{ detail.remove }}"
+                            type="button">Xóa</button></div>
+                      </article>
+                    </sc-for></div>
+                </div>
+              </sc-if>
+              <sc-if hint-placeholder-val="{{ false }}" value="{{ reviewStep }}">
+                <div class="path-panel path-review-panel">
+                  <header>
+                    <div>
+                      <h2>Kiểm tra và phát hành</h2>
+                      <p>Rà soát phạm vi áp dụng và thứ tự nội dung trước khi phát hành.</p>
+                    </div><span class="path-readiness {{ readinessClass }}">{{ readinessLabel }}</span>
+                  </header>
+                  <div class="path-review-summary">
+                    <article><span>Dự án</span><strong>{{ currentProject }}</strong></article>
+                    <article><span>Vị trí áp dụng</span><strong>{{ positionSummary }}</strong></article>
+                    <article><span>Level nội dung</span><strong>{{ levelSummary }}</strong></article>
+                    <article><span>Nội dung</span><strong>{{ detailCount }} bước · {{ lessonTotal }} bài học</strong>
+                    </article>
+                  </div><sc-if hint-placeholder-val="{{ false }}" value="{{ reviewWarningOpen }}">
+                    <div class="path-review-warning"><strong>Chưa thể phát hành</strong>
+                      <p>{{ reviewWarning }}</p>
+                    </div>
+                  </sc-if>
+                  <div class="path-review-list">
+                    <div class="path-review-head"><span>Thứ tự</span><span>Chi tiết lộ trình</span><span>Bài học</span>
+                    </div><sc-for as="detail" hint-placeholder-count="3" list="{{ details }}">
+                      <article><span>{{ detail.order }}</span><span><strong>{{ detail.name }}</strong><small>{{
+                            detail.code }}</small></span><span>{{ detail.lessonNames }}</span></article>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+              <footer class="path-step-footer">
+                <div><sc-if hint-placeholder-val="{{ false }}" value="{{ hasPreviousStep }}"><button
+                      sc-camel-on-click="{{ previous }}" type="button" class="path-secondary">← Quay
+                      lại</button></sc-if></div>
+                <div><button sc-camel-on-click="{{ next }}" type="button" class="path-primary">{{ nextLabel }}</button>
+                </div>
+              </footer>
+            </section>
+          </div>
+        </main>
+      </div>
     </div>
-  </div>
-  <sc-if hint-placeholder-val="{{ false }}" value="{{ levelEditorOpen }}"><div class="path-backdrop"><section aria-label="Chỉnh khóa học và điều kiện Level" aria-modal="true" class="path-dialog path-level-dialog" role="dialog"><div class="path-dialog-heading"><div><span>CẤP ĐỘ {{ editingLevelNumber }}</span><h2>Chỉnh khóa học và điều kiện Level</h2></div><button aria-label="Đóng" sc-camel-on-click="{{ closeLevelEditor }}" type="button">×</button></div><div class="path-form-grid"><label class="path-form-field is-wide">Khóa học của Level *<select sc-camel-on-change="{{ onLevelCourse }}" value="{{ levelDraftCourseId }}"><option value="">Chọn khóa học</option><sc-for as="course" hint-placeholder-count="4" list="{{ courseOptions }}"><option value="{{ course.id }}">{{ course.name }}</option></sc-for></select></label></div><div class="path-dialog-section"><div><h3>Kỳ thi bắt buộc để lên Level tiếp theo</h3><label class="path-threshold">Cần đạt <input max="{{ selectedExamCount }}" min="0" sc-camel-on-input="{{ onRequiredExamCount }}" type="number" value="{{ requiredExamCount }}"/> / {{ selectedExamCount }} kỳ thi</label></div><div class="path-option-list"><sc-for as="exam" hint-placeholder-count="4" list="{{ levelExamOptions }}"><button aria-pressed="{{ exam.ariaSelected }}" sc-camel-on-click="{{ exam.toggle }}" type="button" class="path-option {{ exam.selectedClass }}"><b>{{ exam.mark }}</b><span><strong>{{ exam.label }}</strong><small>{{ exam.meta }}</small></span></button></sc-for></div></div><div class="path-dialog-actions"><button sc-camel-on-click="{{ closeLevelEditor }}" type="button" class="path-secondary">Hủy</button><button sc-camel-on-click="{{ saveLevelEditor }}" type="button" class="path-primary">Lưu Level</button></div></section></div></sc-if>
-  <sc-if hint-placeholder-val="{{ false }}" value="{{ toastOpen }}"><button sc-camel-on-click="{{ closeToast }}" type="button" class="path-toast">{{ toast }}</button></sc-if>
-</x-dc>
-<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1100}}' type="text/x-dc">
+    <sc-if hint-placeholder-val="{{ false }}" value="{{ detailEditorOpen }}">
+      <div class="path-backdrop">
+        <section aria-label="Thiết lập bước lộ trình" aria-modal="true" class="path-dialog path-detail-dialog"
+          role="dialog">
+          <div class="path-dialog-heading">
+            <div><span>CHI TIẾT LỘ TRÌNH</span>
+              <h2>{{ detailDialogTitle }}</h2>
+            </div><button aria-label="Đóng" sc-camel-on-click="{{ closeDetailEditor }}" type="button">×</button>
+          </div>
+          <div class="path-form-grid"><label class="path-form-field">Mã *<input sc-camel-on-input="{{ onDetailCode }}"
+                type="text" value="{{ detailDraftCode }}" /></label><label class="path-form-field">Thứ tự *<input
+                min="1" sc-camel-on-input="{{ onDetailOrder }}" type="number"
+                value="{{ detailDraftOrder }}" /></label><label class="path-form-field is-wide">Tên *<input
+                placeholder="VD: Kiến thức nền tảng" sc-camel-on-input="{{ onDetailName }}" type="text"
+                value="{{ detailDraftName }}" /></label>
+            <div class="path-form-field is-wide"><span>Bài học *</span>
+              <div class="path-lesson-picker"><sc-for as="lesson" hint-placeholder-count="6"
+                  list="{{ lessonOptions }}"><button aria-pressed="{{ lesson.ariaSelected }}"
+                    sc-camel-on-click="{{ lesson.toggle }}" type="button"
+                    class="path-option {{ lesson.selectedClass }}"><b>{{ lesson.mark }}</b><span><strong>{{ lesson.name
+                        }}</strong><small>{{ lesson.course }} · {{ lesson.levelLabel }}</small></span></button></sc-for>
+              </div>
+            </div><label class="path-form-field is-wide">Hình ảnh <input accept="image/*"
+                sc-camel-on-change="{{ onDetailFile }}" type="file" /><sc-if hint-placeholder-val="{{ false }}"
+                value="{{ detailImageSelected }}"><small>Đã chọn: {{ detailDraftImage }}</small></sc-if></label><label
+              class="path-form-field is-wide">Ghi chú <textarea rows="3" sc-camel-on-input="{{ onDetailNote }}"
+                value="{{ detailDraftNote }}"></textarea></label>
+          </div><sc-if hint-placeholder-val="{{ false }}" value="{{ detailErrorOpen }}">
+            <p class="path-form-error">{{ detailError }}</p>
+          </sc-if>
+          <div class="path-dialog-actions"><button sc-camel-on-click="{{ closeDetailEditor }}" type="button"
+              class="path-secondary">Hủy</button><button sc-camel-on-click="{{ saveDetail }}" type="button"
+              class="path-primary">Lưu bước</button></div>
+        </section>
+      </div>
+    </sc-if>
+    <sc-if hint-placeholder-val="{{ false }}" value="{{ deleteOpen }}">
+      <div class="path-backdrop">
+        <section aria-label="Xác nhận xóa bước lộ trình" aria-modal="true" class="path-dialog path-cancel-dialog"
+          role="dialog">
+          <div class="path-dialog-heading">
+            <div><span>XÁC NHẬN</span>
+              <h2>Xóa bước này?</h2>
+            </div><button aria-label="Đóng" sc-camel-on-click="{{ closeDelete }}" type="button">×</button>
+          </div>
+          <p>Bước và danh sách bài học bên trong sẽ bị xóa khỏi lộ trình. Các bước còn lại sẽ được đánh lại thứ tự.</p>
+          <div class="path-dialog-actions"><button sc-camel-on-click="{{ closeDelete }}" type="button"
+              class="path-secondary">Không xóa</button><button sc-camel-on-click="{{ confirmDelete }}" type="button"
+              class="path-danger">Xóa bước</button></div>
+        </section>
+      </div>
+    </sc-if>
+    <sc-if hint-placeholder-val="{{ false }}" value="{{ cancelOpen }}">
+      <div class="path-backdrop">
+        <section aria-label="Xác nhận hủy thiết lập lộ trình" aria-modal="true" class="path-dialog path-cancel-dialog"
+          role="dialog">
+          <div class="path-dialog-heading">
+            <div><span>XÁC NHẬN</span>
+              <h2>{{ cancelTitle }}</h2>
+            </div><button aria-label="Đóng" sc-camel-on-click="{{ closeCancel }}" type="button">×</button>
+          </div>
+          <p>{{ cancelMessage }}</p>
+          <div class="path-dialog-actions"><button sc-camel-on-click="{{ closeCancel }}" type="button"
+              class="path-secondary">Tiếp tục cấu hình</button><button sc-camel-on-click="{{ confirmCancel }}"
+              type="button" class="path-danger">Hủy và thoát</button></div>
+        </section>
+      </div>
+    </sc-if>
+    <sc-if hint-placeholder-val="{{ false }}" value="{{ toastOpen }}"><button sc-camel-on-click="{{ closeToast }}"
+        type="button" class="path-toast">{{ toast }}</button></sc-if>
+  </x-dc>
+  <script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1100}}' type="text/x-dc">
 class Component extends DCLogic {
   constructor(props){
     super(props);
-    const levelParam=new URLSearchParams(window.location.search).get('levels');
-    const isNewPath=levelParam!==null;
-    const requestedLevels=Number(levelParam)||4;
-    const levelCount=Math.min(12,Math.max(1,Math.floor(requestedLevels)));
-    const courseIds=['sale','consult','objection','coach','culture','safety','app','display','season','catalog','new-product','planning'];
-    const examIdsByCourse={sale:['e1','e2','e3','e4'],consult:['e5','e6'],objection:['e7']};
-    const requiredByCourse={sale:3,consult:2,objection:1};
-    const levels=courseIds.slice(0,levelCount).map((defaultCourseId,index)=>{const courseId=isNewPath?'':defaultCourseId;return {number:index+1,courseId,examIds:examIdsByCourse[courseId]||[],required:requiredByCourse[courseId]||0};});
+    const query=new URLSearchParams(window.location.search);
+    const isNewPath=query.get('mode')==='create';
+    const selectedPositions={};
+    const positionIds=isNewPath?(query.get('positions')||'').split(',').filter(Boolean):['sales','supervisor'];
+    positionIds.forEach(id=>{selectedPositions[id]=true;});
+    const existingDetails=[
+      {code:'CT01',name:'Nền tảng bán hàng',order:1,lessonIds:['l1','l2'],image:'nen-tang-ban-hang.png',note:'Kiến thức bắt buộc trước khi thực hành.'},
+      {code:'CT02',name:'Tư vấn và xử lý nhu cầu',order:2,lessonIds:['l3','l4'],image:'tu-van-khach-hang.png',note:'Thực hành quy trình tư vấn tại điểm bán.'},
+      {code:'CT03',name:'Hoàn thiện kỹ năng bán hàng',order:3,lessonIds:['l5','l6'],image:'',note:'Ứng dụng kỹ năng xử lý tình huống và chốt đơn.'}
+    ];
     this.state={
-      step:'info',toast:'',editingLevel:null,levelDraftCourseId:'',levelDraftExams:{},requiredExamCount:0,
-      levels,
-      learnerAssignments:isNewPath?{}:{ADTest1:1,ADTest2:1,HVDEMO001:Math.min(2,levelCount)},learnerQuery:'',learnerDepartment:'all'
+      step:'info',toast:'',cancelOpen:false,deleteIndex:null,isNewPath,
+      pathName:query.get('name')||(isNewPath?'Lộ trình mới':'Lộ trình phát triển năng lực bán hàng'),
+      pathCode:query.get('code')||(isNewPath?'LP-2026-MỚI':'LP-SALES-2026'),
+      pathNote:isNewPath?'':'Chuỗi bài học phát triển năng lực bán hàng theo vị trí; Level nội dung được suy ra từ khóa học.',
+      selectedPositions,details:isNewPath?[]:existingDetails,
+      detailEditorOpen:false,editingDetailIndex:null,detailDraftCode:'',detailDraftName:'',detailDraftOrder:1,detailDraftLessons:{},detailDraftImage:'',detailDraftNote:'',detailError:''
     };
   }
   renderVals(){
-    const P={users:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2',layers:'M12 2 2 7l10 5 10-5-10-5z',book:'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5',cal:'M3 5h18v16H3zM16 3v4',route:'M4 19V5m0 0 4 4m-4-4L0 9m20-4v14m0 0-4-4m4 4 4-4',folder:'M3 6a2 2 0 0 1 2-2h4l2 3h8v13H3z'};const link=(label,d,href,active)=>({label,d,href,isHeader:false,isActive:!!active,isLink:!active});const head=label=>({label,isHeader:true,isActive:false,isLink:false,d:'',href:'#'});const nav=[head('NGƯỜI HỌC'),link('Học viên',P.users,'../students/students-list.html'),head('NỘI DUNG'),link('Chương trình',P.layers,'../programs/programs.html'),link('Khóa học',P.book,'../courses/courses.html'),head('VẬN HÀNH'),link('Lịch học/thi',P.cal,'../schedules/schedules.html'),link('Lộ trình đào tạo',P.route,'learning-paths.html',true),head('THIẾT LẬP'),link('Dự án đào tạo',P.folder,'../training-projects/training-projects.html')];
-    const defs=[['info','01','Thông tin','Mục tiêu và dự án'],['structure','02','Khóa học theo Level','Khóa học và điều kiện'],['learners','03','Phân bổ học viên','Thêm học viên và Level']];const index=Math.max(0,defs.findIndex(d=>d[0]===this.state.step));const steps=defs.map(d=>({number:d[1],label:d[2],help:d[3],className:this.state.step===d[0]?'is-active':'',current:this.state.step===d[0]?'step':'false',open:()=>this.setState({step:d[0]})}));
-    const courseDefs=[{id:'sale',name:'Chốt sale hiệu quả trong 5 bước'},{id:'consult',name:'Tư vấn sản phẩm theo nhu cầu'},{id:'objection',name:'Xử lý từ chối của khách hàng'},{id:'coach',name:'Kèm cặp nhân viên mới'},{id:'culture',name:'Văn hóa và nội quy công ty'},{id:'safety',name:'An toàn lao động tại cửa hàng'},{id:'app',name:'Làm quen ứng dụng đào tạo'},{id:'display',name:'Nguyên tắc trưng bày kệ hàng'},{id:'season',name:'Trưng bày mùa lễ hội'},{id:'catalog',name:'Danh mục sản phẩm 2026'},{id:'new-product',name:'Sản phẩm mới quý 4'},{id:'planning',name:'Lập kế hoạch ca làm việc'}];
-    const examDefs=[{id:'e1',courseId:'sale',label:'Đánh giá chào hỏi và tìm hiểu nhu cầu',meta:'Bài 1 · Đạt 80% · Tối đa 3 lượt'},{id:'e2',courseId:'sale',label:'Đánh giá giới thiệu sản phẩm',meta:'Bài 2 · Đạt 80% · Tối đa 3 lượt'},{id:'e3',courseId:'sale',label:'Đánh giá xử lý băn khoăn',meta:'Bài 3 · Đạt 80% · Tối đa 3 lượt'},{id:'e4',courseId:'sale',label:'Đánh giá chốt đơn',meta:'Bài 4 · Đạt 80% · Tối đa 3 lượt'},{id:'e5',courseId:'consult',label:'Đánh giá khai thác nhu cầu sản phẩm',meta:'Bài 1 · Đạt 80% · Tối đa 3 lượt'},{id:'e6',courseId:'consult',label:'Đánh giá tư vấn sản phẩm phù hợp',meta:'Bài 2 · Đạt 80% · Tối đa 3 lượt'},{id:'e7',courseId:'objection',label:'Đánh giá xử lý từ chối',meta:'Bài 1 · Đạt 80% · Tối đa 3 lượt'}];
-    const editLevel=(level,position)=>{const exams={};level.examIds.forEach(id=>{exams[id]=true;});this.setState({editingLevel:position,levelDraftCourseId:level.courseId,levelDraftExams:exams,requiredExamCount:level.required});};
-    const levels=this.state.levels.map((level,position)=>{const course=courseDefs.find(item=>item.id===level.courseId);return {number:level.number,name:'Cấp độ '+level.number,courseName:course?course.name:'Chưa chọn khóa học',rule:level.examIds.length?'Hoàn thành khóa học và đạt '+level.required+'/'+level.examIds.length+' kỳ thi bắt buộc':'Hoàn thành khóa học',edit:()=>editLevel(level,position)};});
-    const toggleDraft=(key,id)=>{const next=Object.assign({},this.state[key]);next[id]=!next[id];this.setState({[key]:next});};
-    const courseOptions=courseDefs.map(course=>({id:course.id,name:course.name}));
-    const availableExamDefs=examDefs.filter(exam=>exam.courseId===this.state.levelDraftCourseId);
-    const levelExamOptions=availableExamDefs.map(exam=>{const selected=!!this.state.levelDraftExams[exam.id];return {label:exam.label,meta:exam.meta,mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>toggleDraft('levelDraftExams',exam.id)};});
-    const selectedExamCount=availableExamDefs.filter(exam=>this.state.levelDraftExams[exam.id]).length;
-    const levelChoices=this.state.levels.map(level=>({value:String(level.number),label:'Cấp độ '+level.number}));
-    const learnerDefs=[{initials:'AT',name:'Avery Dennison Test 1',code:'ADTest1',department:'Bộ phận 01'},{initials:'AT',name:'Avery Dennison Test 2',code:'ADTest2',department:'Bộ phận 01'},{initials:'AT',name:'Avery Dennison Test 3',code:'ADTest3',department:'Bộ phận 02'},{initials:'HV',name:'Học viên demo 01',code:'HVDEMO001',department:'Bộ phận 01'},{initials:'AC',name:'ACACYDEMO01',code:'ACACYDEMO01',department:'Demo'},{initials:'AC',name:'ACACYDEMO 02',code:'ACACYDEMO_02',department:'Demo'}];
-    const query=this.state.learnerQuery.trim().toLowerCase();
-    const filteredLearners=learnerDefs.filter(learner=>(!query||learner.name.toLowerCase().includes(query)||learner.code.toLowerCase().includes(query))&&(this.state.learnerDepartment==='all'||learner.department===this.state.learnerDepartment));
-    const learners=filteredLearners.map(learner=>{const assigned=!!this.state.learnerAssignments[learner.code];return Object.assign({},learner,{assigned,notAssigned:!assigned,mark:assigned?'✓':'',selectedClass:assigned?'is-selected':'',ariaSelected:String(assigned),levelValue:String(this.state.learnerAssignments[learner.code]||1),toggle:()=>{const next=Object.assign({},this.state.learnerAssignments);if(next[learner.code])delete next[learner.code];else next[learner.code]=1;this.setState({learnerAssignments:next});},changeLevel:event=>{const next=Object.assign({},this.state.learnerAssignments);next[learner.code]=Number(event.target.value);this.setState({learnerAssignments:next});}});});
-    const allSelected=filteredLearners.length>0&&filteredLearners.every(learner=>!!this.state.learnerAssignments[learner.code]);
-    const someSelected=filteredLearners.some(learner=>!!this.state.learnerAssignments[learner.code]);
-    const assignedCount=learnerDefs.filter(learner=>!!this.state.learnerAssignments[learner.code]).length;
-    const firstMissingLevel=this.state.levels.find(level=>!level.courseId);
+    const P={users:'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8',layers:'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',book:'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5',cal:'M3 5h18v16H3zM16 3v4M8 3v4',route:'M4 19V5m0 0 4 4m-4-4L0 9m20-4v14m0 0-4-4m4 4 4-4',folder:'M3 6a2 2 0 0 1 2-2h4l2 3h8v13H3z'};
+    const link=(label,d,href,active)=>({label,d,href,isHeader:false,isActive:!!active,isLink:!active});
+    const head=label=>({label,isHeader:true,isActive:false,isLink:false,d:'',href:'#'});
+    const nav=[head('NGƯỜI HỌC'),link('Học viên',P.users,'../students/students-list.html'),head('NỘI DUNG'),link('Chương trình',P.layers,'../programs/programs.html'),link('Khóa học',P.book,'../courses/courses.html'),head('VẬN HÀNH'),link('Lịch học/thi',P.cal,'../schedules/schedules.html'),link('Lộ trình đào tạo',P.route,'learning-paths.html',true),head('THIẾT LẬP'),link('Dự án đào tạo',P.folder,'../training-projects/training-projects.html')];
+    const defs=[['info','01','Thông tin','Dự án và phạm vi áp dụng'],['structure','02','Chi tiết lộ trình','Sắp xếp bước và bài học'],['review','03','Kiểm tra & phát hành','Rà soát trước khi áp dụng']];
+    const index=Math.max(0,defs.findIndex(d=>d[0]===this.state.step));
+    const steps=defs.map(d=>({number:d[1],label:d[2],help:d[3],className:this.state.step===d[0]?'is-active':'',current:this.state.step===d[0]?'step':'false',open:()=>this.setState({step:d[0]})}));
+    const currentProject=(typeof window!=='undefined'&&window.AcaProjectScope)?window.AcaProjectScope.get():'ACACY PRESENTATION';
+    const projectCatalog=window.AcaProjectData?window.AcaProjectData.get(currentProject):{positions:[]};
+    const positionDefs=projectCatalog.positions.map(position=>[position.code,position.name]);
+    const levelDefs=[['0','Level 0'],['1','Level 1'],['2','Level 2'],['3','Level 3'],['4','Level 4']];
+    const lessonDefs=[
+      {id:'l1',name:'Tổng quan quy trình bán hàng',course:'Chốt sale hiệu quả trong 5 bước',level:'1'},
+      {id:'l2',name:'Chào hỏi và tìm hiểu nhu cầu',course:'Chốt sale hiệu quả trong 5 bước',level:'1'},
+      {id:'l3',name:'Giới thiệu sản phẩm phù hợp',course:'Tư vấn sản phẩm theo nhu cầu',level:'2'},
+      {id:'l4',name:'Khai thác nhu cầu khách hàng',course:'Tư vấn sản phẩm theo nhu cầu',level:'2'},
+      {id:'l5',name:'Xử lý băn khoăn của khách',course:'Xử lý từ chối của khách hàng',level:'3'},
+      {id:'l6',name:'Chốt đơn và chăm sóc sau bán',course:'Xử lý từ chối của khách hàng',level:'3'},
+      {id:'l7',name:'Thực hành tình huống tại điểm bán',course:'Kèm cặp nhân viên mới',level:'4'}
+    ];
+    const toggleChoice=(key,id)=>{const next=Object.assign({},this.state[key]);next[id]=!next[id];this.setState({[key]:next});};
+    const positionOptions=positionDefs.map(item=>{const selected=!!this.state.selectedPositions[item[0]];return {label:item[1],mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>toggleChoice('selectedPositions',item[0])};});
+    const derivedLevels={};this.state.details.forEach(detail=>detail.lessonIds.forEach(id=>{const lesson=lessonDefs.find(item=>item.id===id);if(lesson&&lesson.level)derivedLevels[lesson.level]=true;}));
+    const levelOptions=levelDefs.map(item=>{const selected=!!derivedLevels[item[0]];return {label:item[1],mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected)};});
+    const selectedPositionLabels=positionDefs.filter(item=>this.state.selectedPositions[item[0]]).map(item=>item[1]);
+    const selectedLevelLabels=levelDefs.filter(item=>derivedLevels[item[0]]).map(item=>item[1]);
+    const positionSummary=selectedPositionLabels.length?selectedPositionLabels.join(', '):'Mọi vị trí';
+    const levelSummary=selectedLevelLabels.length?selectedLevelLabels.join(', '):'Không theo Level';
+    const normalizeDetails=list=>list.map((detail,detailIndex)=>Object.assign({},detail,{order:detailIndex+1}));
+    const moveDetail=(from,to)=>{if(to<0||to>=this.state.details.length)return;const next=this.state.details.slice();const moved=next.splice(from,1)[0];next.splice(to,0,moved);this.setState({details:normalizeDetails(next),toast:'Đã cập nhật thứ tự lộ trình.'});};
+    const openDetailEditor=detailIndex=>{const detail=detailIndex===null?null:this.state.details[detailIndex];const lessons={};if(detail)detail.lessonIds.forEach(id=>{lessons[id]=true;});this.setState({detailEditorOpen:true,editingDetailIndex:detailIndex,detailDraftCode:detail?detail.code:'CT'+String(this.state.details.length+1).padStart(2,'0'),detailDraftName:detail?detail.name:'',detailDraftOrder:detail?detail.order:this.state.details.length+1,detailDraftLessons:lessons,detailDraftImage:detail?detail.image:'',detailDraftNote:detail?detail.note:'',detailError:''});};
+    const details=this.state.details.map((detail,detailIndex)=>{const selectedLessons=lessonDefs.filter(lesson=>detail.lessonIds.includes(lesson.id));return Object.assign({},detail,{lessonCount:selectedLessons.length,lessonNames:selectedLessons.map(lesson=>lesson.name).join(' · '),hasImage:!!detail.image,cannotMoveUp:detailIndex===0,cannotMoveDown:detailIndex===this.state.details.length-1,moveUp:()=>moveDetail(detailIndex,detailIndex-1),moveDown:()=>moveDetail(detailIndex,detailIndex+1),edit:()=>openDetailEditor(detailIndex),remove:()=>this.setState({deleteIndex:detailIndex})});});
+    const lessonOptions=lessonDefs.map(lesson=>{const selected=!!this.state.detailDraftLessons[lesson.id];return Object.assign({},lesson,{levelLabel:lesson.level?'Level '+lesson.level:'Không theo Level',mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>{const next=Object.assign({},this.state.detailDraftLessons);next[lesson.id]=!next[lesson.id];this.setState({detailDraftLessons:next,detailError:''});}});});
+    const lessonTotal=this.state.details.reduce((total,detail)=>total+detail.lessonIds.length,0);
+    const invalidDetail=this.state.details.find(detail=>!detail.name.trim()||!detail.lessonIds.length);
+    const readyToPublish=!!this.state.pathName.trim()&&!!this.state.pathCode.trim()&&this.state.details.length>0&&!invalidDetail;
+    const reviewWarning=!this.state.details.length?'Lộ trình phải có ít nhất một bước nội dung.':invalidDetail?'Mỗi bước phải có tên và ít nhất một bài học.':'';
+    const saveDetail=()=>{const code=this.state.detailDraftCode.trim();const name=this.state.detailDraftName.trim();const lessonIds=lessonDefs.filter(lesson=>this.state.detailDraftLessons[lesson.id]).map(lesson=>lesson.id);if(!code||!name){this.setState({detailError:'Vui lòng nhập đầy đủ mã và tên bước.'});return;}if(!lessonIds.length){this.setState({detailError:'Vui lòng chọn ít nhất một bài học.'});return;}const detail={code,name,order:Number(this.state.detailDraftOrder)||1,lessonIds,image:this.state.detailDraftImage.trim(),note:this.state.detailDraftNote.trim()};const next=this.state.details.slice();if(this.state.editingDetailIndex!==null)next.splice(this.state.editingDetailIndex,1);const target=Math.max(0,Math.min(next.length,detail.order-1));next.splice(target,0,detail);this.setState({details:normalizeDetails(next),detailEditorOpen:false,editingDetailIndex:null,detailError:'',toast:'Đã lưu bước lộ trình.'});};
     return {
-      nav,steps,levels,learners,courseOptions,levelExamOptions,levelChoices,levelCount:this.state.levels.length,selectedExamCount,assignedCount,learnerTotal:learnerDefs.length,
-      stepNumber:index+1,stepProgress:'Bước '+(index+1)+'/3',stepLabel:defs[index][2],infoStep:this.state.step==='info',structureStep:this.state.step==='structure',learnersStep:this.state.step==='learners',
-      nextLabel:index===defs.length-1?'Hoàn tất thiết lập':'Tiếp tục →',previous:()=>this.setState({step:defs[Math.max(0,index-1)][0]}),next:()=>{if(this.state.step==='structure'&&firstMissingLevel){this.setState({toast:'Vui lòng chọn khóa học cho Cấp độ '+firstMissingLevel.number+'.'});return;}this.setState(index===defs.length-1?{toast:'Đã hoàn tất cấu hình lộ trình và phân bổ học viên.'}:{step:defs[index+1][0]});},
-      levelEditorOpen:this.state.editingLevel!==null,editingLevelNumber:this.state.editingLevel===null?'':this.state.editingLevel+1,levelDraftCourseId:this.state.levelDraftCourseId,requiredExamCount:this.state.requiredExamCount,
-      onLevelCourse:event=>this.setState({levelDraftCourseId:event.target.value,levelDraftExams:{},requiredExamCount:0}),onRequiredExamCount:event=>this.setState({requiredExamCount:Number(event.target.value)||0}),closeLevelEditor:()=>this.setState({editingLevel:null}),
-      saveLevelEditor:()=>{const position=this.state.editingLevel;if(position===null)return;const courseId=this.state.levelDraftCourseId;if(!courseId){this.setState({toast:'Vui lòng chọn khóa học cho Cấp độ '+(position+1)+'.'});return;}if(this.state.levels.some((level,levelPosition)=>levelPosition!==position&&level.courseId===courseId)){this.setState({toast:'Khóa học này đã được dùng ở một Level khác.'});return;}const examIds=availableExamDefs.filter(exam=>this.state.levelDraftExams[exam.id]).map(exam=>exam.id);const required=Math.min(Math.max(0,this.state.requiredExamCount),examIds.length);const next=this.state.levels.slice();next[position]=Object.assign({},next[position],{courseId,examIds,required});this.setState({levels:next,editingLevel:null,toast:'Đã cập nhật khóa học và điều kiện Cấp độ '+(position+1)+'.'});},
-      learnerQuery:this.state.learnerQuery,learnerDepartment:this.state.learnerDepartment,onLearnerQuery:event=>this.setState({learnerQuery:event.target.value}),onLearnerDepartment:event=>this.setState({learnerDepartment:event.target.value}),clearLearnerFilters:()=>this.setState({learnerQuery:'',learnerDepartment:'all'}),
-      allLearnersSelected:String(allSelected),allLearnersClass:allSelected||someSelected?'is-selected':'',allLearnersMark:allSelected?'✓':someSelected?'−':'',toggleAllLearners:()=>{const next=Object.assign({},this.state.learnerAssignments);filteredLearners.forEach(learner=>{if(allSelected)delete next[learner.code];else if(!next[learner.code])next[learner.code]=1;});this.setState({learnerAssignments:next});},
-      saveDraft:()=>this.setState({toast:'Đã lưu bản nháp lộ trình.'}),publishPath:()=>{if(firstMissingLevel){this.setState({toast:'Chưa thể phát hành: Cấp độ '+firstMissingLevel.number+' chưa có khóa học.'});return;}this.setState({toast:'Đã phát hành lộ trình cho '+assignedCount+' học viên.'});},toast:this.state.toast,toastOpen:!!this.state.toast,closeToast:()=>this.setState({toast:''})
+      nav,steps,currentProject,pathName:this.state.pathName,pathCode:this.state.pathCode,pathNote:this.state.pathNote,positionOptions,levelOptions,positionSummary,levelSummary,details,detailCount:details.length,lessonTotal,
+      stepNumber:index+1,stepProgress:'Bước '+(index+1)+'/3',stepLabel:defs[index][2],infoStep:this.state.step==='info',structureStep:this.state.step==='structure',reviewStep:this.state.step==='review',
+      nextLabel:index===defs.length-1?'Hoàn tất thiết lập':'Tiếp tục →',hasPreviousStep:index>0,previous:()=>this.setState({step:defs[Math.max(0,index-1)][0]}),next:()=>{if(this.state.step==='info'&&!this.state.pathName.trim()){this.setState({toast:'Vui lòng nhập tên lộ trình.'});return;}if(this.state.step==='structure'&&!this.state.details.length){this.setState({toast:'Vui lòng thêm ít nhất một bước nội dung.'});return;}this.setState(index===defs.length-1?{toast:'Đã hoàn tất thiết lập lộ trình.'}:{step:defs[index+1][0]});},
+      onNameChange:event=>this.setState({pathName:event.target.value}),onNoteChange:event=>this.setState({pathNote:event.target.value}),detailEmpty:details.length===0,openAddDetail:()=>openDetailEditor(null),
+      detailEditorOpen:this.state.detailEditorOpen,detailDialogTitle:this.state.editingDetailIndex===null?'Thêm bước lộ trình':'Chỉnh sửa bước lộ trình',detailDraftCode:this.state.detailDraftCode,detailDraftName:this.state.detailDraftName,detailDraftOrder:this.state.detailDraftOrder,detailDraftImage:this.state.detailDraftImage,detailImageSelected:!!this.state.detailDraftImage,detailDraftNote:this.state.detailDraftNote,lessonOptions,detailError:this.state.detailError,detailErrorOpen:!!this.state.detailError,
+      onDetailCode:event=>this.setState({detailDraftCode:event.target.value,detailError:''}),onDetailName:event=>this.setState({detailDraftName:event.target.value,detailError:''}),onDetailOrder:event=>this.setState({detailDraftOrder:event.target.value,detailError:''}),onDetailFile:event=>this.setState({detailDraftImage:event.target.files&&event.target.files[0]?event.target.files[0].name:this.state.detailDraftImage}),onDetailNote:event=>this.setState({detailDraftNote:event.target.value}),closeDetailEditor:()=>this.setState({detailEditorOpen:false,editingDetailIndex:null,detailError:''}),saveDetail,
+      readinessClass:readyToPublish?'is-ready':'is-incomplete',readinessLabel:readyToPublish?'Sẵn sàng phát hành':'Chưa hoàn tất',reviewWarningOpen:!!reviewWarning,reviewWarning,
+      deleteOpen:this.state.deleteIndex!==null,closeDelete:()=>this.setState({deleteIndex:null}),confirmDelete:()=>{if(this.state.deleteIndex===null)return;const next=this.state.details.slice();next.splice(this.state.deleteIndex,1);this.setState({details:normalizeDetails(next),deleteIndex:null,toast:'Đã xóa bước khỏi lộ trình.'});},
+      cancelOpen:this.state.cancelOpen,cancelTitle:this.state.isNewPath?'Hủy tạo lộ trình?':'Bỏ các thay đổi chưa lưu?',cancelMessage:this.state.isNewPath?'Toàn bộ thông tin vừa cấu hình sẽ không được tạo. Bạn có chắc muốn thoát?':'Các thay đổi chưa lưu trong lần cấu hình này sẽ bị bỏ. Bản đã lưu trước đó vẫn được giữ nguyên.',openCancel:()=>this.setState({cancelOpen:true}),closeCancel:()=>this.setState({cancelOpen:false}),confirmCancel:()=>{window.location.href='learning-paths.html';},
+      saveDraft:()=>this.setState({isNewPath:false,toast:'Đã lưu bản nháp lộ trình.'}),publishPath:()=>{if(!readyToPublish){this.setState({step:'review',toast:'Chưa thể phát hành. Vui lòng hoàn tất nội dung lộ trình.'});return;}this.setState({isNewPath:false,toast:'Đã phát hành lộ trình với '+details.length+' bước và '+lessonTotal+' bài học.'});},toast:this.state.toast,toastOpen:!!this.state.toast,closeToast:()=>this.setState({toast:''})
     };
   }
 }
 </script>
 </body>
+
 </html>
