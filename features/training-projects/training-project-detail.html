@@ -355,6 +355,36 @@
                         class="project-position-empty">Dự án chưa có vị trí.</p></sc-if>
                   </div>
                 </sc-if>
+                <sc-if hint-placeholder-val="{{ false }}" value="{{ tabConfiguration }}">
+                  <div role="tabpanel" class="ui-panel-09f4a2f project-configuration-panel">
+                    <div class="project-configuration-heading">
+                      <div><strong>Cấu hình Form Học viên</strong><span>Quy định trường nào được hiển thị và cách chọn
+                          dữ liệu trên hồ sơ học viên của dự án.</span></div>
+                      <button sc-camel-on-click="{{ saveStudentFormConfiguration }}" type="button">Lưu cấu
+                        hình</button>
+                    </div>
+                    <label class="project-configuration-form"><span>Form cấu hình</span><select disabled>
+                        <option>Form Học viên</option>
+                      </select></label>
+                    <div class="project-configuration-table">
+                      <div class="project-configuration-row project-configuration-head"><span>STT</span><span>Nội
+                          dung</span><span>Giá trị</span></div>
+                      <sc-for as="configuration" hint-placeholder-count="8" list="{{ configurationRows }}">
+                        <div class="project-configuration-row"><span>{{ configuration.order }}</span><strong>Quy định
+                            thông tin {{ configuration.name }}</strong><select
+                            sc-camel-on-change="{{ configuration.change }}" value="{{ configuration.mode }}">
+                            <option value="show">Hiện</option>
+                            <option value="multiple">Hiện (Chọn nhiều)</option>
+                            <option value="hidden">Ẩn</option>
+                          </select></div>
+                      </sc-for>
+                    </div>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ configurationSaved }}">
+                      <p class="project-configuration-success">Đã lưu cấu hình Form Học viên cho dự án {{
+                        currentProject }}.</p>
+                    </sc-if>
+                  </div>
+                </sc-if>
                 <sc-if hint-placeholder-val="{{ false }}" value="{{ tabList }}">
                   <div role="tabpanel" class="ui-panel-09f4a2f">
                     <div class="ui-panel-d78b093">
@@ -554,9 +584,10 @@ class Component extends DCLogic {
         trainer: projectCatalog ? (projectCatalog.trainers || []).map((item) => item.name) : [],
         tag: projectCatalog ? (projectCatalog.tags || []).map((item) => item.code + ' · ' + item.name) : [],
         danhmuckhac: projectCatalog ? (projectCatalog.otherCategories || []).map((item) => item.code + ' · ' + item.name) : [],
-        trangthailamviec: projectCatalog ? (projectCatalog.workStatuses || []).map((item) => item.code + ' · ' + item.name) : [],
-        cauhinh: projectCatalog ? (projectCatalog.configurations || []).map((item) => item.name) : []
+        trangthailamviec: projectCatalog ? (projectCatalog.workStatuses || []).map((item) => item.code + ' · ' + item.name) : []
       },
+      studentFormConfigurations: projectCatalog && projectCatalog.configurations && projectCatalog.configurations.length ? projectCatalog.configurations.map((item) => ({ key: item.key, name: item.name, mode: item.mode || 'show' })) : [],
+      configurationSaved: false,
       criteria: (projectCatalog ? projectCatalog.criteria : []).map((item) => ({ id: item.code.toLowerCase(), code: item.code, name: item.name })),
       managementLabels: (projectCatalog ? (projectCatalog.managementLabels || []) : []).map((item, index) => ({ id: item.code || 'QL' + (index + 1), name: item.name, competencyExam: !!item.competencyExam, note: item.note || '' })),
       positions: (projectCatalog ? (projectCatalog.positions || []) : []).map((item, index) => ({ id: item.code || 'VT' + (index + 1), code: item.code || 'VT' + (index + 1), name: item.name, userType: item.userType || 'Trainee', permissionGroups: item.permissionGroups || [], note: item.note || '' })),
@@ -683,7 +714,17 @@ class Component extends DCLogic {
       const selected = s.positionPermissions.includes(label);
       return { label, mark: selected ? '✓' : '', className: selected ? 'is-selected' : '', ariaSelected: String(selected), toggle: () => this.setState({ positionPermissions: selected ? this.state.positionPermissions.filter((item) => item !== label) : this.state.positionPermissions.concat([label]) }) };
     });
-    const listTabs = ['nganhhang', 'kenh', 'thongtinhocvien', 'vung', 'khuvuc', 'capbac', 'cuahang', 'bophan', 'trainer', 'tag', 'danhmuckhac', 'trangthailamviec', 'cauhinh'];
+    const configurationRows = (s.studentFormConfigurations || []).map((configuration, index) => ({
+      key: configuration.key,
+      name: configuration.name,
+      mode: configuration.mode,
+      order: index + 1,
+      change: (event) => this.setState({
+        studentFormConfigurations: this.state.studentFormConfigurations.map((item) => item.key === configuration.key ? Object.assign({}, item, { mode: event.target.value }) : item),
+        configurationSaved: false
+      })
+    }));
+    const listTabs = ['nganhhang', 'kenh', 'thongtinhocvien', 'vung', 'khuvuc', 'capbac', 'cuahang', 'bophan', 'trainer', 'tag', 'danhmuckhac', 'trangthailamviec'];
     const listKey = listTabs.includes(s.tab) ? s.tab : 'nganhhang';
     const list = s.vals[listKey] || [];
     const cancelRow = () => this.setState({ rowEdit: null, rowDraft: '', rowAsk: null, adding: false, addName: '', listError: '' });
@@ -724,7 +765,7 @@ class Component extends DCLogic {
       ['tag', 'Danh mục Tag', (s.vals.tag || []).length, 'Đào tạo & vận hành'],
       ['tieuchi', 'Tiêu chí đào tạo', criteriaCount, 'Đào tạo & vận hành'],
       ['danhmuckhac', 'Danh mục khác', (s.vals.danhmuckhac || []).length, 'Đào tạo & vận hành'],
-      ['cauhinh', 'Cấu hình', (s.vals.cauhinh || []).length, 'Đào tạo & vận hành']
+      ['cauhinh', 'Cấu hình', configurationRows.length, 'Đào tạo & vận hành']
     ];
     const tabs = tabDefs.map(([id, label, count, group]) => ({ id, label, count, group, active: s.tab === id, inactive: s.tab !== id, go: () => keepScroll({ tab: id, more: false, rowEdit: null, rowAsk: null, adding: false }) }));
     const activeTab = tabs.find((tab) => tab.active) || tabs[0];
@@ -750,17 +791,17 @@ class Component extends DCLogic {
       trainer: 'Danh sách giảng viên hoặc người phụ trách đào tạo của dự án.',
       tag: 'Tag dùng để phân loại lịch học/thi và nội dung trong dự án.',
       danhmuckhac: 'Các danh mục mở rộng được khai báo trong phạm vi dự án.',
-      trangthailamviec: 'Danh mục trạng thái làm việc của học viên trong dự án.',
-      cauhinh: 'Các cấu hình mở rộng áp dụng riêng cho dự án.'
+      trangthailamviec: 'Danh mục trạng thái làm việc của học viên trong dự án.'
     };
-    const addLabels = { nganhhang:'Thêm ngành hàng', kenh:'Thêm kênh phân phối', thongtinhocvien:'Thêm thuộc tính học viên', nhanquanly:'Thêm nhãn quản lý', vitri:'Thêm vị trí', vung:'Thêm vùng', khuvuc:'Thêm khu vực', capbac:'Thêm cấp bậc', cuahang:'Thêm cửa hàng', bophan:'Thêm bộ phận', trainer:'Thêm Trainer', tag:'Thêm Tag', danhmuckhac:'Thêm danh mục', trangthailamviec:'Thêm trạng thái', cauhinh:'Thêm cấu hình' };
+    const addLabels = { nganhhang:'Thêm ngành hàng', kenh:'Thêm kênh phân phối', thongtinhocvien:'Thêm thuộc tính học viên', nhanquanly:'Thêm nhãn quản lý', vitri:'Thêm vị trí', vung:'Thêm vùng', khuvuc:'Thêm khu vực', capbac:'Thêm cấp bậc', cuahang:'Thêm cửa hàng', bophan:'Thêm bộ phận', trainer:'Thêm Trainer', tag:'Thêm Tag', danhmuckhac:'Thêm danh mục', trangthailamviec:'Thêm trạng thái' };
     return {
       nav, tabs, tabGroups, visibleTabs, logins, values, managementRows, projectPrograms, assignedCriteria, criteriaCount, criteriaEmpty: assignedCriteria.length === 0, currentProject, currentProjectCode, currentCustomer,
-      tabInfo: s.tab === 'thongtin', tabLogin: false, tabPrograms: false, tabCriteria: s.tab === 'tieuchi', tabManagementLabels: s.tab === 'nhanquanly', tabPositions: s.tab === 'vitri', tabList: listTabs.includes(s.tab), tabModule: false,
+      tabInfo: s.tab === 'thongtin', tabLogin: false, tabPrograms: false, tabCriteria: s.tab === 'tieuchi', tabManagementLabels: s.tab === 'nhanquanly', tabPositions: s.tab === 'vitri', tabConfiguration: s.tab === 'cauhinh', tabList: listTabs.includes(s.tab), tabModule: false,
       moduleTitle: activeModule.title, moduleDescription: activeModule.description, moduleHref: activeModule.href, moduleCount: activeModule.count, moduleUnit: activeModule.unit, moduleItems,
       listHint: hints[listKey], addLabel: addLabels[listKey],
       adding: s.adding, addName: s.addName, listError: s.listError, listErrorOpen: !!s.listError, emptyList: list.length === 0 && !s.adding,
       positionRows, positionPermissionOptions, positionEmpty: positions.length === 0, positionFormOpen: s.positionAdding || !!s.positionEdit, positionCode: s.positionCode, positionName: s.positionName, positionUserType: s.positionUserType, positionNote: s.positionNote, positionError: s.positionError, positionErrorOpen: !!s.positionError, positionSaveLabel: s.positionEdit ? 'Lưu thay đổi' : 'Thêm vị trí',
+      configurationRows, configurationSaved: s.configurationSaved,
       managementEmpty: managementLabels.length === 0 && !s.managementAdding, managementAdding: s.managementAdding, managementNewName: s.managementNewName, managementNewNote: s.managementNewNote, managementNewExamClass: s.managementNewExam ? 'is-on' : '', managementNewExamAria: String(s.managementNewExam), managementDraftName: s.managementDraftName, managementDraftNote: s.managementDraftNote, managementDraftExamClass: s.managementDraftExam ? 'is-on' : '', managementDraftExamAria: String(s.managementDraftExam), managementError: s.managementError, managementErrorOpen: !!s.managementError,
       moreOpen: s.more, editOpen: s.edit, programAddOpen: s.programAdd, criteriaCreateOpen: s.criteriaCreate, criteriaDeleteOpen: !!s.criteriaDelete, criteriaDeleteLabel: s.criteriaDelete ? s.criteriaDelete.code + ' · ' + s.criteriaDelete.name : '', programName: s.programName, programCode: s.programCode, programDescription: s.programDescription, programError: s.programError, programErrorOpen: !!s.programError, criterionCode: s.criterionCode, criterionName: s.criterionName, criterionError: s.criterionError, criterionErrorOpen: !!s.criterionError,
       toggleMore: () => this.setState({ more: !this.state.more }),
@@ -782,6 +823,10 @@ class Component extends DCLogic {
         if (this.state.positions.some((item) => item.id !== editId && item.code.toLowerCase() === code.toLowerCase())) { this.setState({ positionError: 'Mã vị trí đã tồn tại trong dự án.' }); return; }
         const record = { id: editId || code, code, name, userType: this.state.positionUserType, permissionGroups: this.state.positionPermissions.slice(), note: this.state.positionNote.trim() };
         this.setState({ positions: editId ? this.state.positions.map((item) => item.id === editId ? record : item) : this.state.positions.concat([record]), positionAdding: false, positionEdit: '', positionCode: '', positionName: '', positionUserType: 'Trainee', positionPermissions: [], positionNote: '', positionError: '' });
+      },
+      saveStudentFormConfiguration: () => {
+        if (window.AcaProjectData && window.AcaProjectData.updateConfigurations) window.AcaProjectData.updateConfigurations(currentProject, this.state.studentFormConfigurations);
+        this.setState({ configurationSaved: true });
       },
       startManagementAdd: () => this.setState({ managementAdding: true, managementEdit: '', managementDelete: '', managementNewName: '', managementNewNote: '', managementNewExam: false, managementError: '' }),
       cancelManagementEdit: () => this.setState({ managementAdding: false, managementEdit: '', managementDelete: '', managementError: '' }),

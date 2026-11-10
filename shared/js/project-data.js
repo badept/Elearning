@@ -1,6 +1,19 @@
 (function () {
   'use strict';
 
+  function defaultStudentFormConfigurations() {
+    return [
+      { key: 'department', name: 'Bộ phận', mode: 'show' },
+      { key: 'position', name: 'Vị trí', mode: 'show' },
+      { key: 'industry', name: 'Ngành hàng', mode: 'show' },
+      { key: 'area', name: 'Khu vực', mode: 'show' },
+      { key: 'store', name: 'Cửa hàng', mode: 'show' },
+      { key: 'trainer', name: 'Trainer', mode: 'show' },
+      { key: 'manager', name: 'Người quản lý', mode: 'show' },
+      { key: 'workplace', name: 'Nơi làm việc', mode: 'show' }
+    ];
+  }
+
   var projects = {
     'ACACY PRESENTATION': {
       code: 'ACACY_PRESENTATION',
@@ -35,7 +48,7 @@
       stores: [],
       trainers: [],
       otherCategories: [],
-      configurations: [],
+      configurations: defaultStudentFormConfigurations(),
       tags: [
         { code: 'MANDATORY', name: 'Đào tạo bắt buộc' },
         { code: 'PERIODIC', name: 'Đánh giá định kỳ' }
@@ -95,7 +108,7 @@
       otherCategories: [
         { code: 'TTBS01', name: 'Thuộc tính bổ sung 01', note: 'Thuộc tính mở rộng của dự án' }
       ],
-      configurations: [],
+      configurations: defaultStudentFormConfigurations(),
       criteria: [],
       loginLinks: [
         { code: 'id0489', url: 'https://trainee.acacy.com.vn/id0489', industryCode: 'N001' },
@@ -116,7 +129,7 @@
       customer: input.customer || '',
       industries: [], channels: [], learnerAttributes: [], managementLabels: [],
       positions: [], departments: [], regions: [], areas: [], ranks: [], stores: [], trainers: [],
-      tags: [], otherCategories: [], workStatuses: [], configurations: [], criteria: [], loginLinks: [],
+      tags: [], otherCategories: [], workStatuses: [], configurations: defaultStudentFormConfigurations(), criteria: [], loginLinks: [],
       loginTypes: input.loginTypes || ['Mã hoặc số điện thoại học viên được cấp tại dự án']
     };
   }
@@ -127,6 +140,17 @@
     });
   } catch (error) {
     // Ignore invalid prototype data and keep the built-in projects available.
+  }
+
+  try {
+    var storedConfigurations = JSON.parse(window.localStorage.getItem('acasys.projectStudentFormConfigurations') || '{}');
+    Object.keys(storedConfigurations).forEach(function (projectName) {
+      if (projects[projectName] && Array.isArray(storedConfigurations[projectName])) {
+        projects[projectName].configurations = storedConfigurations[projectName];
+      }
+    });
+  } catch (error) {
+    // Keep the default form configuration when stored prototype data is invalid.
   }
 
   function clone(value) {
@@ -176,13 +200,35 @@
     return get(input.name);
   }
 
+  function updateConfigurations(projectName, records) {
+    if (!projects[projectName] || !Array.isArray(records)) return null;
+    var allowedModes = ['show', 'multiple', 'hidden'];
+    projects[projectName].configurations = records.map(function (record) {
+      return {
+        key: record.key,
+        name: record.name,
+        mode: allowedModes.indexOf(record.mode) >= 0 ? record.mode : 'show'
+      };
+    });
+    try {
+      var stored = JSON.parse(window.localStorage.getItem('acasys.projectStudentFormConfigurations') || '{}');
+      stored[projectName] = projects[projectName].configurations;
+      window.localStorage.setItem('acasys.projectStudentFormConfigurations', JSON.stringify(stored));
+    } catch (error) {
+      // Changes remain available for the current session when storage is unavailable.
+    }
+    syncProjectFields();
+    return clone(projects[projectName].configurations);
+  }
+
   window.AcaProjectData = {
     all: function () { return Object.keys(projects); },
     get: get,
     current: current,
     list: list,
     labels: labels,
-    register: register
+    register: register,
+    updateConfigurations: updateConfigurations
   };
 
   function fieldName(label) {
@@ -206,6 +252,22 @@
   function syncProjectFields() {
     if (!document.body) return;
     var project = current();
+    var studentFieldModes = {};
+    (project.configurations || []).forEach(function (record) {
+      studentFieldModes[record.key] = record.mode || 'show';
+    });
+    var studentFieldKeys = {
+      'Bộ phận': 'department',
+      'Phòng ban / Bộ phận': 'department',
+      'Vị trí': 'position',
+      'Ngành hàng': 'industry',
+      'Khu vực': 'area',
+      'Cửa hàng': 'store',
+      'Trainer': 'trainer',
+      'Quản lý': 'manager',
+      'Người quản lý': 'manager',
+      'Nơi làm việc': 'workplace'
+    };
     var mappings = {
       'Bộ phận': { key: 'departments', empty: 'Chưa có bộ phận' },
       'Phòng ban / Bộ phận': { key: 'departments', empty: 'Chưa có bộ phận' },
@@ -217,7 +279,19 @@
     };
 
     document.querySelectorAll('label').forEach(function (label) {
-      var mapping = mappings[fieldName(label)];
+      var name = fieldName(label);
+      if (window.location.pathname.indexOf('/students/') >= 0 && studentFieldKeys[name]) {
+        var mode = studentFieldModes[studentFieldKeys[name]] || 'show';
+        label.hidden = mode === 'hidden';
+        label.setAttribute('data-project-field-mode', mode);
+        var modeSelect = label.querySelector('select');
+        if (modeSelect) {
+          modeSelect.multiple = mode === 'multiple';
+          if (mode === 'multiple') modeSelect.setAttribute('size', '1');
+          else modeSelect.removeAttribute('size');
+        }
+      }
+      var mapping = mappings[name];
       if (!mapping) return;
       var select = label.querySelector('select, sc-raw-select');
       if (!select) return;

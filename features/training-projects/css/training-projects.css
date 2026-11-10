@@ -1189,6 +1189,31 @@
 #dc-root .project-position-actions > span { color:#9D2435; font-weight:650; }
 #dc-root .project-position-actions button.is-delete { color:#B4182E; border-color:#F0C5CC; }
 
+/* Per-project learner form rules mirror the operational configuration flow. */
+#dc-root .project-configuration-panel { display:grid; gap:18px; }
+#dc-root .project-configuration-heading { display:flex; align-items:center; justify-content:space-between; gap:20px; }
+#dc-root .project-configuration-heading > div { min-width:0; display:grid; gap:5px; }
+#dc-root .project-configuration-heading strong { color:#13234B; font-size:18px; }
+#dc-root .project-configuration-heading span { color:#6B7891; font-size:12px; line-height:1.5; }
+#dc-root .project-configuration-heading > button { min-height:42px; padding:0 16px; flex:0 0 auto; color:#FFF; background:#2456B8; border:0; border-radius:9px; font-weight:700; cursor:pointer; }
+#dc-root .project-configuration-form { display:grid; grid-template-columns:180px minmax(0,1fr); align-items:center; gap:14px; color:#43516B; font-size:12px; font-weight:700; }
+#dc-root .project-configuration-form select { width:100%; height:42px; padding:0 12px; color:#34425F; background:#F7F9FC; border:1px solid #CFDAEA; border-radius:8px; opacity:1; }
+#dc-root .project-configuration-table { overflow:hidden; border:1px solid #DFE6F0; border-radius:12px; }
+#dc-root .project-configuration-row { min-height:62px; padding:10px 16px; display:grid; grid-template-columns:70px minmax(260px,1fr) minmax(220px,340px); align-items:center; gap:16px; color:#34425F; border-bottom:1px solid #E7ECF3; font-size:12px; }
+#dc-root .project-configuration-row:last-child { border-bottom:0; }
+#dc-root .project-configuration-row > strong { color:#243552; font-weight:650; }
+#dc-root .project-configuration-row select { width:100%; height:40px; padding:0 11px; color:#243552; background:#FFF; border:1px solid #C8D5E7; border-radius:8px; outline:0; }
+#dc-root .project-configuration-row select:focus { border-color:#2456B8; box-shadow:0 0 0 3px rgba(36,86,184,.1); }
+#dc-root .project-configuration-head { min-height:44px; color:#66738C; background:#F7F9FC; font-size:10px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+#dc-root .project-configuration-success { margin:0; padding:12px 14px; color:#18794E; background:#EAF7F0; border-radius:9px; font-size:12px; font-weight:650; }
+
+@media (max-width: 760px) {
+  #dc-root .project-configuration-heading { align-items:flex-start; flex-direction:column; }
+  #dc-root .project-configuration-form { grid-template-columns:1fr; }
+  #dc-root .project-configuration-table { overflow-x:auto; }
+  #dc-root .project-configuration-row { min-width:660px; }
+}
+
 #dc-root .project-program-dialog {
   display: flex;
   flex-direction: column;
