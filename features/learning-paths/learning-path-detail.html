@@ -110,7 +110,7 @@
                   <header>
                     <div>
                       <h2>Chi tiết lộ trình</h2>
-                      <p>Sắp xếp các bước và chọn bài học cho từng bước.</p>
+                      <p>Sắp xếp các bước và chọn bài học từ các khóa học thuộc dự án.</p>
                     </div><button sc-camel-on-click="{{ openAddDetail }}" type="button" class="path-primary">+ Thêm
                       bước</button>
                   </header><sc-if hint-placeholder-val="{{ false }}" value="{{ detailEmpty }}">
@@ -194,6 +194,10 @@
                 placeholder="VD: Kiến thức nền tảng" sc-camel-on-input="{{ onDetailName }}" type="text"
                 value="{{ detailDraftName }}" /></label>
             <div class="path-form-field is-wide"><span>Bài học *</span>
+              <small>Chỉ hiển thị bài học thuộc các khóa học của dự án {{ currentProject }}. Level được lấy từ khóa học chứa bài.</small>
+              <sc-if hint-placeholder-val="false" value="{{ lessonOptionsEmpty }}">
+                <div class="path-detail-empty"><strong>Dự án chưa có bài học</strong><p>Hãy tạo khóa học và bài học trong dự án trước khi cấu hình lộ trình.</p></div>
+              </sc-if>
               <div class="path-lesson-picker"><sc-for as="lesson" hint-placeholder-count="6"
                   list="{{ lessonOptions }}"><button aria-pressed="{{ lesson.ariaSelected }}"
                     sc-camel-on-click="{{ lesson.toggle }}" type="button"
@@ -258,11 +262,12 @@ class Component extends DCLogic {
     const selectedPositions={};
     const positionIds=isNewPath?(query.get('positions')||'').split(',').filter(Boolean):['sales','supervisor'];
     positionIds.forEach(id=>{selectedPositions[id]=true;});
-    const existingDetails=[
-      {code:'CT01',name:'Nền tảng bán hàng',order:1,lessonIds:['l1','l2'],image:'nen-tang-ban-hang.png',note:'Kiến thức bắt buộc trước khi thực hành.'},
-      {code:'CT02',name:'Tư vấn và xử lý nhu cầu',order:2,lessonIds:['l3','l4'],image:'tu-van-khach-hang.png',note:'Thực hành quy trình tư vấn tại điểm bán.'},
-      {code:'CT03',name:'Hoàn thiện kỹ năng bán hàng',order:3,lessonIds:['l5','l6'],image:'',note:'Ứng dụng kỹ năng xử lý tình huống và chốt đơn.'}
-    ];
+    const currentProject=(typeof window!=='undefined'&&window.AcaProjectScope)?window.AcaProjectScope.get():'ACACY PRESENTATION';
+    const existingDetails=currentProject==='ACACY DEMO'?
+      [{code:'CT01',name:'Hội nhập dự án Demo',order:1,lessonIds:['COURSE-DEMO-01-L01'],image:'',note:'Nội dung hội nhập thuộc dự án Demo.'}]:[
+        {code:'CT01',name:'Nền tảng bán hàng',order:1,lessonIds:['COURSE-SALES-01-L01','COURSE-SALES-01-L02'],image:'nen-tang-ban-hang.png',note:'Kiến thức bắt buộc trước khi thực hành.'},
+        {code:'CT02',name:'Hoàn thiện kỹ năng bán hàng',order:2,lessonIds:['COURSE-SALES-01-L03','COURSE-SALES-01-L04'],image:'tu-van-khach-hang.png',note:'Ứng dụng kỹ năng xử lý tình huống và chốt đơn.'}
+      ];
     this.state={
       step:'info',toast:'',cancelOpen:false,deleteIndex:null,isNewPath,
       pathName:query.get('name')||(isNewPath?'Lộ trình mới':'Lộ trình phát triển năng lực bán hàng'),
@@ -284,15 +289,16 @@ class Component extends DCLogic {
     const projectCatalog=window.AcaProjectData?window.AcaProjectData.get(currentProject):{positions:[]};
     const positionDefs=projectCatalog.positions.map(position=>[position.code,position.name]);
     const levelDefs=[['0','Level 0'],['1','Level 1'],['2','Level 2'],['3','Level 3'],['4','Level 4']];
-    const lessonDefs=[
-      {id:'l1',name:'Tổng quan quy trình bán hàng',course:'Chốt sale hiệu quả trong 5 bước',level:'1'},
-      {id:'l2',name:'Chào hỏi và tìm hiểu nhu cầu',course:'Chốt sale hiệu quả trong 5 bước',level:'1'},
-      {id:'l3',name:'Giới thiệu sản phẩm phù hợp',course:'Tư vấn sản phẩm theo nhu cầu',level:'2'},
-      {id:'l4',name:'Khai thác nhu cầu khách hàng',course:'Tư vấn sản phẩm theo nhu cầu',level:'2'},
-      {id:'l5',name:'Xử lý băn khoăn của khách',course:'Xử lý từ chối của khách hàng',level:'3'},
-      {id:'l6',name:'Chốt đơn và chăm sóc sau bán',course:'Xử lý từ chối của khách hàng',level:'3'},
-      {id:'l7',name:'Thực hành tình huống tại điểm bán',course:'Kèm cặp nhân viên mới',level:'4'}
-    ];
+    const lessonDefs=(projectCatalog.courses||[]).reduce((lessons,course)=>{
+      (course.lessons||[]).forEach(lesson=>lessons.push({
+        id:lesson.id,
+        name:lesson.name,
+        course:course.name,
+        courseCode:course.code,
+        level:course.level||''
+      }));
+      return lessons;
+    },[]);
     const toggleChoice=(key,id)=>{const next=Object.assign({},this.state[key]);next[id]=!next[id];this.setState({[key]:next});};
     const positionOptions=positionDefs.map(item=>{const selected=!!this.state.selectedPositions[item[0]];return {label:item[1],mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>toggleChoice('selectedPositions',item[0])};});
     const derivedLevels={};this.state.details.forEach(detail=>detail.lessonIds.forEach(id=>{const lesson=lessonDefs.find(item=>item.id===id);if(lesson&&lesson.level)derivedLevels[lesson.level]=true;}));
@@ -316,7 +322,7 @@ class Component extends DCLogic {
       stepNumber:index+1,stepProgress:'Bước '+(index+1)+'/3',stepLabel:defs[index][2],infoStep:this.state.step==='info',structureStep:this.state.step==='structure',reviewStep:this.state.step==='review',
       nextLabel:index===defs.length-1?'Hoàn tất thiết lập':'Tiếp tục →',hasPreviousStep:index>0,previous:()=>this.setState({step:defs[Math.max(0,index-1)][0]}),next:()=>{if(this.state.step==='info'&&!this.state.pathName.trim()){this.setState({toast:'Vui lòng nhập tên lộ trình.'});return;}if(this.state.step==='structure'&&!this.state.details.length){this.setState({toast:'Vui lòng thêm ít nhất một bước nội dung.'});return;}this.setState(index===defs.length-1?{toast:'Đã hoàn tất thiết lập lộ trình.'}:{step:defs[index+1][0]});},
       onNameChange:event=>this.setState({pathName:event.target.value}),onNoteChange:event=>this.setState({pathNote:event.target.value}),detailEmpty:details.length===0,openAddDetail:()=>openDetailEditor(null),
-      detailEditorOpen:this.state.detailEditorOpen,detailDialogTitle:this.state.editingDetailIndex===null?'Thêm bước lộ trình':'Chỉnh sửa bước lộ trình',detailDraftCode:this.state.detailDraftCode,detailDraftName:this.state.detailDraftName,detailDraftOrder:this.state.detailDraftOrder,detailDraftImage:this.state.detailDraftImage,detailImageSelected:!!this.state.detailDraftImage,detailDraftNote:this.state.detailDraftNote,lessonOptions,detailError:this.state.detailError,detailErrorOpen:!!this.state.detailError,
+      detailEditorOpen:this.state.detailEditorOpen,detailDialogTitle:this.state.editingDetailIndex===null?'Thêm bước lộ trình':'Chỉnh sửa bước lộ trình',detailDraftCode:this.state.detailDraftCode,detailDraftName:this.state.detailDraftName,detailDraftOrder:this.state.detailDraftOrder,detailDraftImage:this.state.detailDraftImage,detailImageSelected:!!this.state.detailDraftImage,detailDraftNote:this.state.detailDraftNote,lessonOptions,lessonOptionsEmpty:lessonOptions.length===0,detailError:this.state.detailError,detailErrorOpen:!!this.state.detailError,
       onDetailCode:event=>this.setState({detailDraftCode:event.target.value,detailError:''}),onDetailName:event=>this.setState({detailDraftName:event.target.value,detailError:''}),onDetailOrder:event=>this.setState({detailDraftOrder:event.target.value,detailError:''}),onDetailFile:event=>this.setState({detailDraftImage:event.target.files&&event.target.files[0]?event.target.files[0].name:this.state.detailDraftImage}),onDetailNote:event=>this.setState({detailDraftNote:event.target.value}),closeDetailEditor:()=>this.setState({detailEditorOpen:false,editingDetailIndex:null,detailError:''}),saveDetail,
       readinessClass:readyToPublish?'is-ready':'is-incomplete',readinessLabel:readyToPublish?'Sẵn sàng phát hành':'Chưa hoàn tất',reviewWarningOpen:!!reviewWarning,reviewWarning,
       deleteOpen:this.state.deleteIndex!==null,closeDelete:()=>this.setState({deleteIndex:null}),confirmDelete:()=>{if(this.state.deleteIndex===null)return;const next=this.state.details.slice();next.splice(this.state.deleteIndex,1);this.setState({details:normalizeDetails(next),deleteIndex:null,toast:'Đã xóa bước khỏi lộ trình.'});},

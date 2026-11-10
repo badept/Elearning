@@ -19,6 +19,20 @@
       code: 'ACACY_PRESENTATION',
       name: 'ACACY PRESENTATION',
       customer: 'ACA Office Văn Phòng',
+      courses: [
+        {
+          code: 'COURSE-SALES-01',
+          name: 'Chốt sale hiệu quả trong 5 bước',
+          program: 'Kỹ năng bán hàng',
+          level: '1',
+          lessons: [
+            { id: 'COURSE-SALES-01-L01', name: 'Chào hỏi và tìm hiểu nhu cầu' },
+            { id: 'COURSE-SALES-01-L02', name: 'Giới thiệu sản phẩm phù hợp' },
+            { id: 'COURSE-SALES-01-L03', name: 'Xử lý băn khoăn của khách' },
+            { id: 'COURSE-SALES-01-L04', name: 'Chốt đơn và chăm sóc sau bán' }
+          ]
+        }
+      ],
       industries: [
         { code: 'SALES', name: 'Bán hàng' },
         { code: 'ONBOARD', name: 'Hội nhập' },
@@ -69,6 +83,17 @@
       customer: '',
       learnerPage: 'Webview',
       learnerPageVersion: 'Cũ',
+      courses: [
+        {
+          code: 'COURSE-DEMO-01',
+          name: 'Khóa học mẫu dự án Demo',
+          program: 'Hội nhập dự án Demo',
+          level: '',
+          lessons: [
+            { id: 'COURSE-DEMO-01-L01', name: 'Làm quen dự án Demo' }
+          ]
+        }
+      ],
       industries: [
         { code: 'N001', name: 'Ngành 01', note: 'Ghi chú Ngành 01' },
         { code: 'N002', name: 'Ngành 02', note: 'Ghi chú Ngành 02' }
@@ -127,6 +152,7 @@
       code: input.code,
       name: input.name,
       customer: input.customer || '',
+      courses: [],
       industries: [], channels: [], learnerAttributes: [], managementLabels: [],
       positions: [], departments: [], regions: [], areas: [], ranks: [], stores: [], trainers: [],
       tags: [], otherCategories: [], workStatuses: [], configurations: defaultStudentFormConfigurations(), criteria: [], loginLinks: [],
