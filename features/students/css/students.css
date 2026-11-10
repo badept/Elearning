@@ -8,6 +8,186 @@
   overflow: hidden;
 }
 
+#dc-root .student-level-rule-note {
+  margin: 12px 16px 0;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 12px;
+  padding: 10px 12px;
+  border-left: 3px solid #2B5FC2;
+  border-radius: 8px;
+  background: #F3F7FE;
+  color: #52617C;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+#dc-root .student-level-rule-note strong {
+  color: #174994;
+}
+
+#dc-root .student-attempt-dialog {
+  width: min(860px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #D4DEEC;
+  border-radius: 16px;
+  background: #FFFFFF;
+  box-shadow: 0 24px 70px rgba(15, 31, 64, .24);
+}
+
+#dc-root .student-attempt-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  border-bottom: 1px solid #E2E8F1;
+}
+
+#dc-root .student-attempt-header > div {
+  display: grid;
+  gap: 4px;
+}
+
+#dc-root .student-attempt-header span {
+  color: #2456B8;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+#dc-root .student-attempt-header h2,
+#dc-root .student-attempt-header p {
+  margin: 0;
+}
+
+#dc-root .student-attempt-header h2 {
+  color: #13234B;
+  font-size: 18px;
+}
+
+#dc-root .student-attempt-header p {
+  color: #71809B;
+  font-size: 11px;
+}
+
+#dc-root .student-attempt-header > button {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 34px;
+  border: 0;
+  border-radius: 8px;
+  background: #F0F3F8;
+  color: #40506D;
+  font-size: 22px;
+}
+
+#dc-root .student-attempt-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 14px 20px;
+  background: #F8FAFD;
+}
+
+#dc-root .student-attempt-summary article {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid #DCE5F1;
+  border-radius: 9px;
+  background: #FFFFFF;
+}
+
+#dc-root .student-attempt-summary span,
+#dc-root .student-attempt-answers div span {
+  color: #71809B;
+  font-size: 10px;
+}
+
+#dc-root .student-attempt-summary strong {
+  color: #13234B;
+  font-size: 13px;
+}
+
+#dc-root .student-attempt-summary .is-passed,
+#dc-root .student-attempt-answers .is-correct {
+  color: #14734A;
+}
+
+#dc-root .student-attempt-summary .is-failed,
+#dc-root .student-attempt-answers .is-wrong {
+  color: #B11F36;
+}
+
+#dc-root .student-attempt-answers {
+  display: grid;
+  gap: 10px;
+  padding: 16px 20px;
+  overflow-y: auto;
+}
+
+#dc-root .student-attempt-answers article {
+  display: grid;
+  gap: 9px;
+  padding: 13px;
+  border: 1px solid #DCE5F1;
+  border-radius: 10px;
+}
+
+#dc-root .student-attempt-answers article > header,
+#dc-root .student-attempt-answers article > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#dc-root .student-attempt-answers article > header span,
+#dc-root .student-attempt-answers article > header strong {
+  font-size: 10px;
+  font-weight: 800;
+}
+
+#dc-root .student-attempt-answers article > p {
+  margin: 0;
+  color: #13234B;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+#dc-root .student-attempt-answers div strong {
+  color: #344563;
+  font-size: 11px;
+  text-align: right;
+}
+
+#dc-root .student-attempt-dialog > footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 12px 20px;
+  border-top: 1px solid #E2E8F1;
+}
+
+@media (max-width: 720px) {
+  #dc-root .student-level-rule-note,
+  #dc-root .student-attempt-summary {
+    grid-template-columns: 1fr;
+  }
+
+  #dc-root .student-attempt-answers article > div {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  #dc-root .student-attempt-answers div strong {
+    text-align: left;
+  }
+}
+
 #dc-root .student-detail-button-19541ab {
   display: flex;
   align-items: center;

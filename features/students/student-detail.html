@@ -17,7 +17,7 @@
   <x-dc>
     <helmet>
       <link href="../../shared/css/base.css?v=20261104-flex3" rel="stylesheet" />
-      <link href="css/students.css?v=20261105-profile-fields" rel="stylesheet" />
+      <link href="css/students.css?v=20261110-attempt-level" rel="stylesheet" />
     </helmet>
     <div class="app-shell">
       <nav aria-label="Menu chính" class="app-sidebar">
@@ -262,7 +262,7 @@
                               </sc-raw-td>
                               <sc-raw-td class="student-detail-sc-raw-td-4765c9b">
                                 <div class="ui-panel-192902f">
-                                  <button type="button" class="ui-button-5cf3c76">Xem bài làm</button>
+                                  <button sc-camel-on-click="{{ k.view }}" type="button" class="ui-button-5cf3c76">Xem bài làm</button>
                                 </div>
                               </sc-raw-td>
                             </sc-raw-tr>
@@ -311,6 +311,7 @@
                         </div>
                         <span class="student-current-level-badge">Hiện tại: Cấp độ 1</span>
                       </header>
+                      <div class="student-level-rule-note"><strong>Căn cứ xét nâng cấp độ</strong><span>Hệ thống tự tổng hợp các lịch thi đã bật “Tự động nâng Level” theo dự án, học viên và Level mục tiêu. Học viên chỉ được nâng cấp độ khi đã đạt tất cả các lịch áp dụng cho mình ở Level đó; không cần tạo nhóm lịch riêng.</span></div>
                       <div class="student-level-workspace">
                         <nav aria-label="Các Level trong dự án" class="student-level-rail">
                           <sc-for as="level" hint-placeholder-count="4" list="{{ levelSteps }}">
@@ -357,7 +358,7 @@
                           </div>
                           <section class="student-level-exam-section">
                             <header>
-                              <h4>Danh sách lịch thi bắt buộc ({{ levelDetail.total }})</h4>
+                              <h4>Lịch thi xét nâng Level ({{ levelDetail.total }})</h4>
                             </header>
                             <sc-if hint-placeholder-val="{{ true }}" value="{{ levelHasExams }}">
                               <div class="student-level-exam-table">
@@ -376,7 +377,7 @@
                               </div>
                             </sc-if>
                             <sc-if hint-placeholder-val="{{ false }}" value="{{ levelHasExams }}">
-                              <p class="student-level-exam-empty">Cấp độ này chưa mở danh sách lịch thi bắt buộc.</p>
+                              <p class="student-level-exam-empty">Cấp độ này chưa có lịch thi bật “Tự động nâng Level”.</p>
                             </sc-if>
                           </section>
                           <div class="student-level-action-grid">
@@ -589,6 +590,21 @@
           </section>
         </div>
       </sc-if>
+      <sc-if hint-placeholder-val="{{ false }}" value="{{ attemptOpen }}">
+        <div class="modal-backdrop">
+          <section aria-label="Chi tiết bài làm" aria-modal="true" role="dialog" class="student-attempt-dialog">
+            <header class="student-attempt-header"><div><span>CHI TIẾT LƯỢT THI</span><h2>{{ attemptDetail.name }}</h2>
+                <p>{{ attemptDetail.lan }} · Ngày thi {{ attemptDetail.ngay }} · Thời gian {{ attemptDetail.tg }}</p></div>
+              <button aria-label="Đóng chi tiết bài làm" sc-camel-on-click="{{ closeAttempt }}" type="button">×</button>
+            </header>
+            <div class="student-attempt-summary"><article><span>Kết quả</span><strong class="{{ attemptDetail.resultClass }}">{{ attemptDetail.resultLabel }}</strong></article><article><span>Số câu đúng</span><strong>{{ attemptDetail.dung }}</strong></article></div>
+            <div class="student-attempt-answers"><sc-for as="answer" hint-placeholder-count="3" list="{{ attemptAnswers }}">
+                <article><header><span>Câu {{ answer.order }}</span><strong class="{{ answer.statusClass }}">{{ answer.status }}</strong></header><p>{{ answer.question }}</p><div><span>Học viên trả lời</span><strong>{{ answer.selected }}</strong></div><div><span>Đáp án đúng</span><strong>{{ answer.correct }}</strong></div></article>
+              </sc-for></div>
+            <footer><button sc-camel-on-click="{{ closeAttempt }}" type="button" class="ui-button-6998386">Đóng</button></footer>
+          </section>
+        </div>
+      </sc-if>
       <sc-if hint-placeholder-val="{{ false }}" value="{{ toastOpen }}">
         <div aria-live="polite" role="status" class="student-list-toast">
           <b>✓</b>
@@ -602,7 +618,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { tab: 'thongtin', learningTab: 'lich', scheduleFilter: 'all', level: 'level2', more: false, password: false, confirmDelete: false, toast: '' };
+    this.state = { tab: 'thongtin', learningTab: 'lich', scheduleFilter: 'all', level: 'level2', more: false, password: false, confirmDelete: false, selectedAttemptId: null, toast: '' };
   }
   renderVals() {
     const P = {
@@ -666,16 +682,19 @@ class Component extends DCLogic {
     const lich = filteredLichData.map((l) => Object.assign({}, l, {
       pass: l.r === 'pass', fail: l.r === 'fail', none: l.r === 'none'
     }));
-    const luot = [
-      { name: 'K1 - fix lỗi 14 slide - đếm quiz - scorm 2004', lan: 'Lần 1', ngay: '28/09/2026', tg: '01:20', dung: '1/1 câu đúng', pass: true, fail: false },
-      { name: 'Test-4 quiz mix (1)', lan: 'Lần 2', ngay: '28/09/2026', tg: '02:05', dung: '0/1 câu đúng', pass: false, fail: true },
-      { name: 'Test-4 quiz mix (1)', lan: 'Lần 1', ngay: '28/09/2026', tg: '02:40', dung: '0/1 câu đúng', pass: false, fail: true }
+    const luotData = [
+      { id:'attempt-1',name:'K1 - fix lỗi 14 slide - đếm quiz - scorm 2004',lan:'Lần 1',ngay:'28/09/2026',tg:'01:20',dung:'1/1 câu đúng',pass:true,fail:false,answers:[{question:'Nội dung chính của bài học là gì?',selected:'Quy trình bán hàng chuẩn',correct:'Quy trình bán hàng chuẩn',isCorrect:true}] },
+      { id:'attempt-2',name:'Test-4 quiz mix (1)',lan:'Lần 2',ngay:'28/09/2026',tg:'02:05',dung:'0/1 câu đúng',pass:false,fail:true,answers:[{question:'Bước đầu tiên khi tiếp cận khách hàng là gì?',selected:'Giới thiệu sản phẩm ngay',correct:'Chào hỏi và tìm hiểu nhu cầu',isCorrect:false}] },
+      { id:'attempt-3',name:'Test-4 quiz mix (1)',lan:'Lần 1',ngay:'28/09/2026',tg:'02:40',dung:'0/1 câu đúng',pass:false,fail:true,answers:[{question:'Khi khách hàng còn băn khoăn, nhân viên nên làm gì?',selected:'Kết thúc tư vấn',correct:'Lắng nghe và làm rõ băn khoăn',isCorrect:false}] }
     ];
+    const luot=luotData.map(attempt=>Object.assign({},attempt,{view:()=>this.setState({selectedAttemptId:attempt.id})}));
+    const attemptDetail=luotData.find(attempt=>attempt.id===s.selectedAttemptId)||luotData[0];
+    const attemptAnswers=(attemptDetail.answers||[]).map((answer,index)=>Object.assign({},answer,{order:index+1,status:answer.isCorrect?'Đúng':'Sai',statusClass:answer.isCorrect?'is-correct':'is-wrong'}));
     const levelData = [
-      { id:'level1',rank:'Bậc 1/4',shortName:'Cấp độ 1',name:'Cấp độ 1 — Chuẩn kỹ sư cơ bản',status:'Hiện tại · Đã đạt',achieved:true,description:'Nắm được kiến thức hội nhập, an toàn và quy trình chất lượng cơ bản.',requirement:'Đạt tất cả 2 lịch thi bắt buộc của cấp độ.',passed:2,total:2,percent:100,scoreValue:'92%',scoreStatus:'Đã đủ điều kiện',exams:[{order:1,name:'Bài 1: Hội nhập và an toàn',criterion:'Kiến thức cơ bản',deadline:'15/09/2026',result:'92%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:2,name:'Bài 2: Quy trình chất lượng',criterion:'Quy trình kỹ thuật',deadline:'15/09/2026',result:'88%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false}],reasons:['Đã hoàn thành toàn bộ lịch thi bắt buộc của cấp độ.'],guidance:['Tiếp tục hoàn thành các lịch thi của Cấp độ 2.'] },
-      { id:'level2',rank:'Bậc 2/4',shortName:'Cấp độ 2',name:'Cấp độ 2 — Chuẩn kỹ sư',status:'Chưa đạt',achieved:false,description:'Thực hiện độc lập quy trình chuyên môn và xử lý các tình huống QC thường gặp.',requirement:'Đạt tất cả 3 lịch thi bắt buộc của cấp độ. Không xét điểm trung bình, chỉ xét trạng thái đạt của từng lịch thi.',passed:2,total:3,percent:67,scoreValue:'85%',scoreStatus:'Chưa đủ điều kiện',exams:[{order:1,name:'Bài 1: An toàn lao động',criterion:'Kiến thức cơ bản',deadline:'31/10/2026',result:'92%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:2,name:'Bài 2: Quy trình vận hành',criterion:'Quy trình kỹ thuật',deadline:'31/10/2026',result:'78%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:3,name:'Bài 3: Xử lý tình huống QC',criterion:'Xử lý tình huống',deadline:'20/10/2026',result:'Chưa thi',resultHelp:'—',status:'Chưa đạt',passed:false,overdue:true}],reasons:['Còn 1 lịch thi bắt buộc chưa đạt: Bài 3 – Xử lý tình huống QC.','Lịch thi này đã quá hạn 5 ngày (hạn hoàn thành: 20/10/2026).','Học viên cần hoàn thành và đạt bài thi này để được nâng lên Cấp độ 2.'],guidance:['Ôn tập lại nội dung Bài 3 – Xử lý tình huống QC.','Tham gia lịch thi sớm nhất có thể.','Sau khi đạt, hệ thống sẽ tự động xét nâng cấp độ.'] },
-      { id:'level3',rank:'Bậc 3/4',shortName:'Cấp độ 3',name:'Cấp độ 3 — Kỹ sư nâng cao',status:'Chưa đạt',achieved:false,description:'Xử lý tình huống nâng cao và có khả năng hướng dẫn nhân sự tại hiện trường.',requirement:'Đạt toàn bộ 3 lịch thi bắt buộc được cấu hình cho cấp độ.',passed:0,total:3,percent:0,scoreValue:'—',scoreStatus:'Chưa mở',exams:[],reasons:['Chưa hoàn thành điều kiện của Cấp độ 2.'],guidance:['Hoàn thành Cấp độ 2 để mở các lịch thi của cấp độ này.'] },
-      { id:'level4',rank:'Bậc 4/4',shortName:'Cấp độ 4',name:'Cấp độ 4 — Chuyên gia',status:'Chưa đạt',achieved:false,description:'Đủ năng lực đánh giá chuyên môn, cố vấn và đào tạo nhân sự nội bộ.',requirement:'Đạt toàn bộ 3 lịch thi bắt buộc được cấu hình cho cấp độ.',passed:0,total:3,percent:0,scoreValue:'—',scoreStatus:'Chưa mở',exams:[],reasons:['Chưa hoàn thành điều kiện của Cấp độ 3.'],guidance:['Hoàn thành Cấp độ 3 để mở các lịch thi của cấp độ này.'] }
+      { id:'level1',rank:'Bậc 1/4',shortName:'Cấp độ 1',name:'Cấp độ 1 — Chuẩn kỹ sư cơ bản',status:'Hiện tại · Đã đạt',achieved:true,description:'Nắm được kiến thức hội nhập, an toàn và quy trình chất lượng cơ bản.',requirement:'Đạt tất cả 2 lịch thi đã bật “Tự động nâng Level” cho cấp độ.',passed:2,total:2,percent:100,scoreValue:'92%',scoreStatus:'Đã đủ điều kiện',exams:[{order:1,name:'Bài 1: Hội nhập và an toàn',criterion:'Kiến thức cơ bản',deadline:'15/09/2026',result:'92%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:2,name:'Bài 2: Quy trình chất lượng',criterion:'Quy trình kỹ thuật',deadline:'15/09/2026',result:'88%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false}],reasons:['Đã đạt toàn bộ lịch thi dùng để xét nâng cấp độ.'],guidance:['Tiếp tục hoàn thành các lịch thi xét nâng Cấp độ 2.'] },
+      { id:'level2',rank:'Bậc 2/4',shortName:'Cấp độ 2',name:'Cấp độ 2 — Chuẩn kỹ sư',status:'Chưa đạt',achieved:false,description:'Thực hiện độc lập quy trình chuyên môn và xử lý các tình huống QC thường gặp.',requirement:'Đạt tất cả 3 lịch thi đã bật “Tự động nâng Level” cho cấp độ. Không xét điểm trung bình, chỉ xét trạng thái đạt của từng lịch thi.',passed:2,total:3,percent:67,scoreValue:'85%',scoreStatus:'Chưa đủ điều kiện',exams:[{order:1,name:'Bài 1: An toàn lao động',criterion:'Kiến thức cơ bản',deadline:'31/10/2026',result:'92%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:2,name:'Bài 2: Quy trình vận hành',criterion:'Quy trình kỹ thuật',deadline:'31/10/2026',result:'78%',resultHelp:'cao nhất',status:'Đã đạt',passed:true,overdue:false},{order:3,name:'Bài 3: Xử lý tình huống QC',criterion:'Xử lý tình huống',deadline:'20/10/2026',result:'Chưa thi',resultHelp:'—',status:'Chưa đạt',passed:false,overdue:true}],reasons:['Còn 1 lịch thi xét nâng Level chưa đạt: Bài 3 – Xử lý tình huống QC.','Lịch thi này đã quá hạn 5 ngày (hạn hoàn thành: 20/10/2026).','Học viên cần hoàn thành và đạt bài thi này để được nâng lên Cấp độ 2.'],guidance:['Ôn tập lại nội dung Bài 3 – Xử lý tình huống QC.','Tham gia lịch thi sớm nhất có thể.','Sau khi đạt, hệ thống sẽ tự động xét nâng cấp độ.'] },
+      { id:'level3',rank:'Bậc 3/4',shortName:'Cấp độ 3',name:'Cấp độ 3 — Kỹ sư nâng cao',status:'Chưa đạt',achieved:false,description:'Xử lý tình huống nâng cao và có khả năng hướng dẫn nhân sự tại hiện trường.',requirement:'Đạt toàn bộ lịch thi đã bật “Tự động nâng Level” cho cấp độ.',passed:0,total:3,percent:0,scoreValue:'—',scoreStatus:'Chưa mở',exams:[],reasons:['Chưa hoàn thành điều kiện của Cấp độ 2.'],guidance:['Hoàn thành Cấp độ 2 để mở các lịch thi của cấp độ này.'] },
+      { id:'level4',rank:'Bậc 4/4',shortName:'Cấp độ 4',name:'Cấp độ 4 — Chuyên gia',status:'Chưa đạt',achieved:false,description:'Đủ năng lực đánh giá chuyên môn, cố vấn và đào tạo nhân sự nội bộ.',requirement:'Đạt toàn bộ lịch thi đã bật “Tự động nâng Level” cho cấp độ.',passed:0,total:3,percent:0,scoreValue:'—',scoreStatus:'Chưa mở',exams:[],reasons:['Chưa hoàn thành điều kiện của Cấp độ 3.'],guidance:['Hoàn thành Cấp độ 3 để mở các lịch thi của cấp độ này.'] }
     ];
     const levelSteps = levelData.map((level) => Object.assign({}, level, {
       active: s.level === level.id,
@@ -691,7 +710,7 @@ class Component extends DCLogic {
     const levelGuidance = levelDetail.guidance.map((text) => ({ text }));
     const closeAll = () => this.setState({ password: false, confirmDelete: false, more: false });
     return {
-      nav, tabs, learningTabs, lich, luot, levelSteps, levelDetail, levelExams, levelHasExams, levelReasons, levelGuidance, currentProject, studentName, studentCode, projectStudentCode, workplace, studentDepartment,
+      nav, tabs, learningTabs, lich, luot, attemptOpen:!!s.selectedAttemptId,attemptDetail:Object.assign({},attemptDetail,{resultLabel:attemptDetail.pass?'Đạt':'Chưa đạt',resultClass:attemptDetail.pass?'is-passed':'is-failed'}),attemptAnswers,closeAttempt:()=>this.setState({selectedAttemptId:null}),levelSteps, levelDetail, levelExams, levelHasExams, levelReasons, levelGuidance, currentProject, studentName, studentCode, projectStudentCode, workplace, studentDepartment,
       departmentOptions: projectCatalog.departments, positionOptions: projectCatalog.positions, rankOptions: projectCatalog.ranks,
       industryOptions: projectCatalog.industries, areaOptions: projectCatalog.areas, storeOptions: projectCatalog.stores,
       trainerOptions: projectCatalog.trainers, channelOptions: projectCatalog.channels, managerOptions,

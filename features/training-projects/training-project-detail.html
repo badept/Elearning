@@ -6,6 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="../../shared/js/project-data.js"></script>
+  <script src="../../shared/js/market-project-data.js"></script>
   <script defer src="../../shared/js/navigation.js"></script>
   <title>Dự án đào tạo – chi tiết</title>
   <script src="js/training-project-detail-efd98df5.js"></script>
@@ -160,8 +161,22 @@
                           <option>Cũ</option>
                         </select></label>
                       <label class="form-field">Tiếp đầu ngữ tài khoản<input type="text" class="form-control" /></label>
-                      <label class="form-field project-info-check project-info-wide"><input type="checkbox" /> Lấy nhân viên từ dự án thị
-                        trường</label>
+                      <div class="project-market-link-row project-info-wide">
+                        <div class="project-market-toggle-card">
+                          <div><strong>Lấy nhân viên từ dự án thị trường</strong><small>Khi bật, học viên của dự án thị trường đã chọn sẽ được đưa vào phạm vi Dự án đào tạo.</small></div>
+                          <button aria-checked="{{ marketLinkAria }}" aria-label="Lấy nhân viên từ dự án thị trường" class="project-market-switch {{ marketLinkClass }}" role="switch" sc-camel-on-click="{{ toggleMarketLink }}" type="button"><i></i></button>
+                        </div>
+                        <sc-if value="{{ useMarketProject }}">
+                          <label class="form-field project-market-select">Dự án thị trường <span class="danger-text">*</span>
+                            <select class="form-control" sc-camel-on-change="{{ selectMarketProject }}" value="{{ selectedMarketProject }}">
+                              <option value="">Chọn dự án thị trường...</option>
+                              <sc-for as="mp" list="{{ marketProjectOptions }}"><option value="{{ mp.value }}">{{ mp.label }}</option></sc-for>
+                            </select>
+                            <small>{{ marketProjectHelp }}</small>
+                          </label>
+                        </sc-if>
+                      </div>
+                      <sc-if value="{{ marketLinkErrorOpen }}"><p class="project-market-error project-info-wide">{{ marketLinkError }}</p></sc-if>
                       <label class="form-field project-info-wide">Ghi chú<textarea
                           class="form-control"></textarea></label>
                     </div>
@@ -591,6 +606,9 @@ class Component extends DCLogic {
     const projectCatalog = getTrainingProjectCatalog(currentProject);
     this.state = {
       tab: ['thongtin', 'nganhhang', 'kenh', 'thongtinhocvien', 'nhanquanly', 'vitri', 'vung', 'khuvuc', 'capbac', 'cuahang', 'bophan', 'trainer', 'tag', 'danhmuckhac', 'trangthailamviec', 'cauhinh', 'tieuchi'].includes(requestedTab) ? requestedTab : 'thongtin', more: false, edit: false, loginOff: {},
+      useMarketProject: !!(window.AcaMarketProjectData && window.AcaMarketProjectData.getTrainingProjectLink(currentProject)),
+      selectedMarketProject: window.AcaMarketProjectData ? window.AcaMarketProjectData.getTrainingProjectLink(currentProject) : '',
+      marketLinkError: '',
       vals: {
         nganhhang: projectCatalog ? projectCatalog.industries.map((item) => item.code + ' · ' + item.name) : [],
         kenh: projectCatalog ? projectCatalog.channels.map((item) => item.name) : [],
@@ -659,6 +677,10 @@ class Component extends DCLogic {
     const currentCustomer = projectCatalog && projectCatalog.customer ? projectCatalog.customer : '—';
     const learnerPage = projectCatalog && projectCatalog.learnerPage ? projectCatalog.learnerPage : 'Webview';
     const learnerPageVersion = projectCatalog && projectCatalog.learnerPageVersion ? projectCatalog.learnerPageVersion : 'Mới';
+    const marketProjects = window.AcaMarketProjectData ? window.AcaMarketProjectData.all().filter((project) => project.status !== 'inactive') : [];
+    const marketProjectOptions = marketProjects.map((project) => ({ value: project.id, label: project.name + ' · ' + (project.employees || []).filter((employee) => employee.status !== 'inactive').length + ' nhân viên' }));
+    const selectedMarket = marketProjects.find((project) => project.id === s.selectedMarketProject);
+    const marketProjectHelp = selectedMarket ? 'Sẽ đồng bộ ' + (selectedMarket.employees || []).filter((employee) => employee.status !== 'inactive').length + ' nhân viên đang làm việc khi lưu.' : (marketProjects.length ? 'Chọn dự án cung cấp danh sách nhân viên.' : 'Chưa có dự án thị trường. Hãy tạo tại module Dự án thị trường.');
     const loginDefs = projectCatalog && projectCatalog.loginTypes && projectCatalog.loginTypes.length ? projectCatalog.loginTypes : ['Mã hoặc số điện thoại học viên', 'Tên đăng nhập và mật khẩu của dự án', 'Tên đăng nhập và mật khẩu hệ thống', 'Mã nhân viên'];
     const logins = loginDefs.map((title, i) => ({
       title, on: !s.loginOff[i], off: !!s.loginOff[i],
@@ -819,6 +841,18 @@ class Component extends DCLogic {
     const addLabels = { nganhhang:'Thêm ngành hàng', kenh:'Thêm kênh phân phối', thongtinhocvien:'Thêm thuộc tính học viên', nhanquanly:'Thêm nhãn quản lý', vitri:'Thêm vị trí', vung:'Thêm vùng', khuvuc:'Thêm khu vực', capbac:'Thêm cấp bậc', cuahang:'Thêm cửa hàng', bophan:'Thêm bộ phận', trainer:'Thêm Trainer', tag:'Thêm Tag', danhmuckhac:'Thêm danh mục', trangthailamviec:'Thêm trạng thái' };
     return {
       nav, tabs, tabGroups, visibleTabs, logins, values, managementRows, projectPrograms, assignedCriteria, criteriaCount, criteriaEmpty: assignedCriteria.length === 0, currentProject, currentProjectCode, currentCustomer, learnerPage, learnerPageVersion,
+      useMarketProject: s.useMarketProject, selectedMarketProject: s.selectedMarketProject, marketProjectOptions, marketProjectHelp, marketLinkAria: String(!!s.useMarketProject), marketLinkClass: s.useMarketProject ? 'is-on' : '', marketLinkError: s.marketLinkError, marketLinkErrorOpen: !!s.marketLinkError,
+      toggleMarketLink: () => {
+        const enabled = !this.state.useMarketProject;
+        const selected = enabled ? this.state.selectedMarketProject : '';
+        if (window.AcaMarketProjectData) window.AcaMarketProjectData.setTrainingProjectLink(currentProject, selected);
+        this.setState({ useMarketProject: enabled, selectedMarketProject: selected, marketLinkError: enabled && !marketProjects.length ? 'Chưa có dự án thị trường để lựa chọn.' : '' });
+      },
+      selectMarketProject: (e) => {
+        const value = e.target.value;
+        if (window.AcaMarketProjectData) window.AcaMarketProjectData.setTrainingProjectLink(currentProject, value);
+        this.setState({ selectedMarketProject: value, marketLinkError: value ? '' : 'Vui lòng chọn dự án thị trường.' });
+      },
       tabInfo: s.tab === 'thongtin', tabLogin: false, tabPrograms: false, tabCriteria: s.tab === 'tieuchi', tabManagementLabels: s.tab === 'nhanquanly', tabPositions: s.tab === 'vitri', tabConfiguration: s.tab === 'cauhinh', tabList: listTabs.includes(s.tab), tabModule: false,
       moduleTitle: activeModule.title, moduleDescription: activeModule.description, moduleHref: activeModule.href, moduleCount: activeModule.count, moduleUnit: activeModule.unit, moduleItems,
       listHint: hints[listKey], addLabel: addLabels[listKey],

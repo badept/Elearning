@@ -77,6 +77,33 @@ button {
   cursor: pointer;
 }
 
+#dc-root .global-market-project-link {
+  min-height: 44px;
+  margin: 0;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #D9E4FA;
+  border-radius: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+#dc-root .global-market-project-link svg {
+  flex: 0 0 20px;
+}
+
+#dc-root .global-market-project-link > span {
+  min-width: 0;
+}
+
+#dc-root .global-market-project-link:hover {
+  color: #FFF;
+  background: rgba(255, 255, 255, .1);
+  text-decoration: none;
+}
+
 a {
   color: #2456B8;
   text-decoration: none;

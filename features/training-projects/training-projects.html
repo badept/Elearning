@@ -6,6 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <script src="../../shared/js/project-data.js"></script>
+  <script src="../../shared/js/market-project-data.js"></script>
   <script defer src="../../shared/js/navigation.js"></script>
   <title>Dự án đào tạo – danh sách</title>
   <script src="js/training-projects-5270744d.js"></script>
@@ -213,6 +214,13 @@
                     sc-camel-on-change="{{ onLoginEmployeeCode }}" type="checkbox" class="ui-input-ffa791a" />Mã nhân
                   viên</label>
               </div>
+              <div class="project-market-link-row project-create-market-link">
+                <div class="project-market-toggle-card">
+                  <div><strong>Lấy nhân viên từ dự án thị trường</strong><small>Bật để liên kết nguồn nhân viên ngay khi tạo Dự án đào tạo.</small></div>
+                  <button aria-checked="{{ marketLinkAria }}" class="project-market-switch {{ marketLinkClass }}" role="switch" sc-camel-on-click="{{ toggleMarketLink }}" type="button"><i></i></button>
+                </div>
+                <sc-if value="{{ useMarketProject }}"><label class="form-field project-market-select">Dự án thị trường <span class="danger-text">*</span><select class="form-control" sc-camel-on-change="{{ selectMarketProject }}" value="{{ selectedMarketProject }}"><option value="">Chọn dự án thị trường...</option><sc-for as="mp" list="{{ marketProjectOptions }}"><option value="{{ mp.value }}">{{ mp.label }}</option></sc-for></select></label></sc-if>
+              </div>
               <sc-if hint-placeholder-val="{{ false }}" value="{{ projectErrorOpen }}">
                 <p class="project-program-error">{{ projectError }}</p>
               </sc-if>
@@ -235,7 +243,7 @@ class Component extends DCLogic {
       const project = window.AcaProjectData.get(name);
       return { id: 'custom-saved-' + index, name: project.name, code: project.code, customer: project.customer || '—' };
     }) : [];
-    this.state = { off: {}, menu: null, drawer: false, addedProjects, projectName: '', projectCode: '', projectCustomer: '', projectError: '', loginCodePhone: true, loginProjectAccount: false, loginSystemAccount: false, loginEmployeeCode: false };
+    this.state = { off: {}, menu: null, drawer: false, addedProjects, projectName: '', projectCode: '', projectCustomer: '', projectError: '', loginCodePhone: true, loginProjectAccount: false, loginSystemAccount: false, loginEmployeeCode: false, useMarketProject: false, selectedMarketProject: '' };
   }
   renderVals() {
     const P = {
@@ -274,12 +282,15 @@ class Component extends DCLogic {
       menu: () => this.setState({ menu: this.state.menu === p.id ? null : p.id }),
       remove: () => { window.alert('Không thể xóa dự án “' + p.name + '” vì vẫn còn dữ liệu Chương trình, Khóa học, Học viên hoặc Lịch học/thi liên kết. Hãy xử lý toàn bộ dữ liệu liên quan trước.'); this.setState({ menu:null }); }
     }));
+    const marketProjects = window.AcaMarketProjectData ? window.AcaMarketProjectData.all().filter((project) => project.status !== 'inactive') : [];
+    const marketProjectOptions = marketProjects.map((project) => ({ value: project.id, label: project.name + ' · ' + (project.employees || []).filter((employee) => employee.status !== 'inactive').length + ' nhân viên' }));
     return {
       nav, projects, currentProject, drawer: s.drawer,
       projectName: s.projectName, projectCode: s.projectCode, projectCustomer: s.projectCustomer,
       projectError: s.projectError, projectErrorOpen: !!s.projectError,
       loginCodePhone: s.loginCodePhone, loginProjectAccount: s.loginProjectAccount, loginSystemAccount: s.loginSystemAccount, loginEmployeeCode: s.loginEmployeeCode,
-      openDrawer: () => this.setState({ drawer: true, projectName: '', projectCode: '', projectCustomer: '', projectError: '', loginCodePhone: true, loginProjectAccount: false, loginSystemAccount: false, loginEmployeeCode: false }),
+      useMarketProject: s.useMarketProject, selectedMarketProject: s.selectedMarketProject, marketProjectOptions, marketLinkAria: String(!!s.useMarketProject), marketLinkClass: s.useMarketProject ? 'is-on' : '',
+      openDrawer: () => this.setState({ drawer: true, projectName: '', projectCode: '', projectCustomer: '', projectError: '', loginCodePhone: true, loginProjectAccount: false, loginSystemAccount: false, loginEmployeeCode: false, useMarketProject: false, selectedMarketProject: '' }),
       closeDrawer: () => this.setState({ drawer: false, projectError: '' }),
       onProjectName: (e) => this.setState({ projectName: e.target.value, projectError: '' }),
       onProjectCode: (e) => this.setState({ projectCode: e.target.value.toUpperCase().replace(/[^A-Z0-9_-]/g, ''), projectError: '' }),
@@ -288,6 +299,8 @@ class Component extends DCLogic {
       onLoginProjectAccount: (e) => this.setState({ loginProjectAccount: e.target.checked, projectError: '' }),
       onLoginSystemAccount: (e) => this.setState({ loginSystemAccount: e.target.checked, projectError: '' }),
       onLoginEmployeeCode: (e) => this.setState({ loginEmployeeCode: e.target.checked, projectError: '' }),
+      toggleMarketLink: () => { const enabled = !this.state.useMarketProject; this.setState({ useMarketProject: enabled, selectedMarketProject: enabled ? this.state.selectedMarketProject : '', projectError: '' }); },
+      selectMarketProject: (e) => this.setState({ selectedMarketProject: e.target.value, projectError: '' }),
       saveProject: () => {
         const name = this.state.projectName.trim();
         const code = this.state.projectCode.trim();
@@ -299,11 +312,13 @@ class Component extends DCLogic {
         if (this.state.loginSystemAccount) loginTypes.push('Tên đăng nhập và mật khẩu hệ thống');
         if (this.state.loginEmployeeCode) loginTypes.push('Mã nhân viên');
         if (!loginTypes.length) { this.setState({ projectError: 'Vui lòng chọn ít nhất một loại đăng nhập.' }); return; }
+        if (this.state.useMarketProject && !this.state.selectedMarketProject) { this.setState({ projectError: 'Vui lòng chọn dự án thị trường dùng để lấy nhân viên.' }); return; }
         if (data.some((project) => project.name.toLowerCase() === name.toLowerCase() || project.code.toLowerCase() === code.toLowerCase())) {
           this.setState({ projectError: 'Tên hoặc mã dự án đã tồn tại.' }); return;
         }
         const project = { id: 'custom-' + Date.now(), name, code, customer: customer || '—', loginTypes };
         if (window.AcaProjectData && window.AcaProjectData.register) window.AcaProjectData.register(project);
+        if (window.AcaMarketProjectData) window.AcaMarketProjectData.setTrainingProjectLink(name, this.state.useMarketProject ? this.state.selectedMarketProject : '');
         window.localStorage.setItem('acasys.currentProject', name);
         window.location.href = 'training-project-detail.html';
       }

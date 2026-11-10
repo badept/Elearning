@@ -11,7 +11,8 @@
     'Khóa học': 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5v15zM6.5 17A2.5 2.5 0 0 0 4 19.5 2.5 2.5 0 0 0 6.5 22H20v-5',
     'Lịch học/thi': 'M3 5h18v16H3zM16 3v4M8 3v4M3 10h18',
     'Lộ trình đào tạo': 'M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
-    'Dự án đào tạo': 'M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z'
+    'Dự án đào tạo': 'M3 6a2 2 0 0 1 2-2h4l2 3h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z',
+    'Dự án thị trường': 'M4 21V10l8-7 8 7v11M8 21v-7h8v7M2 21h20'
   };
 
   function isCollapsed() {
@@ -134,6 +135,18 @@
     });
   }
 
+  function ensureMarketProjectLink(sidebar) {
+    var links = Array.prototype.slice.call(sidebar.querySelectorAll('a'));
+    if (links.some(function (link) { return getLabel(link) === 'Dự án thị trường'; })) return;
+    var trainingProjectLink = links.find(function (link) { return getLabel(link) === 'Dự án đào tạo'; });
+    if (!trainingProjectLink) return;
+    var link = document.createElement('a');
+    link.href = '../market-projects/market-projects.html';
+    link.className = 'ui-link-dbb06b9 global-market-project-link';
+    link.innerHTML = '<svg aria-hidden="true" fill="none" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" width="20"><path d="' + icons['Dự án thị trường'] + '"></path></svg><span>Dự án thị trường</span>';
+    trainingProjectLink.insertAdjacentElement('afterend', link);
+  }
+
   function updateToggle(toggle, collapsed) {
     toggle.setAttribute('aria-expanded', String(!collapsed));
     toggle.setAttribute('aria-label', collapsed ? 'Mở rộng menu' : 'Thu gọn menu');
@@ -162,6 +175,7 @@
     var collapsed = isCollapsed();
     root.classList.toggle('sidebar-is-collapsed', collapsed);
     root.querySelectorAll(sidebarSelector).forEach(function (sidebar) {
+      ensureMarketProjectLink(sidebar);
       ensureToggle(sidebar);
       syncIcons(sidebar);
     });

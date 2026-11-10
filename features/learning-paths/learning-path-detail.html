@@ -16,7 +16,7 @@
   <x-dc>
     <helmet>
       <link href="../../shared/css/base.css?v=20261104-flex3" rel="stylesheet" />
-      <link href="css/learning-paths.css?v=20261103-2" rel="stylesheet" />
+      <link href="css/learning-paths.css?v=20261110-1" rel="stylesheet" />
     </helmet>
     <div class="app-shell">
       <nav aria-label="Menu chính" class="app-sidebar">
@@ -86,20 +86,41 @@
                         <option>{{ currentProject }}</option>
                       </select></label>
                     <div class="path-form-field is-wide"><span>Vị trí áp dụng</span>
-                      <div class="path-choice-grid"><sc-for as="position" hint-placeholder-count="4"
-                          list="{{ positionOptions }}"><button aria-pressed="{{ position.ariaSelected }}"
-                            sc-camel-on-click="{{ position.toggle }}" type="button"
-                            class="path-choice {{ position.selectedClass }}"><b>{{ position.mark }}</b>{{ position.label
-                            }}</button></sc-for></div><small>Không bắt buộc. Học viên phù hợp được xác định theo vị trí
-                        trong dự án.</small>
+                      <div class="path-position-picker"><button aria-expanded="{{ positionPickerExpanded }}"
+                          sc-camel-on-click="{{ togglePositionPicker }}" type="button" class="path-position-trigger">
+                          <span>{{ positionPickerLabel }}</span><b>⌄</b></button>
+                        <sc-if hint-placeholder-val="false" value="{{ selectedPositionOpen }}">
+                          <div class="path-position-chips"><sc-for as="position" hint-placeholder-count="2"
+                              list="{{ visibleSelectedPositionOptions }}"><button aria-label="Bỏ vị trí {{ position.label }}"
+                                sc-camel-on-click="{{ position.remove }}" type="button"><span>{{ position.label
+                                  }}</span><b>×</b></button></sc-for><sc-if hint-placeholder-val="false"
+                              value="{{ selectedPositionOverflowOpen }}"><span class="path-position-overflow">+{{
+                                selectedPositionOverflow }} vị trí khác</span></sc-if></div>
+                        </sc-if>
+                        <sc-if hint-placeholder-val="false" value="{{ positionPickerOpen }}">
+                          <div class="path-position-menu"><label><span class="visually-hidden">Tìm vị trí</span><input
+                                placeholder="Tìm theo mã hoặc tên vị trí…" sc-camel-on-input="{{ onPositionSearch }}"
+                                type="search" value="{{ positionSearch }}" /></label>
+                            <div class="path-position-options"><sc-for as="position" hint-placeholder-count="4"
+                                list="{{ positionOptions }}"><button aria-pressed="{{ position.ariaSelected }}"
+                                  sc-camel-on-click="{{ position.toggle }}" type="button"
+                                  class="path-position-option {{ position.selectedClass }}"><b>{{ position.mark
+                                    }}</b><span><strong>{{ position.label }}</strong><small>{{ position.code
+                                      }}</small></span></button></sc-for><sc-if hint-placeholder-val="false"
+                                value="{{ positionSearchEmpty }}"><p>Không tìm thấy vị trí phù hợp.</p></sc-if></div>
+                            <button sc-camel-on-click="{{ clearPositions }}" type="button"
+                              class="path-position-clear">Bỏ tất cả lựa chọn</button>
+                          </div>
+                        </sc-if>
+                      </div><small>Không bắt buộc. Học viên phù hợp được xác định theo vị trí trong dự án.</small>
                     </div>
-                    <div class="path-form-field is-wide"><span>Level nội dung của lộ trình</span>
+                    <div class="path-form-field is-wide"><span>Level áp dụng cho lộ trình</span>
                       <div class="path-choice-grid path-choice-grid-levels"><sc-for as="level"
                           hint-placeholder-count="5" list="{{ levelOptions }}"><button
-                            aria-pressed="{{ level.ariaSelected }}" disabled="disabled" type="button"
+                            aria-pressed="{{ level.ariaSelected }}" sc-camel-on-click="{{ level.toggle }}" type="button"
                             class="path-choice {{ level.selectedClass }}"><b>{{ level.mark }}</b>{{ level.label
-                            }}</button></sc-for></div><small>Đây không phải Level được gán cho học viên. Hệ thống tự
-                        tổng hợp từ Level của các khóa học đã chọn ở bước 2.</small>
+                            }}</button></sc-for></div><small>Chọn Level mà lộ trình này phục vụ. Thiết lập này không tự
+                        nâng cấp độ học viên; việc nâng cấp độ được xét từ các lịch thi bắt buộc của từng Level.</small>
                     </div><label class="path-form-field is-wide">Ghi chú <textarea rows="4"
                         sc-camel-on-input="{{ onNoteChange }}" value="{{ pathNote }}"></textarea></label>
                   </div>
@@ -149,7 +170,7 @@
                   <div class="path-review-summary">
                     <article><span>Dự án</span><strong>{{ currentProject }}</strong></article>
                     <article><span>Vị trí áp dụng</span><strong>{{ positionSummary }}</strong></article>
-                    <article><span>Level nội dung</span><strong>{{ levelSummary }}</strong></article>
+                    <article><span>Level áp dụng</span><strong>{{ levelSummary }}</strong></article>
                     <article><span>Nội dung</span><strong>{{ detailCount }} bước · {{ lessonTotal }} bài học</strong>
                     </article>
                   </div><sc-if hint-placeholder-val="{{ false }}" value="{{ reviewWarningOpen }}">
@@ -260,8 +281,11 @@ class Component extends DCLogic {
     const query=new URLSearchParams(window.location.search);
     const isNewPath=query.get('mode')==='create';
     const selectedPositions={};
-    const positionIds=isNewPath?(query.get('positions')||'').split(',').filter(Boolean):['sales','supervisor'];
+    const positionIds=isNewPath?(query.get('positions')||'').split(',').filter(Boolean):['SALE','SUPERVISOR'];
     positionIds.forEach(id=>{selectedPositions[id]=true;});
+    const selectedLevels={};
+    const levelIds=(query.get('levels')||query.get('level')||(isNewPath?'':'1')).split(',').map(id=>id.replace(/[^0-4]/g,'')).filter(Boolean);
+    levelIds.forEach(id=>{selectedLevels[id]=true;});
     const currentProject=(typeof window!=='undefined'&&window.AcaProjectScope)?window.AcaProjectScope.get():'ACACY PRESENTATION';
     const existingDetails=currentProject==='ACACY DEMO'?
       [{code:'CT01',name:'Hội nhập dự án Demo',order:1,lessonIds:['COURSE-DEMO-01-L01'],image:'',note:'Nội dung hội nhập thuộc dự án Demo.'}]:[
@@ -272,8 +296,8 @@ class Component extends DCLogic {
       step:'info',toast:'',cancelOpen:false,deleteIndex:null,isNewPath,
       pathName:query.get('name')||(isNewPath?'Lộ trình mới':'Lộ trình phát triển năng lực bán hàng'),
       pathCode:query.get('code')||(isNewPath?'LP-2026-MỚI':'LP-SALES-2026'),
-      pathNote:isNewPath?'':'Chuỗi bài học phát triển năng lực bán hàng theo vị trí; Level nội dung được suy ra từ khóa học.',
-      selectedPositions,details:isNewPath?[]:existingDetails,
+      pathNote:isNewPath?'':'Chuỗi bài học phát triển năng lực bán hàng theo vị trí và Level áp dụng.',
+      selectedPositions,selectedLevels,positionPickerOpen:false,positionSearch:'',details:isNewPath?[]:existingDetails,
       detailEditorOpen:false,editingDetailIndex:null,detailDraftCode:'',detailDraftName:'',detailDraftOrder:1,detailDraftLessons:{},detailDraftImage:'',detailDraftNote:'',detailError:''
     };
   }
@@ -300,12 +324,14 @@ class Component extends DCLogic {
       return lessons;
     },[]);
     const toggleChoice=(key,id)=>{const next=Object.assign({},this.state[key]);next[id]=!next[id];this.setState({[key]:next});};
-    const positionOptions=positionDefs.map(item=>{const selected=!!this.state.selectedPositions[item[0]];return {label:item[1],mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>toggleChoice('selectedPositions',item[0])};});
-    const derivedLevels={};this.state.details.forEach(detail=>detail.lessonIds.forEach(id=>{const lesson=lessonDefs.find(item=>item.id===id);if(lesson&&lesson.level)derivedLevels[lesson.level]=true;}));
-    const levelOptions=levelDefs.map(item=>{const selected=!!derivedLevels[item[0]];return {label:item[1],mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected)};});
+    const positionSearch=this.state.positionSearch.trim().toLocaleLowerCase('vi');
+    const filteredPositionDefs=positionDefs.filter(item=>!positionSearch||(item[0]+' '+item[1]).toLocaleLowerCase('vi').includes(positionSearch));
+    const positionOptions=filteredPositionDefs.map(item=>{const selected=!!this.state.selectedPositions[item[0]];return {code:item[0],label:item[1],mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>toggleChoice('selectedPositions',item[0])};});
+    const selectedPositionOptions=positionDefs.filter(item=>this.state.selectedPositions[item[0]]).map(item=>({code:item[0],label:item[1],remove:()=>toggleChoice('selectedPositions',item[0])}));
+    const levelOptions=levelDefs.map(item=>{const selected=!!this.state.selectedLevels[item[0]];return {label:item[1],mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>toggleChoice('selectedLevels',item[0])};});
     const selectedPositionLabels=positionDefs.filter(item=>this.state.selectedPositions[item[0]]).map(item=>item[1]);
-    const selectedLevelLabels=levelDefs.filter(item=>derivedLevels[item[0]]).map(item=>item[1]);
-    const positionSummary=selectedPositionLabels.length?selectedPositionLabels.join(', '):'Mọi vị trí';
+    const selectedLevelLabels=levelDefs.filter(item=>this.state.selectedLevels[item[0]]).map(item=>item[1]);
+    const positionSummary=!selectedPositionLabels.length?'Mọi vị trí':selectedPositionLabels.length<=3?selectedPositionLabels.join(', '):selectedPositionLabels.slice(0,2).join(', ')+' +'+(selectedPositionLabels.length-2)+' vị trí khác';
     const levelSummary=selectedLevelLabels.length?selectedLevelLabels.join(', '):'Không theo Level';
     const normalizeDetails=list=>list.map((detail,detailIndex)=>Object.assign({},detail,{order:detailIndex+1}));
     const moveDetail=(from,to)=>{if(to<0||to>=this.state.details.length)return;const next=this.state.details.slice();const moved=next.splice(from,1)[0];next.splice(to,0,moved);this.setState({details:normalizeDetails(next),toast:'Đã cập nhật thứ tự lộ trình.'});};
@@ -318,7 +344,7 @@ class Component extends DCLogic {
     const reviewWarning=!this.state.details.length?'Lộ trình phải có ít nhất một bước nội dung.':invalidDetail?'Mỗi bước phải có tên và ít nhất một bài học.':'';
     const saveDetail=()=>{const code=this.state.detailDraftCode.trim();const name=this.state.detailDraftName.trim();const lessonIds=lessonDefs.filter(lesson=>this.state.detailDraftLessons[lesson.id]).map(lesson=>lesson.id);if(!code||!name){this.setState({detailError:'Vui lòng nhập đầy đủ mã và tên bước.'});return;}if(!lessonIds.length){this.setState({detailError:'Vui lòng chọn ít nhất một bài học.'});return;}const detail={code,name,order:Number(this.state.detailDraftOrder)||1,lessonIds,image:this.state.detailDraftImage.trim(),note:this.state.detailDraftNote.trim()};const next=this.state.details.slice();if(this.state.editingDetailIndex!==null)next.splice(this.state.editingDetailIndex,1);const target=Math.max(0,Math.min(next.length,detail.order-1));next.splice(target,0,detail);this.setState({details:normalizeDetails(next),detailEditorOpen:false,editingDetailIndex:null,detailError:'',toast:'Đã lưu bước lộ trình.'});};
     return {
-      nav,steps,currentProject,pathName:this.state.pathName,pathCode:this.state.pathCode,pathNote:this.state.pathNote,positionOptions,levelOptions,positionSummary,levelSummary,details,detailCount:details.length,lessonTotal,
+      nav,steps,currentProject,pathName:this.state.pathName,pathCode:this.state.pathCode,pathNote:this.state.pathNote,positionOptions,selectedPositionOptions,visibleSelectedPositionOptions:selectedPositionOptions.slice(0,3),selectedPositionOpen:selectedPositionOptions.length>0,selectedPositionOverflow:Math.max(0,selectedPositionOptions.length-3),selectedPositionOverflowOpen:selectedPositionOptions.length>3,positionPickerOpen:this.state.positionPickerOpen,positionPickerExpanded:String(this.state.positionPickerOpen),positionPickerLabel:selectedPositionOptions.length?selectedPositionOptions.length+' vị trí đã chọn':'Chọn vị trí áp dụng',positionSearch:this.state.positionSearch,positionSearchEmpty:positionOptions.length===0,togglePositionPicker:()=>this.setState({positionPickerOpen:!this.state.positionPickerOpen,positionSearch:''}),onPositionSearch:event=>this.setState({positionSearch:event.target.value}),clearPositions:()=>this.setState({selectedPositions:{}}),levelOptions,positionSummary,levelSummary,details,detailCount:details.length,lessonTotal,
       stepNumber:index+1,stepProgress:'Bước '+(index+1)+'/3',stepLabel:defs[index][2],infoStep:this.state.step==='info',structureStep:this.state.step==='structure',reviewStep:this.state.step==='review',
       nextLabel:index===defs.length-1?'Hoàn tất thiết lập':'Tiếp tục →',hasPreviousStep:index>0,previous:()=>this.setState({step:defs[Math.max(0,index-1)][0]}),next:()=>{if(this.state.step==='info'&&!this.state.pathName.trim()){this.setState({toast:'Vui lòng nhập tên lộ trình.'});return;}if(this.state.step==='structure'&&!this.state.details.length){this.setState({toast:'Vui lòng thêm ít nhất một bước nội dung.'});return;}this.setState(index===defs.length-1?{toast:'Đã hoàn tất thiết lập lộ trình.'}:{step:defs[index+1][0]});},
       onNameChange:event=>this.setState({pathName:event.target.value}),onNoteChange:event=>this.setState({pathNote:event.target.value}),detailEmpty:details.length===0,openAddDetail:()=>openDetailEditor(null),
