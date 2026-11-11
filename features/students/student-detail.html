@@ -165,33 +165,12 @@
                         <span class="visually-hidden">Tìm lịch học/thi</span>
                         <input placeholder="Tìm lịch học/thi" type="search" class="student-detail-input-6b5c3bd" />
                       </label>
-                      <div aria-label="Lọc lịch theo nguồn gán" role="tablist" class="student-detail-panel-58bc523">
-                        <sc-if hint-placeholder-val="{{ true }}" value="{{ scheduleAllActive }}"><button
-                            aria-selected="true" role="tab" sc-camel-on-click="{{ showAllSchedules }}" type="button"
-                            class="student-detail-button-7bf02ab">Tất cả</button></sc-if>
-                        <sc-if hint-placeholder-val="{{ false }}" value="{{ scheduleAllInactive }}"><button
-                            aria-selected="false" role="tab" sc-camel-on-click="{{ showAllSchedules }}" type="button"
-                            class="student-detail-button-4f17580">Tất cả</button></sc-if>
-                        <sc-if hint-placeholder-val="{{ false }}" value="{{ schedulePathActive }}"><button
-                            aria-selected="true" role="tab" sc-camel-on-click="{{ showPathSchedules }}" type="button"
-                            class="student-detail-button-7bf02ab">Lộ trình</button></sc-if>
-                        <sc-if hint-placeholder-val="{{ true }}" value="{{ schedulePathInactive }}"><button
-                            aria-selected="false" role="tab" sc-camel-on-click="{{ showPathSchedules }}" type="button"
-                            class="student-detail-button-4f17580">Lộ trình</button></sc-if>
-                        <sc-if hint-placeholder-val="{{ false }}" value="{{ scheduleStandaloneActive }}"><button
-                            aria-selected="true" role="tab" sc-camel-on-click="{{ showStandaloneSchedules }}"
-                            type="button" class="student-detail-button-7bf02ab">Khóa lẻ</button></sc-if>
-                        <sc-if hint-placeholder-val="{{ true }}" value="{{ scheduleStandaloneInactive }}"><button
-                            aria-selected="false" role="tab" sc-camel-on-click="{{ showStandaloneSchedules }}"
-                            type="button" class="student-detail-button-4f17580">Khóa lẻ</button></sc-if>
-                      </div>
                       <div class="ui-panel-634a28b"></div>
                     </div>
                     <div class="student-detail-panel-2303ff4">
                       <sc-raw-table class="student-detail-sc-raw-table-102a456">
                         <sc-raw-thead><sc-raw-tr class="ui-sc-raw-tr-f600716">
                             <sc-raw-th class="student-detail-sc-raw-th-72064d2">Lịch học/thi</sc-raw-th>
-                            <sc-raw-th class="student-detail-sc-raw-th-72064d2">Nguồn gán</sc-raw-th>
                             <sc-raw-th class="student-detail-sc-raw-th-72064d2">Lượt thi</sc-raw-th>
                             <sc-raw-th class="student-detail-sc-raw-th-72064d2">Kết quả</sc-raw-th>
                           </sc-raw-tr></sc-raw-thead>
@@ -204,8 +183,6 @@
                                     }}</span><span class="student-schedule-time">Thời gian: {{ l.from }} → {{ l.to
                                     }}</span></div>
                               </sc-raw-td>
-                              <sc-raw-td class="student-detail-sc-raw-td-4765c9b"><span
-                                  class="student-detail-label-2e2ef94">{{ l.kind }}</span></sc-raw-td>
                               <sc-raw-td class="student-detail-sc-raw-td-a330f95">{{ l.tries }}</sc-raw-td>
                               <sc-raw-td class="student-detail-sc-raw-td-4765c9b">
                                 <sc-if hint-placeholder-val="{{ true }}" value="{{ l.pass }}"><span
@@ -618,7 +595,7 @@
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.state = { tab: 'thongtin', learningTab: 'lich', scheduleFilter: 'all', level: 'level2', more: false, password: false, confirmDelete: false, selectedAttemptId: null, toast: '' };
+    this.state = { tab: 'thongtin', learningTab: 'lich', level: 'level2', more: false, password: false, confirmDelete: false, selectedAttemptId: null, toast: '' };
   }
   renderVals() {
     const P = {
@@ -674,12 +651,11 @@ class Component extends DCLogic {
     const learningTabDefs = [['lich', 'Lịch học/thi', 3], ['ketqua', 'Kết quả thi', 3], ['capdo', 'Cấp độ', 0], ['chungchi', 'Chứng chỉ', 1]];
     const learningTabs = learningTabDefs.map(([id, label, count]) => ({ label, count, hasCount: count > 0, active: s.learningTab === id, inactive: s.learningTab !== id, go: () => keepScroll({ learningTab: id }) }));
     const lichData = [
-      { id: 'a', name: 'K1 - fix lỗi 14 slide - đếm quiz - scorm 2004', course: 'Test các bài học', kind: 'Lộ trình', from: '28/09/2026 17:51', to: '28/09/2026 23:59', tries: '1 / 3', r: 'pass' },
-      { id: 'b', name: 'Test-4 quiz mix (1)', course: 'Test các bài học', kind: 'Lộ trình', from: '28/09/2026 15:49', to: '29/09/2026 23:59', tries: '2 / 3', r: 'fail' },
-      { id: 'c', name: 'Test Ispring 11-3 quiz ko tính điểm - Scorm 1.2', course: 'Test các bài học', kind: 'Khóa lẻ', from: '28/09/2026 15:50', to: '28/09/2026 23:59', tries: '0 / 3', r: 'none' }
+      { id: 'a', name: 'K1 - fix lỗi 14 slide - đếm quiz - scorm 2004', course: 'Test các bài học', from: '28/09/2026 17:51', to: '28/09/2026 23:59', tries: '1 / 3', r: 'pass' },
+      { id: 'b', name: 'Test-4 quiz mix (1)', course: 'Test các bài học', from: '28/09/2026 15:49', to: '29/09/2026 23:59', tries: '2 / 3', r: 'fail' },
+      { id: 'c', name: 'Test Ispring 11-3 quiz ko tính điểm - Scorm 1.2', course: 'Test các bài học', from: '28/09/2026 15:50', to: '28/09/2026 23:59', tries: '0 / 3', r: 'none' }
     ];
-    const filteredLichData = s.scheduleFilter === 'all' ? lichData : lichData.filter((l) => s.scheduleFilter === 'path' ? l.kind === 'Lộ trình' : l.kind === 'Khóa lẻ');
-    const lich = filteredLichData.map((l) => Object.assign({}, l, {
+    const lich = lichData.map((l) => Object.assign({}, l, {
       pass: l.r === 'pass', fail: l.r === 'fail', none: l.r === 'none'
     }));
     const luotData = [
@@ -716,12 +692,6 @@ class Component extends DCLogic {
       trainerOptions: projectCatalog.trainers, channelOptions: projectCatalog.channels, managerOptions,
       tabThongTin: s.tab === 'thongtin', tabHocTap: s.tab === 'hoctap', tabLich: s.learningTab === 'lich', tabKetQua: s.learningTab === 'ketqua', tabCapDo: s.learningTab === 'capdo', tabChungChi: s.learningTab === 'chungchi',
       moreOpen: s.more, password: s.password, confirmDelete: s.confirmDelete, toast: s.toast, toastOpen: !!s.toast,
-      scheduleAllActive: s.scheduleFilter === 'all', scheduleAllInactive: s.scheduleFilter !== 'all',
-      schedulePathActive: s.scheduleFilter === 'path', schedulePathInactive: s.scheduleFilter !== 'path',
-      scheduleStandaloneActive: s.scheduleFilter === 'standalone', scheduleStandaloneInactive: s.scheduleFilter !== 'standalone',
-      showAllSchedules: () => keepScroll({ scheduleFilter: 'all' }),
-      showPathSchedules: () => keepScroll({ scheduleFilter: 'path' }),
-      showStandaloneSchedules: () => keepScroll({ scheduleFilter: 'standalone' }),
       toggleMore: () => this.setState({ more: !this.state.more }),
       askDelete: () => this.setState({ confirmDelete: true, more: false }),
       openPassword: () => this.setState({ password: true }),
