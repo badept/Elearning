@@ -16,7 +16,7 @@
   <x-dc>
     <helmet>
       <link href="../../shared/css/base.css?v=20261104-flex3" rel="stylesheet" />
-      <link href="css/learning-paths.css?v=20261111-course-first" rel="stylesheet" />
+      <link href="css/learning-paths.css?v=20261111-review-inline-values" rel="stylesheet" />
     </helmet>
     <div class="app-shell">
       <nav aria-label="Menu chính" class="app-sidebar">
@@ -224,11 +224,16 @@
               </sc-if><sc-if hint-placeholder-val="false" value="{{ lessonOptionsEmpty }}">
                 <div class="path-detail-empty"><strong>Khóa học chưa có bài học</strong><p>Hãy tạo bài học cho khóa học này trước khi cấu hình lộ trình.</p></div>
               </sc-if>
+              <sc-if hint-placeholder-val="false" value="{{ lessonToolbarOpen }}"><div class="path-lesson-toolbar">
+                <span>Đã chọn {{ selectedLessonCount }}/{{ availableLessonCount }} bài · Lưu theo thứ tự khóa học</span>
+                <div><button sc-camel-on-click="{{ selectAllLessons }}" type="button">Chọn tất cả</button><button
+                    sc-camel-on-click="{{ clearAllLessons }}" type="button">Bỏ chọn tất cả</button></div>
+              </div></sc-if>
               <div class="path-lesson-picker"><sc-for as="lesson" hint-placeholder-count="4"
                   list="{{ lessonOptions }}"><button aria-pressed="{{ lesson.ariaSelected }}"
                     sc-camel-on-click="{{ lesson.toggle }}" type="button"
                     class="path-option {{ lesson.selectedClass }}"><b>{{ lesson.mark }}</b><span><strong>{{ lesson.name
-                        }}</strong><small>{{ lesson.levelLabel }}</small></span></button></sc-for>
+                        }}</strong><small>Bài {{ lesson.sequence }} · {{ lesson.levelLabel }}</small></span></button></sc-for>
               </div>
             </div><label class="path-form-field is-wide">Hình ảnh <input accept="image/*"
                 sc-camel-on-change="{{ onDetailFile }}" type="file" /><sc-if hint-placeholder-val="{{ false }}"
@@ -319,12 +324,13 @@ class Component extends DCLogic {
     const positionDefs=projectCatalog.positions.map(position=>[position.code,position.name]);
     const levelDefs=[['0','Level 0'],['1','Level 1'],['2','Level 2'],['3','Level 3'],['4','Level 4']];
     const lessonDefs=(projectCatalog.courses||[]).reduce((lessons,course)=>{
-      (course.lessons||[]).forEach(lesson=>lessons.push({
+      (course.lessons||[]).forEach((lesson,lessonIndex)=>lessons.push({
         id:lesson.id,
         name:lesson.name,
         course:course.name,
         courseCode:course.code,
-        level:course.level||''
+        level:course.level||'',
+        sequence:lessonIndex+1
       }));
       return lessons;
     },[]);
@@ -345,6 +351,7 @@ class Component extends DCLogic {
     const details=this.state.details.map((detail,detailIndex)=>{const selectedLessons=lessonDefs.filter(lesson=>detail.lessonIds.includes(lesson.id));return Object.assign({},detail,{lessonCount:selectedLessons.length,lessonNames:selectedLessons.map(lesson=>lesson.name).join(' · '),hasImage:!!detail.image,cannotMoveUp:detailIndex===0,cannotMoveDown:detailIndex===this.state.details.length-1,moveUp:()=>moveDetail(detailIndex,detailIndex-1),moveDown:()=>moveDetail(detailIndex,detailIndex+1),edit:()=>openDetailEditor(detailIndex),remove:()=>this.setState({deleteIndex:detailIndex})});});
     const filteredLessonDefs=lessonDefs.filter(lesson=>lesson.courseCode===this.state.detailDraftCourse);
     const lessonOptions=filteredLessonDefs.map(lesson=>{const selected=!!this.state.detailDraftLessons[lesson.id];return Object.assign({},lesson,{levelLabel:lesson.level?'Level '+lesson.level:'Không theo Level',mark:selected?'✓':'',selectedClass:selected?'is-selected':'',ariaSelected:String(selected),toggle:()=>{const next=Object.assign({},this.state.detailDraftLessons);next[lesson.id]=!next[lesson.id];this.setState({detailDraftLessons:next,detailError:''});}});});
+    const selectedLessonCount=filteredLessonDefs.filter(lesson=>this.state.detailDraftLessons[lesson.id]).length;
     const lessonTotal=this.state.details.reduce((total,detail)=>total+detail.lessonIds.length,0);
     const invalidDetail=this.state.details.find(detail=>!detail.name.trim()||!detail.lessonIds.length);
     const readyToPublish=!!this.state.pathName.trim()&&!!this.state.pathCode.trim()&&this.state.details.length>0&&!invalidDetail;
@@ -355,8 +362,8 @@ class Component extends DCLogic {
       stepNumber:index+1,stepProgress:'Bước '+(index+1)+'/3',stepLabel:defs[index][2],infoStep:this.state.step==='info',structureStep:this.state.step==='structure',reviewStep:this.state.step==='review',
       nextLabel:index===defs.length-1?'Hoàn tất thiết lập':'Tiếp tục →',hasPreviousStep:index>0,previous:()=>this.setState({step:defs[Math.max(0,index-1)][0]}),next:()=>{if(this.state.step==='info'&&!this.state.pathName.trim()){this.setState({toast:'Vui lòng nhập tên lộ trình.'});return;}if(this.state.step==='structure'&&!this.state.details.length){this.setState({toast:'Vui lòng thêm ít nhất một bước nội dung.'});return;}this.setState(index===defs.length-1?{toast:'Đã hoàn tất thiết lập lộ trình.'}:{step:defs[index+1][0]});},
       onNameChange:event=>this.setState({pathName:event.target.value}),onNoteChange:event=>this.setState({pathNote:event.target.value}),detailEmpty:details.length===0,openAddDetail:()=>openDetailEditor(null),
-      detailEditorOpen:this.state.detailEditorOpen,detailDialogTitle:this.state.editingDetailIndex===null?'Thêm bước lộ trình':'Chỉnh sửa bước lộ trình',detailDraftCode:this.state.detailDraftCode,detailDraftName:this.state.detailDraftName,detailDraftOrder:this.state.detailDraftOrder,detailDraftCourse:this.state.detailDraftCourse,detailCourseOptions:courseDefs,courseNotSelected:!this.state.detailDraftCourse,detailDraftImage:this.state.detailDraftImage,detailImageSelected:!!this.state.detailDraftImage,detailDraftNote:this.state.detailDraftNote,lessonOptions,lessonOptionsEmpty:!!this.state.detailDraftCourse&&lessonOptions.length===0,detailError:this.state.detailError,detailErrorOpen:!!this.state.detailError,
-      onDetailCode:event=>this.setState({detailDraftCode:event.target.value,detailError:''}),onDetailName:event=>this.setState({detailDraftName:event.target.value,detailError:''}),onDetailOrder:event=>this.setState({detailDraftOrder:event.target.value,detailError:''}),onDetailCourse:event=>this.setState({detailDraftCourse:event.target.value,detailDraftLessons:{},detailError:''}),onDetailFile:event=>this.setState({detailDraftImage:event.target.files&&event.target.files[0]?event.target.files[0].name:this.state.detailDraftImage}),onDetailNote:event=>this.setState({detailDraftNote:event.target.value}),closeDetailEditor:()=>this.setState({detailEditorOpen:false,editingDetailIndex:null,detailError:''}),saveDetail,
+      detailEditorOpen:this.state.detailEditorOpen,detailDialogTitle:this.state.editingDetailIndex===null?'Thêm bước lộ trình':'Chỉnh sửa bước lộ trình',detailDraftCode:this.state.detailDraftCode,detailDraftName:this.state.detailDraftName,detailDraftOrder:this.state.detailDraftOrder,detailDraftCourse:this.state.detailDraftCourse,detailCourseOptions:courseDefs,courseNotSelected:!this.state.detailDraftCourse,detailDraftImage:this.state.detailDraftImage,detailImageSelected:!!this.state.detailDraftImage,detailDraftNote:this.state.detailDraftNote,lessonOptions,lessonOptionsEmpty:!!this.state.detailDraftCourse&&lessonOptions.length===0,lessonToolbarOpen:lessonOptions.length>0,selectedLessonCount,availableLessonCount:filteredLessonDefs.length,detailError:this.state.detailError,detailErrorOpen:!!this.state.detailError,
+      onDetailCode:event=>this.setState({detailDraftCode:event.target.value,detailError:''}),onDetailName:event=>this.setState({detailDraftName:event.target.value,detailError:''}),onDetailOrder:event=>this.setState({detailDraftOrder:event.target.value,detailError:''}),onDetailCourse:event=>{const courseCode=event.target.value;const selected={};lessonDefs.filter(lesson=>lesson.courseCode===courseCode).forEach(lesson=>{selected[lesson.id]=true;});this.setState({detailDraftCourse:courseCode,detailDraftLessons:selected,detailError:''});},selectAllLessons:()=>{const selected={};filteredLessonDefs.forEach(lesson=>{selected[lesson.id]=true;});this.setState({detailDraftLessons:selected,detailError:''});},clearAllLessons:()=>this.setState({detailDraftLessons:{},detailError:''}),onDetailFile:event=>this.setState({detailDraftImage:event.target.files&&event.target.files[0]?event.target.files[0].name:this.state.detailDraftImage}),onDetailNote:event=>this.setState({detailDraftNote:event.target.value}),closeDetailEditor:()=>this.setState({detailEditorOpen:false,editingDetailIndex:null,detailError:''}),saveDetail,
       readinessClass:readyToPublish?'is-ready':'is-incomplete',readinessLabel:readyToPublish?'Sẵn sàng phát hành':'Chưa hoàn tất',reviewWarningOpen:!!reviewWarning,reviewWarning,
       deleteOpen:this.state.deleteIndex!==null,closeDelete:()=>this.setState({deleteIndex:null}),confirmDelete:()=>{if(this.state.deleteIndex===null)return;const next=this.state.details.slice();next.splice(this.state.deleteIndex,1);this.setState({details:normalizeDetails(next),deleteIndex:null,toast:'Đã xóa bước khỏi lộ trình.'});},
       cancelOpen:this.state.cancelOpen,cancelTitle:this.state.isNewPath?'Hủy tạo lộ trình?':'Bỏ các thay đổi chưa lưu?',cancelMessage:this.state.isNewPath?'Toàn bộ thông tin vừa cấu hình sẽ không được tạo. Bạn có chắc muốn thoát?':'Các thay đổi chưa lưu trong lần cấu hình này sẽ bị bỏ. Bản đã lưu trước đó vẫn được giữ nguyên.',openCancel:()=>this.setState({cancelOpen:true}),closeCancel:()=>this.setState({cancelOpen:false}),confirmCancel:()=>{window.location.href='learning-paths.html';},

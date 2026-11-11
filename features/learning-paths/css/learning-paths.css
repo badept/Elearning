@@ -11,6 +11,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
@@ -934,6 +935,38 @@
   padding: 2px;
 }
 
+#dc-root .path-lesson-toolbar {
+  min-height: 38px;
+  padding: 7px 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #64728B;
+  background: #F5F8FD;
+  border: 1px solid #DCE5F1;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+#dc-root .path-lesson-toolbar > div {
+  display: flex;
+  gap: 6px;
+}
+
+#dc-root .path-lesson-toolbar button {
+  min-height: 28px;
+  padding: 0 9px;
+  color: #2456B8;
+  background: #FFFFFF;
+  border: 1px solid #BFD0E8;
+  border-radius: 6px;
+  font: inherit;
+  cursor: pointer;
+}
+
 #dc-root .path-readiness {
   width: max-content;
   padding: 7px 11px;
@@ -954,32 +987,53 @@
 
 #dc-root .path-review-summary {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
   gap: 10px;
   margin-bottom: 16px;
 }
 
 #dc-root .path-review-summary article {
+  min-width: 0;
   padding: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   border: 1px solid #DCE4F0;
   border-radius: 10px;
   background: #F8FAFD;
 }
 
-#dc-root .path-review-summary span,
-#dc-root .path-review-summary strong {
+#dc-root .path-review-summary article > span,
+#dc-root .path-review-summary article > strong {
   display: block;
 }
 
-#dc-root .path-review-summary span {
+#dc-root .path-review-summary article > span {
   margin-bottom: 5px;
   color: #71809A;
   font-size: 11px;
 }
 
-#dc-root .path-review-summary strong {
+#dc-root .path-review-summary article > strong {
+  width: 100%;
   color: #17284F;
   font-size: 13px;
+  line-height: 1.35;
+}
+
+#dc-root .path-review-summary article:last-child > strong {
+  overflow-wrap: normal;
+  word-break: normal;
+  white-space: nowrap;
+}
+
+#dc-root .path-review-summary article > strong span {
+  display: inline;
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  white-space: inherit;
 }
 
 #dc-root .path-review-warning {
