@@ -163,20 +163,29 @@
                       <label class="form-field">Tiếp đầu ngữ tài khoản<input type="text" class="form-control" /></label>
                       <div class="project-market-link-row project-info-wide">
                         <div class="project-market-toggle-card">
-                          <div><strong>Lấy nhân viên từ dự án thị trường</strong><small>Khi bật, học viên của dự án thị trường đã chọn sẽ được đưa vào phạm vi Dự án đào tạo.</small></div>
-                          <button aria-checked="{{ marketLinkAria }}" aria-label="Lấy nhân viên từ dự án thị trường" class="project-market-switch {{ marketLinkClass }}" role="switch" sc-camel-on-click="{{ toggleMarketLink }}" type="button"><i></i></button>
+                          <div><strong>Lấy nhân viên từ dự án thị trường</strong><small>Khi bật, học viên của dự án thị
+                              trường đã chọn sẽ được đưa vào phạm vi Dự án đào tạo.</small></div>
+                          <button aria-checked="{{ marketLinkAria }}" aria-label="Lấy nhân viên từ dự án thị trường"
+                            class="project-market-switch {{ marketLinkClass }}" role="switch"
+                            sc-camel-on-click="{{ toggleMarketLink }}" type="button"><i></i></button>
                         </div>
                         <sc-if value="{{ useMarketProject }}">
-                          <label class="form-field project-market-select">Dự án thị trường <span class="danger-text">*</span>
-                            <select class="form-control" sc-camel-on-change="{{ selectMarketProject }}" value="{{ selectedMarketProject }}">
+                          <label class="form-field project-market-select">Dự án thị trường <span
+                              class="danger-text">*</span>
+                            <select class="form-control" sc-camel-on-change="{{ selectMarketProject }}"
+                              value="{{ selectedMarketProject }}">
                               <option value="">Chọn dự án thị trường...</option>
-                              <sc-for as="mp" list="{{ marketProjectOptions }}"><option value="{{ mp.value }}">{{ mp.label }}</option></sc-for>
+                              <sc-for as="mp" list="{{ marketProjectOptions }}">
+                                <option value="{{ mp.value }}">{{ mp.label }}</option>
+                              </sc-for>
                             </select>
                             <small>{{ marketProjectHelp }}</small>
                           </label>
                         </sc-if>
                       </div>
-                      <sc-if value="{{ marketLinkErrorOpen }}"><p class="project-market-error project-info-wide">{{ marketLinkError }}</p></sc-if>
+                      <sc-if value="{{ marketLinkErrorOpen }}">
+                        <p class="project-market-error project-info-wide">{{ marketLinkError }}</p>
+                      </sc-if>
                       <label class="form-field project-info-wide">Ghi chú<textarea
                           class="form-control"></textarea></label>
                     </div>
@@ -327,24 +336,29 @@
                               sc-camel-on-input="{{ onPositionCode }}" type="text" value="{{ positionCode }}" /></label>
                           <label><span>Tên <b>*</b></span><input placeholder="VD: Giám sát bán hàng"
                               sc-camel-on-input="{{ onPositionName }}" type="text" value="{{ positionName }}" /></label>
-                          <label><span>Phân loại user <b>*</b></span><select sc-camel-on-change="{{ onPositionUserType }}"
-                              value="{{ positionUserType }}"><option value="Trainee">Trainee · Học viên</option><option
-                                value="Sup">Sup · Quản lý/giám sát</option><option value="Trainer">Trainer · Giảng
-                                viên</option></select></label>
+                          <label><span>Phân loại user <b>*</b></span><select
+                              sc-camel-on-change="{{ onPositionUserType }}" value="{{ positionUserType }}">
+                              <option value="Trainee">Trainee · Học viên</option>
+                              <option value="Sup">Sup · Quản lý/giám sát</option>
+                              <option value="Trainer">Trainer · Giảng
+                                viên</option>
+                            </select></label>
                           <label class="project-position-note"><span>Ghi chú</span><input placeholder="Nhập ghi chú"
                               sc-camel-on-input="{{ onPositionNote }}" type="text" value="{{ positionNote }}" /></label>
                         </div>
                         <fieldset class="project-position-permissions">
                           <legend>Nhóm quyền</legend>
-                          <p>Chọn nhiều quyền nếu vị trí này cần truy cập chức năng quản trị. Trainee có thể để trống.</p>
+                          <p>Chọn nhiều quyền nếu vị trí này cần truy cập chức năng quản trị. Trainee có thể để trống.
+                          </p>
                           <div><sc-for as="permission" hint-placeholder-count="8"
                               list="{{ positionPermissionOptions }}"><button
                                 aria-pressed="{{ permission.ariaSelected }}" sc-camel-on-click="{{ permission.toggle }}"
                                 type="button" class="{{ permission.className }}"><i>{{ permission.mark }}</i><span>{{
                                   permission.label }}</span></button></sc-for></div>
                         </fieldset>
-                        <sc-if hint-placeholder-val="{{ false }}" value="{{ positionErrorOpen }}"><p
-                            class="project-position-error">{{ positionError }}</p></sc-if>
+                        <sc-if hint-placeholder-val="{{ false }}" value="{{ positionErrorOpen }}">
+                          <p class="project-position-error">{{ positionError }}</p>
+                        </sc-if>
                         <div class="project-position-form-actions"><button sc-camel-on-click="{{ cancelPositionForm }}"
                             type="button">Hủy</button><button class="is-primary" sc-camel-on-click="{{ savePosition }}"
                             type="button">{{ positionSaveLabel }}</button></div>
@@ -357,19 +371,21 @@
                         <div class="project-position-row"><strong>{{ position.code }}</strong><span>{{ position.name
                             }}</span><span class="project-position-type {{ position.typeClass }}">{{ position.userType
                             }}</span><span class="project-position-permission-summary">{{ position.permissionSummary
-                            }}</span><span>{{ position.noteText }}</span><div class="project-position-actions"><sc-if
-                              hint-placeholder-val="{{ true }}" value="{{ position.notAsking }}"><button
-                                sc-camel-on-click="{{ position.edit }}" type="button">Chỉnh sửa</button><button
-                                class="is-delete" sc-camel-on-click="{{ position.askDelete }}"
-                                type="button">Xóa</button></sc-if><sc-if hint-placeholder-val="{{ true }}"
-                              value="{{ position.asking }}"><span>Xóa vị trí này?</span><button
-                                sc-camel-on-click="{{ position.cancelDelete }}" type="button">Không</button><button
-                                class="is-delete" sc-camel-on-click="{{ position.remove }}"
-                                type="button">Xóa</button></sc-if></div></div>
+                            }}</span><span>{{ position.noteText }}</span>
+                          <div class="project-position-actions"><sc-if hint-placeholder-val="{{ true }}"
+                              value="{{ position.notAsking }}"><button sc-camel-on-click="{{ position.edit }}"
+                                type="button">Chỉnh sửa</button><button class="is-delete"
+                                sc-camel-on-click="{{ position.askDelete }}" type="button">Xóa</button></sc-if><sc-if
+                              hint-placeholder-val="{{ true }}" value="{{ position.asking }}"><span>Xóa vị trí
+                                này?</span><button sc-camel-on-click="{{ position.cancelDelete }}"
+                                type="button">Không</button><button class="is-delete"
+                                sc-camel-on-click="{{ position.remove }}" type="button">Xóa</button></sc-if></div>
+                        </div>
                       </sc-for>
                     </div>
-                    <sc-if hint-placeholder-val="{{ false }}" value="{{ positionEmpty }}"><p
-                        class="project-position-empty">Dự án chưa có vị trí.</p></sc-if>
+                    <sc-if hint-placeholder-val="{{ false }}" value="{{ positionEmpty }}">
+                      <p class="project-position-empty">Dự án chưa có vị trí.</p>
+                    </sc-if>
                   </div>
                 </sc-if>
                 <sc-if hint-placeholder-val="{{ false }}" value="{{ tabConfiguration }}">
@@ -577,7 +593,7 @@
       </sc-if>
     </div>
   </x-dc>
-<script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1000}}' type="text/x-dc">
+  <script data-dc-script="" data-props='{"$preview":{"width":1440,"height":1000}}' type="text/x-dc">
 function getTrainingProjectCatalog(projectName) {
   if (!window.AcaProjectData) return null;
   const project = window.AcaProjectData.get(projectName);
